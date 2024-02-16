@@ -1,0 +1,12 @@
+flutter_native_splash:
+  # this for ios and android 12
+  color: "#ffffff"
+  image: assets/images/white_mode_icon.png
+  color_dark: "#1E1E1E"
+  image_dark: assets/images/dark_mode_icon.png
+
+  android_12:
+    color: "#ffffff"
+    image: assets/images/white_mode_icon.png
+    color_dark: "#1E1E1E"
+    image_dark: assets/images/dark_mode_icon.png
