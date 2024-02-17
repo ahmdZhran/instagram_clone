@@ -8,10 +8,21 @@ class CustomFormSignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Form(
+    return Form(
       child: Column(
         children: [
-          CustomTextFormField(hintText: AppStrings.fristName),
+          const CustomTextFormField(hintText: AppStrings.fristName),
+          const CustomTextFormField(hintText: AppStrings.lastName),
+          const CustomTextFormField(hintText: AppStrings.emailAddress),
+          CustomTextFormField(
+            hintText: AppStrings.password,
+            suffixIcon: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.visibility_off,
+              ),
+            ),
+          ),
         ],
       ),
     );
