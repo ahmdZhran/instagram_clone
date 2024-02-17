@@ -1,7 +1,7 @@
 abstract class AppStrings {
   static const String appName = "Instagram",
       //  Auth strings
-      instagramTitle = 'Instagram',
+      headInstagramTitle = 'Instagram',
       fristName = "First Name",
       lastName = "Last Name",
       emailAddress = "Email Address",
