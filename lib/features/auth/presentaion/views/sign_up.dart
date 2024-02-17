@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/widgets/custom_head_text_widget.dart';
-import '../widgets/custom_from_sign_up.dart';
+import '../widgets/custom_form_sign_up.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
