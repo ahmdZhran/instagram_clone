@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../core/widgets/custom_head_text_widget.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
@@ -6,9 +7,17 @@ class SignUpView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Text('Sign up view'),
-      ),
-    );
+        body: CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: Column(
+            children: [
+              SizedBox(height: 150),
+              CusotmHeadTextWidget(),
+            ],
+          ),
+        )
+      ],
+    ));
   }
 }

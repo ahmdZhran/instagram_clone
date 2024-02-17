@@ -7,6 +7,7 @@ class InstagramApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: AppStrings.appName,
       theme: ThemeData.dark(
         useMaterial3: true,
