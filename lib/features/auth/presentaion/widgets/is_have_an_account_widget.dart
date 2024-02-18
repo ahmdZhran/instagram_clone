@@ -25,8 +25,10 @@ class IsHaveAnAccountWidget extends StatelessWidget {
             ),
             TextSpan(
               text: titleOfTextTwo,
-              style: CustomTextStyles.normalTextStyle
-                  .copyWith(color: AppColors.kBlueColor),
+              style: CustomTextStyles.normalTextStyle.copyWith(
+                  color: AppColors.kBlueColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16),
             ),
           ],
         ),
