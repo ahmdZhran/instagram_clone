@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utls/app_colors.dart';
 import 'package:instagram_clone/core/utls/app_strings.dart';
 import 'package:instagram_clone/features/auth/presentaion/widgets/custom_button_widget.dart';
-
 import 'custom_text_form_field.dart';
+import 'forgot_passowrd_widget.dart';
 
-class CustomFormSignUp extends StatelessWidget {
-  const CustomFormSignUp({super.key});
+class CustomFormSignIn extends StatelessWidget {
+  const CustomFormSignIn({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +15,9 @@ class CustomFormSignUp extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 30.0),
         child: Column(
           children: [
-            const CustomTextFormField(
-              hintText: AppStrings.fristName,
-            ),
-            const CustomTextFormField(hintText: AppStrings.lastName),
-            const CustomTextFormField(
-                hintText: AppStrings.emailAddress,
-                keyboardType: TextInputType.emailAddress),
+            const CustomTextFormField(hintText: AppStrings.emailAddress),
             CustomTextFormField(
+              keyboardType: TextInputType.emailAddress,
               hintText: AppStrings.password,
               suffixIcon: IconButton(
                 onPressed: () {},
@@ -32,11 +27,13 @@ class CustomFormSignUp extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 15),
+            const ForgotPasswordWidget(),
+            const SizedBox(height: 40),
             CustomButton(
               onPressed: () {},
-              text: AppStrings.signUp,
+              text: AppStrings.signIn,
               color: AppColors.kBlueColor,
-            )
+            ),
           ],
         ),
       ),

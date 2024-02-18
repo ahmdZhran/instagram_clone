@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utls/text_styles.dart';
 
 import '../../../../core/utls/app_colors.dart';
 
@@ -8,9 +9,11 @@ class CustomTextFormField extends StatelessWidget {
     required this.hintText,
     this.suffixIcon,
     this.onChanged,
+    this.keyboardType,
   });
   final String hintText;
   final Widget? suffixIcon;
+  final TextInputType? keyboardType;
   final void Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
@@ -26,14 +29,16 @@ class CustomTextFormField extends StatelessWidget {
       ),
       child: Center(
         child: TextFormField(
+          keyboardType: keyboardType,
           onChanged: onChanged,
           cursorHeight: 25,
           cursorColor: AppColors.kBlueColor,
           decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: hintText,
-            suffixIcon: suffixIcon,
-          ),
+              border: InputBorder.none,
+              hintText: hintText,
+              suffixIcon: suffixIcon,
+              hintStyle: CustomTextStyles.normalTextStyle
+                  .copyWith(color: AppColors.kGreyColor)),
         ),
       ),
     );
