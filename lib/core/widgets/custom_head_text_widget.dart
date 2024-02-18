@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../utls/app_strings.dart';
 import '../utls/text_styles.dart';
 
 class CusotmHeadTextWidget extends StatelessWidget {
   const CusotmHeadTextWidget({
     super.key,
+    required this.text,
   });
-
+  final String text;
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      AppStrings.createYourEmail,
+    return Text(
+      text,
       style: CustomTextStyles.pacifico50Style,
     );
   }
