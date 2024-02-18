@@ -17,7 +17,7 @@ class SignUpView extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 150),
-              const CusotmHeadTextWidget(
+              const CustomHeadText(
                 text: AppStrings.createYourEmail,
               ),
               const SizedBox(height: 50),

@@ -17,8 +17,8 @@ class SignInView extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 150),
-              const CusotmHeadTextWidget(text: AppStrings.headInstagramTitle),
-              const SizedBox(height: 50),
+              const CustomHeadText(text: AppStrings.headInstagramTitle),
+              const SizedBox(height: 30),
               const CustomFormSignIn(),
               const SizedBox(height: 10),
               IsHaveAnAccountWidget(
