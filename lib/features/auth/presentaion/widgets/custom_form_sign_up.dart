@@ -32,7 +32,6 @@ class CustomFormSignUp extends StatelessWidget {
               onPressed: () {},
               text: AppStrings.signUp,
               color: AppColors.kBlueColor,
-              onTap: () {},
             )
           ],
         ),

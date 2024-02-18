@@ -10,8 +10,8 @@ abstract class AppStrings {
       password = "Password",
       signUp = "Sign Up",
       signIn = "Sign In",
-      alreadyHaveAnAccount = "Already have an account ? ",
-      dontHaveAnAccount = "Don’t have an account ? ",
+      alreadyHaveAnAccount = "Already have an account? ",
+      dontHaveAnAccount = "Don’t have an account? ",
       forgotPassword = "Forgot Password ?",
       enterYourEmailBelow = "Enter your Email below to can reset your password",
       // Profile Strings

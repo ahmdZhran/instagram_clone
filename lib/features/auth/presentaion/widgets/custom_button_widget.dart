@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utls/text_styles.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton(
-      {super.key,
-      this.color,
-      required this.onPressed,
-      required this.text,
-      this.onTap});
+  const CustomButton({
+    super.key,
+    this.color,
+    required this.onPressed,
+    required this.text,
+  });
   final Color? color;
   final VoidCallback onPressed;
   final String text;
-  final VoidCallback? onTap;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
