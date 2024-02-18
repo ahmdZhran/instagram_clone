@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/functions/navigator_methods.dart';
 import 'package:instagram_clone/core/utls/app_strings.dart';
+import 'package:instagram_clone/core/utls/text_styles.dart';
 import 'package:instagram_clone/features/auth/presentaion/widgets/custom_form_sing_in.dart';
 import 'package:instagram_clone/features/auth/presentaion/widgets/is_have_an_account_widget.dart';
 import '../../../../core/widgets/custom_head_text_widget.dart';
@@ -17,10 +18,13 @@ class SignInView extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(height: 150),
-              const CustomHeadText(text: AppStrings.headInstagramTitle),
+              CustomHeadText(
+                  text: AppStrings.headInstagramTitle,
+                  style:
+                      CustomTextStyles.pacifico50Style.copyWith(fontSize: 40)),
               const SizedBox(height: 30),
               const CustomFormSignIn(),
-              const SizedBox(height: 10),
+              const SizedBox(height: 40),
               IsHaveAnAccountWidget(
                 titleOfTextOne: AppStrings.dontHaveAnAccount,
                 titleOfTextTwo: AppStrings.signUp,

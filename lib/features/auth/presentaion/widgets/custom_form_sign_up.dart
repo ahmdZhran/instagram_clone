@@ -15,9 +15,13 @@ class CustomFormSignUp extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 30.0),
         child: Column(
           children: [
-            const CustomTextFormField(hintText: AppStrings.fristName),
+            const CustomTextFormField(
+              hintText: AppStrings.fristName,
+            ),
             const CustomTextFormField(hintText: AppStrings.lastName),
-            const CustomTextFormField(hintText: AppStrings.emailAddress),
+            const CustomTextFormField(
+                hintText: AppStrings.emailAddress,
+                keyboardType: TextInputType.emailAddress),
             CustomTextFormField(
               hintText: AppStrings.password,
               suffixIcon: IconButton(
