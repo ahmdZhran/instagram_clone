@@ -12,7 +12,7 @@ abstract class AppStrings {
       signIn = "Sign In",
       alreadyHaveAnAccount = "Already have an account? ",
       dontHaveAnAccount = "Don’t have an account? ",
-      forgotPassword = "Forgot Password ?",
+      forgotPassword = "Forgot Password?",
       enterYourEmailBelow = "Enter your Email below to can reset your password",
       // Profile Strings
       posts = 'Posts',
