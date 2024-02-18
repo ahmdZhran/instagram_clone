@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utls/app_colors.dart';
 import 'package:instagram_clone/core/utls/app_strings.dart';
 import 'package:instagram_clone/features/auth/presentaion/views/sign_up.dart';
 
@@ -7,8 +8,12 @@ class InstagramApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: AppStrings.appName,
-      theme: ThemeData.dark(
+      theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.kBlackColor,
+        primaryColor: AppColors.kWhiteColor,
+        brightness: Brightness.dark,
         useMaterial3: true,
       ),
       home: const SignUpView(),
