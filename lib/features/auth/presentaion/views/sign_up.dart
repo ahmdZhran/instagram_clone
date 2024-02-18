@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utls/app_strings.dart';
+import 'package:instagram_clone/features/auth/presentaion/widgets/is_have_an_account_widget.dart';
 import '../../../../core/widgets/custom_head_text_widget.dart';
 import '../widgets/custom_form_sign_up.dart';
 
@@ -7,16 +9,22 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
         body: CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
           child: Column(
             children: [
-              SizedBox(height: 150),
-              CusotmHeadTextWidget(),
-              SizedBox(height: 50),
-              CustomFormSignUp()
+              const SizedBox(height: 150),
+              const CusotmHeadTextWidget(),
+              const SizedBox(height: 50),
+              const CustomFormSignUp(),
+              const SizedBox(height: 10),
+              IsHaveAnAccountWidget(
+                titleOfTextOne: AppStrings.alreadyHaveAnAccount,
+                titleOfTextTwo: AppStrings.signIn,
+                onTap: () {},
+              )
             ],
           ),
         )
