@@ -11,8 +11,8 @@ class CusotmHeadTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Text(
-      AppStrings.headInstagramTitle,
-      style: CustomTextStyles.instagramFontStyle,
+      AppStrings.createYourEmail,
+      style: CustomTextStyles.pacifico50Style,
     );
   }
 }
