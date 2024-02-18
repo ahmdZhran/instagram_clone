@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:instagram_clone/core/functions/navigator_methods.dart';
 import 'package:instagram_clone/core/utls/app_strings.dart';
 import 'package:instagram_clone/features/auth/presentaion/widgets/is_have_an_account_widget.dart';
 import '../../../../core/widgets/custom_head_text_widget.dart';
