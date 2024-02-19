@@ -24,6 +24,7 @@ class CustomFormSignUp extends StatelessWidget {
                 keyboardType: TextInputType.emailAddress),
             CustomTextFormField(
               hintText: AppStrings.password,
+              obscureText: false,
               suffixIcon: IconButton(
                 onPressed: () {},
                 icon: const Icon(
