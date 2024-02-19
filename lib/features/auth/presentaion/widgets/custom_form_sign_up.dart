@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/core/utls/app_colors.dart';
 import 'package:instagram_clone/core/utls/app_strings.dart';
 import 'package:instagram_clone/features/auth/presentaion/widgets/custom_button_widget.dart';
 
+import '../view_model/auth_cubit.dart';
 import 'custom_text_form_field.dart';
 
 class CustomFormSignUp extends StatelessWidget {
@@ -10,37 +12,44 @@ class CustomFormSignUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-        child: Column(
-          children: [
-            const CustomTextFormField(
-              hintText: AppStrings.fristName,
-            ),
-            const CustomTextFormField(hintText: AppStrings.lastName),
-            const CustomTextFormField(
-                hintText: AppStrings.emailAddress,
-                keyboardType: TextInputType.emailAddress),
-            CustomTextFormField(
-              hintText: AppStrings.password,
-              obscureText: false,
-              suffixIcon: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.visibility_off,
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return Form(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child: Column(
+              children: [
+                const CustomTextFormField(
+                  hintText: AppStrings.fristName,
                 ),
-              ),
+                const CustomTextFormField(hintText: AppStrings.lastName),
+                const CustomTextFormField(
+                    hintText: AppStrings.emailAddress,
+                    keyboardType: TextInputType.emailAddress),
+                CustomTextFormField(
+                  hintText: AppStrings.password,
+                  obscureText: false,
+                  suffixIcon: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.visibility_off,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 15),
+                CustomButton(
+                  onPressed: () {},
+                  text: AppStrings.signUp,
+                  color: AppColors.kBlueColor,
+                )
+              ],
             ),
-            const SizedBox(height: 15),
-            CustomButton(
-              onPressed: () {},
-              text: AppStrings.signUp,
-              color: AppColors.kBlueColor,
-            )
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
