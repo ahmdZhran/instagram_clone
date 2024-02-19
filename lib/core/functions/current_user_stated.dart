@@ -1,11 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 void currentUserStateCheck() {
   FirebaseAuth.instance.authStateChanges().listen((User? user) {
     if (user == null) {
-      print('User is currently signed out!');
+      if (kDebugMode) {
+        print('User is currently signed out!');
+      }
     } else {
-      print('User is signed in!');
+      if (kDebugMode) {
+        print('User is signed in!');
+      }
     }
   });
 }
