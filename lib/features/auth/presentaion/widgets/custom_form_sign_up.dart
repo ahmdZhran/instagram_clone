@@ -46,13 +46,14 @@ class CustomFormSignUp extends StatelessWidget {
                     authCubit.password = password;
                   },
                   hintText: AppStrings.password,
-                  obscureText: false,
+                  obscureText: authCubit.isObsecurePasswordText,
                   suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.visibility_off,
-                    ),
-                  ),
+                      onPressed: () {
+                        authCubit.obsecurePasswordText();
+                      },
+                      icon: Icon(authCubit.isObsecurePasswordText == false
+                          ? Icons.visibility
+                          : Icons.visibility_off)),
                 ),
                 const SizedBox(height: 15),
                 CustomButton(

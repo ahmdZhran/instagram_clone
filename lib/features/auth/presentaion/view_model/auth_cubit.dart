@@ -9,7 +9,11 @@ class AuthCubit extends Cubit<AuthState> {
   String? lasttName;
   String? emailAdress;
   String? password;
-  bool obsecurePasswordText = true;
+  bool isObsecurePasswordText = true;
   GlobalKey<FormState> signUpFormKey = GlobalKey();
   GlobalKey<FormState> signInFormKey = GlobalKey();
+  void obsecurePasswordText() {
+    isObsecurePasswordText = !isObsecurePasswordText;
+    emit(ObsecurePasswordTextState());
+  }
 }

@@ -5,4 +5,4 @@ abstract class AuthState {}
 
 class AuthInitial extends AuthState {}
 
-
+class ObsecurePasswordTextState extends AuthState {}
