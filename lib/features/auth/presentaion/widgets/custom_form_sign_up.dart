@@ -39,7 +39,7 @@ class CustomFormSignUp extends StatelessWidget {
                 CustomTextFormField(
                     hintText: AppStrings.emailAddress,
                     onChanged: (emialAddress) {
-                      authCubit.emailAdress = emialAddress;
+                      authCubit.emailAddress = emialAddress;
                     },
                     keyboardType: TextInputType.emailAddress),
                 CustomTextFormField(
@@ -60,7 +60,9 @@ class CustomFormSignUp extends StatelessWidget {
                 CustomButton(
                   onPressed: () {
                     if (authCubit.signUpFormKey.currentState!.validate() ==
-                        true) {}
+                        true) {
+                      authCubit.createUserWithEmailAndPassword();
+                    }
                   },
                   text: AppStrings.signUp,
                   color: AppColors.kBlueColor,

@@ -8,19 +8,18 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
   String? firstName;
   String? lasttName;
-  String? emailAdress;
+  String? emailAddress;
   String? password;
   bool isObsecurePasswordText = true;
   GlobalKey<FormState> signUpFormKey = GlobalKey();
   GlobalKey<FormState> signInFormKey = GlobalKey();
 
-  Future<void> createUserWithEmailAndPassword(
-      {required String emailAddress, required String password}) async {
+  Future<void> createUserWithEmailAndPassword() async {
     try {
       emit(CreateUserLoading());
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailAddress,
-        password: password,
+        email: emailAddress!,
+        password: password!,
       );
       emit(CreateUserSuccess());
     } on FirebaseAuthException catch (e) {
