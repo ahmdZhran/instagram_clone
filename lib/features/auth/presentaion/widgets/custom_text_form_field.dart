@@ -10,11 +10,13 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.onChanged,
     this.keyboardType,
+    this.obscureText = false,
   });
   final String hintText;
   final Widget? suffixIcon;
   final TextInputType? keyboardType;
   final void Function(String)? onChanged;
+  final bool obscureText;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,6 +31,7 @@ class CustomTextFormField extends StatelessWidget {
       ),
       child: Center(
         child: TextFormField(
+          obscureText: obscureText,
           keyboardType: keyboardType,
           onChanged: onChanged,
           cursorHeight: 25,

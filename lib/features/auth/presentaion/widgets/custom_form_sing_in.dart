@@ -15,9 +15,12 @@ class CustomFormSignIn extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 30.0),
         child: Column(
           children: [
-            const CustomTextFormField(hintText: AppStrings.emailAddress),
-            CustomTextFormField(
+            const CustomTextFormField(
+              hintText: AppStrings.emailAddress,
               keyboardType: TextInputType.emailAddress,
+            ),
+            CustomTextFormField(
+              obscureText: true,
               hintText: AppStrings.password,
               suffixIcon: IconButton(
                 onPressed: () {},
