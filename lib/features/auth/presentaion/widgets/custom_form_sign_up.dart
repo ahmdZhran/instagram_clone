@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/core/utls/app_assets.dart';
 import 'package:instagram_clone/core/utls/app_colors.dart';
 import 'package:instagram_clone/core/utls/app_strings.dart';
+import 'package:instagram_clone/core/utls/text_styles.dart';
 import 'package:instagram_clone/features/auth/presentaion/widgets/custom_button_widget.dart';
 import 'package:lottie/lottie.dart';
 
@@ -68,7 +69,8 @@ class CustomFormSignUp extends StatelessWidget {
                   },
                   childOfCustomButton: state is CreateUserLoading
                       ? LottieBuilder.asset(Assets.lottieFilePath)
-                      : const Text(AppStrings.signUp),
+                      : const Text(AppStrings.signUp,
+                          style: CustomTextStyles.normalTextStyle),
                   color: AppColors.kBlueColor,
                 )
               ],
