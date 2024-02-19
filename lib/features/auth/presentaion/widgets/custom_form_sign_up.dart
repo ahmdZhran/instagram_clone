@@ -17,19 +17,34 @@ class CustomFormSignUp extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
+        AuthCubit authCubit = BlocProvider.of<AuthCubit>(context);
         return Form(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
             child: Column(
               children: [
-                const CustomTextFormField(
+                CustomTextFormField(
+                  onChanged: (firstName) {
+                    authCubit.firstName = firstName;
+                  },
                   hintText: AppStrings.fristName,
                 ),
-                const CustomTextFormField(hintText: AppStrings.lastName),
-                const CustomTextFormField(
+                CustomTextFormField(
+                  hintText: AppStrings.lastName,
+                  onChanged: (lastName) {
+                    authCubit.lasttName = lastName;
+                  },
+                ),
+                CustomTextFormField(
                     hintText: AppStrings.emailAddress,
+                    onChanged: (emialAddress) {
+                      authCubit.emailAdress = emialAddress;
+                    },
                     keyboardType: TextInputType.emailAddress),
                 CustomTextFormField(
+                  onChanged: (password) {
+                    authCubit.password = password;
+                  },
                   hintText: AppStrings.password,
                   obscureText: false,
                   suffixIcon: IconButton(
