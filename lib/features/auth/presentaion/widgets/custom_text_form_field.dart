@@ -17,31 +17,38 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final void Function(String)? onChanged;
   final bool obscureText;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 70,
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      margin: const EdgeInsets.symmetric(
-        vertical: 10,
-      ),
-      decoration: BoxDecoration(
-        color: AppColors.deepGrey,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Center(
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: TextFormField(
+          validator: (value) {
+            return value!.isEmpty ? "This Field is required!" : null;
+          },
           obscureText: obscureText,
           keyboardType: keyboardType,
           onChanged: onChanged,
           cursorHeight: 25,
           cursorColor: AppColors.kBlueColor,
           decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: hintText,
-              suffixIcon: suffixIcon,
-              hintStyle: CustomTextStyles.normalTextStyle
-                  .copyWith(color: AppColors.kGreyColor)),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+            errorStyle: const TextStyle(color: Colors.red),
+            border: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius:
+                  BorderRadius.circular(20), // Set circular border radius
+            ),
+            hintText: hintText,
+            fillColor: AppColors.deepGrey,
+            filled: true,
+            suffixIcon: suffixIcon,
+            hintStyle: CustomTextStyles.normalTextStyle.copyWith(
+              color: AppColors.kGreyColor,
+            ),
+          ),
         ),
       ),
     );

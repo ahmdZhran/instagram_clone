@@ -19,6 +19,7 @@ class CustomFormSignUp extends StatelessWidget {
       builder: (context, state) {
         AuthCubit authCubit = BlocProvider.of<AuthCubit>(context);
         return Form(
+          key: authCubit.signUpFormKey,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
             child: Column(
@@ -57,7 +58,10 @@ class CustomFormSignUp extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 CustomButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (authCubit.signUpFormKey.currentState!.validate() ==
+                        true) {}
+                  },
                   text: AppStrings.signUp,
                   color: AppColors.kBlueColor,
                 )
