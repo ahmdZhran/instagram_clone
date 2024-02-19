@@ -6,4 +6,6 @@ class Assets {
   static const String homeIcon = "assets/images/home_icon.svg";
   static const String instagramIconAnimation =
       "assets/lottie/intagramIconAnimation.json";
+
+  static const String lottieFilePath = "assets/lottie/loading_animation.json";
 }

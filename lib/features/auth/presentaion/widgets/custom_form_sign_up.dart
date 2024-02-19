@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/core/functions/navigator_methods.dart';
+import 'package:instagram_clone/core/utls/app_assets.dart';
 import 'package:instagram_clone/core/utls/app_colors.dart';
 import 'package:instagram_clone/core/utls/app_strings.dart';
+import 'package:instagram_clone/core/utls/text_styles.dart';
 import 'package:instagram_clone/features/auth/presentaion/widgets/custom_button_widget.dart';
+import 'package:lottie/lottie.dart';
 
 import '../view_model/auth_cubit/auth_cubit.dart';
 import 'custom_text_form_field.dart';
@@ -14,7 +18,11 @@ class CustomFormSignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        // TODO: implement listener
+        if (state is CreateUserSuccess) {
+          customNavigator(context, '/signInView');
+        } else if (state is CreateUserFailer) {
+          //TODO show custom snakbar
+        }
       },
       builder: (context, state) {
         AuthCubit authCubit = BlocProvider.of<AuthCubit>(context);
@@ -64,7 +72,10 @@ class CustomFormSignUp extends StatelessWidget {
                       authCubit.createUserWithEmailAndPassword();
                     }
                   },
-                  childOfCustomButton: const Text(AppStrings.signUp),
+                  childOfCustomButton: state is CreateUserLoading
+                      ? LottieBuilder.asset(Assets.lottieFilePath)
+                      : const Text(AppStrings.signUp,
+                          style: CustomTextStyles.normalTextStyle),
                   color: AppColors.kBlueColor,
                 )
               ],
