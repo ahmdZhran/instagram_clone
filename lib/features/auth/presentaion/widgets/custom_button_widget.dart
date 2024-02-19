@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utls/text_styles.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     this.color,
     required this.onPressed,
-    required this.text,
+    this.childOfCustomButton,
   });
   final Color? color;
   final VoidCallback onPressed;
-  final String text;
-
+  final Widget? childOfCustomButton;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -25,10 +23,7 @@ class CustomButton extends StatelessWidget {
           ),
         ),
         onPressed: onPressed,
-        child: Text(
-          text,
-          style: CustomTextStyles.normalTextStyle,
-        ),
+        child: childOfCustomButton,
       ),
     );
   }
