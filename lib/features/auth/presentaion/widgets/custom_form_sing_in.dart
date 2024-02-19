@@ -34,7 +34,7 @@ class CustomFormSignIn extends StatelessWidget {
             const SizedBox(height: 40),
             CustomButton(
               onPressed: () {},
-              text: AppStrings.signIn,
+              childOfCustomButton: const Text(AppStrings.signIn),
               color: AppColors.kBlueColor,
             ),
           ],

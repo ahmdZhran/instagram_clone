@@ -64,7 +64,7 @@ class CustomFormSignUp extends StatelessWidget {
                       authCubit.createUserWithEmailAndPassword();
                     }
                   },
-                  text: AppStrings.signUp,
+                  childOfCustomButton: const Text(AppStrings.signUp),
                   color: AppColors.kBlueColor,
                 )
               ],
