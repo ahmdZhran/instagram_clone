@@ -17,6 +17,9 @@ class CustomFormSignIn extends StatelessWidget {
         // TODO: implement listener
         if (state is SigninSuccess) {
           print('success==============================================');
+        } else if (state is SigninFailure) {
+          print(
+              'somthing wrong happens .........................................');
         }
       },
       builder: (context, state) {
@@ -38,13 +41,15 @@ class CustomFormSignIn extends StatelessWidget {
                   onChanged: (password) {
                     authCubit.password = password;
                   },
-                  obscureText: true,
+                  obscureText: authCubit.isObsecurePasswordText,
                   hintText: AppStrings.password,
                   suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.visibility_off,
-                    ),
+                    onPressed: () {
+                      authCubit.obsecurePasswordText();
+                    },
+                    icon: Icon(authCubit.isObsecurePasswordText == true
+                        ? Icons.visibility_off
+                        : Icons.visibility),
                   ),
                 ),
                 const SizedBox(height: 15),
