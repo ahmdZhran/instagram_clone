@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/core/functions/navigator_methods.dart';
+import 'package:instagram_clone/core/utls/app_assets.dart';
 import 'package:instagram_clone/core/utls/app_colors.dart';
 import 'package:instagram_clone/core/utls/app_strings.dart';
+import 'package:lottie/lottie.dart';
 import '../view_model/auth_cubit/auth_cubit.dart';
 import 'custom_button_widget.dart';
 import 'custom_text_form_field.dart';
@@ -16,10 +19,12 @@ class CustomFormSignIn extends StatelessWidget {
       listener: (context, state) {
         // TODO: implement listener
         if (state is SigninSuccess) {
-          print('success==============================================');
+          customNavigator(context, '/homeView');
         } else if (state is SigninFailure) {
-          print(
-              'somthing wrong happens .........................................');
+          //TODO show custom snakbar with the error string
+          const SnackBar(
+            content: Text('somthing wrong happend '),
+          );
         }
       },
       builder: (context, state) {
@@ -57,11 +62,14 @@ class CustomFormSignIn extends StatelessWidget {
                 const SizedBox(height: 40),
                 CustomButton(
                   onPressed: () {
-                    if (authCubit.signInFormKey.currentState!.validate()) {
+                    if (authCubit.signInFormKey.currentState!.validate() ==
+                        true) {
                       authCubit.signInWithEmailAndPassword();
                     }
                   },
-                  childOfCustomButton: const Text(AppStrings.signIn),
+                  childOfCustomButton: state is SignInLoading
+                      ? LottieBuilder.asset(Assets.lottieFilePath)
+                      : const Text(AppStrings.signIn),
                   color: AppColors.kBlueColor,
                 ),
               ],
