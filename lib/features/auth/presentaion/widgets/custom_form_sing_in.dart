@@ -17,7 +17,9 @@ class CustomFormSignIn extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
+        AuthCubit authCubit = BlocProvider.of<AuthCubit>(context);
         return Form(
+          key: authCubit.signInFormKey,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
             child: Column(
@@ -40,7 +42,11 @@ class CustomFormSignIn extends StatelessWidget {
                 const ForgotPasswordWidget(),
                 const SizedBox(height: 40),
                 CustomButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (authCubit.signInFormKey.currentState!.validate()) {
+                      //TODO call method of login from Authcubit
+                    }
+                  },
                   childOfCustomButton: const Text(AppStrings.signIn),
                   color: AppColors.kBlueColor,
                 ),
