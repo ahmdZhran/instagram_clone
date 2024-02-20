@@ -4,6 +4,8 @@ import 'package:instagram_clone/core/functions/navigator_methods.dart';
 import 'package:instagram_clone/core/utls/app_assets.dart';
 import 'package:instagram_clone/core/utls/app_colors.dart';
 import 'package:instagram_clone/core/utls/app_strings.dart';
+import 'package:instagram_clone/core/utls/text_styles.dart';
+import 'package:instagram_clone/features/auth/presentaion/widgets/custom_snakbar_widget.dart';
 import 'package:lottie/lottie.dart';
 import '../view_model/auth_cubit/auth_cubit.dart';
 import 'custom_button_widget.dart';
@@ -17,8 +19,8 @@ class CustomFormSignIn extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        // TODO: implement listener
         if (state is SigninSuccess) {
+          showSnakBarMessage(context);
           customNavigator(context, '/homeView');
         } else if (state is SigninFailure) {
           //TODO show custom snakbar with the error string
@@ -69,7 +71,10 @@ class CustomFormSignIn extends StatelessWidget {
                   },
                   childOfCustomButton: state is SignInLoading
                       ? LottieBuilder.asset(Assets.lottieFilePath)
-                      : const Text(AppStrings.signIn),
+                      : const Text(
+                          AppStrings.signIn,
+                          style: CustomTextStyles.normalTextStyle,
+                        ),
                   color: AppColors.kBlueColor,
                 ),
               ],
