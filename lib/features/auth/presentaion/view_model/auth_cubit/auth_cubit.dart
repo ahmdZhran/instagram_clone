@@ -35,6 +35,28 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  Future<void> signInWithEmailAndPassword() async {
+    try {
+      emit(SignInLoading());
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailAddress!,
+        password: password!,
+      );
+      emit(SigninSuccess());
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        emit(SigninFailure(errMessage: 'No user found for that email.'));
+      } else if (e.code == 'wrong-password') {
+        emit(SigninFailure(
+            errMessage: 'Wrong password provided for that user.'));
+      } else {
+        emit(SigninFailure(errMessage: 'check your email and password'));
+      }
+    } catch (e) {
+      emit(SigninFailure(errMessage: e.toString()));
+    }
+  }
+
   void obsecurePasswordText() {
     isObsecurePasswordText = !isObsecurePasswordText;
     emit(ObsecurePasswordTextState());

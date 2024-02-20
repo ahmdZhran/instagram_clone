@@ -15,4 +15,14 @@ class CreateUserFailer extends AuthState {
   CreateUserFailer({required this.errMessage});
 }
 
+final class SignInLoading extends AuthState {}
+
+final class SigninSuccess extends AuthState {}
+
+final class SigninFailure extends AuthState {
+  final String errMessage;
+
+  SigninFailure({required this.errMessage});
+}
+
 class ObsecurePasswordTextState extends AuthState {}
