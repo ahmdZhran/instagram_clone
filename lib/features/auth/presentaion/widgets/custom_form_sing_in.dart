@@ -15,6 +15,9 @@ class CustomFormSignIn extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         // TODO: implement listener
+        if (state is SigninSuccess) {
+          print('success==============================================');
+        }
       },
       builder: (context, state) {
         AuthCubit authCubit = BlocProvider.of<AuthCubit>(context);
@@ -24,11 +27,17 @@ class CustomFormSignIn extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
             child: Column(
               children: [
-                const CustomTextFormField(
+                CustomTextFormField(
+                  onChanged: (emailAddress) {
+                    authCubit.emailAddress = emailAddress;
+                  },
                   hintText: AppStrings.emailAddress,
                   keyboardType: TextInputType.emailAddress,
                 ),
                 CustomTextFormField(
+                  onChanged: (password) {
+                    authCubit.password = password;
+                  },
                   obscureText: true,
                   hintText: AppStrings.password,
                   suffixIcon: IconButton(
@@ -44,7 +53,7 @@ class CustomFormSignIn extends StatelessWidget {
                 CustomButton(
                   onPressed: () {
                     if (authCubit.signInFormKey.currentState!.validate()) {
-                      //TODO call method of login from Authcubit
+                      authCubit.signInWithEmailAndPassword();
                     }
                   },
                   childOfCustomButton: const Text(AppStrings.signIn),
