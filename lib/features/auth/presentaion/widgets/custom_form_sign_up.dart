@@ -8,7 +8,9 @@ import 'package:instagram_clone/core/utls/text_styles.dart';
 import 'package:instagram_clone/features/auth/presentaion/widgets/custom_button_widget.dart';
 import 'package:lottie/lottie.dart';
 
+import '../functions/show_error_message.dart';
 import '../view_model/auth_cubit/auth_cubit.dart';
+import 'custom_snakbar_widget.dart';
 import 'custom_text_form_field.dart';
 
 class CustomFormSignUp extends StatelessWidget {
@@ -19,9 +21,10 @@ class CustomFormSignUp extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is CreateUserSuccess) {
+          showingConfirmingMessage(context);
           customNavigator(context, '/signInView');
         } else if (state is CreateUserFailer) {
-          //TODO show custom snakbar
+          showErrorMessage(context, state);
         }
       },
       builder: (context, state) {
@@ -53,6 +56,7 @@ class CustomFormSignUp extends StatelessWidget {
                 CustomTextFormField(
                   onChanged: (password) {
                     authCubit.password = password;
+                    print(password);
                   },
                   hintText: AppStrings.password,
                   obscureText: authCubit.isObsecurePasswordText,

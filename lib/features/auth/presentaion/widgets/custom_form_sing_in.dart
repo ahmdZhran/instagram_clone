@@ -5,7 +5,6 @@ import 'package:instagram_clone/core/utls/app_assets.dart';
 import 'package:instagram_clone/core/utls/app_colors.dart';
 import 'package:instagram_clone/core/utls/app_strings.dart';
 import 'package:instagram_clone/core/utls/text_styles.dart';
-import 'package:instagram_clone/features/auth/presentaion/widgets/custom_snakbar_widget.dart';
 import 'package:lottie/lottie.dart';
 import '../view_model/auth_cubit/auth_cubit.dart';
 import 'custom_button_widget.dart';
@@ -20,9 +19,11 @@ class CustomFormSignIn extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is SigninSuccess) {
-          showingConfirmingMessage(context);
           customNavigator(context, '/homeView');
-        } else if (state is SigninFailure) {}
+        } else if (state is SigninFailure) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(state.errMessage)));
+        }
       },
       builder: (context, state) {
         AuthCubit authCubit = BlocProvider.of<AuthCubit>(context);
