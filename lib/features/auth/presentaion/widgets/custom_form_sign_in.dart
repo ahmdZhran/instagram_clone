@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/functions/navigator_methods.dart';
@@ -13,7 +14,10 @@ class CustomFormSignIn extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is SigninSuccess) {
-          customNavigator(context, '/homeView');
+          FirebaseAuth.instance.currentUser!.emailVerified
+              ? customNavigator(context, '/homeView')
+              //TODO show message tell user verfy your email
+              : print('verfy your email first ');
         } else if (state is SigninFailure) {
           showErrorMessage(
               context, CreateUserFailer(errMessage: state.errMessage));

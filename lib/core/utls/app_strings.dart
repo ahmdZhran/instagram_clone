@@ -13,7 +13,13 @@ abstract class AppStrings {
       alreadyHaveAnAccount = "Already have an account? ",
       dontHaveAnAccount = "Don’t have an account? ",
       forgotPassword = "Forgot Password?",
-      enterYourEmailBelow = "Enter your Email below to can reset your password",
+
+      // Reset Passowrd View
+      resetPassword = 'Reset Password',
+      pleaseenterYourEmail =
+          'Please enter your registered email below to can reset your password.',
+      sendVerficatoinCode = 'Send Verficatoin Code',
+
       // Profile Strings
       posts = 'Posts',
       followers = 'Followers',
