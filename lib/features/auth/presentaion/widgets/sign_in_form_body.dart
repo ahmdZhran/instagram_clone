@@ -53,7 +53,7 @@ class SignInFormBody extends StatelessWidget {
             const SizedBox(height: 40),
             CustomButton(
               onPressed: () {
-                if (authCubit.signInFormKey.currentState!.validate() == true) {
+                if (authCubit.signInFormKey.currentState!.validate()) {
                   authCubit.signInWithEmailAndPassword();
                 }
               },

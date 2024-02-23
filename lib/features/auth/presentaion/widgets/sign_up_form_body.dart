@@ -60,7 +60,7 @@ class SignUpFormBody extends StatelessWidget {
             const SizedBox(height: 15),
             CustomButton(
               onPressed: () {
-                if (authCubit.signUpFormKey.currentState!.validate() == true) {
+                if (authCubit.signUpFormKey.currentState!.validate()) {
                   authCubit.createUserWithEmailAndPassword();
                 }
               },
