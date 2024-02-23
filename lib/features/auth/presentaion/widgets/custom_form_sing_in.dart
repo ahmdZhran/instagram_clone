@@ -5,7 +5,7 @@ import 'package:instagram_clone/core/utls/app_assets.dart';
 import 'package:instagram_clone/core/utls/app_colors.dart';
 import 'package:instagram_clone/core/utls/app_strings.dart';
 import 'package:instagram_clone/core/utls/text_styles.dart';
-import 'package:instagram_clone/features/auth/presentaion/widgets/custom_snakbar_widget.dart';
+import 'package:instagram_clone/features/auth/presentaion/functions/show_message.dart';
 import 'package:lottie/lottie.dart';
 import '../view_model/auth_cubit/auth_cubit.dart';
 import 'custom_button_widget.dart';
@@ -20,13 +20,9 @@ class CustomFormSignIn extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is SigninSuccess) {
-          showSnakBarMessage(context);
           customNavigator(context, '/homeView');
         } else if (state is SigninFailure) {
-          //TODO show custom snakbar with the error string
-          const SnackBar(
-            content: Text('somthing wrong happend '),
-          );
+          showMessage(context, CreateUserFailer(errMessage: state.errMessage));
         }
       },
       builder: (context, state) {
