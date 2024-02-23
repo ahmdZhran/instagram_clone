@@ -5,6 +5,7 @@ import 'package:instagram_clone/core/utls/app_assets.dart';
 import 'package:instagram_clone/core/utls/app_colors.dart';
 import 'package:instagram_clone/core/utls/app_strings.dart';
 import 'package:instagram_clone/core/utls/text_styles.dart';
+import 'package:instagram_clone/features/auth/presentaion/functions/show_message.dart';
 import 'package:lottie/lottie.dart';
 import '../view_model/auth_cubit/auth_cubit.dart';
 import 'custom_button_widget.dart';
@@ -21,8 +22,7 @@ class CustomFormSignIn extends StatelessWidget {
         if (state is SigninSuccess) {
           customNavigator(context, '/homeView');
         } else if (state is SigninFailure) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.errMessage)));
+          showMessage(context, CreateUserFailer(errMessage: state.errMessage));
         }
       },
       builder: (context, state) {
