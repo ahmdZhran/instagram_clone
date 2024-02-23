@@ -65,4 +65,8 @@ class AuthCubit extends Cubit<AuthState> {
     isObsecurePasswordText = !isObsecurePasswordText;
     emit(ObsecurePasswordTextState());
   }
+
+  void verfyEmail() {
+    FirebaseAuth.instance.currentUser!.sendEmailVerification();
+  }
 }
