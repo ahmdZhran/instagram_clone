@@ -1,7 +1,8 @@
 import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utls/text_styles.dart';
 
-void showSnakBarMessage(BuildContext context) {
+void showingConfirmingMessage(context) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
     content: Container(
       padding: const EdgeInsets.all(8),
@@ -19,17 +20,17 @@ void showSnakBarMessage(BuildContext context) {
             openStore: true,
           );
         },
-        child: Row(children: [
-          const Icon(
+        child: const Row(children: [
+          Icon(
             Icons.check_circle,
             color: Colors.white,
             size: 40,
           ),
-          const SizedBox(width: 20),
+          SizedBox(width: 20),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 "We've sent a verification email.",
                 style: TextStyle(
                   fontSize: 15,
@@ -37,24 +38,9 @@ void showSnakBarMessage(BuildContext context) {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              RichText(
-                text: const TextSpan(
-                  style: TextStyle(color: Colors.white, fontSize: 12),
-                  children: [
-                    TextSpan(
-                      text: "Press ",
-                    ),
-                    TextSpan(
-                      text: "here",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.underline),
-                    ),
-                    TextSpan(
-                      text: " to check your inbox.",
-                    ),
-                  ],
-                ),
+              Text(
+                'Press here to check your inbox',
+                style: CustomTextStyles.normalTextStyle,
               )
             ],
           ),
@@ -66,3 +52,10 @@ void showSnakBarMessage(BuildContext context) {
     behavior: SnackBarBehavior.floating,
   ));
 }
+
+
+
+
+//Color? color color of message
+// Widget? child // GestsureDectore 
+// Widget? child contentOfMessage 

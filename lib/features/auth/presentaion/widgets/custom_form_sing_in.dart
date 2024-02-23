@@ -20,14 +20,9 @@ class CustomFormSignIn extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is SigninSuccess) {
-          showSnakBarMessage(context);
+          showingConfirmingMessage(context);
           customNavigator(context, '/homeView');
-        } else if (state is SigninFailure) {
-          //TODO show custom snakbar with the error string
-          const SnackBar(
-            content: Text('somthing wrong happend '),
-          );
-        }
+        } else if (state is SigninFailure) {}
       },
       builder: (context, state) {
         AuthCubit authCubit = BlocProvider.of<AuthCubit>(context);
