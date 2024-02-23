@@ -14,7 +14,7 @@ class CustomFormSignUp extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
         if (state is CreateUserSuccess) {
-          showingConfirmingMessage(context);
+          showConfirmingMessage(context);
           customNavigator(context, '/signInView');
         } else if (state is CreateUserFailer) {
           showErrorMessage(context, state);

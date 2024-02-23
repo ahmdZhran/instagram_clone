@@ -13,6 +13,7 @@ class AuthCubit extends Cubit<AuthState> {
   bool isObsecurePasswordText = true;
   GlobalKey<FormState> signUpFormKey = GlobalKey();
   GlobalKey<FormState> signInFormKey = GlobalKey();
+  GlobalKey<FormState> resePassowrdKey = GlobalKey();
 
   Future<void> createUserWithEmailAndPassword() async {
     try {
