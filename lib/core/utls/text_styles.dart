@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utls/app_colors.dart';
+import 'app_colors.dart';
 
 abstract class CustomTextStyles {
   static const pacifico50Style = TextStyle(

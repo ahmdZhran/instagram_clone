@@ -1,6 +1,6 @@
 import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utls/text_styles.dart';
+import '../../../../core/utls/text_styles.dart';
 
 void showingConfirmingMessage(context) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(

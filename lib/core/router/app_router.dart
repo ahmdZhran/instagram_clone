@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:instagram_clone/features/auth/presentaion/view_model/auth_cubit/auth_cubit.dart';
-import 'package:instagram_clone/features/auth/presentaion/views/sign_up.dart';
-import 'package:instagram_clone/features/home/presentation/views/home.dart';
+import '../../features/auth/presentaion/view_model/auth_cubit/auth_cubit.dart';
+import '../../features/auth/presentaion/views/sign_up.dart';
+import '../../features/home/presentation/views/home.dart';
 
 import '../../features/auth/presentaion/views/sign_in.dart';
 
