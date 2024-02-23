@@ -16,6 +16,7 @@ class CustomFormSignIn extends StatelessWidget {
         if (state is SigninSuccess) {
           FirebaseAuth.instance.currentUser!.emailVerified
               ? customNavigator(context, '/homeView')
+              //TODO show message tell user verfy your email
               : print('verfy your email first ');
         } else if (state is SigninFailure) {
           showErrorMessage(
