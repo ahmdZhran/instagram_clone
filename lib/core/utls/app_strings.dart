@@ -18,7 +18,7 @@ abstract class AppStrings {
       resetPassword = 'Reset Password',
       pleaseenterYourEmail =
           'Please enter your registered email below to can reset your password.',
-      sendVerficatoinCode = 'Send Verficatoin Code',
+      sendResetPasswordLink = 'Send reset password link',
 
       // Profile Strings
       posts = 'Posts',

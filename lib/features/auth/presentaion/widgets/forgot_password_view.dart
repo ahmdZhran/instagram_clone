@@ -35,7 +35,7 @@ class ForgotPasswordView extends StatelessWidget {
                     onPressed: () {},
                     color: AppColors.kBlueColor,
                     childOfCustomButton: const Text(
-                      AppStrings.sendVerficatoinCode,
+                      AppStrings.sendResetPasswordLink,
                       style: TextStyle(color: AppColors.kWhiteColor),
                     ),
                   ),
