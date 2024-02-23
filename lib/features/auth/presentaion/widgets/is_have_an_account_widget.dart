@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utls/app_colors.dart';
-import 'package:instagram_clone/core/utls/text_styles.dart';
+import '../../../../core/utls/app_colors.dart';
+import '../../../../core/utls/text_styles.dart';
 
 class IsHaveAnAccountWidget extends StatelessWidget {
   const IsHaveAnAccountWidget(

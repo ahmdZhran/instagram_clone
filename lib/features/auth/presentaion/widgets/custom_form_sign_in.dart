@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/core/functions/navigator_methods.dart';
-import 'package:instagram_clone/features/auth/presentaion/functions/show_error_message.dart';
+import '../../../../core/functions/navigator_methods.dart';
+import '../functions/show_error_message.dart';
 import '../view_model/auth_cubit/auth_cubit.dart';
 import 'sign_in_form_body.dart';
 

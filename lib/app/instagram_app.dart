@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/router/app_router.dart';
-import 'package:instagram_clone/core/utls/app_colors.dart';
-import 'package:instagram_clone/core/utls/app_strings.dart';
+import '../core/router/app_router.dart';
+import '../core/utls/app_colors.dart';
+import '../core/utls/app_strings.dart';
 
 class InstagramApp extends StatelessWidget {
   const InstagramApp({super.key});
