@@ -2,7 +2,7 @@ import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/utls/text_styles.dart';
 
-void showingConfirmingMessage(context) {
+void showConfirmingMessage(context) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
     content: Container(
       padding: const EdgeInsets.all(8),

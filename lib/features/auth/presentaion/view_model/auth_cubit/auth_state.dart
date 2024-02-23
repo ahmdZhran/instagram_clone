@@ -25,4 +25,14 @@ final class SigninFailure extends AuthState {
   SigninFailure({required this.errMessage});
 }
 
+final class EmailResetPasswordLoading extends AuthState {}
+
+final class EmailResetPasswordSuccess extends AuthState {}
+
+final class EmailResetPasswordFailer extends AuthState {
+  final String errMessage;
+
+  EmailResetPasswordFailer({required this.errMessage});
+}
+
 class ObsecurePasswordTextState extends AuthState {}

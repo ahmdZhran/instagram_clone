@@ -13,6 +13,7 @@ class AuthCubit extends Cubit<AuthState> {
   bool isObsecurePasswordText = true;
   GlobalKey<FormState> signUpFormKey = GlobalKey();
   GlobalKey<FormState> signInFormKey = GlobalKey();
+  GlobalKey<FormState> resePassowrdKey = GlobalKey();
 
   Future<void> createUserWithEmailAndPassword() async {
     try {
@@ -67,7 +68,17 @@ class AuthCubit extends Cubit<AuthState> {
     emit(ObsecurePasswordTextState());
   }
 
-  void verfyEmail() {
-    FirebaseAuth.instance.currentUser!.sendEmailVerification();
+  Future<void> verfyEmail() async {
+    await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+  }
+
+  void resetPasswordWithEmail() async {
+    try {
+      emit(EmailResetPasswordLoading());
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: emailAddress!);
+      emit(EmailResetPasswordSuccess());
+    } catch (e) {
+      emit(EmailResetPasswordFailer(errMessage: e.toString()));
+    }
   }
 }
