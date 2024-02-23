@@ -52,10 +52,3 @@ void showConfirmingMessage(context) {
     behavior: SnackBarBehavior.floating,
   ));
 }
-
-
-
-
-//Color? color color of message
-// Widget? child // GestsureDectore 
-// Widget? child contentOfMessage 
