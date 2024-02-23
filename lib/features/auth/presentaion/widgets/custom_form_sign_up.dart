@@ -8,7 +8,7 @@ import 'package:instagram_clone/core/utls/text_styles.dart';
 import 'package:instagram_clone/features/auth/presentaion/widgets/custom_button_widget.dart';
 import 'package:lottie/lottie.dart';
 
-import '../functions/show_error_message.dart';
+import '../functions/show_message.dart';
 import '../view_model/auth_cubit/auth_cubit.dart';
 import 'custom_snakbar_widget.dart';
 import 'custom_text_form_field.dart';
@@ -24,7 +24,7 @@ class CustomFormSignUp extends StatelessWidget {
           showingConfirmingMessage(context);
           customNavigator(context, '/signInView');
         } else if (state is CreateUserFailer) {
-          showErrorMessage(context, state);
+          showMessage(context, state);
         }
       },
       builder: (context, state) {
