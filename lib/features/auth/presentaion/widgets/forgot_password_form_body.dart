@@ -32,6 +32,7 @@ class ForgotPasswordFormBody extends StatelessWidget {
               onPressed: () {
                 if (authCubit.resePassowrdKey.currentState!.validate()) {
                   authCubit.resetPasswordWithEmail();
+                  Navigator.pop(context);
                 }
               },
               color: AppColors.kBlueColor,
