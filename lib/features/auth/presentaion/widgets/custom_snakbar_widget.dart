@@ -1,3 +1,4 @@
+import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:flutter/material.dart';
 
 void showSnakBarMessage(BuildContext context) {
@@ -12,8 +13,11 @@ void showSnakBarMessage(BuildContext context) {
         ),
       ),
       child: GestureDetector(
-        onTap: () {
-          print('tapped on Row=========================');
+        onTap: () async {
+          await LaunchApp.openApp(
+            androidPackageName: 'com.google.android.gm',
+            openStore: true,
+          );
         },
         child: Row(children: [
           const Icon(
