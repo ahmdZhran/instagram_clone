@@ -67,7 +67,15 @@ class AuthCubit extends Cubit<AuthState> {
     emit(ObsecurePasswordTextState());
   }
 
-  void verfyEmail() {
-    FirebaseAuth.instance.currentUser!.sendEmailVerification();
+  Future<void> verfyEmail() async {
+    await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+  }
+
+  void resetPasswordWithEmail() async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: emailAddress!);
+    } on Exception {
+      // TODO
+    }
   }
 }
