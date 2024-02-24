@@ -72,7 +72,7 @@ class AuthCubit extends Cubit<AuthState> {
     await FirebaseAuth.instance.currentUser!.sendEmailVerification();
   }
 
-  void resetPasswordWithEmail() async {
+  Future<void> resetPasswordWithEmail() async {
     try {
       emit(EmailResetPasswordLoading());
       await FirebaseAuth.instance.sendPasswordResetEmail(email: emailAddress!);
