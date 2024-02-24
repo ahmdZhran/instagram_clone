@@ -4,7 +4,7 @@ import '../../../../core/functions/navigator_methods.dart';
 import '../../../../core/utls/app_strings.dart';
 import '../functions/show_error_message.dart';
 import '../view_model/auth_cubit/auth_cubit.dart';
-import 'custom_snakbar_widget.dart';
+import '../functions/show_is_confirming_message.dart';
 import 'sign_up_form_body.dart';
 
 class CustomFormSignUp extends StatelessWidget {
