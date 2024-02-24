@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/core/utls/app_strings.dart';
 import 'package:instagram_clone/core/utls/text_styles.dart';
 import 'package:instagram_clone/features/auth/presentaion/widgets/custom_snakbar_widget.dart';
+import '../functions/show_error_message.dart';
 import '../view_model/auth_cubit/auth_cubit.dart';
 import 'forgot_password_form_body.dart';
 
@@ -26,7 +27,7 @@ class ForgotPasswordView extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   const Text(
-                    AppStrings.pleaseenterYourEmail,
+                    AppStrings.pleaseEnterYourEmail,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 40),
@@ -36,7 +37,7 @@ class ForgotPasswordView extends StatelessWidget {
                         showConfirmingMessage(
                             context, AppStrings.passwordResetEmailSent);
                       } else if (state is EmailResetPasswordFailer) {
-                        showErrorMessage(context, state);
+                        showErrorMessage(context, state.errMessage);
                       }
                     },
                     builder: (context, state) {
@@ -51,19 +52,5 @@ class ForgotPasswordView extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  void showErrorMessage(BuildContext context, EmailResetPasswordFailer state) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Row(
-        children: [
-          const Icon(Icons.error),
-          const SizedBox(width: 10),
-          Text(state.errMessage, style: CustomTextStyles.normalTextStyle),
-        ],
-      ),
-      backgroundColor: const Color.fromARGB(255, 229, 35, 21),
-      behavior: SnackBarBehavior.floating,
-    ));
   }
 }

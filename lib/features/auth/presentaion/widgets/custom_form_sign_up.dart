@@ -18,7 +18,7 @@ class CustomFormSignUp extends StatelessWidget {
           showConfirmingMessage(context, AppStrings.weSentVerfyEmail);
           customNavigator(context, '/signInView');
         } else if (state is CreateUserFailer) {
-          showErrorMessage(context, state);
+          showErrorMessage(context, state.errMessage);
         }
       },
       builder: (context, state) {
