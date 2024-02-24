@@ -81,7 +81,8 @@ class AuthCubit extends Cubit<AuthState> {
       emit(EmailResetPasswordSuccess());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-email') {
-        emit(EmailResetPasswordFailer(errMessage: 'check your email'));
+        emit(EmailResetPasswordFailer(
+            errMessage: 'Please enter a valid email.'));
       }
     }
   }
