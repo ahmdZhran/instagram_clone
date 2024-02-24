@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utls/text_styles.dart';
+import '../../../../core/utls/text_styles.dart';
 
 void showErrorMessage(BuildContext context, String errMessage) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
