@@ -2,7 +2,7 @@ import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/utls/text_styles.dart';
 
-void showConfirmingMessage(context) {
+void showConfirmingMessage(context, String text) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
     content: Container(
       padding: const EdgeInsets.all(8),
@@ -20,25 +20,25 @@ void showConfirmingMessage(context) {
             openStore: true,
           );
         },
-        child: const Row(children: [
-          Icon(
+        child: Row(children: [
+          const Icon(
             Icons.check_circle,
             color: Colors.white,
             size: 40,
           ),
-          SizedBox(width: 20),
+          const SizedBox(width: 20),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "We've sent a verification email.",
-                style: TextStyle(
+                text,
+                style: const TextStyle(
                   fontSize: 15,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
+              const Text(
                 'Press here to check your inbox',
                 style: CustomTextStyles.normalTextStyle,
               )

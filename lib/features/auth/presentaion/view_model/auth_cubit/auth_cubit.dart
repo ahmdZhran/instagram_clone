@@ -45,11 +45,11 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> signInWithEmailAndPassword() async {
     try {
+      emit(SignInLoading());
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailAddress!,
         password: password!,
       );
-      verfyEmail();
       emit(SigninSuccess());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -79,8 +79,11 @@ class AuthCubit extends Cubit<AuthState> {
       emit(EmailResetPasswordLoading());
       await FirebaseAuth.instance.sendPasswordResetEmail(email: emailAddress!);
       emit(EmailResetPasswordSuccess());
-    } catch (e) {
-      emit(EmailResetPasswordFailer(errMessage: e.toString()));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'invalid-email') {
+        emit(EmailResetPasswordFailer(
+            errMessage: 'Please enter a valid email.'));
+      }
     }
   }
 

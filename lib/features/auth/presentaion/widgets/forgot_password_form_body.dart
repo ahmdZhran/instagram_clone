@@ -23,6 +23,7 @@ class ForgotPasswordFormBody extends StatelessWidget {
         child: Column(
           children: [
             CustomTextFormField(
+                keyboardType: TextInputType.emailAddress,
                 onChanged: (emailAddress) {
                   authCubit.emailAddress = emailAddress;
                 },
@@ -32,7 +33,6 @@ class ForgotPasswordFormBody extends StatelessWidget {
               onPressed: () {
                 if (authCubit.resePassowrdKey.currentState!.validate()) {
                   authCubit.resetPasswordWithEmail();
-                  Navigator.pop(context);
                 }
               },
               color: AppColors.kBlueColor,

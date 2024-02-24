@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/core/utls/app_strings.dart';
 import '../../../../core/functions/navigator_methods.dart';
 import '../functions/show_error_message.dart';
 import '../view_model/auth_cubit/auth_cubit.dart';
@@ -16,11 +17,9 @@ class CustomFormSignIn extends StatelessWidget {
         if (state is SigninSuccess) {
           FirebaseAuth.instance.currentUser!.emailVerified
               ? customNavigator(context, '/homeView')
-              //TODO show message tell user verfy your email
-              : print('verfy your email first ');
+              : showErrorMessage(context, AppStrings.pleaseVefyEmail);
         } else if (state is SigninFailure) {
-          showErrorMessage(
-              context, CreateUserFailer(errMessage: state.errMessage));
+          showErrorMessage(context, state.errMessage);
         }
       },
       builder: (context, state) {
