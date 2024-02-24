@@ -34,7 +34,8 @@ class ForgotPasswordView extends StatelessWidget {
                   BlocConsumer<AuthCubit, AuthState>(
                     listener: (context, state) {
                       if (state is EmailResetPasswordSuccess) {
-                        showConfirmingMessage(context);
+                        showConfirmingMessage(
+                            context, AppStrings.passwordResetEmailSent);
                       } else {
                         print('somthing went wrong');
                       }
