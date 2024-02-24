@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/functions/navigator_methods.dart';
 
+import '../../../../core/functions/navigator_methods.dart';
 import '../../../../core/utls/app_colors.dart';
 import '../../../../core/utls/app_strings.dart';
 import '../../../../core/utls/text_styles.dart';

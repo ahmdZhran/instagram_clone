@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/core/utls/app_strings.dart';
-import 'package:instagram_clone/core/utls/text_styles.dart';
-import 'package:instagram_clone/features/auth/presentaion/functions/show_is_confirming_message.dart';
+import '../../../../core/utls/app_strings.dart';
+import '../../../../core/utls/text_styles.dart';
+import '../functions/show_is_confirming_message.dart';
 import '../functions/show_error_message.dart';
 import '../view_model/auth_cubit/auth_cubit.dart';
 import 'forgot_password_form_body.dart';
