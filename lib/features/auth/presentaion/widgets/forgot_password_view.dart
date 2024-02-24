@@ -13,6 +13,7 @@ class ForgotPasswordView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(backgroundColor: Colors.transparent),
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -20,7 +21,7 @@ class ForgotPasswordView extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  const SizedBox(height: 300),
+                  const SizedBox(height: 250),
                   const Text(
                     AppStrings.resetPassword,
                     style: CustomTextStyles.pacifico50Style,
