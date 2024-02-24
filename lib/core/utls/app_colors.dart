@@ -6,4 +6,5 @@ abstract class AppColors {
   static const kGreyColor = Color(0xff999999);
   static const Color deepGrey = Color.fromARGB(255, 44, 44, 46);
   static const Color kWhiteColor = Color(0xffF9F9F9);
+  static const Color kRedColor = Color.fromARGB(255, 229, 35, 21);
 }
