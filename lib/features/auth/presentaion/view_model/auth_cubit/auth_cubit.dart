@@ -49,7 +49,7 @@ class AuthCubit extends Cubit<AuthState> {
         email: emailAddress!,
         password: password!,
       );
-      verfyEmail();
+
       emit(SigninSuccess());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
