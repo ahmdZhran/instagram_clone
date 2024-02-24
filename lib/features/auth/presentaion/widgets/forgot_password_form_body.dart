@@ -23,6 +23,7 @@ class ForgotPasswordFormBody extends StatelessWidget {
         child: Column(
           children: [
             CustomTextFormField(
+                keyboardType: TextInputType.emailAddress,
                 onChanged: (emailAddress) {
                   authCubit.emailAddress = emailAddress;
                 },

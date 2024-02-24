@@ -21,7 +21,7 @@ class ForgotPasswordView extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  const SizedBox(height: 250),
+                  const SizedBox(height: 120),
                   const Text(
                     AppStrings.resetPassword,
                     style: CustomTextStyles.pacifico50Style,
