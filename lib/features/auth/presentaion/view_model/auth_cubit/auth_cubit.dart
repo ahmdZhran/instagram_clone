@@ -45,11 +45,11 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> signInWithEmailAndPassword() async {
     try {
+      emit(SignInLoading());
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailAddress!,
         password: password!,
       );
-
       emit(SigninSuccess());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
