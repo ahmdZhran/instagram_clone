@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:instagram_clone/core/utls/spacer.dart';
 
 import '../../../../core/functions/navigator_methods.dart';
 import '../../../../core/utls/app_strings.dart';
@@ -18,14 +20,14 @@ class SignInView extends StatelessWidget {
         SliverToBoxAdapter(
           child: Column(
             children: [
-              const SizedBox(height: 150),
+              verticalSpacer(150),
               CustomHeadText(
                   text: AppStrings.headInstagramTitle,
-                  style:
-                      CustomTextStyles.pacifico50Style.copyWith(fontSize: 40)),
-              const SizedBox(height: 30),
+                  style: CustomTextStyles.pacifico50Style
+                      .copyWith(fontSize: 38.sp)),
+              verticalSpacer(28),
               const CustomFormSignIn(),
-              const SizedBox(height: 40),
+              verticalSpacer(36),
               IsHaveAnAccountWidget(
                 titleOfTextOne: AppStrings.dontHaveAnAccount,
                 titleOfTextTwo: AppStrings.signUp,
