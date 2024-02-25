@@ -37,7 +37,7 @@ class ForgotPasswordFormBody extends StatelessWidget {
               },
               color: AppColors.kBlueColor,
               childOfCustomButton: authCubit.state is EmailResetPasswordLoading
-                  ? LottieBuilder.asset(Assets.lottieFilePath)
+                  ? LottieBuilder.asset(Assets.loadingAnimtation)
                   : const Text(
                       AppStrings.sendResetPasswordLink,
                       style: TextStyle(

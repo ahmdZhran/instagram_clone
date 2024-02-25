@@ -59,7 +59,7 @@ class SignInFormBody extends StatelessWidget {
                 }
               },
               childOfCustomButton: authCubit.state is SignInLoading
-                  ? LottieBuilder.asset(Assets.lottieFilePath)
+                  ? LottieBuilder.asset(Assets.loadingAnimtation)
                   : Text(
                       AppStrings.signIn,
                       style: CustomTextStyles.normalTextStyle,
