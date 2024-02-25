@@ -7,4 +7,7 @@ The Instagram Clone App follows the MVVM (Model-View-ViewModel) architecture pat
 - **View:** Represents the user interface components, responsible for rendering UI elements.
 - **ViewModel:** Acts as an intermediary between the View and the Model, handling user interactions, data operations, and updating the View accordingly.
 ## Features
-- Native splash screen
+- **Native Splash Screen:**
+  - The app features a native splash screen that enhances the user experience during app launch.
+  - Utilizes the `flutter_native_splash` package to seamlessly integrate splash screens for both iOS and Android platforms.
+  - Supports both light and dark mode, ensuring a consistent and visually appealing loading experience across different themes.
