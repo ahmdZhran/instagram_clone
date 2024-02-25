@@ -38,7 +38,7 @@ void showConfirmingMessage(context, String text) {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const Text(
+              Text(
                 'Press here to check your inbox',
                 style: CustomTextStyles.normalTextStyle,
               )

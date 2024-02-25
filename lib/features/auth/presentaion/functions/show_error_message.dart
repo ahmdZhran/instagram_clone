@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utls/spacer.dart';
 import '../../../../core/utls/text_styles.dart';
 
 void showErrorMessage(BuildContext context, String errMessage) {
@@ -6,7 +7,7 @@ void showErrorMessage(BuildContext context, String errMessage) {
     content: Row(
       children: [
         const Icon(Icons.error),
-        const SizedBox(width: 10),
+        horizontalSpacer(10),
         Text(errMessage, style: CustomTextStyles.normalTextStyle),
       ],
     ),
