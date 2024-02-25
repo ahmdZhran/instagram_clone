@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/core/utls/spacer.dart';
+import '../../../../core/utls/spacer.dart';
 import '../../../../core/utls/app_strings.dart';
 import '../../../../core/utls/text_styles.dart';
 import '../functions/show_is_confirming_message.dart';

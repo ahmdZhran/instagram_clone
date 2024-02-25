@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:instagram_clone/core/router/route_constants.dart';
-import 'package:instagram_clone/core/utls/spacer.dart';
+import '../../../../core/router/route_constants.dart';
+import '../../../../core/utls/spacer.dart';
 
 import '../../../../core/functions/navigator_methods.dart';
 import '../../../../core/utls/app_strings.dart';

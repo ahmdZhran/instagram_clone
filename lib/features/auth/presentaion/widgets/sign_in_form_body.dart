@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utls/spacer.dart';
+import '../../../../core/utls/spacer.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../core/utls/app_assets.dart';

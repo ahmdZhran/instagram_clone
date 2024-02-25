@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:instagram_clone/core/utls/spacer.dart';
+import '../../../../core/utls/spacer.dart';
 import '../../../../core/utls/app_strings.dart';
 import '../../../../core/utls/text_styles.dart';
 import '../widgets/is_have_an_account_widget.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/router/route_constants.dart';
+import '../../../../core/router/route_constants.dart';
 
 import '../../../../core/functions/navigator_methods.dart';
 import '../../../../core/utls/app_colors.dart';
