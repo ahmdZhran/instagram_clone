@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utls/spacer.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../core/utls/app_assets.dart';
@@ -48,9 +49,9 @@ class SignInFormBody extends StatelessWidget {
                     : Icons.visibility),
               ),
             ),
-            const SizedBox(height: 15),
+            verticalSpacer(15),
             const ForgotPasswordWidget(),
-            const SizedBox(height: 40),
+            verticalSpacer(35),
             CustomButton(
               onPressed: () {
                 if (authCubit.signInFormKey.currentState!.validate()) {
@@ -59,7 +60,7 @@ class SignInFormBody extends StatelessWidget {
               },
               childOfCustomButton: authCubit.state is SignInLoading
                   ? LottieBuilder.asset(Assets.lottieFilePath)
-                  : const Text(
+                  : Text(
                       AppStrings.signIn,
                       style: CustomTextStyles.normalTextStyle,
                     ),

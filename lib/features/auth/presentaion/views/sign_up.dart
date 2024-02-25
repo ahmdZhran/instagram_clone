@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:instagram_clone/core/utls/spacer.dart';
 import '../../../../core/utls/app_strings.dart';
 import '../../../../core/utls/text_styles.dart';
 import '../widgets/is_have_an_account_widget.dart';
@@ -17,14 +18,14 @@ class SignUpView extends StatelessWidget {
         SliverToBoxAdapter(
           child: Column(
             children: [
-              const SizedBox(height: 150),
-              const CustomHeadText(
+              verticalSpacer(120),
+              CustomHeadText(
                 text: AppStrings.createYourEmail,
                 style: CustomTextStyles.pacifico50Style,
               ),
-              const SizedBox(height: 50),
+              verticalSpacer(40),
               const CustomFormSignUp(),
-              const SizedBox(height: 10),
+              verticalSpacer(10),
               IsHaveAnAccountWidget(
                 titleOfTextOne: AppStrings.alreadyHaveAnAccount,
                 titleOfTextTwo: AppStrings.signIn,

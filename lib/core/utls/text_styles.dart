@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'app_colors.dart';
 
 abstract class CustomTextStyles {
-  static const pacifico50Style = TextStyle(
+  static final pacifico50Style = TextStyle(
     fontFamily: "Pacifico",
-    fontSize: 30,
+    fontSize: 30.sp,
   );
-  static const normalTextStyle = TextStyle(
-    fontSize: 14,
+  static final normalTextStyle = TextStyle(
+    fontSize: 12.sp,
     color: AppColors.kWhiteColor,
   );
 }

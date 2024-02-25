@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utls/spacer.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../core/utls/app_assets.dart';
@@ -57,7 +58,7 @@ class SignUpFormBody extends StatelessWidget {
                       ? Icons.visibility
                       : Icons.visibility_off)),
             ),
-            const SizedBox(height: 15),
+            verticalSpacer(15),
             CustomButton(
               onPressed: () {
                 if (authCubit.signUpFormKey.currentState!.validate()) {
@@ -66,7 +67,7 @@ class SignUpFormBody extends StatelessWidget {
               },
               childOfCustomButton: authCubit.state is CreateUserLoading
                   ? LottieBuilder.asset(Assets.lottieFilePath)
-                  : const Text(AppStrings.signUp,
+                  : Text(AppStrings.signUp,
                       style: CustomTextStyles.normalTextStyle),
               color: AppColors.kBlueColor,
             )
