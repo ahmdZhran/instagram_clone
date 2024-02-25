@@ -6,3 +6,5 @@ The Instagram Clone App follows the MVVM (Model-View-ViewModel) architecture pat
 - **Model:** Represents the data and business logic of the application.
 - **View:** Represents the user interface components, responsible for rendering UI elements.
 - **ViewModel:** Acts as an intermediary between the View and the Model, handling user interactions, data operations, and updating the View accordingly.
+## Features
+- Native splash screen
