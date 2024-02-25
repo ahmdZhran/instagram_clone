@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utls/app_assets.dart';
 import 'package:lottie/lottie.dart';
@@ -14,13 +15,8 @@ class SplshView extends StatefulWidget {
 class _SplshViewState extends State<SplshView> {
   @override
   void initState() {
+    delayedNavigation();
     super.initState();
-  }
-
-  void delayedNavigation(context, path) {
-    Future.delayed(const Duration(seconds: 2), () {
-      customReplacementNavigate(context, path);
-    });
   }
 
   @override
@@ -29,9 +25,20 @@ class _SplshViewState extends State<SplshView> {
       body: Center(
         child: LottieBuilder.asset(
           Assets.instagramAnimationLogo,
-          height: MediaQuery.of(context).size.height / 5,
+          height: MediaQuery.of(context).size.height / 7,
         ),
       ),
+    );
+  }
+
+  void delayedNavigation() {
+    Future.delayed(
+      const Duration(seconds: 3),
+      () {
+        FirebaseAuth.instance.currentUser == null
+            ? customNavigator(context, '/signUpView')
+            : customNavigator(context, '/homeView');
+      },
     );
   }
 }
