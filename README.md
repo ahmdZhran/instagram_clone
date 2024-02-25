@@ -11,4 +11,5 @@ The Instagram Clone App follows the MVVM (Model-View-ViewModel) architecture pat
   - The app features a native splash screen that enhances the user experience during app launch.
   - Utilizes the `flutter_native_splash` package to seamlessly integrate splash screens for both iOS and Android platforms.
   - Supports both light and dark mode, ensuring a consistent and visually appealing loading experience across different themes.
-    https://github.com/ahmdZhran/instagram_clone/assets/80375430/21eff030-c645-49df-89e9-4f3aeb8da517
+   [![Click to Watch Video!](https://example.com/path/to/thumbnail.jpg)](https://example.com/path/to/video.mp4)
+
