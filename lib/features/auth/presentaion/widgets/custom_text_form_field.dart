@@ -38,8 +38,7 @@ class CustomTextFormField extends StatelessWidget {
             errorStyle: const TextStyle(color: Colors.red),
             border: OutlineInputBorder(
               borderSide: BorderSide.none,
-              borderRadius:
-                  BorderRadius.circular(20), // Set circular border radius
+              borderRadius: BorderRadius.circular(20),
             ),
             hintText: hintText,
             fillColor: AppColors.deepGrey,

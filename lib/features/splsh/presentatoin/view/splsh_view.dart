@@ -36,7 +36,7 @@ class _SplshViewState extends State<SplshView> {
       const Duration(seconds: 3),
       () {
         FirebaseAuth.instance.currentUser == null
-            ? customNavigator(context, '/signUpView')
+            ? customNavigator(context, '/signInView')
             : customNavigator(context, '/homeView');
       },
     );

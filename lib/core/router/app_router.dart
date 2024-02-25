@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:instagram_clone/core/router/route_constants.dart';
 import 'package:instagram_clone/features/splsh/presentatoin/view/splsh_view.dart';
 import '../../features/auth/presentaion/view_model/auth_cubit/auth_cubit.dart';
 import '../../features/auth/presentaion/views/sign_up.dart';
@@ -11,29 +12,29 @@ import '../../features/auth/presentaion/views/sign_in.dart';
 final GoRouter router = GoRouter(
   routes: [
     GoRoute(
-      path: '/',
+      path: RouteConstants.splashRoute,
       builder: (context, state) => const SplshView(),
     ),
     GoRoute(
-      path: '/signUpView',
+      path: RouteConstants.signUpRoute,
       builder: (context, state) => BlocProvider(
         create: (context) => AuthCubit(),
         child: const SignUpView(),
       ),
     ),
     GoRoute(
-      path: '/signInView',
+      path: RouteConstants.signInRoute,
       builder: (context, state) => BlocProvider(
         create: (context) => AuthCubit(),
         child: const SignInView(),
       ),
     ),
     GoRoute(
-      path: '/homeView',
+      path: RouteConstants.homeRoute,
       builder: (context, state) => const HomeView(),
     ),
     GoRoute(
-      path: '/forgotPasswordView',
+      path: RouteConstants.forgotPasswordRoute,
       builder: (context, state) => BlocProvider(
         create: (context) => AuthCubit(),
         child: const ForgotPasswordView(),

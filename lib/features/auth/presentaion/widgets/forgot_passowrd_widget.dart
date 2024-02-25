@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/router/route_constants.dart';
 
 import '../../../../core/functions/navigator_methods.dart';
 import '../../../../core/utls/app_colors.dart';
@@ -14,7 +15,7 @@ class ForgotPasswordWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        customNavigator(context, '/forgotPasswordView');
+        customNavigator(context, RouteConstants.forgotPasswordRoute);
       },
       child: Align(
         alignment: Alignment.topRight,
