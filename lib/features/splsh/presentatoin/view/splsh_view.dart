@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utls/app_assets.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../core/functions/navigator_methods.dart';
-import '../../../../core/utls/app_strings.dart';
-import '../../../../core/utls/text_styles.dart';
 
 class SplshView extends StatefulWidget {
   const SplshView({super.key});
@@ -27,9 +27,9 @@ class _SplshViewState extends State<SplshView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(
-          AppStrings.appName,
-          style: CustomTextStyles.pacifico50Style,
+        child: LottieBuilder.asset(
+          Assets.instagramAnimationLogo,
+          height: MediaQuery.of(context).size.height / 5,
         ),
       ),
     );

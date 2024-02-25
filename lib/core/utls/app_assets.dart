@@ -4,8 +4,9 @@ class Assets {
   static const String sendIcon = "assets/images/send_icon.svg";
   static const String settingIcon = "assets/images/setting_icon.svg";
   static const String homeIcon = "assets/images/home_icon.svg";
-  static const String instagramIconAnimation =
-      "assets/lottie/intagramIconAnimation.json";
 
-  static const String lottieFilePath = "assets/lottie/loading_animation.json";
+  static const String loadingAnimtation =
+      "assets/lottie/loading_animation.json";
+  static const String instagramAnimationLogo =
+      'assets/lottie/intagram_logo_animatoin.json';
 }

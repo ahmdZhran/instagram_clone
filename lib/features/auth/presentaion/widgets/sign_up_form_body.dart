@@ -66,7 +66,7 @@ class SignUpFormBody extends StatelessWidget {
                 }
               },
               childOfCustomButton: authCubit.state is CreateUserLoading
-                  ? LottieBuilder.asset(Assets.lottieFilePath)
+                  ? LottieBuilder.asset(Assets.loadingAnimtation)
                   : Text(AppStrings.signUp,
                       style: CustomTextStyles.normalTextStyle),
               color: AppColors.kBlueColor,
