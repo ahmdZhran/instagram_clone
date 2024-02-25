@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:instagram_clone/core/router/route_constants.dart';
 import 'package:instagram_clone/core/utls/spacer.dart';
 
 import '../../../../core/functions/navigator_methods.dart';
@@ -32,7 +33,7 @@ class SignInView extends StatelessWidget {
                 titleOfTextOne: AppStrings.dontHaveAnAccount,
                 titleOfTextTwo: AppStrings.signUp,
                 onTap: () {
-                  customNavigator(context, '/signUpView');
+                  customNavigator(context, RouteConstants.signUpRoute);
                 },
               )
             ],
