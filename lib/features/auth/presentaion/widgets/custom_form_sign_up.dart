@@ -17,7 +17,7 @@ class CustomFormSignUp extends StatelessWidget {
       listener: (context, state) {
         if (state is CreateUserSuccess) {
           showConfirmingMessage(context, AppStrings.weSentVerfyEmail);
-          customNavigator(context, RouteConstants.signInRoute);
+          customReplacementNavigate(context, RouteConstants.signInRoute);
         } else if (state is CreateUserFailer) {
           showErrorMessage(context, state.errMessage);
         }
