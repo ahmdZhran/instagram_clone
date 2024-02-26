@@ -39,6 +39,7 @@ dependencies:
   flutter_native_splash: ^2.3.7
   # A flutter plugin for adapting screen and font size.Guaranteed to look good on different models
   flutter_screenutil: ^5.9.0
+  glassmorphism: ^3.0.0
   go_router: ^13.2.0
   lottie: ^2.7.0
   meta: ^1.9.1

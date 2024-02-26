@@ -5,8 +5,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: BottomAppBar(),
-    );
+    return const Scaffold();
   }
 }
