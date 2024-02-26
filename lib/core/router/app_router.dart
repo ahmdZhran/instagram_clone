@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import '../widgets/custom_bottom_navigation_bar.dart';
 import 'route_constants.dart';
 import '../../features/splsh/presentatoin/view/splsh_view.dart';
 import '../../features/auth/presentaion/view_model/auth_cubit/auth_cubit.dart';
@@ -30,9 +31,8 @@ final GoRouter router = GoRouter(
       ),
     ),
     GoRoute(
-      path: RouteConstants.homeRoute,
-      builder: (context, state) => const HomeView(),
-    ),
+        path: RouteConstants.homeRoute,
+        builder: (context, state) => const HomeView()),
     GoRoute(
       path: RouteConstants.forgotPasswordRoute,
       builder: (context, state) => BlocProvider(
@@ -40,5 +40,9 @@ final GoRouter router = GoRouter(
         child: const ForgotPasswordView(),
       ),
     ),
+    GoRoute(
+      path: RouteConstants.bottomNavBarRoute,
+      builder: (context, state) => const CustomBottomNavigationBar(),
+    )
   ],
 );

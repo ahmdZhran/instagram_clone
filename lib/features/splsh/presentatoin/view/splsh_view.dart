@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/router/route_constants.dart';
 import '../../../../core/utls/app_assets.dart';
 import 'package:lottie/lottie.dart';
 
@@ -36,8 +37,8 @@ class _SplshViewState extends State<SplshView> {
       const Duration(seconds: 3),
       () {
         FirebaseAuth.instance.currentUser == null
-            ? customNavigator(context, '/signInView')
-            : customNavigator(context, '/homeView');
+            ? customNavigator(context, RouteConstants.signInRoute)
+            : customNavigator(context, RouteConstants.bottomNavBarRoute);
       },
     );
   }

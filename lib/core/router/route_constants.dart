@@ -6,4 +6,5 @@ class RouteConstants {
   static const String signInRoute = '/signInView';
   static const String homeRoute = '/homeView';
   static const String forgotPasswordRoute = '/forgotPasswordView';
+  static const String bottomNavBarRoute = '/bottomNavBar';
 }
