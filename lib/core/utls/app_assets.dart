@@ -3,10 +3,10 @@ class Assets {
   static const String searchIcon = "assets/images/search_icon.svg";
   static const String sendIcon = "assets/images/send_icon.svg";
   static const String settingIcon = "assets/images/setting_icon.svg";
-  // static const String homeIcon = "assets/images/home_icon.svg";
+  static const String homeIcon = "assets/images/home_icon.svg";
 
   // assets for bottom nav bar
-  static const String homeIcon = "assets/images/active_heart.svg";
+
   static const String search = "assets/images/search.png";
 
   static const String loadingAnimtation =

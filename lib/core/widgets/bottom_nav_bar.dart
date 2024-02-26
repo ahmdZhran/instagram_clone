@@ -48,7 +48,7 @@ class BottomNavBar extends StatelessWidget {
             ),
             IconButton(
               onPressed: () => onTap(3),
-              icon: const Icon(Icons.person),
+              icon: const Icon(Icons.person_outlined),
             ),
           ],
         ),
