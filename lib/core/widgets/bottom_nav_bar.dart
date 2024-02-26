@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:glassmorphism/glassmorphism.dart';
+import 'package:instagram_clone/core/utls/app_assets.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -31,12 +33,11 @@ class BottomNavBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              onPressed: () => onTap(0),
-              icon: const Icon(Icons.home),
-            ),
+                onPressed: () => onTap(0),
+                icon: SvgPicture.asset(Assets.homeIcon)),
             IconButton(
               onPressed: () => onTap(1),
-              icon: const Icon(Icons.search),
+              icon: Image.asset(Assets.activeSearch),
             ),
             IconButton(
               onPressed: () => onTap(2),
