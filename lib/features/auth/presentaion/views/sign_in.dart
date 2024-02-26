@@ -33,7 +33,8 @@ class SignInView extends StatelessWidget {
                 titleOfTextOne: AppStrings.dontHaveAnAccount,
                 titleOfTextTwo: AppStrings.signUp,
                 onTap: () {
-                  customNavigator(context, RouteConstants.signUpRoute);
+                  customReplacementNavigate(
+                      context, RouteConstants.signUpRoute);
                 },
               )
             ],
