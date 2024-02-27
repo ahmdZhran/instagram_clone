@@ -9,10 +9,10 @@ class BottomNavBar extends StatelessWidget {
   final ValueChanged<int> onTap;
 
   const BottomNavBar({
-    super.key,
+    Key? key,
     required this.currentIndex,
     required this.onTap,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,9 @@ class BottomNavBar extends StatelessWidget {
               icon: SvgPicture.asset(
                 currentIndex == 1 ? Assets.activeSearch : Assets.searchIcon,
                 colorFilter: const ColorFilter.mode(
-                    AppColors.kWhiteColor, BlendMode.srcIn),
+                  AppColors.kWhiteColor,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
             IconButton(
@@ -67,9 +69,22 @@ class BottomNavBar extends StatelessWidget {
                 ),
               ),
             ),
-            IconButton(
-              onPressed: () => onTap(3),
-              icon: const Icon(Icons.person_outlined),
+            GestureDetector(
+              onTap: () => onTap(4),
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color:
+                        currentIndex == 4 ? Colors.white : Colors.transparent,
+                    width: 2.0,
+                  ),
+                ),
+                child: const CircleAvatar(
+                  radius: 15,
+                  backgroundImage: AssetImage("assets/images/airen.jpg"),
+                ),
+              ),
             ),
           ],
         ),
