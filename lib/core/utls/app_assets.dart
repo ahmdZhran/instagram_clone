@@ -7,6 +7,7 @@ class Assets {
   static const String search = "assets/images/search.png";
   static const String activeSearch = "assets/images/search.png";
   static const String heartIcon = "assets/images/heart.svg";
+  static const String addPost = "assets/images/add_post.svg";
 
   static const String loadingAnimtation =
       "assets/lottie/loading_animation.json";

@@ -52,11 +52,20 @@ class BottomNavBar extends StatelessWidget {
             ),
             IconButton(
               onPressed: () => onTap(2),
-              icon: const Icon(Icons.post_add),
+              icon: SvgPicture.asset(
+                Assets.addPost,
+              ),
             ),
             IconButton(
-                onPressed: () => onTap(3),
-                icon: SvgPicture.asset(Assets.heartIcon)),
+              onPressed: () => onTap(3),
+              icon: SvgPicture.asset(
+                Assets.heartIcon,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.kWhiteColor,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
             IconButton(
               onPressed: () => onTap(3),
               icon: const Icon(Icons.person_outlined),
