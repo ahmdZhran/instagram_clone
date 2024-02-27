@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:instagram_clone/core/utls/app_assets.dart';
+import 'package:instagram_clone/core/utls/app_colors.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int> onTap;
 
   const BottomNavBar({
-    super.key,
+    Key? key,
     required this.currentIndex,
     required this.onTap,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,23 +34,57 @@ class BottomNavBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-                onPressed: () => onTap(0),
-                icon: SvgPicture.asset(Assets.homeIcon)),
+              onPressed: () => onTap(0),
+              icon: SvgPicture.asset(
+                currentIndex == 0 ? Assets.homeActiveIcon : Assets.homeIcon,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.kWhiteColor,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
             IconButton(
               onPressed: () => onTap(1),
-              icon: Image.asset(Assets.activeSearch),
+              icon: SvgPicture.asset(
+                currentIndex == 1 ? Assets.activeSearch : Assets.searchIcon,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.kWhiteColor,
+                  BlendMode.srcIn,
+                ),
+              ),
             ),
             IconButton(
               onPressed: () => onTap(2),
-              icon: const Icon(Icons.post_add),
+              icon: SvgPicture.asset(
+                Assets.addPost,
+              ),
             ),
             IconButton(
               onPressed: () => onTap(3),
-              icon: const Icon(Icons.person_outlined),
+              icon: SvgPicture.asset(
+                currentIndex == 3 ? Assets.heartActiveIcon : Assets.heartIcon,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.kWhiteColor,
+                  BlendMode.srcIn,
+                ),
+              ),
             ),
-            IconButton(
-              onPressed: () => onTap(3),
-              icon: const Icon(Icons.person_outlined),
+            GestureDetector(
+              onTap: () => onTap(4),
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color:
+                        currentIndex == 4 ? Colors.white : Colors.transparent,
+                    width: 2.0,
+                  ),
+                ),
+                child: const CircleAvatar(
+                  radius: 15,
+                  backgroundImage: AssetImage("assets/images/airen.jpg"),
+                ),
+              ),
             ),
           ],
         ),
