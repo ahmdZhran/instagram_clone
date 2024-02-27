@@ -38,13 +38,16 @@ class BottomNavBar extends StatelessWidget {
               icon: SvgPicture.asset(
                 Assets.homeIcon,
                 colorFilter: const ColorFilter.mode(
-                    AppColors.kWhiteColor, BlendMode.srcIn),
+                  AppColors.kWhiteColor,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
             IconButton(
               onPressed: () => onTap(1),
               icon: Image.asset(
                 Assets.activeSearch,
+                color: AppColors.kWhiteColor,
               ),
             ),
             IconButton(
@@ -52,9 +55,8 @@ class BottomNavBar extends StatelessWidget {
               icon: const Icon(Icons.post_add),
             ),
             IconButton(
-              onPressed: () => onTap(3),
-              icon: const Icon(Icons.person_outlined),
-            ),
+                onPressed: () => onTap(3),
+                icon: SvgPicture.asset(Assets.heartIcon)),
             IconButton(
               onPressed: () => onTap(3),
               icon: const Icon(Icons.person_outlined),
