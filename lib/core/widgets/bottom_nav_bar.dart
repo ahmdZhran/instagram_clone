@@ -36,7 +36,7 @@ class BottomNavBar extends StatelessWidget {
             IconButton(
               onPressed: () => onTap(0),
               icon: SvgPicture.asset(
-                Assets.homeIcon,
+                currentIndex == 0 ? Assets.homeActiveIcon : Assets.homeIcon,
                 colorFilter: const ColorFilter.mode(
                   AppColors.kWhiteColor,
                   BlendMode.srcIn,
@@ -46,7 +46,7 @@ class BottomNavBar extends StatelessWidget {
             IconButton(
               onPressed: () => onTap(1),
               icon: SvgPicture.asset(
-                Assets.searchIcon,
+                currentIndex == 1 ? Assets.activeSearch : Assets.searchIcon,
                 colorFilter: const ColorFilter.mode(
                     AppColors.kWhiteColor, BlendMode.srcIn),
               ),
@@ -60,7 +60,7 @@ class BottomNavBar extends StatelessWidget {
             IconButton(
               onPressed: () => onTap(3),
               icon: SvgPicture.asset(
-                Assets.heartIcon,
+                currentIndex == 3 ? Assets.heartActiveIcon : Assets.heartIcon,
                 colorFilter: const ColorFilter.mode(
                   AppColors.kWhiteColor,
                   BlendMode.srcIn,
