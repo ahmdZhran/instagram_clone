@@ -45,9 +45,10 @@ class BottomNavBar extends StatelessWidget {
             ),
             IconButton(
               onPressed: () => onTap(1),
-              icon: Image.asset(
-                Assets.activeSearch,
-                color: AppColors.kWhiteColor,
+              icon: SvgPicture.asset(
+                Assets.searchIcon,
+                colorFilter: const ColorFilter.mode(
+                    AppColors.kWhiteColor, BlendMode.srcIn),
               ),
             ),
             IconButton(

@@ -4,7 +4,6 @@ class Assets {
   static const String settingIcon = "assets/images/setting_icon.svg";
   static const String homeIcon = "assets/images/home.svg";
 
-  static const String search = "assets/images/search.png";
   static const String activeSearch = "assets/images/search.png";
   static const String heartIcon = "assets/images/heart.svg";
   static const String addPost = "assets/images/add_post.svg";
