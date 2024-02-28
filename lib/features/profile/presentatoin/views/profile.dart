@@ -34,7 +34,12 @@ class _ProfileViewState extends State<ProfileView> {
       child: Scaffold(
         appBar: AppBar(),
         body: Column(
-          children: [TabBar(tabs: _createTabs())],
+          children: [
+            TabBar(
+              tabs: _createTabs(),
+            ),
+            Expanded(child: TabBarView(children: tabBarView))
+          ],
         ),
       ),
     );
