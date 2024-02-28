@@ -5,9 +5,24 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Profile view'),
+    return const DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        body: Column(
+          children: [
+            TabBar(tabs: [
+              Tab(
+                icon: Icon(Icons.person),
+              ),
+              Tab(
+                icon: Icon(Icons.person),
+              ),
+              Tab(
+                icon: Icon(Icons.person),
+              ),
+            ])
+          ],
+        ),
       ),
     );
   }
