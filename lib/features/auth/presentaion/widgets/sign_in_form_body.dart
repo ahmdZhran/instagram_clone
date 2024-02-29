@@ -7,7 +7,7 @@ import '../../../../core/utls/app_colors.dart';
 import '../../../../core/utls/app_strings.dart';
 import '../../../../core/utls/text_styles.dart';
 import '../view_model/auth_cubit/auth_cubit.dart';
-import 'custom_button_widget.dart';
+import '../../../../core/widgets/custom_button_widget.dart';
 import 'custom_text_form_field.dart';
 import 'forgot_passowrd_widget.dart';
 

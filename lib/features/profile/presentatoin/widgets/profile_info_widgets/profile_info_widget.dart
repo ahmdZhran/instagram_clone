@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utls/app_colors.dart';
+import 'package:instagram_clone/core/utls/spacer.dart';
 
+import '../../../../../core/widgets/custom_button_widget.dart';
 import 'photo_of_profile.dart';
 import 'profile_count_widget.dart';
 
@@ -8,9 +11,9 @@ class ProfileInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ProfileCountWidget(count: '120', label: 'Following'),
@@ -18,19 +21,29 @@ class ProfileInfoWidget extends StatelessWidget {
             ProfileCountWidget(count: '21.2k', label: 'Followers'),
           ],
         ),
-        SizedBox(height: 10),
-        Text(
+        verticalSpacer(10),
+        const Text(
           'Eren_official',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 10),
-        Text(
+        verticalSpacer(5),
+        const Text(
           'Hero of Attack on Titan',
         ),
-        Text(
+        const Text(
           'youtube/attack_on_titan/official',
           style: TextStyle(color: Colors.blue),
         ),
+        verticalSpacer(10),
+        CustomButton(
+          childOfCustomButton: const Text(
+            'Edite Profile',
+            style: TextStyle(color: AppColors.kWhiteColor),
+          ),
+          height: 40,
+          width: 180,
+          onPressed: () {},
+        )
       ],
     );
   }
