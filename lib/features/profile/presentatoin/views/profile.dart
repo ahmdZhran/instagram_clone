@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/features/profile/presentatoin/views/saved_view_section/book_marked.dart';
+import 'package:instagram_clone/features/profile/presentatoin/widgets/saved_view_section/book_marked.dart';
 import '../widgets/profile_info_widgets/profile_info_widget.dart';
-import 'feed_view_section/feed.dart';
-import 'reals_view_sectoin/reals.dart';
+import '../widgets/feed_view_section/feed.dart';
+import '../widgets/reals_view_sectoin/reals.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({Key? key}) : super(key: key);
