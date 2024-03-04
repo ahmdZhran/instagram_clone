@@ -1,14 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../widgets/custom_bottom_navigation_bar.dart';
-import 'route_constants.dart';
-import '../../features/splsh/presentatoin/view/splsh_view.dart';
+
 import '../../features/auth/presentaion/view_model/auth_cubit/auth_cubit.dart';
+import '../../features/auth/presentaion/views/sign_in.dart';
 import '../../features/auth/presentaion/views/sign_up.dart';
 import '../../features/auth/presentaion/widgets/forgot_password_view.dart';
 import '../../features/home/presentation/views/home.dart';
-
-import '../../features/auth/presentaion/views/sign_in.dart';
+import '../../features/splsh/presentatoin/view/splsh_view.dart';
+import '../widgets/custom_bottom_navigation_bar.dart';
+import 'route_constants.dart';
 
 final GoRouter router = GoRouter(
   routes: [

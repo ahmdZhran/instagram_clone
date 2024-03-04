@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:glassmorphism/glassmorphism.dart';
-import 'package:instagram_clone/core/utls/app_assets.dart';
-import 'package:instagram_clone/core/utls/app_colors.dart';
+import '../utls/app_assets.dart';
+import '../utls/app_colors.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/widgets/bottom_nav_bar.dart';
-import 'package:instagram_clone/features/add_post/presentation/views/add_post.dart';
-import 'package:instagram_clone/features/home/presentation/views/home.dart';
-import 'package:instagram_clone/features/profile/presentatoin/views/profile.dart';
-import 'package:instagram_clone/features/search/presentation/views/search_view.dart';
-import 'package:instagram_clone/features/shorts/presentation/views/shorts.dart';
+import 'bottom_nav_bar.dart';
+import '../../features/add_post/presentation/views/add_post.dart';
+import '../../features/home/presentation/views/home.dart';
+import '../../features/profile/presentatoin/views/profile.dart';
+import '../../features/search/presentation/views/search_view.dart';
+import '../../features/shorts/presentation/views/shorts.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
   const CustomBottomNavigationBar({Key? key}) : super(key: key);
