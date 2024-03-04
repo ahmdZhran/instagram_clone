@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/features/profile/presentatoin/views/saved_view_section/book_marked.dart';
+import 'package:instagram_clone/features/profile/presentatoin/widgets/saved_view_section/book_marked.dart';
 import '../widgets/profile_info_widgets/profile_info_widget.dart';
-import 'feed_view_section/feed.dart';
-import 'reals_view_sectoin/reals.dart';
+import '../widgets/feed_view_section/feed.dart';
+import '../widgets/reals_view_sectoin/reals.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({Key? key}) : super(key: key);
@@ -29,23 +29,18 @@ class _ProfileViewState extends State<ProfileView> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: [
-              const ProfileInfoWidget(),
-              Column(
-                children: [
-                  TabBar(
-                    tabs: _tabs,
-                  ),
-                  const SizedBox(height: 10),
-                ],
-              ),
-              Expanded(
-                child: TabBarView(children: _tabBarView),
-              ),
-            ],
-          ),
+        body: ListView(
+          children: [
+            const ProfileInfoWidget(),
+            TabBar(
+              tabs: _tabs,
+            ),
+            const SizedBox(height: 10),
+            SizedBox(
+              height: 1430,
+              child: TabBarView(children: _tabBarView),
+            ),
+          ],
         ),
       ),
     );
