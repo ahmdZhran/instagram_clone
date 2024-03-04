@@ -1,3 +1,4 @@
+
 # Instagram Clone App
 
 ## Overview
@@ -39,3 +40,4 @@ The authentication feature allows users to securely sign up, sign in, and reset 
   - **Firebase Cloud Firestore:** Utilized Firebase Cloud Firestore to store user data securely in the cloud, ensuring real-time data synchronization across devices.
 - **External App Launcher:** Incorporated the external_app_launcher package to seamlessly launch external apps for password reset functionality, enhancing user convenience.
 - **GoRouter:** Employed GoRouter for streamlined navigation between authentication screens, providing users with a cohesive and intuitive user interface.
+
