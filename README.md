@@ -43,3 +43,5 @@ The authentication feature allows users to securely sign up, sign in, and reset 
 ## Demo
 https://github.com/ahmdZhran/instagram_clone/assets/80375430/c486221d-2ced-4ab6-91ed-db27c190cca7
 
+https://github.com/ahmdZhran/instagram_clone/assets/80375430/726a501f-ca51-4ca0-a71d-491c67277865
+
