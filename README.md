@@ -40,7 +40,7 @@ The authentication feature allows users to securely sign up, sign in, and reset 
   - **Firebase Cloud Firestore:** Utilized Firebase Cloud Firestore to store user data securely in the cloud, ensuring real-time data synchronization across devices.
 - **External App Launcher:** Incorporated the external_app_launcher package to seamlessly launch external apps for password reset functionality, enhancing user convenience.
 - **GoRouter:** Employed GoRouter for streamlined navigation between authentication screens, providing users with a cohesive and intuitive user interface.
-## Demo
+### Demo
 https://github.com/ahmdZhran/instagram_clone/assets/80375430/c486221d-2ced-4ab6-91ed-db27c190cca7
 
 https://github.com/ahmdZhran/instagram_clone/assets/80375430/3c2063d9-969e-4670-9fc1-0636f92ff260
