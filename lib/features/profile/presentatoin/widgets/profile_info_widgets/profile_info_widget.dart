@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utls/app_colors.dart';
-import 'package:instagram_clone/core/utls/spacer.dart';
+import '../../../../../core/utls/app_colors.dart';
+import '../../../../../core/utls/spacer.dart';
 
 import '../../../../../core/widgets/custom_button_widget.dart';
 import 'photo_of_profile.dart';
