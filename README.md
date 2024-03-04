@@ -41,5 +41,5 @@ The authentication feature allows users to securely sign up, sign in, and reset 
 - **External App Launcher:** Incorporated the external_app_launcher package to seamlessly launch external apps for password reset functionality, enhancing user convenience.
 - **GoRouter:** Employed GoRouter for streamlined navigation between authentication screens, providing users with a cohesive and intuitive user interface.
 ## Demo
-https://github.com/ahmdZhran/instagram_clone/assets/80375430/e4208c60-53c3-4170-9f06-62a8fe387cb9
+
 
