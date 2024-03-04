@@ -29,23 +29,18 @@ class _ProfileViewState extends State<ProfileView> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: [
-              const ProfileInfoWidget(),
-              Column(
-                children: [
-                  TabBar(
-                    tabs: _tabs,
-                  ),
-                  const SizedBox(height: 10),
-                ],
-              ),
-              Expanded(
-                child: TabBarView(children: _tabBarView),
-              ),
-            ],
-          ),
+        body: ListView(
+          children: [
+            const ProfileInfoWidget(),
+            TabBar(
+              tabs: _tabs,
+            ),
+            const SizedBox(height: 10),
+            SizedBox(
+              height: 1430,
+              child: TabBarView(children: _tabBarView),
+            ),
+          ],
         ),
       ),
     );
