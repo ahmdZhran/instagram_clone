@@ -16,14 +16,16 @@ class AuthCubit extends Cubit<AuthState> {
   GlobalKey<FormState> signUpFormKey = GlobalKey();
   GlobalKey<FormState> signInFormKey = GlobalKey();
   GlobalKey<FormState> resePassowrdKey = GlobalKey();
-
+  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   Future<void> createUserWithEmailAndPassword() async {
     try {
       emit(CreateUserLoading());
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailAddress!,
         password: password!,
       );
+      _firebaseFirestore.collection("users").doc(userCredential.user!.uid);
       await verfyEmail();
       await addUserProfile();
       emit(CreateUserSuccess());
@@ -90,6 +92,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   addUserProfile() async {
     CollectionReference users = FirebaseFirestore.instance.collection("users");
+
     await users.add({
       "email": emailAddress,
       "first_name": firstName,
