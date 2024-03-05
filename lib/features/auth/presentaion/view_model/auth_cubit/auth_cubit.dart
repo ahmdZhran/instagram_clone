@@ -11,6 +11,7 @@ class AuthCubit extends Cubit<AuthState> {
   String? lasttName;
   String? emailAddress;
   String? password;
+  String? bio;
   bool isObsecurePasswordText = true;
   GlobalKey<FormState> signUpFormKey = GlobalKey();
   GlobalKey<FormState> signInFormKey = GlobalKey();
@@ -93,6 +94,9 @@ class AuthCubit extends Cubit<AuthState> {
       "email": emailAddress,
       "first_name": firstName,
       "last_name": lasttName,
+      "bio": bio,
+      "followers": [],
+      "following": [],
     });
   }
 }
