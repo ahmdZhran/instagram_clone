@@ -28,7 +28,7 @@ class SignUpFormBody extends StatelessWidget {
           children: [
             CustomTextFormField(
               onChanged: (firstName) {
-                authCubit.firstName = firstName;
+                authCubit.username = firstName;
               },
               hintText: AppStrings.fristName,
             ),
