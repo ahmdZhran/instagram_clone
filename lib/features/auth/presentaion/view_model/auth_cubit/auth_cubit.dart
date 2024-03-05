@@ -7,7 +7,7 @@ part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
-  String? firstName;
+  String? username;
   String? lasttName;
   String? emailAddress;
   String? password;
@@ -25,7 +25,17 @@ class AuthCubit extends Cubit<AuthState> {
         email: emailAddress!,
         password: password!,
       );
-      _firebaseFirestore.collection("users").doc(userCredential.user!.uid);
+      await _firebaseFirestore
+          .collection("users")
+          .doc(userCredential.user!.uid)
+          .set({
+        "username": username,
+        "uid": userCredential.user!.uid,
+        "emailAddress": emailAddress,
+        "bio": bio,
+        "followers": [],
+        "following": []
+      });
       await verfyEmail();
       await addUserProfile();
       emit(CreateUserSuccess());
@@ -95,7 +105,7 @@ class AuthCubit extends Cubit<AuthState> {
 
     await users.add({
       "email": emailAddress,
-      "first_name": firstName,
+      "first_name": username,
       "last_name": lasttName,
       "bio": bio,
       "followers": [],
