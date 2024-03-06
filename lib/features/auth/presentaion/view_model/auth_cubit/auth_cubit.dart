@@ -45,9 +45,9 @@ class AuthCubit extends Cubit<AuthState> {
         default:
           errorMessage = e.message ?? 'An error occurred';
       }
-      emit(SignInFailure(errMessage: errorMessage));
+      emit(CreateUserFailer(errMessage: errorMessage));
     } catch (e) {
-      emit(SignInFailure(errMessage: 'An unexpected error occurred'));
+      emit(CreateUserFailer(errMessage: 'An unexpected error occurred'));
     }
   }
 
@@ -107,8 +107,8 @@ class AuthCubit extends Cubit<AuthState> {
 
     await users.add({
       "email": emailAddress,
-      "first_name": username,
-      "last_name": name,
+      "user_name": username,
+      "name": name,
       "bio": bio,
       "followers": [],
       "following": [],
