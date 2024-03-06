@@ -1,28 +1,28 @@
-class User {
+class UserModel {
   final String id;
   final String email;
-  final String firstName;
-  final String lastName;
+  final String username;
+  final String name;
   final String bio;
   final List<String> following;
   final List<String> followers;
 
-  User({
+  UserModel({
     required this.id,
     required this.email,
-    required this.firstName,
-    required this.lastName,
+    required this.username,
+    required this.name,
     required this.bio,
     required this.following,
     required this.followers,
   });
 
-  factory User.fromFirestore(Map<String, dynamic> data, String id) {
-    return User(
+  factory UserModel.fromFirestore(Map<String, dynamic> data, String id) {
+    return UserModel(
       id: id,
       email: data['email'] ?? '',
-      firstName: data['first_name'] ?? '',
-      lastName: data['last_name'] ?? '',
+      username: data['first_name'] ?? '',
+      name: data['last_name'] ?? '',
       bio: data['bio'] ?? '',
       following: List<String>.from(data['following'] ?? []),
       followers: List<String>.from(data['followers'] ?? []),
