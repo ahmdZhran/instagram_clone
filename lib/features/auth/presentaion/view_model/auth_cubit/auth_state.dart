@@ -17,22 +17,22 @@ class CreateUserFailer extends AuthState {
 
 final class SignInLoading extends AuthState {}
 
-final class SigninSuccess extends AuthState {}
+final class SignInSuccess extends AuthState {}
 
-final class SigninFailure extends AuthState {
+final class SignInFailure extends AuthState {
   final String errMessage;
 
-  SigninFailure({required this.errMessage});
+  SignInFailure({required this.errMessage});
 }
 
-final class EmailResetPasswordLoading extends AuthState {}
+final class ResetPasswordLoading extends AuthState {}
 
-final class EmailResetPasswordSuccess extends AuthState {}
+final class ResetPasswordSuccess extends AuthState {}
 
-final class EmailResetPasswordFailer extends AuthState {
+final class ResetPasswordFailure extends AuthState {
   final String errMessage;
 
-  EmailResetPasswordFailer({required this.errMessage});
+  ResetPasswordFailure({required this.errMessage});
 }
 
-class ObsecurePasswordTextState extends AuthState {}
+class TogglePasswordVisibilityState extends AuthState {}

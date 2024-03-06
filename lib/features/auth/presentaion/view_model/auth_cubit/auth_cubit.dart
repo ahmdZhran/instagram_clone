@@ -7,52 +7,47 @@ part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
+
   String? username;
-  String? lasttName;
+  String? lastName;
   String? emailAddress;
   String? password;
   String? bio;
   bool isObsecurePasswordText = true;
   GlobalKey<FormState> signUpFormKey = GlobalKey();
   GlobalKey<FormState> signInFormKey = GlobalKey();
-  GlobalKey<FormState> resePassowrdKey = GlobalKey();
-  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+  GlobalKey<FormState> resetPasswordKey = GlobalKey();
+
   Future<void> createUserWithEmailAndPassword() async {
     try {
       emit(CreateUserLoading());
-      final UserCredential userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailAddress!,
         password: password!,
       );
-      await _firebaseFirestore
-          .collection("users")
-          .doc(userCredential.user!.uid)
-          .set({
-        "username": username,
-        "uid": userCredential.user!.uid,
-        "emailAddress": emailAddress,
-        "bio": bio,
-        "followers": [],
-        "following": []
-      });
-      await verfyEmail();
+
+      await verifyEmail();
       await addUserProfile();
       emit(CreateUserSuccess());
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        emit(
-            CreateUserFailer(errMessage: 'The password provided is too weak.'));
-      } else if (e.code == 'email-already-in-use') {
-        emit(CreateUserFailer(
-            errMessage: 'The account already exists for that email.'));
-      } else if (e.code == 'invalid-email') {
-        emit(CreateUserFailer(errMessage: 'The email is invalid'));
-      } else {
-        emit(CreateUserFailer(errMessage: e.toString()));
+      String errorMessage;
+      switch (e.code) {
+        case 'weak-password':
+          errorMessage = 'The password provided is too weak.';
+          break;
+        case 'email-already-in-use':
+          errorMessage = 'The account already exists for that email.';
+          break;
+        case 'invalid-email':
+          errorMessage = 'The email is invalid';
+          break;
+        default:
+          errorMessage = e.message ?? 'An error occurred';
       }
+      emit(SignInFailure(errMessage: errorMessage));
     } catch (e) {
-      emit(CreateUserFailer(errMessage: e.toString()));
+      emit(SignInFailure(errMessage: 'An unexpected error occurred'));
     }
   }
 
@@ -63,50 +58,57 @@ class AuthCubit extends Cubit<AuthState> {
         email: emailAddress!,
         password: password!,
       );
-      emit(SigninSuccess());
+      emit(SignInSuccess());
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        emit(SigninFailure(errMessage: 'No user found for that email.'));
-      } else if (e.code == 'wrong-password') {
-        emit(SigninFailure(
-            errMessage: 'Wrong password provided for that user.'));
-      } else {
-        emit(SigninFailure(errMessage: 'check your email and password'));
+      String errorMessage;
+      switch (e.code) {
+        case 'user-not-found':
+          errorMessage = 'No user found for that email.';
+          break;
+        case 'wrong-password':
+          errorMessage = 'Wrong password provided for that user.';
+          break;
+        default:
+          errorMessage = 'An error occurred during sign in.';
       }
+      emit(SignInFailure(errMessage: errorMessage));
     } catch (e) {
-      emit(SigninFailure(errMessage: e.toString()));
+      emit(SignInFailure(errMessage: 'An unexpected error occurred'));
     }
   }
 
-  void obsecurePasswordText() {
+  void togglePasswordVisibility() {
     isObsecurePasswordText = !isObsecurePasswordText;
-    emit(ObsecurePasswordTextState());
+    emit(TogglePasswordVisibilityState());
   }
 
-  Future<void> verfyEmail() async {
+  Future<void> verifyEmail() async {
     await FirebaseAuth.instance.currentUser!.sendEmailVerification();
   }
 
   Future<void> resetPasswordWithEmail() async {
     try {
-      emit(EmailResetPasswordLoading());
+      emit(ResetPasswordLoading());
       await FirebaseAuth.instance.sendPasswordResetEmail(email: emailAddress!);
-      emit(EmailResetPasswordSuccess());
+      emit(ResetPasswordSuccess());
     } on FirebaseAuthException catch (e) {
+      String errorMessage;
       if (e.code == 'invalid-email') {
-        emit(EmailResetPasswordFailer(
-            errMessage: 'Please enter a valid email.'));
+        errorMessage = 'Please enter a valid email.';
+      } else {
+        errorMessage = 'An error occurred while resetting password.';
       }
+      emit(ResetPasswordFailure(errMessage: errorMessage));
     }
   }
 
-  addUserProfile() async {
+  Future<void> addUserProfile() async {
     CollectionReference users = FirebaseFirestore.instance.collection("users");
 
     await users.add({
       "email": emailAddress,
       "first_name": username,
-      "last_name": lasttName,
+      "last_name": lastName,
       "bio": bio,
       "followers": [],
       "following": [],

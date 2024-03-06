@@ -19,7 +19,7 @@ class ForgotPasswordFormBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
-        key: authCubit.resePassowrdKey,
+        key: authCubit.resetPasswordKey,
         child: Column(
           children: [
             CustomTextFormField(
@@ -31,12 +31,12 @@ class ForgotPasswordFormBody extends StatelessWidget {
             const SizedBox(height: 50),
             CustomButton(
               onPressed: () {
-                if (authCubit.resePassowrdKey.currentState!.validate()) {
+                if (authCubit.resetPasswordKey.currentState!.validate()) {
                   authCubit.resetPasswordWithEmail();
                 }
               },
               color: AppColors.kBlueColor,
-              childOfCustomButton: authCubit.state is EmailResetPasswordLoading
+              childOfCustomButton: authCubit.state is ResetPasswordLoading
                   ? LottieBuilder.asset(Assets.loadingAnimtation)
                   : const Text(
                       AppStrings.sendResetPasswordLink,

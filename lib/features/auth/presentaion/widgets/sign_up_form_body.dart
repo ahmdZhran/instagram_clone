@@ -35,7 +35,7 @@ class SignUpFormBody extends StatelessWidget {
             CustomTextFormField(
               hintText: AppStrings.lastName,
               onChanged: (lastName) {
-                authCubit.lasttName = lastName;
+                authCubit.lastName = lastName;
               },
             ),
             CustomTextFormField(
@@ -52,7 +52,7 @@ class SignUpFormBody extends StatelessWidget {
               obscureText: authCubit.isObsecurePasswordText,
               suffixIcon: IconButton(
                   onPressed: () {
-                    authCubit.obsecurePasswordText();
+                    authCubit.togglePasswordVisibility();
                   },
                   icon: Icon(authCubit.isObsecurePasswordText == false
                       ? Icons.visibility

@@ -42,7 +42,7 @@ class SignInFormBody extends StatelessWidget {
               hintText: AppStrings.password,
               suffixIcon: IconButton(
                 onPressed: () {
-                  authCubit.obsecurePasswordText();
+                  authCubit.togglePasswordVisibility();
                 },
                 icon: Icon(authCubit.isObsecurePasswordText == true
                     ? Icons.visibility_off
