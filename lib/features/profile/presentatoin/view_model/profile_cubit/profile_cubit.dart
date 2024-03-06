@@ -1,9 +1,22 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/core/models/user_model.dart';
 import 'package:meta/meta.dart';
+
+import 'package:instagram_clone/core/models/user_repositry.dart';
 
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
-  ProfileCubit() : super(ProfileInitial());
+  ProfileCubit(this.userRepositry) : super(ProfileInitial());
+  final UserRepositry userRepositry;
+  Future<void> fetchUserProfile(String userId) async {
+    try {
+      emit(ProfileLoading());
+      UserModel userModel = await userRepositry.getUser(userId);
+      emit(ProfileSuccess(userModel: userModel));
+    } catch (e) {
+      emit(ProfileFailer(errMessage: e.toString()));
+    }
+  }
 }
