@@ -5,7 +5,7 @@ import 'package:instagram_clone/features/profile/presentatoin/view_model/profile
 import 'bottom_nav_bar.dart';
 import '../../features/add_post/presentation/views/add_post.dart';
 import '../../features/home/presentation/views/home.dart';
-import '../../features/profile/presentatoin/views/profile.dart';
+import '../../features/profile/presentatoin/views/profile_view.dart';
 import '../../features/search/presentation/views/search_view.dart';
 import '../../features/shorts/presentation/views/shorts.dart';
 
@@ -19,9 +19,10 @@ class CustomBottomNavigationBar extends StatefulWidget {
 
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   int currentIndex = 0;
-  UserRepositry userRepositry = UserRepositry();
+
   @override
   Widget build(BuildContext context) {
+    UserRepositry userRepositry = UserRepositry();
     return Scaffold(
       bottomNavigationBar: BottomNavBar(
         currentIndex: currentIndex,
