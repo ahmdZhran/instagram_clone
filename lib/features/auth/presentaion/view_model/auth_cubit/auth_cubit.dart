@@ -9,7 +9,7 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
 
   String? username;
-  String? lastName;
+  String? name;
   String? emailAddress;
   String? password;
   String? bio;
@@ -45,9 +45,9 @@ class AuthCubit extends Cubit<AuthState> {
         default:
           errorMessage = e.message ?? 'An error occurred';
       }
-      emit(SignInFailure(errMessage: errorMessage));
+      emit(CreateUserFailer(errMessage: errorMessage));
     } catch (e) {
-      emit(SignInFailure(errMessage: 'An unexpected error occurred'));
+      emit(CreateUserFailer(errMessage: 'An unexpected error occurred'));
     }
   }
 
@@ -107,8 +107,8 @@ class AuthCubit extends Cubit<AuthState> {
 
     await users.add({
       "email": emailAddress,
-      "first_name": username,
-      "last_name": lastName,
+      "user_name": username,
+      "name": name,
       "bio": bio,
       "followers": [],
       "following": [],

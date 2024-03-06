@@ -27,15 +27,21 @@ class SignUpFormBody extends StatelessWidget {
         child: Column(
           children: [
             CustomTextFormField(
-              onChanged: (firstName) {
-                authCubit.username = firstName;
+              onChanged: (username) {
+                authCubit.username = username;
               },
-              hintText: AppStrings.fristName,
+              hintText: AppStrings.username,
             ),
             CustomTextFormField(
-              hintText: AppStrings.lastName,
-              onChanged: (lastName) {
-                authCubit.lastName = lastName;
+              hintText: AppStrings.name,
+              onChanged: (name) {
+                authCubit.name = name;
+              },
+            ),
+            CustomTextFormField(
+              hintText: AppStrings.bio,
+              onChanged: (bio) {
+                authCubit.bio = bio;
               },
             ),
             CustomTextFormField(
