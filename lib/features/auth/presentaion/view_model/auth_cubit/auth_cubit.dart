@@ -9,7 +9,7 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
 
   String? username;
-  String? lastName;
+  String? name;
   String? emailAddress;
   String? password;
   String? bio;
@@ -108,7 +108,7 @@ class AuthCubit extends Cubit<AuthState> {
     await users.add({
       "email": emailAddress,
       "first_name": username,
-      "last_name": lastName,
+      "last_name": name,
       "bio": bio,
       "followers": [],
       "following": [],
