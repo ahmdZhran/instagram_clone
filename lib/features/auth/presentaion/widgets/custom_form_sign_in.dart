@@ -15,12 +15,12 @@ class CustomFormSignIn extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        if (state is SigninSuccess) {
+        if (state is SignInSuccess) {
           FirebaseAuth.instance.currentUser!.emailVerified
               ? customReplacementNavigate(
                   context, RouteConstants.bottomNavBarRoute)
               : showErrorMessage(context, AppStrings.pleaseVefyEmail);
-        } else if (state is SigninFailure) {
+        } else if (state is SignInFailure) {
           showErrorMessage(context, state.errMessage);
         }
       },
