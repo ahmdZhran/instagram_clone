@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:instagram_clone/core/models/user_model.dart';
+import 'user_model.dart';
 
 class UserRepositry {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
