@@ -10,10 +10,11 @@ part 'profile_state.dart';
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit(this.userRepositry) : super(ProfileInitial());
   final UserRepositry userRepositry;
-  Future<void> fetchUserProfile(String userId) async {
+  Future<void> fetchUserProfile(String documentId) async {
     try {
       emit(ProfileLoading());
-      UserModel userModel = await userRepositry.getUser(userId);
+
+      UserModel userModel = await userRepositry.getUser(documentId);
       emit(ProfileSuccess(userModel: userModel));
     } catch (e) {
       emit(ProfileFailer(errMessage: e.toString()));

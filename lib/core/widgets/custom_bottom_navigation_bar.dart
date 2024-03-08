@@ -19,7 +19,7 @@ class CustomBottomNavigationBar extends StatefulWidget {
 
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   int currentIndex = 0;
-
+  late String documentId;
   @override
   Widget build(BuildContext context) {
     UserRepositry userRepositry = UserRepositry();
@@ -41,7 +41,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           const ShortView(),
           BlocProvider(
             create: (context) => ProfileCubit(userRepositry),
-            child: const ProfileView(),
+            child: ProfileView(
+              documentId: documentId,
+            ),
           )
         ],
       ),
