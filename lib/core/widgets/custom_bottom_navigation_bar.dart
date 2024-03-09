@@ -20,11 +20,10 @@ class CustomBottomNavigationBar extends StatefulWidget {
 
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   int currentIndex = 0;
-  UserModel? userModel;
+
   String? doucumentId;
   @override
   Widget build(BuildContext context) {
-    // UserRepositry userRepositry = UserRepositry();
     return Scaffold(
       bottomNavigationBar: BottomNavBar(
         currentIndex: currentIndex,
@@ -41,9 +40,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           SearchView(),
           AddPost(),
           ShortView(),
-          ProfileView(
-            doucumentId: '',
-          )
+          ProfileView()
         ],
       ),
     );
