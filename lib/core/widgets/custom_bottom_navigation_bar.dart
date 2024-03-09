@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/core/models/user_model.dart';
 import '../models/user_repositry.dart';
 import '../../features/profile/presentatoin/view_model/profile_cubit/profile_cubit.dart';
 import 'bottom_nav_bar.dart';
@@ -19,10 +20,11 @@ class CustomBottomNavigationBar extends StatefulWidget {
 
 class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   int currentIndex = 0;
-  late String documentId;
+  UserModel? userModel;
+  String? doucumentId;
   @override
   Widget build(BuildContext context) {
-    UserRepositry userRepositry = UserRepositry();
+    // UserRepositry userRepositry = UserRepositry();
     return Scaffold(
       bottomNavigationBar: BottomNavBar(
         currentIndex: currentIndex,
@@ -34,16 +36,13 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       ),
       body: IndexedStack(
         index: currentIndex,
-        children: [
-          const HomeView(),
-          const SearchView(),
-          const AddPost(),
-          const ShortView(),
-          BlocProvider(
-            create: (context) => ProfileCubit(userRepositry),
-            child: ProfileView(
-              documentId: documentId,
-            ),
+        children: const [
+          HomeView(),
+          SearchView(),
+          AddPost(),
+          ShortView(),
+          ProfileView(
+            doucumentId: '',
           )
         ],
       ),

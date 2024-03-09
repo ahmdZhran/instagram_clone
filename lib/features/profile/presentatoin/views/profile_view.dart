@@ -48,67 +48,36 @@
 //     );
 //   }
 // }
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:flutter/material.dart';
-
-// class ProfileView extends StatelessWidget {
-//   const ProfileView({super.key, required this.doucumentId});
-//   final String doucumentId;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     CollectionReference users = FirebaseFirestore.instance.collection("users");
-//     return FutureBuilder(
-//         future: users.doc(doucumentId).get(),
-//         builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-//           if (snapshot.hasError) {
-//             return const Text("Something went wrong");
-//           }
-
-//           if (snapshot.hasData && !snapshot.data!.exists) {
-//             return const Text("Document does not exist");
-//           }
-
-//           if (snapshot.connectionState == ConnectionState.done) {
-//             Map<String, dynamic> data =
-//                 snapshot.data!.data() as Map<String, dynamic>;
-//             return Text("Full Name: ${data['bio']} ${data['user_name']}");
-//           }
-
-//           return const Text("loading");
-//         });
-//   }
-// }
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../core/models/user_repositry.dart';
-import '../view_model/profile_cubit/profile_cubit.dart';
 
 class ProfileView extends StatelessWidget {
-  final String documentId;
-
-  const ProfileView({Key? key, required this.documentId}) : super(key: key);
+  const ProfileView({super.key, required this.doucumentId});
+  final String doucumentId;
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProfileCubit(UserRepositry()),
-      child: BlocBuilder<ProfileCubit, ProfileState>(
-        builder: (context, state) {
-          if (state is ProfileLoading) {
-            return const Text("Loading...");
-          } else if (state is ProfileSuccess) {
-            return Text(
-                "Full Name: ${state.userModel.bio} ${state.userModel.name}");
-          } else if (state is ProfileFailer) {
-            return Text("Error: ${state.errMessage}");
-          } else {
-            return const Text("Unknown state");
+    CollectionReference users = FirebaseFirestore.instance.collection("users");
+
+    return FutureBuilder(
+        future: users.doc(doucumentId).get(),
+        builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return const Center(child: Text("Something went wrong"));
           }
-        },
-      ),
-    );
+
+          if (snapshot.hasData && !snapshot.data!.exists) {
+            return const Center(child: Text("Document does not exist"));
+          }
+
+          if (snapshot.connectionState == ConnectionState.done) {
+            Map<String, dynamic> data =
+                snapshot.data!.data() as Map<String, dynamic>;
+            return Center(
+                child: Text("Full Name: ${data['bio']} ${data['user_name']}"));
+          }
+
+          return const Text("loading");
+        });
   }
 }

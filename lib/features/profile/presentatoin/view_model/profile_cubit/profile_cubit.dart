@@ -14,8 +14,8 @@ class ProfileCubit extends Cubit<ProfileState> {
     try {
       emit(ProfileLoading());
 
-      UserModel userModel = await userRepositry.getUser(documentId);
-      emit(ProfileSuccess(userModel: userModel));
+      final profile = await userRepositry.getUser(documentId);
+      emit(ProfileSuccess(userModel: profile));
     } catch (e) {
       emit(ProfileFailer(errMessage: e.toString()));
     }
