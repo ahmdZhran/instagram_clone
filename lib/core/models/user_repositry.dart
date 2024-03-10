@@ -9,6 +9,7 @@ class UserRepositry {
     final snapshot = await _usersCollection.doc(documentId).get();
     if (snapshot.exists) {
       final data = snapshot.data();
+
       return UserModel.fromMap(data as Map<String, dynamic>);
     } else {
       throw Exception("Document does not exist");
