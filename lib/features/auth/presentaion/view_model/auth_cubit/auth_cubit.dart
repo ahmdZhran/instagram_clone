@@ -22,13 +22,14 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       emit(CreateUserLoading());
 
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailAddress!,
         password: password!,
       );
-
+      createUserDocument(userCredential);
       await verifyEmail();
-      await addUserProfile();
+      // await addUserProfile();
       emit(CreateUserSuccess());
     } on FirebaseAuthException catch (e) {
       String errorMessage;
@@ -102,16 +103,33 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> addUserProfile() async {
-    CollectionReference users = FirebaseFirestore.instance.collection("users");
+//   Future<void> addUserProfile() async {
+//     CollectionReference users = FirebaseFirestore.instance.collection("users");
 
-    await users.add({
-      "email": emailAddress,
-      "user_name": username,
-      "name": name,
-      "bio": bio,
-      "followers": [],
-      "following": [],
-    });
+//     await users.add({
+//       "email": emailAddress,
+//       "user_name": username,
+//       "name": name,
+//       "bio": bio,
+//       "followers": [],
+//       "following": [],
+//     });
+//   }
+// }
+
+  Future<void> createUserDocument(UserCredential? userCredential) async {
+    if (userCredential != null && userCredential.user != null) {
+      FirebaseFirestore.instance
+          .collection("users")
+          .doc(userCredential.user!.uid)
+          .set({
+        "email": emailAddress,
+        "user_name": username,
+        "name": name,
+        "bio": bio,
+        "followers": [],
+        "following": [],
+      });
+    }
   }
 }

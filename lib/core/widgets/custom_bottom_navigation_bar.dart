@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/core/models/user_model.dart';
-import '../models/user_repositry.dart';
-import '../../features/profile/presentatoin/view_model/profile_cubit/profile_cubit.dart';
 import 'bottom_nav_bar.dart';
 import '../../features/add_post/presentation/views/add_post.dart';
 import '../../features/home/presentation/views/home.dart';
