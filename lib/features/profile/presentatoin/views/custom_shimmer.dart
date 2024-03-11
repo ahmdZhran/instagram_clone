@@ -3,7 +3,7 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/utls/app_colors.dart';
 import '../../../../core/utls/spacer.dart';
-import '../../../../core/widgets/loading_circular.dart';
+import '../../../../core/widgets/rectangular_loading.dart';
 
 class CustomShimmer extends StatelessWidget {
   const CustomShimmer({super.key});
@@ -20,9 +20,9 @@ class CustomShimmer extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  const CircularLoadingPlaceholder(width: 30),
+                  const RectangularLoadingPlaceHolder(width: 30),
                   verticalSpacer(10),
-                  const CircularLoadingPlaceholder(width: 70),
+                  const RectangularLoadingPlaceHolder(width: 70),
                 ],
               ),
               horizontalSpacer(30),
@@ -37,21 +37,21 @@ class CustomShimmer extends StatelessWidget {
               horizontalSpacer(30),
               Column(
                 children: [
-                  const CircularLoadingPlaceholder(width: 30),
+                  const RectangularLoadingPlaceHolder(width: 30),
                   verticalSpacer(10),
-                  const CircularLoadingPlaceholder(width: 70),
+                  const RectangularLoadingPlaceHolder(width: 70),
                 ],
               ),
             ],
           ),
           verticalSpacer(10),
-          const CircularLoadingPlaceholder(width: 100),
+          const RectangularLoadingPlaceHolder(width: 100),
           verticalSpacer(10),
-          const CircularLoadingPlaceholder(width: 70),
+          const RectangularLoadingPlaceHolder(width: 70),
           verticalSpacer(10),
-          const CircularLoadingPlaceholder(width: 60),
+          const RectangularLoadingPlaceHolder(width: 60),
           verticalSpacer(10),
-          const CircularLoadingPlaceholder(width: 120),
+          const RectangularLoadingPlaceHolder(width: 120),
         ],
       ),
     );
