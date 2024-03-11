@@ -3,18 +3,18 @@ part of 'profile_cubit.dart';
 @immutable
 abstract class ProfileState {}
 
-class ProfileInitial extends ProfileState {}
+class ProfileInfoInitial extends ProfileState {}
 
-class ProfileLoading extends ProfileState {}
+class ProfileInfoLoading extends ProfileState {}
 
-class ProfileSuccess extends ProfileState {
-  final UserModel userModel;
+class ProfileInfoSuccess extends ProfileState {
+  final UserProfile userProfile;
 
-  ProfileSuccess({required this.userModel});
+  ProfileInfoSuccess({required this.userProfile});
 }
 
-class ProfileFailer extends ProfileState {
+class ProfileInfoFailer extends ProfileState {
   final String errMessage;
 
-  ProfileFailer({required this.errMessage});
+  ProfileInfoFailer({required this.errMessage});
 }

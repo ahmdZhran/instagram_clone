@@ -1,78 +1,96 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/features/profile/presentatoin/view_model/profile_cubit/profile_cubit.dart';
 
-class ProfileInfoWidget extends StatelessWidget {
-  const ProfileInfoWidget({super.key});
+import '../../../../../core/utls/app_colors.dart';
+import '../../../../../core/utls/spacer.dart';
+import '../../../../../core/widgets/custom_button_widget.dart';
+import '../../views/custom_shimmer.dart';
+import 'photo_of_profile.dart';
+import 'profile_count_widget.dart';
+
+class ProfileInfoWidget extends StatefulWidget {
+  const ProfileInfoWidget({Key? key}) : super(key: key);
+
+  @override
+  State<ProfileInfoWidget> createState() => _ProfileInfoWidgetState();
+}
+
+class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
+  late ProfileCubit _profileCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _profileCubit = BlocProvider.of<ProfileCubit>(context);
+    _profileCubit.getUserProfile();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final User? currentUser = FirebaseAuth.instance.currentUser;
-    Future<DocumentSnapshot<Map<String, dynamic>>> getUserDetails() async {
-      return await FirebaseFirestore.instance
-          .collection("users")
-          .doc(currentUser!.uid)
-          .get();
-    }
-
-    return FutureBuilder(
-        future: getUserDetails(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Text("loading...........");
-          }
-          if (snapshot.hasError) {
-            return const Text('there is something wrong');
-          }
-          if (snapshot.hasData) {
-            Map<String, dynamic>? user = snapshot.data!.data();
-            return Column(
-              children: [
-                Text(user!['email']),
-                Text(user['user_name']),
-                Text(user['bio']),
-              ],
-            );
-          } else {
-            return const Text('there is no data stored ');
-          }
-        });
-//     return Column(
-//       children: [
-//         const Row(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             ProfileCountWidget(count: '120', label: 'Following'),
-//             ProfileAvatarWidget(),
-//             ProfileCountWidget(count: '21.2k', label: 'Followers'),
-//           ],
-//         ),
-//         verticalSpacer(10),
-//         const Text(
-//           'Eren_official',
-//           style: TextStyle(fontWeight: FontWeight.bold),
-//         ),
-//         verticalSpacer(5),
-//         const Text(
-//           'Hero of Attack on Titan',
-//         ),
-//         const Text(
-//           'youtube/attack_on_titan/official',
-//           style: TextStyle(color: Colors.blue),
-//         ),
-//         verticalSpacer(10),
-//         CustomButton(
-//           childOfCustomButton: const Text(
-//             'Edite Profile',
-//             style: TextStyle(color: AppColors.kWhiteColor),
-//           ),
-//           height: 40,
-//           width: 180,
-//           onPressed: () {},
-//         )
-//       ],
-//     );
-//   }
-// }
+    return BlocBuilder<ProfileCubit, ProfileState>(
+      builder: (context, state) {
+        if (state is ProfileInfoLoading) {
+          return const Center(
+            child: CustomShimmer(),
+          );
+        } else if (state is ProfileInfoSuccess) {
+          final userProfile = state.userProfile;
+          return Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ProfileCountWidget(
+                      count: (userProfile.following?.length ?? 0).toString(),
+                      label: 'Following'),
+                  const ProfileAvatarWidget(),
+                  ProfileCountWidget(
+                      count: (userProfile.followers?.length ?? 0).toString(),
+                      label: 'Followers'),
+                ],
+              ),
+              verticalSpacer(10),
+              Text(
+                userProfile.userName.toString(),
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              verticalSpacer(5),
+              Text(
+                userProfile.name.toString(),
+              ),
+              verticalSpacer(5),
+              Text(
+                userProfile.bio.toString(),
+              ),
+              const Text(
+                'youtube/attack_on_titan/official',
+                style: TextStyle(color: Colors.blue),
+              ),
+              verticalSpacer(10),
+              CustomButton(
+                childOfCustomButton: const Text(
+                  'Edit Profile',
+                  style: TextStyle(color: AppColors.kWhiteColor),
+                ),
+                height: 40,
+                width: 180,
+                onPressed: () {
+                  // TODO
+                },
+              )
+            ],
+          );
+        } else if (state is ProfileInfoFailer) {
+          return Text(state.errMessage);
+        } else {
+          return const Center(
+              child: Icon(
+            Icons.error,
+            color: Colors.red,
+          ));
+        }
+      },
+    );
   }
 }
