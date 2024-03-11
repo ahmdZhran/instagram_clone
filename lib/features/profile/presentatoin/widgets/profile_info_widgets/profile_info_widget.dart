@@ -5,6 +5,7 @@ import 'package:instagram_clone/features/profile/presentatoin/view_model/profile
 import '../../../../../core/utls/app_colors.dart';
 import '../../../../../core/utls/spacer.dart';
 import '../../../../../core/widgets/custom_button_widget.dart';
+import '../../views/custom_shimmer.dart';
 import 'photo_of_profile.dart';
 import 'profile_count_widget.dart';
 
@@ -29,8 +30,10 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (context, state) {
-        if (state is ProfileInfoLoading) {
-          return const Center(child: CircularProgressIndicator());
+        if (state is ProfileInfoSuccess) {
+          return const Center(
+            child: CustomShimmer(),
+          );
         } else if (state is ProfileInfoSuccess) {
           final userProfile = state.userProfile;
           return Column(
