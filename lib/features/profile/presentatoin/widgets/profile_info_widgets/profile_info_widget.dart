@@ -30,7 +30,7 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (context, state) {
-        if (state is ProfileInfoSuccess) {
+        if (state is ProfileInfoLoading) {
           return const Center(
             child: CustomShimmer(),
           );
@@ -80,7 +80,11 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
         } else if (state is ProfileInfoFailer) {
           return Text(state.errMessage);
         } else {
-          return const Text("Unexpected Error");
+          return const Center(
+              child: Icon(
+            Icons.error,
+            color: Colors.red,
+          ));
         }
       },
     );
