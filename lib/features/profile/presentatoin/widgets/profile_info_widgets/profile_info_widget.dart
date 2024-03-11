@@ -38,12 +38,16 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
           final userProfile = state.userProfile;
           return Column(
             children: [
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ProfileCountWidget(count: '120', label: 'Following'),
-                  ProfileAvatarWidget(),
-                  ProfileCountWidget(count: '21.2k', label: 'Followers'),
+                  ProfileCountWidget(
+                      count: (userProfile.following?.length ?? 0).toString(),
+                      label: 'Following'),
+                  const ProfileAvatarWidget(),
+                  ProfileCountWidget(
+                      count: (userProfile.followers?.length ?? 0).toString(),
+                      label: 'Followers'),
                 ],
               ),
               verticalSpacer(10),
