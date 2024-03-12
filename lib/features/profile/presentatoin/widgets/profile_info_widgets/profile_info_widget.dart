@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/features/profile/presentatoin/view_model/profile_cubit/profile_cubit.dart';
+import '../../view_model/profile_cubit/profile_cubit.dart';
 
 import '../../../../../core/utls/app_colors.dart';
 import '../../../../../core/utls/spacer.dart';

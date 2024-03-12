@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/features/profile/presentatoin/view_model/profile_cubit/profile_cubit.dart';
-import 'package:instagram_clone/features/profile/presentatoin/view_model/profile_cubit/user_repositry.dart';
+import '../../features/profile/presentatoin/view_model/profile_cubit/profile_cubit.dart';
+import '../../features/profile/presentatoin/view_model/profile_cubit/user_repositry.dart';
 import 'bottom_nav_bar.dart';
 import '../../features/add_post/presentation/views/add_post.dart';
 import '../../features/home/presentation/views/home.dart';

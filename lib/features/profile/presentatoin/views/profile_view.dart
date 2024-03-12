@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/features/profile/presentatoin/widgets/profile_info_widgets/profile_info_widget.dart';
+import '../widgets/profile_info_widgets/profile_info_widget.dart';
 import '../widgets/saved_view_section/book_marked.dart';
 import '../widgets/feed_view_section/feed.dart';
 import '../widgets/reals_view_sectoin/reals.dart';
