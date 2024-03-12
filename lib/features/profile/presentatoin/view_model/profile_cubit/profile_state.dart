@@ -18,3 +18,7 @@ class ProfileInfoFailer extends ProfileState {
 
   ProfileInfoFailer({required this.errMessage});
 }
+
+class UserImageSelectedSuccess extends ProfileState {}
+
+class UserImageSelectedFailure extends ProfileState {}
