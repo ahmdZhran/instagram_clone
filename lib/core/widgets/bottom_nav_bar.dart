@@ -29,6 +29,7 @@ class BottomNavBar extends StatelessWidget {
         colors: [Colors.white.withOpacity(0.1), Colors.white.withOpacity(0.1)],
       ),
       child: BottomAppBar(
+        elevation: 0,
         color: Colors.transparent,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

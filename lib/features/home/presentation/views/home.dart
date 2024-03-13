@@ -8,30 +8,39 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
         body: SafeArea(
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: CustomScrollView(
+          physics: const NeverScrollableScrollPhysics(),
           slivers: [
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: CustomAppBarWidget(),
             ),
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: SizedBox(
                 height: 10,
               ),
             ),
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: StorySection(),
             ),
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: SizedBox(
                 height: 15,
               ),
             ),
             SliverToBoxAdapter(
-              child: PostSectoin(),
+              child: SizedBox(
+                height: 1000,
+                child: ListView.builder(
+                  itemBuilder: (context, index) => const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    child: PostSectoin(),
+                  ),
+                ),
+              ),
             )
           ],
         ),
