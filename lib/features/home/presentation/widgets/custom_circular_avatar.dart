@@ -3,13 +3,20 @@ import 'package:flutter/material.dart';
 class CustomCircularAvatar extends StatelessWidget {
   const CustomCircularAvatar({
     super.key,
+    required this.widthOfContainer,
+    required this.heightOfImage,
+    required this.widthOfImage,
+    this.margin,
   });
-
+  final double widthOfContainer;
+  final double heightOfImage;
+  final double widthOfImage;
+  final EdgeInsetsGeometry? margin;
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10.0),
-      width: 80,
+      margin: margin,
+      width: widthOfContainer,
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
         boxShadow: [
@@ -20,13 +27,13 @@ class CustomCircularAvatar extends StatelessWidget {
           ),
         ],
       ),
-      child: const CircleAvatar(
+      child: CircleAvatar(
           child: ClipOval(
         child: Image(
-          height: 90,
-          width: 90,
+          height: heightOfImage,
+          width: widthOfImage,
           fit: BoxFit.cover,
-          image: AssetImage('assets/images/airen.jpg'),
+          image: const AssetImage('assets/images/airen.jpg'),
         ),
       )),
     );

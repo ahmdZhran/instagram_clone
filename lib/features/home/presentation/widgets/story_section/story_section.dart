@@ -14,7 +14,12 @@ class StorySection extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: 10,
         itemBuilder: (context, index) {
-          return const CustomCircularAvatar();
+          return const CustomCircularAvatar(
+            widthOfContainer: 80,
+            heightOfImage: 90,
+            widthOfImage: 90,
+            margin: EdgeInsets.all(10),
+          );
         },
       ),
     );
