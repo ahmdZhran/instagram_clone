@@ -33,7 +33,7 @@ class CustomCircularAvatar extends StatelessWidget {
           height: heightOfImage,
           width: widthOfImage,
           fit: BoxFit.cover,
-          image: const AssetImage('assets/images/airen.jpg'),
+          image: const AssetImage('assets/images/profile_image/profile.png'),
         ),
       )),
     );
