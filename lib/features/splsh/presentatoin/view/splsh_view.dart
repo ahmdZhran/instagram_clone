@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/router/route_constants.dart';
-import '../../../../core/utls/app_assets.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../core/functions/navigator_methods.dart';
+import '../../../../core/router/route_constants.dart';
+import '../../../../core/utls/app_assets.dart';
 
 class SplshView extends StatefulWidget {
   const SplshView({super.key});

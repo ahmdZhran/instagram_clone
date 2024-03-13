@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:instagram_clone/core/utls/spacer.dart';
+import '../../../../../core/utls/spacer.dart';
+import '../../../../../core/utls/text_styles.dart';
 import '../../../../../core/utls/app_assets.dart';
 
 class ReactIconsWidgtes extends StatelessWidget {
@@ -20,7 +21,10 @@ class ReactIconsWidgtes extends StatelessWidget {
             ),
           ),
           horizontalSpacer(4),
-          const Text('245'),
+          Text(
+            '245',
+            style: CustomTextStyles.normalTextStyle,
+          ),
           horizontalSpacer(10),
           SvgPicture.asset(
             Assets.commentIcon,
@@ -30,7 +34,10 @@ class ReactIconsWidgtes extends StatelessWidget {
             ),
           ),
           horizontalSpacer(6),
-          const Text('245'),
+          Text(
+            '245',
+            style: CustomTextStyles.normalTextStyle,
+          ),
           const Spacer(),
           SvgPicture.asset(
             Assets.bookmark,
