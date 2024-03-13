@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../widgets/custom_appbar.dart';
+import '../widgets/story_section.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -15,6 +15,14 @@ class HomeView extends StatelessWidget {
           slivers: [
             SliverToBoxAdapter(
               child: CustomAppBarWidget(),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 10,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: StorySection(),
             )
           ],
         ),
