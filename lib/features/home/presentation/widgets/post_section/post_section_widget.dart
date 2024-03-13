@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
-
 import '../../../../../core/utls/text_styles.dart';
 import '../custom_circular_avatar.dart';
+import 'react_icon_widgets.dart';
 
 class PostSectoin extends StatelessWidget {
   const PostSectoin({super.key});
@@ -71,6 +71,7 @@ class PostSectoin extends StatelessWidget {
                   ),
                 ),
               ),
+              const ReactIconsWidgtes()
             ],
           ),
         ),
