@@ -9,7 +9,7 @@ class Assets {
   static const String heartIcon = "assets/images/heart.svg";
   static const String heartActiveIcon = "assets/images/active_heart.svg";
   static const String addPost = "assets/images/add_post.svg";
-
+  static const String chatIcon = "assets/images/chaticon.svg";
   static const String loadingAnimtation =
       "assets/lottie/loading_animation.json";
   static const String instagramAnimationLogo =
