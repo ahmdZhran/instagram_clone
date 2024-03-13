@@ -10,6 +10,9 @@ class Assets {
   static const String heartActiveIcon = "assets/images/active_heart.svg";
   static const String addPost = "assets/images/add_post.svg";
   static const String chatIcon = "assets/images/chaticon.svg";
+  static const String commentIcon = "assets/images/comment.svg";
+  static const String bookmark = "assets/images/bookmark.svg";
+  static const String bookmarkActive = "assets/images/bookmark_active.svg";
   static const String loadingAnimtation =
       "assets/lottie/loading_animation.json";
   static const String instagramAnimationLogo =
