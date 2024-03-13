@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/features/profile/data/models/prfile_model.dart';
+import '../../../data/models/prfile_model.dart';
 import 'package:meta/meta.dart';
 import 'user_repositry.dart';
 part 'profile_state.dart';

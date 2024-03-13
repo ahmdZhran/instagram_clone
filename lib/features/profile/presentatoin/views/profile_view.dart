@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../widgets/profile_info_widgets/profile_info_widget.dart';
-import '../widgets/saved_view_section/book_marked.dart';
+
 import '../widgets/feed_view_section/feed.dart';
+import '../widgets/profile_info_widgets/profile_info_widget.dart';
 import '../widgets/reals_view_sectoin/reals.dart';
+import '../widgets/saved_view_section/book_marked.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({Key? key}) : super(key: key);
