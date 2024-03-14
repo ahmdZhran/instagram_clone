@@ -38,6 +38,14 @@ class ReactIconsWidgtes extends StatelessWidget {
             '245',
             style: CustomTextStyles.normalTextStyle,
           ),
+          horizontalSpacer(8),
+          SvgPicture.asset(
+            Assets.shareIcon,
+            colorFilter: const ColorFilter.mode(
+              Colors.white,
+              BlendMode.srcIn,
+            ),
+          ),
           const Spacer(),
           SvgPicture.asset(
             Assets.bookmark,
