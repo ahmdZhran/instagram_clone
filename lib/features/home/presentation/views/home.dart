@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/custom_appbar.dart';
-import '../widgets/post_section/post_section_widget.dart';
+import '../widgets/post_section/posts_list_widget.dart';
 import '../widgets/story_section/story_section.dart';
 
 class HomeView extends StatelessWidget {
@@ -8,39 +8,31 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
         body: SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         child: CustomScrollView(
-          physics: const NeverScrollableScrollPhysics(),
+          physics: NeverScrollableScrollPhysics(),
           slivers: [
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: CustomAppBarWidget(),
             ),
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: SizedBox(
                 height: 10,
               ),
             ),
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: StorySection(),
             ),
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: SizedBox(
                 height: 15,
               ),
             ),
             SliverToBoxAdapter(
-              child: SizedBox(
-                height: 1000,
-                child: ListView.builder(
-                  itemBuilder: (context, index) => const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    child: PostSectoin(),
-                  ),
-                ),
-              ),
+              child: PostsListWidget(),
             )
           ],
         ),

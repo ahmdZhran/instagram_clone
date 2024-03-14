@@ -13,6 +13,7 @@ class Assets {
   static const String commentIcon = "assets/images/comment.svg";
   static const String bookmark = "assets/images/bookmark.svg";
   static const String bookmarkActive = "assets/images/bookmark_active.svg";
+  static const String shareIcon = "assets/images/paper-plane.svg";
   static const String loadingAnimtation =
       "assets/lottie/loading_animation.json";
   static const String instagramAnimationLogo =

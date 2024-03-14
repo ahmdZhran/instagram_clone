@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../widgets/feed_view_section/feed.dart';
 import '../widgets/profile_info_widgets/profile_info_widget.dart';
 import '../widgets/reals_view_sectoin/reals.dart';
@@ -29,16 +28,21 @@ class _ProfileViewState extends State<ProfileView> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        body: ListView(
-          children: [
-            const ProfileInfoWidget(),
-            TabBar(
-              tabs: _tabs,
+        body: CustomScrollView(
+          slivers: [
+            const SliverToBoxAdapter(
+              child: ProfileInfoWidget(),
             ),
-            const SizedBox(height: 10),
-            SizedBox(
-              height: 1430,
-              child: TabBarView(children: _tabBarView),
+            SliverToBoxAdapter(
+              child: TabBar(
+                tabs: _tabs,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 1430,
+                child: TabBarView(children: _tabBarView),
+              ),
             ),
           ],
         ),

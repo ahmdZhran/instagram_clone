@@ -38,6 +38,7 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
           final userProfile = state.userProfile;
           return Column(
             children: [
+              verticalSpacer(30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
