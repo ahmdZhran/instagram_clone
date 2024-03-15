@@ -3,6 +3,7 @@ class UserProfile {
   final String? userName;
   final String? name;
   final String? bio;
+  final String? profileImageUrl;
   final List<String>? followers;
   final List<String>? following;
 
@@ -13,5 +14,6 @@ class UserProfile {
     this.bio,
     this.followers,
     this.following,
+    this.profileImageUrl,
   });
 }
