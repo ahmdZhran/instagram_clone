@@ -7,12 +7,13 @@ class UserProfile {
   final List<String>? followers;
   final List<String>? following;
 
-  UserProfile(
-      {this.email,
-      this.userName,
-      this.name,
-      this.bio,
-      this.followers,
-      this.following,
-      this.profileImageUrl});
+  UserProfile({
+    this.email,
+    this.userName,
+    this.name,
+    this.bio,
+    this.followers,
+    this.following,
+    this.profileImageUrl,
+  });
 }
