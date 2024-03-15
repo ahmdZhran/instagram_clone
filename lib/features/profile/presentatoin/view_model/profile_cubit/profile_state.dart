@@ -19,6 +19,12 @@ class ProfileInfoFailer extends ProfileState {
   ProfileInfoFailer({required this.errMessage});
 }
 
+class UserImageSelectedLoading extends ProfileState {}
+
 class UserImageSelectedSuccess extends ProfileState {}
 
-class UserImageSelectedFailure extends ProfileState {}
+class UserImageSelectedFailure extends ProfileState {
+  final String errMessage;
+
+  UserImageSelectedFailure({required this.errMessage});
+}
