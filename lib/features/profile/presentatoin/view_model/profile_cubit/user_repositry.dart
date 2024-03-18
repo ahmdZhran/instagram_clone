@@ -31,7 +31,7 @@ class UserRepositry {
       final ref = firebase_storage.FirebaseStorage.instance
           .ref()
           .child('user_profile_images')
-          .child('${currentUser.uid}.jpg');
+          .child(currentUser.uid);
 
       await ref.putFile(File(imagePath));
 
