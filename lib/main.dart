@@ -10,8 +10,7 @@ void main() async {
   runApp(const InstagramApp());
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseAppCheck.instance.activate(
-    androidProvider: AndroidProvider.playIntegrity,
-  );
+  await FirebaseAppCheck.instance
+      .activate(androidProvider: AndroidProvider.playIntegrity);
   currentUserStateCheck();
 }
