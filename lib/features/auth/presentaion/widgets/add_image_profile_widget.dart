@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
-class AddImageProfileWidget extends StatelessWidget {
-  const AddImageProfileWidget({
-    super.key,
-  });
+class AddImageProfileWidget extends StatefulWidget {
+  const AddImageProfileWidget({super.key});
 
+  @override
+  State<AddImageProfileWidget> createState() => _AddImageProfileWidgetState();
+}
+
+class _AddImageProfileWidgetState extends State<AddImageProfileWidget> {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
