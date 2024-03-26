@@ -38,8 +38,7 @@ class _SplshViewState extends State<SplshView> {
       () {
         FirebaseAuth.instance.currentUser == null
             ? customReplacementNavigate(context, RouteConstants.signInRoute)
-            : customReplacementNavigate(
-                context, RouteConstants.bottomNavBarRoute);
+            : customReplacementNavigate(context, RouteConstants.signUpRoute);
       },
     );
   }
