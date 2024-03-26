@@ -11,10 +11,7 @@ import '../view_model/auth_cubit/auth_cubit.dart';
 import 'custom_text_form_field.dart';
 
 class SignUpFormBody extends StatelessWidget {
-  const SignUpFormBody({
-    super.key,
-    required this.authCubit,
-  });
+  const SignUpFormBody({super.key, required this.authCubit});
 
   final AuthCubit authCubit;
 
