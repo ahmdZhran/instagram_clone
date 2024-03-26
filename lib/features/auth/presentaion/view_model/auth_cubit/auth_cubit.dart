@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/core/services/firebase_services/storage.dart';
 
 part 'auth_state.dart';
 
@@ -14,6 +16,7 @@ class AuthCubit extends Cubit<AuthState> {
   String? password;
   String? bio;
   bool isObsecurePasswordText = true;
+  Uint8List? profileImage;
   GlobalKey<FormState> signUpFormKey = GlobalKey();
   GlobalKey<FormState> signInFormKey = GlobalKey();
   GlobalKey<FormState> resetPasswordKey = GlobalKey();
@@ -27,6 +30,8 @@ class AuthCubit extends Cubit<AuthState> {
         email: emailAddress!,
         password: password!,
       );
+      String imageUrl = await StorageMethod()
+          .uploadImageToStorage('profileImage', profileImage!, false);
       createUserDocument(userCredential);
       await verifyEmail();
       // await addUserProfile();
