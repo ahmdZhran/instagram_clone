@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/utls/spacer.dart';
 import '../../../../core/utls/app_strings.dart';
 import '../../../../core/utls/text_styles.dart';
+import '../widgets/add_image_profile_widget.dart';
 import '../widgets/is_have_an_account_widget.dart';
 import '../../../../core/widgets/custom_head_text_widget.dart';
 import '../widgets/custom_form_sign_up.dart';
@@ -24,15 +25,7 @@ class SignUpView extends StatelessWidget {
                 style: CustomTextStyles.pacifico50Style,
               ),
               verticalSpacer(10),
-              CircleAvatar(
-                radius: 50,
-                backgroundColor: Colors.grey[300],
-                child: Icon(
-                  Icons.add_a_photo,
-                  size: 60,
-                  color: Colors.grey[600],
-                ),
-              ),
+              const AddImageProfileWidget(),
               verticalSpacer(10),
               const CustomFormSignUp(),
               verticalSpacer(10),
