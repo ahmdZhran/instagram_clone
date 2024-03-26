@@ -23,6 +23,7 @@ class SignUpView extends StatelessWidget {
                 text: AppStrings.createYourEmail,
                 style: CustomTextStyles.pacifico50Style,
               ),
+              verticalSpacer(10),
               CircleAvatar(
                 radius: 50,
                 backgroundColor: Colors.grey[300],
@@ -32,7 +33,7 @@ class SignUpView extends StatelessWidget {
                   color: Colors.grey[600],
                 ),
               ),
-              verticalSpacer(20),
+              verticalSpacer(10),
               const CustomFormSignUp(),
               verticalSpacer(10),
               IsHaveAnAccountWidget(
