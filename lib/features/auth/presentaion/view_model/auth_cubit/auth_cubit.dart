@@ -115,21 +115,5 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  // Future<void> createUserDocument(UserCredential? userCredential) async {
-  //   if (userCredential != null && userCredential.user != null) {
-  //     FirebaseFirestore.instance
-  //         .collection("users")
-  //         .doc(userCredential.user!.uid)
-  //         .set({
-  //       "email": emailAddress,
-  //       "user_name": username,
-  //       "name": name,
-  //       "bio": bio,
-  //       "imageUrl":imageUrl;
-  //       "followers": [],
-  //       "following": [],
-  //     }
-  //     );
-  //   }
-  // }
+
 }
