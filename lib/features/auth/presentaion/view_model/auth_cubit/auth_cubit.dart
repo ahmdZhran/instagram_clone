@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/core/services/firebase_services/storage.dart';
 
 part 'auth_state.dart';
 
@@ -14,23 +16,33 @@ class AuthCubit extends Cubit<AuthState> {
   String? password;
   String? bio;
   bool isObsecurePasswordText = true;
+  Uint8List? profileImage;
   GlobalKey<FormState> signUpFormKey = GlobalKey();
   GlobalKey<FormState> signInFormKey = GlobalKey();
   GlobalKey<FormState> resetPasswordKey = GlobalKey();
-
-  Future<void> createUserWithEmailAndPassword() async {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  Future<void> createUserWithEmailAndPassword(Uint8List profileImage) async {
+    emit(CreateUserLoading());
     try {
-      emit(CreateUserLoading());
-
       UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailAddress!,
         password: password!,
       );
-      createUserDocument(userCredential);
-      await verifyEmail();
-      // await addUserProfile();
+      String imageUrl = await StorageMethod()
+          .uploadImageToStorage('profileImage', profileImage, false);
+      await firestore.collection("users").doc(userCredential.user!.uid).set({
+        "emailAddress": emailAddress,
+        "username": username,
+        "name": name,
+        "bio": bio,
+        "uid": userCredential.user!.uid,
+        "imageUrl": imageUrl,
+        "following": [],
+        "follwoer": [],
+      });
       emit(CreateUserSuccess());
+      await verifyEmail();
     } on FirebaseAuthException catch (e) {
       String errorMessage;
       switch (e.code) {
@@ -103,19 +115,5 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> createUserDocument(UserCredential? userCredential) async {
-    if (userCredential != null && userCredential.user != null) {
-      FirebaseFirestore.instance
-          .collection("users")
-          .doc(userCredential.user!.uid)
-          .set({
-        "email": emailAddress,
-        "user_name": username,
-        "name": name,
-        "bio": bio,
-        "followers": [],
-        "following": [],
-      });
-    }
-  }
+
 }
