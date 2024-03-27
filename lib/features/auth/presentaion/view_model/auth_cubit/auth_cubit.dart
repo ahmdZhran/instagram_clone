@@ -34,6 +34,7 @@ class AuthCubit extends Cubit<AuthState> {
       await firestore.collection("users").doc(userCredential.user!.uid).set({
         "emailAddress": emailAddress,
         "username": username,
+        "name": name,
         "bio": bio,
         "uid": userCredential.user!.uid,
         "imageUrl": imageUrl,
