@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:instagram_clone/features/auth/presentaion/functions/show_error_message.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../core/functions/image_picker_method.dart';
@@ -105,7 +106,12 @@ class _SignUpFormBodyState extends State<SignUpFormBody> {
             CustomButton(
               onPressed: () {
                 if (widget.authCubit.signUpFormKey.currentState!.validate()) {
-                  widget.authCubit.createUserWithEmailAndPassword(imageProfile!);
+                  if (imageProfile != null) {
+                    widget.authCubit
+                        .createUserWithEmailAndPassword(imageProfile!);
+                  } else {
+                    showErrorMessage(context, 'Please select an image');
+                  }
                 }
               },
               childOfCustomButton: widget.authCubit.state is CreateUserLoading
