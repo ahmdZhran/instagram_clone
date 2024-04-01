@@ -5,9 +5,15 @@ class UserModel {
   final String passowrd;
   final String bio;
   final String imageUrl;
+  final String uid;
+  final List following;
+  final List follower;
 
   UserModel({
     required this.name,
+    required this.uid,
+    required this.follower,
+    required this.following,
     required this.username,
     required this.email,
     required this.passowrd,
@@ -21,5 +27,8 @@ class UserModel {
         "password": passowrd,
         "bio": bio,
         "imageUrl": imageUrl,
+        "uid": uid,
+        "following":following,
+        "follower":follower,
       };
 }

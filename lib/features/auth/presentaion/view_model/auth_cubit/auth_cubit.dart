@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/core/models/user_model.dart';
 import 'package:instagram_clone/core/services/firebase_services/storage.dart';
 
 part 'auth_state.dart';
@@ -15,6 +16,7 @@ class AuthCubit extends Cubit<AuthState> {
   String? emailAddress;
   String? password;
   String? bio;
+  String? uid;
   bool isObsecurePasswordText = true;
   Uint8List? profileImage;
   GlobalKey<FormState> signUpFormKey = GlobalKey();
@@ -31,16 +33,23 @@ class AuthCubit extends Cubit<AuthState> {
       );
       String imageUrl = await StorageMethod()
           .uploadImageToStorage('profileImage', profileImage, false);
-      await firestore.collection("users").doc(userCredential.user!.uid).set({
-        "emailAddress": emailAddress,
-        "username": username,
-        "name": name,
-        "bio": bio,
-        "uid": userCredential.user!.uid,
-        "imageUrl": imageUrl,
-        "following": [],
-        "follwoer": [],
-      });
+
+      UserModel userModel = UserModel(
+        name: name!,
+        username: username!,
+        email: emailAddress!,
+        passowrd: password!,
+        bio: bio!,
+        imageUrl: imageUrl,
+        uid: uid!,
+        follower: [],
+        following: [],
+      );
+      await firestore
+          .collection("users")
+          .doc(userCredential.user!.uid)
+          .set(userModel.toJson());
+          
       emit(CreateUserSuccess());
       await verifyEmail();
     } on FirebaseAuthException catch (e) {
