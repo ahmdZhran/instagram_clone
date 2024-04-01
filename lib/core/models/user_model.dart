@@ -6,11 +6,20 @@ class UserModel {
   final String bio;
   final String imageUrl;
 
-  UserModel(
-      {required this.name,
-      required this.username,
-      required this.email,
-      required this.passowrd,
-      required this.bio,
-      required this.imageUrl});
+  UserModel({
+    required this.name,
+    required this.username,
+    required this.email,
+    required this.passowrd,
+    required this.bio,
+    required this.imageUrl,
+  });
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "username": username,
+        "email": email,
+        "password": passowrd,
+        "bio": bio,
+        "imageUrl": imageUrl,
+      };
 }
