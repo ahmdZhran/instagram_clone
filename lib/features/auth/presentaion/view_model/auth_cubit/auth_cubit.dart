@@ -45,11 +45,12 @@ class AuthCubit extends Cubit<AuthState> {
         follower: [],
         following: [],
       );
+
       await firestore
           .collection("users")
           .doc(userCredential.user!.uid)
           .set(userModel.toJson());
-          
+
       emit(CreateUserSuccess());
       await verifyEmail();
     } on FirebaseAuthException catch (e) {
