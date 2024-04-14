@@ -25,6 +25,12 @@ final class SignInFailure extends AuthState {
   SignInFailure({required this.errMessage});
 }
 
+class VerifyEmailFailure extends AuthState {
+  final String errMessage;
+
+  VerifyEmailFailure({required this.errMessage});
+}
+
 final class ResetPasswordLoading extends AuthState {}
 
 final class ResetPasswordSuccess extends AuthState {}
