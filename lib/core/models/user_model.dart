@@ -4,21 +4,21 @@ class UserModel {
   final String email;
   final String password;
   final String bio;
-  final String imageUrl;
+  String? imageUrl;
   final String uid;
-  final List following;
-  final List follower;
+  List? following;
+  List? follower;
 
   UserModel({
     required this.name,
     required this.uid,
-    required this.follower,
-    required this.following,
+    this.follower,
+    this.following,
     required this.username,
     required this.email,
     required this.password,
     required this.bio,
-    required this.imageUrl,
+    this.imageUrl,
   });
   Map<String, dynamic> toJson() => {
         "name": name,
