@@ -1,11 +1,9 @@
-import 'dart:ffi';
-import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 
-import 'package:instagram_clone/core/models/user_model.dart';
+import '../../../../core/models/user_model.dart';
 
-abstract class AuthRepositry {
-  Future<Void> signUpWithEmailAndPassword(
-      UserModel userModel, Uint8List profileImage);
+abstract class AuthRepository {
+  Future<void> signUpWithEmailAndPassword(UserModel userModel, Uint8List profileImage);
   Future<void> signInWithEmailAndPassword(String email, String password);
   Future<void> resetPasswordWithEmail(String email);
   Future<void> verifyEmail();

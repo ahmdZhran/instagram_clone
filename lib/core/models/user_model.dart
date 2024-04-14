@@ -2,7 +2,7 @@ class UserModel {
   final String name;
   final String username;
   final String email;
-  final String passowrd;
+  final String password;
   final String bio;
   final String imageUrl;
   final String uid;
@@ -16,7 +16,7 @@ class UserModel {
     required this.following,
     required this.username,
     required this.email,
-    required this.passowrd,
+    required this.password,
     required this.bio,
     required this.imageUrl,
   });
@@ -24,11 +24,11 @@ class UserModel {
         "name": name,
         "username": username,
         "email": email,
-        "password": passowrd,
+        "password": password,
         "bio": bio,
         "imageUrl": imageUrl,
         "uid": uid,
-        "following":following,
-        "follower":follower,
+        "following": following,
+        "follower": follower,
       };
 }
