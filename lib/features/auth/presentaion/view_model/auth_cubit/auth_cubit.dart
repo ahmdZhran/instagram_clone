@@ -38,7 +38,7 @@ class AuthCubit extends Cubit<AuthState> {
         name: name!,
         username: username!,
         email: emailAddress!,
-        passowrd: password!,
+        password: password!,
         bio: bio!,
         imageUrl: imageUrl,
         uid: uid!,
