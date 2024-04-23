@@ -22,14 +22,14 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouteConstants.signUpRoute,
       builder: (context, state) => BlocProvider(
-        create: (context) => AuthCubit(authRepository),
+        create: (context) => AuthCubit(),
         child: const SignUpView(),
       ),
     ),
     GoRoute(
       path: RouteConstants.signInRoute,
       builder: (context, state) => BlocProvider(
-        create: (context) => AuthCubit(authRepository),
+        create: (context) => AuthCubit(),
         child: const SignInView(),
       ),
     ),
@@ -39,7 +39,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouteConstants.forgotPasswordRoute,
       builder: (context, state) => BlocProvider(
-        create: (context) => AuthCubit(authRepository),
+        create: (context) => AuthCubit(),
         child: const ForgotPasswordView(),
       ),
     ),
