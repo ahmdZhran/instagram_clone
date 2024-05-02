@@ -3,8 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/core/models/user_model.dart';
 import 'package:instagram_clone/core/services/firebase_services/storage.dart';
+
+import '../../../../../core/functions/image_picker_method.dart';
 
 part 'auth_state.dart';
 
@@ -23,7 +26,7 @@ class AuthCubit extends Cubit<AuthState> {
   GlobalKey<FormState> signInFormKey = GlobalKey();
   GlobalKey<FormState> resetPasswordKey = GlobalKey();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  Future<void> createUserWithEmailAndPassword(Uint8List profileImage) async {
+  Future<void> createUserWithEmailAndPassword() async {
     emit(CreateUserLoading());
     try {
       UserCredential userCredential =
@@ -32,7 +35,7 @@ class AuthCubit extends Cubit<AuthState> {
         password: password!,
       );
       String imageUrl = await StorageMethod()
-          .uploadImageToStorage('profileImage', profileImage, false);
+          .uploadImageToStorage('profileImage', profileImage!, false);
 
       UserModel userModel = UserModel(
         name: name!,
@@ -41,7 +44,7 @@ class AuthCubit extends Cubit<AuthState> {
         password: password!,
         bio: bio!,
         imageUrl: imageUrl,
-        uid: uid!,
+        uid: userCredential.user!.uid,
         follower: [],
         following: [],
       );
@@ -122,5 +125,11 @@ class AuthCubit extends Cubit<AuthState> {
       }
       emit(ResetPasswordFailure(errMessage: errorMessage));
     }
+  }
+
+  Future<void> selectedImageProfile() async {
+    Uint8List? image = await pickImage(ImageSource.gallery);
+    profileImage = image;
+    emit(ProfileImageSelected(profileImage));
   }
 }
