@@ -25,7 +25,7 @@ class ForgotPasswordFormBody extends StatelessWidget {
             CustomTextFormField(
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (emailAddress) {
-                  authCubit.emailAddress = emailAddress;
+                  authCubit.emailAddressController.text = emailAddress;
                 },
                 hintText: AppStrings.emailAddress),
             const SizedBox(height: 50),

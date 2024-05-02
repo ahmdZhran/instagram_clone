@@ -14,35 +14,34 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
 
-  String? username;
-  String? name;
-  String? emailAddress;
-  String? password;
-  String? bio;
-  String? uid;
-  bool isObsecurePasswordText = true;
-  Uint8List? profileImage;
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailAddressController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController bioController = TextEditingController();
   GlobalKey<FormState> signUpFormKey = GlobalKey();
   GlobalKey<FormState> signInFormKey = GlobalKey();
   GlobalKey<FormState> resetPasswordKey = GlobalKey();
+  Uint8List? profileImage;
+  bool isObsecurePasswordText = true;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   Future<void> createUserWithEmailAndPassword() async {
     emit(CreateUserLoading());
     try {
       UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailAddress!,
-        password: password!,
+        email: emailAddressController.text,
+        password: passwordController.text,
       );
       String imageUrl = await StorageMethod()
           .uploadImageToStorage('profileImage', profileImage!, false);
 
       UserModel userModel = UserModel(
-        name: name!,
-        username: username!,
-        email: emailAddress!,
-        password: password!,
-        bio: bio!,
+        name: nameController.text,
+        username: usernameController.text,
+        email: emailAddressController.text,
+        password: passwordController.text,
+        bio: bioController.text,
         imageUrl: imageUrl,
         uid: userCredential.user!.uid,
         follower: [],
@@ -80,8 +79,8 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       emit(SignInLoading());
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailAddress!,
-        password: password!,
+        email: emailAddressController.text,
+        password: passwordController.text,
       );
       emit(SignInSuccess());
     } on FirebaseAuthException catch (e) {
@@ -114,7 +113,8 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> resetPasswordWithEmail() async {
     try {
       emit(ResetPasswordLoading());
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: emailAddress!);
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: emailAddressController.text);
       emit(ResetPasswordSuccess());
     } on FirebaseAuthException catch (e) {
       String errorMessage;
