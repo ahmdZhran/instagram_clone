@@ -6,8 +6,8 @@ class UserModel {
   final String bio;
   final String imageUrl;
   final String uid;
-  final List? following;
-  final List? follower;
+  final List following;
+  final List follower;
 
   UserModel({
     required this.name,
