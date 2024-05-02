@@ -46,31 +46,31 @@ class SignUpFormBody extends StatelessWidget {
             ),
             CustomTextFormField(
               onChanged: (username) {
-                authCubit.username = username;
+                authCubit.usernameController.text = username;
               },
               hintText: AppStrings.username,
             ),
             CustomTextFormField(
               hintText: AppStrings.name,
               onChanged: (name) {
-                authCubit.name = name;
+                authCubit.nameController.text = name;
               },
             ),
             CustomTextFormField(
               hintText: AppStrings.bio,
               onChanged: (bio) {
-                authCubit.bio = bio;
+                authCubit.bioController.text = bio;
               },
             ),
             CustomTextFormField(
                 hintText: AppStrings.emailAddress,
                 onChanged: (emialAddress) {
-                  authCubit.emailAddress = emialAddress;
+                  authCubit.emailAddressController.text = emialAddress;
                 },
                 keyboardType: TextInputType.emailAddress),
             CustomTextFormField(
               onChanged: (password) {
-                authCubit.password = password;
+                authCubit.passwordController.text = password;
               },
               hintText: AppStrings.password,
               obscureText: authCubit.isObsecurePasswordText,

@@ -29,14 +29,14 @@ class SignInFormBody extends StatelessWidget {
           children: [
             CustomTextFormField(
               onChanged: (emailAddress) {
-                authCubit.emailAddress = emailAddress;
+                authCubit.emailAddressController.text = emailAddress;
               },
               hintText: AppStrings.emailAddress,
               keyboardType: TextInputType.emailAddress,
             ),
             CustomTextFormField(
               onChanged: (password) {
-                authCubit.password = password;
+                authCubit.passwordController.text = password;
               },
               obscureText: authCubit.isObsecurePasswordText,
               hintText: AppStrings.password,
