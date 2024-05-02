@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/auth/data/repositry/firebase_auth_reposityr.dart';
 import '../../features/auth/presentaion/view_model/auth_cubit/auth_cubit.dart';
 import '../../features/auth/presentaion/views/sign_in_view.dart';
 import '../../features/auth/presentaion/views/sign_up_view.dart';
@@ -9,6 +10,8 @@ import '../../features/home/presentation/views/home.dart';
 import '../../features/splsh/presentatoin/view/splsh_view.dart';
 import '../widgets/custom_bottom_navigation_bar.dart';
 import 'route_constants.dart';
+
+final authRepository = FirebaseAuthRepository();
 
 final GoRouter router = GoRouter(
   routes: [

@@ -42,3 +42,8 @@ final class ResetPasswordFailure extends AuthState {
 }
 
 class TogglePasswordVisibilityState extends AuthState {}
+class ProfileImageSelected extends AuthState {
+  final Uint8List? profileImage;
+
+  ProfileImageSelected(this.profileImage);
+}
