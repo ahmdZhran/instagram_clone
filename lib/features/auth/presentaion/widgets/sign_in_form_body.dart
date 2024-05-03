@@ -4,7 +4,7 @@ import 'package:lottie/lottie.dart';
 import '../../../../core/utls/app_assets.dart';
 import '../../../../core/utls/app_colors.dart';
 import '../../../../core/utls/app_strings.dart';
-import '../../../../core/utls/spacer.dart';
+import '../../../../core/utls/spacer_helper.dart';
 import '../../../../core/utls/text_styles.dart';
 import '../../../../core/widgets/custom_button_widget.dart';
 import '../view_model/auth_cubit/auth_cubit.dart';
@@ -49,9 +49,9 @@ class SignInFormBody extends StatelessWidget {
                     : Icons.visibility),
               ),
             ),
-            verticalSpacer(15),
+       context.     verticalSpacer(15),
             const ForgotPasswordWidget(),
-            verticalSpacer(35),
+         context.   verticalSpacer(35),
             CustomButton(
               onPressed: () {
                 if (authCubit.signInFormKey.currentState!.validate()) {

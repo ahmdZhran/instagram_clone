@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utls/app_strings.dart';
-import '../../../../core/utls/spacer.dart';
+import '../../../../core/utls/spacer_helper.dart';
 import '../../../../core/utls/text_styles.dart';
 import '../functions/show_error_message.dart';
 import '../functions/show_is_confirming_message.dart';
@@ -23,17 +23,17 @@ class ForgotPasswordView extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  verticalSpacer(100),
+                  context.verticalSpacer(100),
                   Text(
                     AppStrings.resetPassword,
                     style: CustomTextStyles.pacifico50Style,
                   ),
-                  verticalSpacer(17),
+                  context.verticalSpacer(17),
                   const Text(
                     AppStrings.pleaseEnterYourEmail,
                     textAlign: TextAlign.center,
                   ),
-                  verticalSpacer(30),
+                  context.verticalSpacer(30),
                   BlocConsumer<AuthCubit, AuthState>(
                     listener: (context, state) {
                       if (state is ResetPasswordSuccess) {

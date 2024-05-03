@@ -17,8 +17,8 @@ class CustomFormSignIn extends StatelessWidget {
       listener: (context, state) {
         if (state is SignInSuccess) {
           FirebaseAuth.instance.currentUser!.emailVerified
-              ? customReplacementNavigate(
-                  context, RouteConstants.bottomNavBarRoute)
+              ? context
+                  .customReplacementNavigate(RouteConstants.bottomNavBarRoute)
               : showErrorMessage(context, AppStrings.pleaseVefyEmail);
         } else if (state is SignInFailure) {
           showErrorMessage(context, state.errMessage);

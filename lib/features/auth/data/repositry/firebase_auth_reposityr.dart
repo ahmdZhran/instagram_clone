@@ -2,8 +2,8 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:instagram_clone/core/models/user_model.dart';
-import 'package:instagram_clone/core/services/firebase_services/storage.dart';
+import '../../../../core/models/user_model.dart';
+import '../../../../core/services/firebase_services/storage.dart';
 
 class AuthRepositry {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -102,9 +102,5 @@ class AuthRepositry {
       }
       throw Exception(errorMessage);
     }
-  }
-
-  Future<void> verifyEmail() async {
-    await _auth.currentUser!.sendEmailVerification();
   }
 }

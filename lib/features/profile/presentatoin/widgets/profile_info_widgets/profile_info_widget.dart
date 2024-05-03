@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../core/utls/spacer_helper.dart';
 import '../../view_model/profile_cubit/profile_cubit.dart';
 
 import '../../../../../core/utls/app_colors.dart';
-import '../../../../../core/utls/spacer.dart';
 import '../../../../../core/widgets/custom_button_widget.dart';
 import '../../views/custom_shimmer.dart';
 import 'photo_of_profile.dart';
@@ -38,7 +38,7 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
           final userProfile = state.userProfile;
           return Column(
             children: [
-              verticalSpacer(30),
+              context.verticalSpacer(30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -51,16 +51,16 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                       label: 'Followers'),
                 ],
               ),
-              verticalSpacer(10),
+              context.verticalSpacer(10),
               Text(
                 userProfile.userName.toString(),
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-              verticalSpacer(5),
+              context.verticalSpacer(5),
               Text(
                 userProfile.name.toString(),
               ),
-              verticalSpacer(5),
+              context.verticalSpacer(5),
               Text(
                 userProfile.bio.toString(),
               ),
@@ -68,7 +68,7 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                 'youtube/attack_on_titan/official',
                 style: TextStyle(color: Colors.blue),
               ),
-              verticalSpacer(10),
+              context.verticalSpacer(10),
               CustomButton(
                 childOfCustomButton: const Text(
                   'Edit Profile',

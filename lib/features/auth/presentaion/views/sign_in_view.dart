@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/functions/navigator_methods.dart';
 import '../../../../core/router/route_constants.dart';
 import '../../../../core/utls/app_strings.dart';
-import '../../../../core/utls/spacer.dart';
+import '../../../../core/utls/spacer_helper.dart';
 import '../../../../core/utls/text_styles.dart';
 import '../../../../core/widgets/custom_head_text_widget.dart';
 import '../widgets/custom_form_sign_in.dart';
@@ -21,20 +21,19 @@ class SignInView extends StatelessWidget {
         SliverToBoxAdapter(
           child: Column(
             children: [
-              verticalSpacer(150),
+              context.verticalSpacer(150),
               CustomHeadText(
                   text: AppStrings.headInstagramTitle,
                   style: CustomTextStyles.pacifico50Style
                       .copyWith(fontSize: 38.sp)),
-              verticalSpacer(28),
+              context.verticalSpacer(28),
               const CustomFormSignIn(),
-              verticalSpacer(36),
+              context.verticalSpacer(36),
               IsHaveAnAccountWidget(
                 titleOfTextOne: AppStrings.dontHaveAnAccount,
                 titleOfTextTwo: AppStrings.signUp,
                 onTap: () {
-                  customReplacementNavigate(
-                      context, RouteConstants.signUpRoute);
+                  context.customNavigate(RouteConstants.signUpRoute);
                 },
               )
             ],

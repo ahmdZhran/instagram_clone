@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import '../../../../core/utls/spacer.dart';
+import '../../../../core/functions/navigator_methods.dart';
+import '../../../../core/router/route_constants.dart';
+import '../../../../core/utls/spacer_helper.dart';
 import '../../../../core/utls/app_strings.dart';
 import '../../../../core/utls/text_styles.dart';
 import '../widgets/is_have_an_account_widget.dart';
@@ -18,21 +19,21 @@ class SignUpView extends StatelessWidget {
         SliverToBoxAdapter(
           child: Column(
             children: [
-              verticalSpacer(90),
+              context.verticalSpacer(90),
               CustomHeadText(
                 text: AppStrings.createYourEmail,
                 style: CustomTextStyles.pacifico50Style,
               ),
-              verticalSpacer(10),
+              context.verticalSpacer(10),
               // const AddImageProfileWidget(),
-              verticalSpacer(10),
+              context.verticalSpacer(10),
               const CustomFormSignUp(),
-              verticalSpacer(10),
+              context.verticalSpacer(10),
               IsHaveAnAccountWidget(
                 titleOfTextOne: AppStrings.alreadyHaveAnAccount,
                 titleOfTextTwo: AppStrings.signIn,
                 onTap: () {
-                  GoRouter.of(context).push('/signInView');
+                  context.customNavigate(RouteConstants.signInRoute);
                 },
               )
             ],

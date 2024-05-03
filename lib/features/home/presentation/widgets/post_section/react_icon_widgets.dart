@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../../../core/utls/spacer.dart';
-import '../../../../../core/utls/text_styles.dart';
+
 import '../../../../../core/utls/app_assets.dart';
+import '../../../../../core/utls/spacer_helper.dart';
+import '../../../../../core/utls/text_styles.dart';
 
 class ReactIconsWidgtes extends StatelessWidget {
   const ReactIconsWidgtes({super.key});
@@ -20,12 +21,12 @@ class ReactIconsWidgtes extends StatelessWidget {
               BlendMode.srcIn,
             ),
           ),
-          horizontalSpacer(4),
+      context.    horizontalSpacer(4),
           Text(
             '245',
             style: CustomTextStyles.normalTextStyle,
           ),
-          horizontalSpacer(10),
+        context.  horizontalSpacer(10),
           SvgPicture.asset(
             Assets.commentIcon,
             colorFilter: const ColorFilter.mode(
@@ -33,12 +34,12 @@ class ReactIconsWidgtes extends StatelessWidget {
               BlendMode.srcIn,
             ),
           ),
-          horizontalSpacer(6),
+      context.    horizontalSpacer(6),
           Text(
             '245',
             style: CustomTextStyles.normalTextStyle,
           ),
-          horizontalSpacer(8),
+       context.   horizontalSpacer(8),
           SvgPicture.asset(
             Assets.shareIcon,
             colorFilter: const ColorFilter.mode(

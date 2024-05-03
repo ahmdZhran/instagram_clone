@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/router/route_constants.dart';
 import '../../../../core/functions/navigator_methods.dart';
+import '../../../../core/router/route_constants.dart';
 import '../../../../core/utls/app_strings.dart';
 import '../functions/show_error_message.dart';
 import '../view_model/auth_cubit/auth_cubit.dart';
@@ -17,7 +17,7 @@ class CustomFormSignUp extends StatelessWidget {
       listener: (context, state) {
         if (state is CreateUserSuccess) {
           showConfirmingMessage(context, AppStrings.weSentVerfyEmail);
-          customNavigator(context, RouteConstants.signInRoute);
+          context.customNavigate(RouteConstants.signInRoute);
         } else if (state is CreateUserFailer) {
           showErrorMessage(context, state.errMessage);
         }
