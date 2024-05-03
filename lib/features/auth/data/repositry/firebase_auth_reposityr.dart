@@ -1,78 +1,110 @@
 import 'dart:typed_data';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:instagram_clone/core/models/user_model.dart';
+import 'package:instagram_clone/core/services/firebase_services/storage.dart';
 
-import '../../../../core/services/firebase_services/storage.dart';
-import 'auth_repositry.dart';
-
-class FirebaseAuthRepository implements AuthRepository {
+class AuthRepositry {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final StorageMethod _storageMethod = StorageMethod();
 
-  @override
-  Future<void> signUpWithEmailAndPassword(
-      UserModel userModel, Uint8List profileImage) async {
+  Future<void> createUserWithEmailAndPassword({
+    required String email,
+    required String password,
+    required String username,
+    required String name,
+    required String bio,
+    required Uint8List? profileImage,
+  }) async {
     try {
-      final userCredential = await _auth.createUserWithEmailAndPassword(
-        email: userModel.email,
-        password: userModel.password,
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
       );
-
-      if (userCredential.user != null) {
-        final imageUrl = await StorageMethod()
-            .uploadImageToStorage('profileImage', profileImage, false);
-        final user = UserModel(
-          name: userModel.name,
-          username: userModel.username,
-          email: userModel.email,
-          password: userModel.password,
-          bio: userModel.bio,
-          imageUrl: imageUrl,
-          uid: userCredential.user!.uid,
-          follower: [],
-          following: [],
-        );
-        await _firestore.collection("users").doc(user.uid).set(user.toJson());
+      String imageUrl = await _storageMethod.uploadImageToStorage(
+        'profileImge',
+        profileImage!,
+        false,
+      );
+      UserModel userModel = UserModel(
+        name: name,
+        uid: userCredential.user!.uid,
+        follower: [],
+        following: [],
+        username: username,
+        email: email,
+        password: password,
+        bio: bio,
+        imageUrl: imageUrl,
+      );
+      await _firestore
+          .collection("users")
+          .doc(userCredential.user!.uid)
+          .set(userModel.toJson());
+    } on FirebaseAuthException catch (e) {
+      String errorMessage;
+      switch (e.code) {
+        case 'weak-password':
+          errorMessage = 'The password provided is too weak.';
+          break;
+        case 'email-already-in-use':
+          errorMessage = 'The account already exists for that email.';
+          break;
+        case 'invalid-email':
+          errorMessage = 'The email is invalid';
+          break;
+        default:
+          errorMessage = e.message ?? 'An error occurred';
       }
-
-      await verifyEmail();
-    } catch (e) {
-      print('Error in createUserWithEmailAndPassword: $e');
-      throw Exception('Sign up failed: $e');
+      throw Exception(errorMessage);
     }
   }
 
-  @override
-  Future<void> signInWithEmailAndPassword(String email, String password) async {
+  Future<void> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
     try {
       await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-    } catch (e) {
-      throw Exception('Sign in failed: $e');
+    } on FirebaseAuthException catch (e) {
+      String errorMessage;
+      switch (e.code) {
+        case 'user-not-found':
+          errorMessage = 'No user found for that email.';
+          break;
+        case 'wrong-password':
+          errorMessage = 'Wrong password provided for that user.';
+          break;
+        default:
+          errorMessage = 'An error occurred during sign in.';
+      }
+      throw Exception(errorMessage);
     }
   }
 
-  @override
-  Future<void> resetPasswordWithEmail(String email) async {
+  Future<void> resetPasswordWithEmail({
+    required String email,
+  }) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
-    } catch (e) {
-      throw Exception('Reset password failed: $e');
+    } on FirebaseAuthException catch (e) {
+      String errorMessage;
+      if (e.code == 'invalid-email') {
+        errorMessage = 'Please enter a valid email.';
+      } else {
+        errorMessage = 'An error occurred while resetting password.';
+      }
+      throw Exception(errorMessage);
     }
   }
 
-  @override
   Future<void> verifyEmail() async {
-    try {
-      final user = _auth.currentUser;
-      if (user != null && !user.emailVerified) {
-        await user.sendEmailVerification();
-      }
-    } catch (e) {
-      throw Exception('Email verification failed: $e');
-    }
+    await _auth.currentUser!.sendEmailVerification();
   }
 }

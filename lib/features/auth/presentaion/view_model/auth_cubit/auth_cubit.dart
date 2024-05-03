@@ -4,15 +4,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:instagram_clone/core/models/user_model.dart';
-import 'package:instagram_clone/core/services/firebase_services/storage.dart';
-
 import '../../../../../core/functions/image_picker_method.dart';
+import '../../../data/repositry/firebase_auth_reposityr.dart';
 
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(AuthInitial());
+  final AuthRepositry _authRepository;
+  AuthCubit(this._authRepository) : super(AuthInitial());
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
@@ -25,80 +24,54 @@ class AuthCubit extends Cubit<AuthState> {
   Uint8List? profileImage;
   bool isObsecurePasswordText = true;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   Future<void> createUserWithEmailAndPassword() async {
     emit(CreateUserLoading());
     try {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await _authRepository.createUserWithEmailAndPassword(
         email: emailAddressController.text,
         password: passwordController.text,
-      );
-      String imageUrl = await StorageMethod()
-          .uploadImageToStorage('profileImage', profileImage!, false);
-
-      UserModel userModel = UserModel(
-        name: nameController.text,
         username: usernameController.text,
-        email: emailAddressController.text,
-        password: passwordController.text,
+        name: nameController.text,
         bio: bioController.text,
-        imageUrl: imageUrl,
-        uid: userCredential.user!.uid,
-        follower: [],
-        following: [],
+        profileImage: profileImage,
       );
 
-      await firestore
-          .collection("users")
-          .doc(userCredential.user!.uid)
-          .set(userModel.toJson());
       emit(CreateUserSuccess());
       await verifyEmail();
-    } on FirebaseAuthException catch (e) {
-      String errorMessage;
-      switch (e.code) {
-        case 'weak-password':
-          errorMessage = 'The password provided is too weak.';
-          break;
-        case 'email-already-in-use':
-          errorMessage = 'The account already exists for that email.';
-          break;
-        case 'invalid-email':
-          errorMessage = 'The email is invalid';
-          break;
-        default:
-          errorMessage = e.message ?? 'An error occurred';
-      }
-      emit(CreateUserFailer(errMessage: errorMessage));
     } catch (e) {
-      emit(CreateUserFailer(errMessage: 'An unexpected error occurred'));
+      emit(CreateUserFailer(errMessage: e.toString()));
     }
   }
 
   Future<void> signInWithEmailAndPassword() async {
     try {
       emit(SignInLoading());
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await _authRepository.signInWithEmailAndPassword(
         email: emailAddressController.text,
         password: passwordController.text,
       );
       emit(SignInSuccess());
-    } on FirebaseAuthException catch (e) {
-      String errorMessage;
-      switch (e.code) {
-        case 'user-not-found':
-          errorMessage = 'No user found for that email.';
-          break;
-        case 'wrong-password':
-          errorMessage = 'Wrong password provided for that user.';
-          break;
-        default:
-          errorMessage = 'An error occurred during sign in.';
-      }
-      emit(SignInFailure(errMessage: errorMessage));
     } catch (e) {
       emit(SignInFailure(errMessage: 'An unexpected error occurred'));
     }
+  }
+
+  Future<void> resetPasswordWithEmail() async {
+    try {
+      emit(ResetPasswordLoading());
+      await _authRepository.resetPasswordWithEmail(
+          email: emailAddressController.text);
+      emit(ResetPasswordSuccess());
+    } catch (e) {
+      emit(ResetPasswordFailure(errMessage: 'An unexpected error occurred'));
+    }
+  }
+
+  Future<void> selectedImageProfile() async {
+    Uint8List? image = await pickImage(ImageSource.gallery);
+    profileImage = image;
+    emit(ProfileImageSelected(profileImage));
   }
 
   void togglePasswordVisibility() {
@@ -108,28 +81,5 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> verifyEmail() async {
     await FirebaseAuth.instance.currentUser!.sendEmailVerification();
-  }
-
-  Future<void> resetPasswordWithEmail() async {
-    try {
-      emit(ResetPasswordLoading());
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: emailAddressController.text);
-      emit(ResetPasswordSuccess());
-    } on FirebaseAuthException catch (e) {
-      String errorMessage;
-      if (e.code == 'invalid-email') {
-        errorMessage = 'Please enter a valid email.';
-      } else {
-        errorMessage = 'An error occurred while resetting password.';
-      }
-      emit(ResetPasswordFailure(errMessage: errorMessage));
-    }
-  }
-
-  Future<void> selectedImageProfile() async {
-    Uint8List? image = await pickImage(ImageSource.gallery);
-    profileImage = image;
-    emit(ProfileImageSelected(profileImage));
   }
 }
