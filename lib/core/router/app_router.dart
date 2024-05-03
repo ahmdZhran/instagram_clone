@@ -11,7 +11,7 @@ import '../../features/splsh/presentatoin/view/splsh_view.dart';
 import '../widgets/custom_bottom_navigation_bar.dart';
 import 'route_constants.dart';
 
-final authRepository = FirebaseAuthRepository();
+final authRepository = AuthRepositry();
 
 final GoRouter router = GoRouter(
   routes: [
@@ -22,14 +22,14 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouteConstants.signUpRoute,
       builder: (context, state) => BlocProvider(
-        create: (context) => AuthCubit(),
+        create: (context) => AuthCubit(authRepository),
         child: const SignUpView(),
       ),
     ),
     GoRoute(
       path: RouteConstants.signInRoute,
       builder: (context, state) => BlocProvider(
-        create: (context) => AuthCubit(),
+        create: (context) => AuthCubit(authRepository),
         child: const SignInView(),
       ),
     ),
@@ -39,7 +39,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouteConstants.forgotPasswordRoute,
       builder: (context, state) => BlocProvider(
-        create: (context) => AuthCubit(),
+        create: (context) => AuthCubit(authRepository),
         child: const ForgotPasswordView(),
       ),
     ),
