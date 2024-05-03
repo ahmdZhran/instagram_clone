@@ -7,7 +7,7 @@ void showErrorMessage(BuildContext context, String errMessage) {
     content: Row(
       children: [
         const Icon(Icons.error),
-        horizontalSpacer(10),
+       context. horizontalSpacer(10),
         Text(errMessage, style: CustomTextStyles.normalTextStyle),
       ],
     ),

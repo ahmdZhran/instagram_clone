@@ -23,17 +23,17 @@ class ForgotPasswordView extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  verticalSpacer(100),
+                  context.verticalSpacer(100),
                   Text(
                     AppStrings.resetPassword,
                     style: CustomTextStyles.pacifico50Style,
                   ),
-                  verticalSpacer(17),
+                  context.verticalSpacer(17),
                   const Text(
                     AppStrings.pleaseEnterYourEmail,
                     textAlign: TextAlign.center,
                   ),
-                  verticalSpacer(30),
+                  context.verticalSpacer(30),
                   BlocConsumer<AuthCubit, AuthState>(
                     listener: (context, state) {
                       if (state is ResetPasswordSuccess) {

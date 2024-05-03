@@ -49,9 +49,9 @@ class SignInFormBody extends StatelessWidget {
                     : Icons.visibility),
               ),
             ),
-            verticalSpacer(15),
+       context.     verticalSpacer(15),
             const ForgotPasswordWidget(),
-            verticalSpacer(35),
+         context.   verticalSpacer(35),
             CustomButton(
               onPressed: () {
                 if (authCubit.signInFormKey.currentState!.validate()) {

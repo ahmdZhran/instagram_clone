@@ -20,12 +20,12 @@ class ReactIconsWidgtes extends StatelessWidget {
               BlendMode.srcIn,
             ),
           ),
-          horizontalSpacer(4),
+      context.    horizontalSpacer(4),
           Text(
             '245',
             style: CustomTextStyles.normalTextStyle,
           ),
-          horizontalSpacer(10),
+        context.  horizontalSpacer(10),
           SvgPicture.asset(
             Assets.commentIcon,
             colorFilter: const ColorFilter.mode(
@@ -33,12 +33,12 @@ class ReactIconsWidgtes extends StatelessWidget {
               BlendMode.srcIn,
             ),
           ),
-          horizontalSpacer(6),
+      context.    horizontalSpacer(6),
           Text(
             '245',
             style: CustomTextStyles.normalTextStyle,
           ),
-          horizontalSpacer(8),
+       context.   horizontalSpacer(8),
           SvgPicture.asset(
             Assets.shareIcon,
             colorFilter: const ColorFilter.mode(

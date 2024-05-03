@@ -103,8 +103,4 @@ class AuthRepositry {
       throw Exception(errorMessage);
     }
   }
-
-  Future<void> verifyEmail() async {
-    await _auth.currentUser!.sendEmailVerification();
-  }
 }

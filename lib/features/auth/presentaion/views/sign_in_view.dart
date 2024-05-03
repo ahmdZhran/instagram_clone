@@ -21,14 +21,14 @@ class SignInView extends StatelessWidget {
         SliverToBoxAdapter(
           child: Column(
             children: [
-              verticalSpacer(150),
+          context.    verticalSpacer(150),
               CustomHeadText(
                   text: AppStrings.headInstagramTitle,
                   style: CustomTextStyles.pacifico50Style
                       .copyWith(fontSize: 38.sp)),
-              verticalSpacer(28),
+           context.   verticalSpacer(28),
               const CustomFormSignIn(),
-              verticalSpacer(36),
+          context.    verticalSpacer(36),
               IsHaveAnAccountWidget(
                 titleOfTextOne: AppStrings.dontHaveAnAccount,
                 titleOfTextTwo: AppStrings.signUp,
