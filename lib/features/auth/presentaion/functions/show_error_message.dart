@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../core/utls/spacer.dart';
+import '../../../../core/utls/spacer_helper.dart';
 import '../../../../core/utls/text_styles.dart';
 
 void showErrorMessage(BuildContext context, String errMessage) {

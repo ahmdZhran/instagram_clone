@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/core/utls/spacer.dart';
+import 'package:instagram_clone/core/utls/spacer_helper.dart';
 import '../../view_model/profile_cubit/profile_cubit.dart';
 
 import '../../../../../core/utls/app_colors.dart';

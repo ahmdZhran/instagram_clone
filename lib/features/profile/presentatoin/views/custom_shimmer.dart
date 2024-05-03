@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/utls/app_colors.dart';
-import '../../../../core/utls/spacer.dart';
+import '../../../../core/utls/spacer_helper.dart';
 import '../../../../core/widgets/rectangular_loading.dart';
 
 class CustomShimmer extends StatelessWidget {
