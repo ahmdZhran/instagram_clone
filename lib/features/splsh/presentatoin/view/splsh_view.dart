@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/functions/navigator_methods.dart';
+import '../../../../core/functions/navigator_methods.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../core/router/route_constants.dart';
