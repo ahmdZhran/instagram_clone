@@ -38,7 +38,7 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
           final userProfile = state.userProfile;
           return Column(
             children: [
-              context.verticalSpacer(30),
+            30.0.getVerticalSpacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -51,16 +51,16 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                       label: 'Followers'),
                 ],
               ),
-              context.verticalSpacer(10),
+              10.0.getVerticalSpacer(),
               Text(
                 userProfile.userName.toString(),
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-              context.verticalSpacer(5),
+             5.0.getVerticalSpacer(),
               Text(
                 userProfile.name.toString(),
               ),
-              context.verticalSpacer(5),
+             5.0.getVerticalSpacer(),
               Text(
                 userProfile.bio.toString(),
               ),
@@ -68,7 +68,7 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                 'youtube/attack_on_titan/official',
                 style: TextStyle(color: Colors.blue),
               ),
-              context.verticalSpacer(10),
+             10.0.getVerticalSpacer(),
               CustomButton(
                 childOfCustomButton: const Text(
                   'Edit Profile',

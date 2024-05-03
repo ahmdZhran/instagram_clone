@@ -85,7 +85,7 @@ class SignUpFormBody extends StatelessWidget {
                 ),
               ),
             ),
-       context.     verticalSpacer(15),
+            15.0.getVerticalSpacer(),
             CustomButton(
               onPressed: () {
                 if (authCubit.signUpFormKey.currentState!.validate()) {

@@ -19,16 +19,16 @@ class SignUpView extends StatelessWidget {
         SliverToBoxAdapter(
           child: Column(
             children: [
-              context.verticalSpacer(90),
+              90.0.getVerticalSpacer(),
               CustomHeadText(
                 text: AppStrings.createYourEmail,
                 style: CustomTextStyles.pacifico50Style,
               ),
-              context.verticalSpacer(10),
+              10.0.getVerticalSpacer(),
               // const AddImageProfileWidget(),
-              context.verticalSpacer(10),
+              10.0.getVerticalSpacer(),
               const CustomFormSignUp(),
-              context.verticalSpacer(10),
+              10.0.getVerticalSpacer(),
               IsHaveAnAccountWidget(
                 titleOfTextOne: AppStrings.alreadyHaveAnAccount,
                 titleOfTextTwo: AppStrings.signIn,
