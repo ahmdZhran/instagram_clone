@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/profile/presentatoin/view_model/profile_cubit/profile_cubit.dart';
 import '../../features/profile/presentatoin/view_model/profile_cubit/user_repositry.dart';
 import 'bottom_nav_bar.dart';
-import '../../features/add_post/presentation/views/add_post.dart';
+import '../../features/add_post/presentation/views/add_post_view.dart';
 import '../../features/home/presentation/views/home.dart';
 import '../../features/profile/presentatoin/views/profile_view.dart';
 import '../../features/search/presentation/views/search_view.dart';
@@ -36,7 +36,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         children: [
           const HomeView(),
           const SearchView(),
-          const AddPost(),
+          const AddPostView(),
           const ShortView(),
           BlocProvider(
             create: (context) => ProfileCubit(UserRepositry()),
