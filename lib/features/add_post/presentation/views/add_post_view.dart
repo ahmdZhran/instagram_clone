@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:instagram_clone/features/add_post/data/services/local/media_services/media_services.dart';
 import 'package:instagram_clone/features/add_post/presentation/views/asset_thumbnail.dart';
 import 'package:photo_manager/photo_manager.dart';
@@ -19,6 +20,7 @@ class _AddPostViewState extends State<AddPostView> {
 
   AssetEntity? selectedEntity;
 
+  bool isMultible = false;
   Future<void> _fetchAssets() async {
     assetList = await PhotoManager.getAssetListRange(
       start: 0,
@@ -101,7 +103,24 @@ class _AddPostViewState extends State<AddPostView> {
                   const Icon(
                     Icons.expand_more,
                     size: 25,
-                  )
+                  ),
+                  const Spacer(),
+                  IconButton(
+                    onPressed: () {},
+                    icon: isMultible
+                        ? const Icon(
+                            Iconsax.note_21,
+                          )
+                        : const Icon(
+                            Iconsax.note_2_copy,
+                          ),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Iconsax.camera_copy,
+                    ),
+                  ),
                 ],
               ),
             ),
