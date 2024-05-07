@@ -15,7 +15,7 @@ class MediaServices {
   Future loadAssets(AssetPathEntity selectedAlbum) async {
     List<AssetEntity> assetList = await selectedAlbum.getAssetListRange(
       start: 0,
-      end: 50,
+      end: 10000,
     );
     return assetList;
   }
