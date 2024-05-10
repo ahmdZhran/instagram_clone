@@ -13,6 +13,8 @@ class AddPostView extends StatefulWidget {
 
 class _AddPostViewState extends State<AddPostView> {
   List<AssetEntity> assetList = [];
+  
+  List<AssetEntity> selectedAssetList = [];
 
   List<AssetPathEntity> albumList = [];
 
@@ -106,8 +108,13 @@ class _AddPostViewState extends State<AddPostView> {
                   ),
                   const Spacer(),
                   IconButton(
-                    onPressed: () {},
-                    icon: isMultible
+                    onPressed: () {
+                      setState(() {
+                        isMultible = isMultible == true ? false : true;
+                        selectedAssetList = [];
+                      });
+                    },
+                    icon: isMultible == true
                         ? const Icon(
                             Iconsax.note_21,
                           )
@@ -134,15 +141,16 @@ class _AddPostViewState extends State<AddPostView> {
               itemBuilder: (context, index) {
                 final isSelected = assetList[index] == selectedEntity;
                 return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedEntity = assetList[index];
-                      });
-                    },
-                    child: AssetThumbnail(
-                      asset: assetList[index],
-                      isSelected: isSelected,
-                    ));
+                  onTap: () {
+                    setState(() {
+                      selectedEntity = assetList[index];
+                    });
+                  },
+                  child: AssetThumbnail(
+                    asset: assetList[index],
+                    isSelected: isSelected,
+                  ),
+                );
               },
             ),
           ),

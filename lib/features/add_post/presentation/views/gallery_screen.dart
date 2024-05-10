@@ -36,7 +36,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
         gridDelegate:
             const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
         itemBuilder: (context, index) {
-          return AssetThumbnail(asset: assets[index]);
+          return AssetThumbnail(asset: assets[index], isSelected: false,);
         },
         itemCount: assets.length,
       ),
