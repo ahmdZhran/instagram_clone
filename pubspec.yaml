@@ -30,8 +30,30 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
+  # state management
+  flutter_bloc: ^8.1.6
+  # native splash screen 
+  flutter_native_splash: ^2.4.1
+  # fpr Responsive 
+  flutter_screenutil: ^5.9.3
+  # SVG rendering
+  flutter_svg: ^2.0.10+1
+  # for implimentation of Glassmorphic UI easily.
+  glassmorphism: ^3.0.0
+  # Flutter plugin for selecting images from the Android and iOS image library,
+  image_picker: ^1.1.2
+  # for reading and writing simple key-value pairs. Wraps
+  shared_preferences: ^2.3.2
+  # A package provides an easy way to add shimmer effect in Flutter project
+  shimmer: ^3.0.0
+  # to support more than one language on our app
+  easy_localization: ^3.0.7
+  # Firebase
+  cloud_firestore: ^5.4.2
+  external_app_launcher: ^4.0.0
+  firebase_auth: ^5.3.0
+  firebase_core: ^3.5.0
+  firebase_storage: ^12.3.1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
