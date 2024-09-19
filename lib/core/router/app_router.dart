@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/main.dart';
+import '../../features/home/presentation/screens/home_screen.dart';
 import 'routes.dart';
 
 class AppRouter {

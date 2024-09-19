@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../core/utils/app_them.dart';
-import '../main.dart';
+import '../features/home/presentation/screens/home_screen.dart';
 
 class InstagramApp extends StatelessWidget {
   const InstagramApp({super.key});
