@@ -11,6 +11,7 @@ include: package:flutter_lints/flutter.yaml
 analyzer:
   exclude:
     -lib/l10n/arb/*
+    -assets/translations/*
     -lib/**/*.g.gen.dart
     -packages/**/*.gen.dart
     -packages/**/*.g.dart
