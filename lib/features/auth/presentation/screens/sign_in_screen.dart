@@ -7,9 +7,13 @@ class LogInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-          child: Text(
-        'this is our log in ya ',
-        style: TextStyle(fontSize: 20),
+          child: Column(
+        children: [
+          Text(
+            'this is our log in ya ',
+            style: TextStyle(fontSize: 20),
+          ),
+        ],
       )),
     );
   }
