@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utils/app_them.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -14,13 +15,13 @@ Future<void> main() async {
       ],
       path: 'assets/translations',
       startLocale: const Locale('en', 'US'),
-      child: const MyApp(),
+      child: const InstagramApp(),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class InstagramApp extends StatelessWidget {
+  const InstagramApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +31,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: AppThemes.lightTheme,
       home: const HomeScreen(),
     );
   }
