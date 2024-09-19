@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/router/app_router.dart';
 import 'app/instagram_app.dart';
 import 'firebase_options.dart';
 
@@ -15,8 +16,9 @@ Future<void> main() async {
       ],
       path: 'assets/translations',
       startLocale: const Locale('en', 'US'),
-      child: const InstagramApp(),
+      child: InstagramApp(
+        appRouter: AppRouter(),
+      ),
     ),
   );
 }
-
