@@ -5,6 +5,12 @@ class LogInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return const Scaffold(
+      body: Center(
+          child: Text(
+        'this is our log in ya ',
+        style: TextStyle(fontSize: 20),
+      )),
+    );
   }
 }

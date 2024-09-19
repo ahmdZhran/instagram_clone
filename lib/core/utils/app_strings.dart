@@ -1,4 +1,4 @@
-abstract class Password {
+abstract class AppStrings {
   static const String appName = "Instagram";
   //  Auth strings
   static const String headInstagramTitle = 'Instagram';
