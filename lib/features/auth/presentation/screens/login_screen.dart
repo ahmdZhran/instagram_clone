@@ -12,7 +12,7 @@ class LogInScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Gap(200),
+            Gap(150),
             Align(
               alignment: Alignment.topCenter,
               child: HeadInstagramTitle(),
