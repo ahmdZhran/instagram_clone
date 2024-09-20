@@ -14,8 +14,8 @@ class HeadInstagramTitle extends StatelessWidget {
   }
 }
 
-class LoginTextStyle extends StatelessWidget {
-  const LoginTextStyle({super.key});
+class LoginTextStyleP16 extends StatelessWidget {
+  const LoginTextStyleP16({super.key});
 
   @override
   Widget build(BuildContext context) {

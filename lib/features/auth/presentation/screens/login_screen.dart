@@ -17,7 +17,7 @@ class LogInScreen extends StatelessWidget {
               alignment: Alignment.topCenter,
               child: HeadInstagramTitle(),
             ),
-            Gap(20),
+            Gap(30),
             CustomFormLogInWidget(),
           ],
         ),
