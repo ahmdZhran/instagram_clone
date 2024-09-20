@@ -57,8 +57,7 @@ class AppThemes {
       unselectedItemColor: Colors.grey,
     ),
     textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: Colors.white),
-      bodyMedium: TextStyle(color: Colors.grey),
+      bodyMedium: TextStyle(color: Colors.white),
     ),
     fontFamily: 'Pacifico',
   );
