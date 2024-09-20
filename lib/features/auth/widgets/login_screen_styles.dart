@@ -13,3 +13,27 @@ class HeadInstagramTitle extends StatelessWidget {
     );
   }
 }
+
+class LoginTextStyle extends StatelessWidget {
+  const LoginTextStyle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      AppStrings.logIn,
+      style: CustomTextStyle.pacifico16,
+    );
+  }
+}
+
+class ForgotPasswordTextStyle extends StatelessWidget {
+  const ForgotPasswordTextStyle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      AppStrings.forgotPassword,
+      style: CustomTextStyle.pacifico18,
+    );
+  }
+}

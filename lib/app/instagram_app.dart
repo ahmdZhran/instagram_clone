@@ -19,7 +19,7 @@ class InstagramApp extends StatelessWidget {
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
-        theme: AppThemes.lightTheme,
+        theme: AppThemes.darkTheme,
         onGenerateRoute: appRouter.onGenerateRoute,
         initialRoute: Routes.logIn,
       ),

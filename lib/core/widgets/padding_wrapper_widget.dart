@@ -11,8 +11,6 @@ class PaddingWrapperWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(
         top: 60.r,
-        right: 30.r,
-        left: 30.r,
       ),
       child: child,
     );
