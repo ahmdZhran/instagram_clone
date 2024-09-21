@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:instagram_clone/core/helper/extentsions.dart';
+import 'package:instagram_clone/core/router/routes.dart';
 import 'package:instagram_clone/core/widgets/is_have_an_accout_widget.dart';
 import 'package:instagram_clone/features/auth/widgets/padding_wrapper_widget.dart';
 import '../../../core/utils/app_colors.dart';
@@ -36,9 +38,10 @@ class CustomFormLogInWidget extends StatelessWidget {
               color: AppColors.blueColor,
             ),
             const Gap(30),
-            const IsHaveAnAccountWidget(
+            IsHaveAnAccountWidget(
               titleOfTextOne: AppStrings.alreadyHaveAnAccount,
               titleOfTextTwo: AppStrings.signUp,
+              onTap: () => context.pushReplacementNamed(Routes.signUp),
             )
           ],
         ),
