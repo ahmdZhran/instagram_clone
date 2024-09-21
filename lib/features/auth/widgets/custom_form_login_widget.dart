@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/core/helper/extentsions.dart';
+import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/router/routes.dart';
-import 'package:instagram_clone/core/widgets/is_have_an_accout_widget.dart';
+import 'package:instagram_clone/core/widgets/is_have_an_account_widget.dart';
 import 'package:instagram_clone/features/auth/widgets/padding_wrapper_widget.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_strings.dart';
@@ -42,7 +42,7 @@ class CustomFormLogInWidget extends StatelessWidget {
               titleOfTextOne: AppStrings.alreadyHaveAnAccount,
               titleOfTextTwo: AppStrings.signUp,
               onTap: () => context.pushReplacementNamed(Routes.signUp),
-            )
+            ),
           ],
         ),
       ),
