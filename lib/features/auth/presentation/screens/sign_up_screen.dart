@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:instagram_clone/features/auth/widgets/auth_text_styles.dart';
 import 'package:instagram_clone/features/auth/widgets/padding_wrapper_widget.dart';
 
@@ -18,6 +19,7 @@ class SignUpScreen extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 child: SignUpHeadTitleText(),
               ),
+              Gap(30),
               CustomFormSignUp(),
             ],
           ),

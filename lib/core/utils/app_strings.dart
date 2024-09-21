@@ -6,7 +6,7 @@ abstract class AppStrings {
   static const String welcomeBack = 'Welcome Back!';
   static const String username = "User name";
   static const String name = "Name";
-  static const String bio = 'bio';
+  static const String bio = 'Bio';
   static const String emailAddress = "Email Address";
   static const String password = "Password";
   static const String signUp = "Sign Up";
