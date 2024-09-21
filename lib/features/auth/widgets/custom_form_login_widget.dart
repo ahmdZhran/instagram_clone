@@ -35,7 +35,7 @@ class CustomFormLogInWidget extends StatelessWidget {
               onPressed: () {},
               color: AppColors.blueColor,
             ),
-            const Gap(20),
+            const Gap(30),
             const IsHaveAnAccountWidget(
               titleOfTextOne: AppStrings.alreadyHaveAnAccount,
               titleOfTextTwo: AppStrings.signUp,
