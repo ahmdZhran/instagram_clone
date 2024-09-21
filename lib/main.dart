@@ -5,7 +5,7 @@ import 'package:instagram_clone/core/router/app_router.dart';
 import 'app/instagram_app.dart';
 import 'firebase_options.dart';
 
-Future<void> main()  {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(
