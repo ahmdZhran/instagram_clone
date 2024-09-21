@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:instagram_clone/core/helper/extentsions.dart';
+import 'package:instagram_clone/core/router/routes.dart';
+import 'package:instagram_clone/core/widgets/is_have_an_accout_widget.dart';
+import 'package:instagram_clone/features/auth/widgets/padding_wrapper_widget.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_strings.dart';
 import '../../../core/widgets/custom_button_widget.dart';
@@ -13,9 +16,8 @@ class CustomFormLogInWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 25.w),
+    return PaddingWrapperWidget(
+      child: Form(
         child: Column(
           children: [
             const CustomTextFormField(
@@ -28,14 +30,19 @@ class CustomFormLogInWidget extends StatelessWidget {
               hintText: AppStrings.password,
             ),
             const Gap(20),
-            const Gap(35),
+            const ForgotPasswordWidget(),
+            const Gap(20),
             CustomButton(
-              childOfCustomButton: const LoginTextStyle(),
+              childOfCustomButton: const LoginTextStyleP16(),
               onPressed: () {},
               color: AppColors.blueColor,
             ),
-            const Gap(20),
-            const ForgotPasswordWidget(),
+            const Gap(30),
+            IsHaveAnAccountWidget(
+              titleOfTextOne: AppStrings.alreadyHaveAnAccount,
+              titleOfTextTwo: AppStrings.signUp,
+              onTap: () => context.pushReplacementNamed(Routes.signUp),
+            )
           ],
         ),
       ),
