@@ -14,3 +14,17 @@ class PaddingWrapperWidget extends StatelessWidget {
     );
   }
 }
+
+class PaddingTopWrapperWidget extends StatelessWidget {
+  final Widget child;
+
+  const PaddingTopWrapperWidget({required this.child, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(top: 70.r),
+      child: child,
+    );
+  }
+}

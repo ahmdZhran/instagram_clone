@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/features/auth/widgets/custom_form_login_widget.dart';
-import '../../widgets/login_screen_styles.dart';
+import '../../widgets/auth_text_styles.dart';
 
 class LogInScreen extends StatelessWidget {
   const LogInScreen({super.key});
@@ -15,7 +15,7 @@ class LogInScreen extends StatelessWidget {
             Gap(150),
             Align(
               alignment: Alignment.topCenter,
-              child: HeadInstagramTitle(),
+              child: LoginHeadTitleText(),
             ),
             Gap(30),
             CustomFormLogInWidget(),

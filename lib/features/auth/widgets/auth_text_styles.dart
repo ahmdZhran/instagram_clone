@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/custom_text_style.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 
-class HeadInstagramTitle extends StatelessWidget {
-  const HeadInstagramTitle({super.key});
+class LoginHeadTitleText extends StatelessWidget {
+  const LoginHeadTitleText({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +34,18 @@ class ForgotPasswordTextStyle extends StatelessWidget {
     return Text(
       AppStrings.forgotPassword,
       style: CustomTextStyle.pacifico18,
+    );
+  }
+}
+
+class SignUpHeadTitleText extends StatelessWidget {
+  const SignUpHeadTitleText({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      AppStrings.createYourEmail,
+      style: CustomTextStyle.pacifico30,
     );
   }
 }
