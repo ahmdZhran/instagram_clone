@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'login_screen_styles.dart';
+import 'auth_text_styles.dart';
 
 class ForgotPasswordWidget extends StatelessWidget {
   const ForgotPasswordWidget({

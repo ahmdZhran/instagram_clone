@@ -9,7 +9,7 @@ import '../../../core/utils/app_strings.dart';
 import '../../../core/widgets/custom_button_widget.dart';
 import '../../../core/widgets/custom_text_form_field.dart';
 import 'forgot_password_widget.dart';
-import 'login_screen_styles.dart';
+import 'auth_text_styles.dart';
 
 class CustomFormLogInWidget extends StatelessWidget {
   const CustomFormLogInWidget({super.key});
