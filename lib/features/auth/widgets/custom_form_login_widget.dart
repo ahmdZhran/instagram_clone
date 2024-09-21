@@ -39,7 +39,7 @@ class CustomFormLogInWidget extends StatelessWidget {
             ),
             const Gap(30),
             IsHaveAnAccountWidget(
-              titleOfTextOne: AppStrings.alreadyHaveAnAccount,
+              titleOfTextOne: AppStrings.donnHaveAnAccount,
               titleOfTextTwo: AppStrings.signUp,
               onTap: () => context.pushReplacementNamed(Routes.signUp),
             ),
