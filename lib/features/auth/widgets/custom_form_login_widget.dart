@@ -40,6 +40,7 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
                 const CustomTextFormField(
                   hintText: AppStrings.emailAddress,
                   keyboardType: TextInputType.emailAddress,
+                  fieldName: AppStrings.name,
                 ),
                 const Gap(10),
                 CustomTextFormField(
@@ -53,6 +54,7 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
                   ),
                   obscureText: auth.obscuredPasswordText,
                   hintText: AppStrings.password,
+                  fieldName: AppStrings.password,
                 ),
                 const Gap(20),
                 const ForgotPasswordWidget(),

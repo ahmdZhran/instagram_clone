@@ -38,16 +38,20 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
               children: [
                 const CustomTextFormField(
                   hintText: AppStrings.username,
+                  fieldName: AppStrings.username,
                 ),
                 const CustomTextFormField(
+                  fieldName: AppStrings.name,
                   hintText: AppStrings.name,
                 ),
                 const CustomTextFormField(
+                  fieldName: AppStrings.bio,
                   hintText: AppStrings.bio,
                 ),
                 const CustomTextFormField(
                   hintText: AppStrings.emailAddress,
                   keyboardType: TextInputType.emailAddress,
+                  fieldName: AppStrings.emailAddress,
                 ),
                 CustomTextFormField(
                   obscureText: auth.obscuredPasswordText,
@@ -60,6 +64,7 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                     ),
                   ),
                   hintText: AppStrings.password,
+                  fieldName: AppStrings.password,
                 ),
                 const Gap(20),
                 CustomButton(
