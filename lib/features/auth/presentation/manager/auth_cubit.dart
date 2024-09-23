@@ -21,7 +21,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  bool obscuredPasswordText = true;
+  bool obscuredPasswordText = false;
 
   void obscuredPassword() {
     obscuredPasswordText = !obscuredPasswordText;
