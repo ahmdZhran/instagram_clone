@@ -62,7 +62,9 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
                 const Gap(20),
                 CustomButton(
                   childOfCustomButton: const LoginTextStyleP16(),
-                  onPressed: () {},
+                  onPressed: () {
+                    if (auth.loginFormKey.currentState!.validate()) {}
+                  },
                   color: AppColors.blueColor,
                 ),
                 const Gap(30),

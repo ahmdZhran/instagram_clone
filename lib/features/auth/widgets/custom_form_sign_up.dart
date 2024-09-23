@@ -33,6 +33,7 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
       builder: (context, state) {
         final auth = AuthCubit.getInstance();
         return Form(
+          key: auth.signUpKey,
           child: PaddingWrapperWidget(
             child: Column(
               children: [
@@ -69,7 +70,9 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                 const Gap(20),
                 CustomButton(
                     color: AppColors.blueColor,
-                    onPressed: () {},
+                    onPressed: () {
+                      if (auth.signUpKey.currentState!.validate()) {}
+                    },
                     childOfCustomButton: const SignUpTextStyle()),
                 const Gap(20),
                 IsHaveAnAccountWidget(

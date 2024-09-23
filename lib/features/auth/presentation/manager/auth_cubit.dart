@@ -7,6 +7,7 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
 
   GlobalKey<FormState> loginFormKey = GlobalKey();
+  GlobalKey<FormState> signUpKey = GlobalKey();
 
   static const String _tag = "auth_instance";
   static AuthCubit getInstance() {
