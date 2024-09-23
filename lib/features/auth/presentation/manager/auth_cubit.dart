@@ -16,12 +16,12 @@ class AuthCubit extends Cubit<AuthState> {
 
   static Future<void> deleteInstance() async {
     final isRegister = sl.isRegistered<AuthCubit>(instanceName: _tag);
-    if (!isRegister) {
+    if (isRegister) {
       await sl.unregister<AuthCubit>(instanceName: _tag);
     }
   }
 
-  bool obscuredPasswordText = false;
+  bool obscuredPasswordText = true;
 
   void obscuredPassword() {
     obscuredPasswordText = !obscuredPasswordText;

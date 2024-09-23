@@ -33,7 +33,7 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
       child: BlocBuilder<AuthCubit, AuthState>(
         bloc: AuthCubit.getInstance(),
         builder: (context, state) {
-          final authCubit = AuthCubit.getInstance();
+          final auth = AuthCubit.getInstance();
           return Form(
             child: Column(
               children: [
@@ -44,14 +44,14 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
                 const Gap(10),
                 CustomTextFormField(
                   suffixIcon: IconButton(
-                    onPressed: authCubit.obscuredPassword,
+                    onPressed: auth.obscuredPassword,
                     icon: Icon(
-                      authCubit.obscuredPasswordText
+                      auth.obscuredPasswordText
                           ? Icons.visibility_off
                           : Icons.visibility,
                     ),
                   ),
-                  obscureText: authCubit.obscuredPasswordText,
+                  obscureText: auth.obscuredPasswordText,
                   hintText: AppStrings.password,
                 ),
                 const Gap(20),
