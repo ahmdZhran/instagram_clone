@@ -1,9 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/core/utils/injection_container.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
+
+  GlobalKey<FormState> loginFormKey = GlobalKey();
 
   static const String _tag = "auth_instance";
   static AuthCubit getInstance() {

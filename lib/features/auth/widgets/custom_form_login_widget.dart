@@ -35,6 +35,7 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
         builder: (context, state) {
           final auth = AuthCubit.getInstance();
           return Form(
+            key: auth.loginFormKey,
             child: Column(
               children: [
                 const CustomTextFormField(
