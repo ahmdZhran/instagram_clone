@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/core/helper/extensions.dart';
-import 'package:instagram_clone/core/router/routes.dart';
-import 'package:instagram_clone/core/widgets/is_have_an_account_widget.dart';
-import 'package:instagram_clone/features/auth/presentation/manager/auth_cubit.dart';
-import 'package:instagram_clone/features/auth/widgets/padding_wrapper_widget.dart';
+import '../../../core/helper/extensions.dart';
+import '../../../core/router/routes.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_strings.dart';
 import '../../../core/widgets/custom_button_widget.dart';
 import '../../../core/widgets/custom_text_form_field.dart';
-import 'forgot_password_widget.dart';
+import '../../../core/widgets/is_have_an_account_widget.dart';
+import '../presentation/manager/auth_cubit.dart';
 import 'auth_text_styles.dart';
+import 'forgot_password_widget.dart';
+import 'padding_wrapper_widget.dart';
 
 class CustomFormLogInWidget extends StatefulWidget {
   const CustomFormLogInWidget({super.key});
