@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:instagram_clone/features/auth/widgets/auth_text_styles.dart';
 import '../../../core/helper/extensions.dart';
 import '../presentation/manager/auth_cubit.dart';
 import '../../../core/utils/app_colors.dart';
@@ -62,12 +63,9 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                 ),
                 const Gap(20),
                 CustomButton(
-                  color: AppColors.blueColor,
-                  onPressed: () {},
-                  childOfCustomButton: const Text(
-                    AppStrings.signUp,
-                  ),
-                ),
+                    color: AppColors.blueColor,
+                    onPressed: () {},
+                    childOfCustomButton: const SignUpTextStyle()),
                 const Gap(20),
                 IsHaveAnAccountWidget(
                   titleOfTextOne: AppStrings.alreadyHaveAnAccount,

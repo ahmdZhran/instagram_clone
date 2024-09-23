@@ -49,3 +49,15 @@ class SignUpHeadTitleText extends StatelessWidget {
     );
   }
 }
+
+class SignUpTextStyle extends StatelessWidget {
+  const SignUpTextStyle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      AppStrings.signUp,
+      style: CustomTextStyle.pacifico16,
+    );
+  }
+}
