@@ -8,11 +8,13 @@ class CustomTextFormField extends StatelessWidget {
     super.key,
     required this.hintText,
     this.suffixIcon,
+    required this.fieldName,
     this.onChanged,
     this.keyboardType,
     this.obscureText = false,
   });
   final String hintText;
+  final String fieldName;
   final Widget? suffixIcon;
   final TextInputType? keyboardType;
   final void Function(String)? onChanged;
@@ -25,7 +27,7 @@ class CustomTextFormField extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: TextFormField(
           validator: (value) {
-            return value!.isEmpty ? "This Field is required!" : null;
+            return value!.isEmpty ? "You have to enter the $fieldName!" : null;
           },
           obscureText: obscureText,
           keyboardType: keyboardType,
