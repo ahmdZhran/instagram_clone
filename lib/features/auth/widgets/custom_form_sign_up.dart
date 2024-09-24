@@ -14,7 +14,6 @@ import '../../../core/utils/app_strings.dart';
 import '../../../core/widgets/custom_button_widget.dart';
 import '../../../core/widgets/custom_text_form_field.dart';
 import '../../../core/widgets/is_have_an_account_widget.dart';
-import 'pick_profile_image.dart';
 
 class CustomFormSignUp extends StatefulWidget {
   const CustomFormSignUp({super.key});
@@ -45,7 +44,25 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                   onTap: () {
                     authCubit.selectedImageProfile();
                   },
-                  child: PickProfileImage(auth: authCubit),
+                  child: Column(
+                    children: [
+                      authCubit.profileImage != null
+                          ? CircleAvatar(
+                              radius: 50,
+                              backgroundImage:
+                                  MemoryImage(authCubit.profileImage!),
+                            )
+                          : CircleAvatar(
+                              radius: 50,
+                              backgroundColor: Colors.grey[300],
+                              child: Icon(
+                                Icons.add_a_photo,
+                                size: 60,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                    ],
+                  ),
                 ),
                 CustomTextFormField(
                   onChanged: (username) {
