@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import '../../../core/utils/app_assets.dart';
+import '../../../core/utils/custom_text_style.dart';
 import '../../../core/utils/snak_bar_messages.dart';
-import 'auth_text_styles.dart';
 import 'package:lottie/lottie.dart';
 import '../../../core/helper/extensions.dart';
 import '../presentation/manager/auth_cubit.dart';
@@ -124,7 +124,10 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                   },
                   childOfCustomButton: authCubit.state is CreateUserLoading
                       ? LottieBuilder.asset(AppAssets.loadingAnimation)
-                      : const SignUpTextButtonStyle(),
+                      : Text(
+                          AppStrings.signUp,
+                          style: CustomTextStyle.normalTextStyle,
+                        ),
                 ),
                 const Gap(20),
                 IsHaveAnAccountWidget(

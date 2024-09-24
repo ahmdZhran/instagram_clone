@@ -47,11 +47,13 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> selectedImageProfile() async {
-    Uint8List? image = await _imagePickerService.pickImage(ImageSource.gallery);
+Future<void> selectedImageProfile() async {
+  Uint8List? image = await _imagePickerService.pickImage(ImageSource.gallery);
+  if (image != null) {
     profileImage = image;
-    emit(ProfileImageSelected(profileImage));
+    emit(ProfileImageSelected(profileImage!));  // Emit only when a valid image is selected
   }
+}
 
   void obscuredPassword() {
     obscuredPasswordText = !obscuredPasswordText;
