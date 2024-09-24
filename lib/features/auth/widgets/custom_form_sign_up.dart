@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/features/auth/widgets/auth_text_styles.dart';
+import '../../../core/utils/app_assets.dart';
+import '../../../core/utils/snak_bar_messages.dart';
+import 'auth_text_styles.dart';
+import 'package:lottie/lottie.dart';
 import '../../../core/helper/extensions.dart';
 import '../presentation/manager/auth_cubit.dart';
 import '../../../core/utils/app_colors.dart';
@@ -32,41 +35,56 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
     return BlocBuilder<AuthCubit, AuthState>(
       bloc: AuthCubit.getInstance(),
       builder: (context, state) {
-        final auth = AuthCubit.getInstance();
+        final authCubit = AuthCubit.getInstance();
         return Form(
-          key: auth.signUpKey,
+          key: authCubit.signUpKey,
           child: PaddingWrapperWidget(
             child: Column(
               children: [
                 GestureDetector(
                   onTap: () {
-                    auth.selectedImageProfile();
+                    authCubit.selectedImageProfile();
                   },
-                  child: PickProfileImage(auth: auth),
+                  child: PickProfileImage(auth: authCubit),
                 ),
-                const CustomTextFormField(
+                CustomTextFormField(
+                  onChanged: (username) {
+                    authCubit.usernameController.text = username;
+                  },
                   hintText: AppStrings.username,
                   fieldName: AppStrings.username,
                 ),
-                const CustomTextFormField(
+                CustomTextFormField(
+                  onChanged: (name) {
+                    authCubit.nameController.text = name;
+                  },
                   fieldName: AppStrings.name,
                   hintText: AppStrings.name,
                 ),
-                const CustomTextFormField(
+                CustomTextFormField(
+                  onChanged: (bio) {
+                    authCubit.bioController.text = bio;
+                  },
                   fieldName: AppStrings.bio,
                   hintText: AppStrings.bio,
                 ),
-                const CustomTextFormField(
+                CustomTextFormField(
+                  onChanged: (emailAddress) {
+                    authCubit.emailAddressController.text = emailAddress;
+                  },
                   hintText: AppStrings.emailAddress,
                   keyboardType: TextInputType.emailAddress,
                   fieldName: AppStrings.emailAddress,
                 ),
                 CustomTextFormField(
-                  obscureText: auth.obscuredPasswordText,
+                  onChanged: (password) {
+                    authCubit.passwordController.text = password;
+                  },
+                  obscureText: authCubit.obscuredPasswordText,
                   suffixIcon: IconButton(
-                    onPressed: auth.obscuredPassword,
+                    onPressed: authCubit.obscuredPassword,
                     icon: Icon(
-                      auth.obscuredPasswordText
+                      authCubit.obscuredPasswordText
                           ? Icons.visibility_off
                           : Icons.visibility,
                     ),
@@ -76,11 +94,21 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                 ),
                 const Gap(20),
                 CustomButton(
-                    color: AppColors.blueColor,
-                    onPressed: () {
-                      if (auth.signUpKey.currentState!.validate()) {}
-                    },
-                    childOfCustomButton: const SignUpTextStyle()),
+                  color: AppColors.blueColor,
+                  onPressed: () {
+                    if (authCubit.signUpKey.currentState!.validate()) {
+                      if (authCubit.profileImage != null) {
+                        authCubit.createUserWithEmailAndPassword();
+                      } else {
+                        SnackBarMessages.showErrorMessage(
+                            context, 'Please select an image');
+                      }
+                    }
+                  },
+                  childOfCustomButton: authCubit.state is CreateUserLoading
+                      ? LottieBuilder.asset(AppAssets.loadingAnimation)
+                      : const SignUpTextButtonStyle(),
+                ),
                 const Gap(20),
                 IsHaveAnAccountWidget(
                   titleOfTextOne: AppStrings.alreadyHaveAnAccount,
