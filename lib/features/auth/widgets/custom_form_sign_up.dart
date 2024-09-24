@@ -11,6 +11,7 @@ import '../../../core/utils/app_strings.dart';
 import '../../../core/widgets/custom_button_widget.dart';
 import '../../../core/widgets/custom_text_form_field.dart';
 import '../../../core/widgets/is_have_an_account_widget.dart';
+import 'pick_profile_image.dart';
 
 class CustomFormSignUp extends StatefulWidget {
   const CustomFormSignUp({super.key});
@@ -37,6 +38,12 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
           child: PaddingWrapperWidget(
             child: Column(
               children: [
+                GestureDetector(
+                  onTap: () {
+                    auth.selectedImageProfile();
+                  },
+                  child: PickProfileImage(auth: auth),
+                ),
                 const CustomTextFormField(
                   hintText: AppStrings.username,
                   fieldName: AppStrings.username,
