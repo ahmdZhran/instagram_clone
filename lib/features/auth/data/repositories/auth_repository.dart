@@ -6,17 +6,16 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class AuthRepository {
-  final FirebaseAuth _auth;
-  final FirebaseFirestore _firestore;
-  final FirebaseStorage _firebaseStorage;
+  final FirebaseAuth auth;
+  final FirebaseFirestore firestore;
+  final FirebaseStorage firebaseStorage;
 
-  AuthRepository(
-      {required FirebaseAuth auth,
-      required FirebaseFirestore firestore,
-      required FirebaseStorage firebaseStorage})
-      : _auth = auth,
-        _firestore = firestore,
-        _firebaseStorage = firebaseStorage;
+  AuthRepository({
+    required this.auth,
+    required this.firestore,
+    required this.firebaseStorage,
+  });
+
   Future<User?> createUserWithEmailAndPassword({
     required String email,
     required String password,
@@ -26,15 +25,14 @@ class AuthRepository {
     required Uint8List? profileImage,
   }) async {
     try {
-      UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
       String imageUrl =
           await _uploadProfileImage(profileImage!, userCredential.user!.uid);
 
-      await _firestore.collection('users').doc(userCredential.user!.uid).set({
+      await firestore.collection('users').doc(userCredential.user!.uid).set({
         "username": username,
         "name": name,
         "bio": bio,
@@ -63,7 +61,7 @@ class AuthRepository {
 
   Future<String> _uploadProfileImage(Uint8List image, String userId) async {
     try {
-      TaskSnapshot snapshot = await _firebaseStorage
+      TaskSnapshot snapshot = await firebaseStorage
           .ref()
           .child('profileImages/$userId')
           .putData(image);
@@ -79,7 +77,7 @@ class AuthRepository {
     required String password,
   }) async {
     try {
-      await _auth.signInWithEmailAndPassword(
+      await auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -103,7 +101,7 @@ class AuthRepository {
     required String email,
   }) async {
     try {
-      await _auth.sendPasswordResetEmail(email: email);
+      await auth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
       String errorMessage;
       if (e.code == 'invalid-email') {
@@ -116,6 +114,6 @@ class AuthRepository {
   }
 
   Future<User?> getCurrentUser() async {
-    return _auth.currentUser;
+    return auth.currentUser;
   }
 }

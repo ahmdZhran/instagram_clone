@@ -13,7 +13,9 @@ class CreateUserFailure extends AuthState {
 
   CreateUserFailure({required this.errMessage});
 }
+
 final class SignInLoading extends AuthState {}
+
 final class SignInSuccess extends AuthState {}
 
 final class SignInFailure extends AuthState {
@@ -21,11 +23,13 @@ final class SignInFailure extends AuthState {
 
   SignInFailure({required this.errMessage});
 }
+
 class VerifyEmailFailure extends AuthState {
   final String errMessage;
 
   VerifyEmailFailure({required this.errMessage});
 }
+
 final class ResetPasswordLoading extends AuthState {}
 
 final class ResetPasswordSuccess extends AuthState {}
@@ -35,9 +39,10 @@ final class ResetPasswordFailure extends AuthState {
 
   ResetPasswordFailure({required this.errMessage});
 }
-class ProfileImageSelected extends AuthState {
-  final Uint8List? profileImage;
 
+class ProfileImageSelected extends AuthState {
+  final Uint8List profileImage;
   ProfileImageSelected(this.profileImage);
 }
+
 final class ObscuredPasswordTextState extends AuthState {}

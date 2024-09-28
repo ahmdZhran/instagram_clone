@@ -15,25 +15,15 @@ import '../../../core/widgets/custom_button_widget.dart';
 import '../../../core/widgets/custom_text_form_field.dart';
 import '../../../core/widgets/is_have_an_account_widget.dart';
 
-class CustomFormSignUp extends StatefulWidget {
+class CustomFormSignUp extends StatelessWidget {
   const CustomFormSignUp({super.key});
-
-  @override
-  State<CustomFormSignUp> createState() => _CustomFormSignUpState();
-}
-
-class _CustomFormSignUpState extends State<CustomFormSignUp> {
-  @override
-  void dispose() {
-    AuthCubit.deleteInstance();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
       bloc: AuthCubit.getInstance(),
       builder: (context, state) {
+        print("BlocBuilder rebuilt, state: $state");
         final authCubit = AuthCubit.getInstance();
         return Form(
           key: authCubit.signUpKey,
@@ -65,6 +55,7 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                   ),
                 ),
                 CustomTextFormField(
+                  // controller: context.read(),
                   onChanged: (username) {
                     authCubit.usernameController.text = username;
                   },

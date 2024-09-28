@@ -3,16 +3,14 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:instagram_clone/core/helper/image_picker_service.dart';
 import 'package:instagram_clone/core/utils/injection_container.dart';
-import 'package:instagram_clone/features/auth/auth_di.dart';
 
-import '../../../../core/helper/image_picker_service.dart';
 import '../../data/repositories/auth_repository.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit(this._authRepository, this._imagePickerService)
-      : super(AuthInitial());
+  AuthCubit(this._authRepository, this._pickerService) : super(AuthInitial());
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
@@ -22,7 +20,7 @@ class AuthCubit extends Cubit<AuthState> {
   Uint8List? profileImage;
 
   final AuthRepository _authRepository;
-  final ImagePickerService _imagePickerService;
+  final ImageService _pickerService;
   GlobalKey<FormState> loginFormKey = GlobalKey();
   GlobalKey<FormState> signUpKey = GlobalKey();
 
@@ -47,13 +45,12 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-Future<void> selectedImageProfile() async {
-  Uint8List? image = await _imagePickerService.pickImage(ImageSource.gallery);
-  if (image != null) {
+  Future<void> selectedImageProfile() async {
+    Uint8List? image = await _pickerService.pickImage(ImageSource.gallery);
     profileImage = image;
-    emit(ProfileImageSelected(profileImage!));  // Emit only when a valid image is selected
+    print("Image selected successfully");
+    emit(ProfileImageSelected(profileImage!));
   }
-}
 
   void obscuredPassword() {
     obscuredPasswordText = !obscuredPasswordText;
@@ -73,8 +70,7 @@ Future<void> selectedImageProfile() async {
   static AuthCubit getInstance() {
     final isRegister = sl.isRegistered<AuthCubit>(instanceName: _tag);
     if (!isRegister) {
-      sl.registerSingleton<AuthCubit>(
-          AuthCubit(authDI(), sl<ImagePickerService>()),
+      sl.registerSingleton<AuthCubit>(AuthCubit(sl(), sl<ImageService>()),
           instanceName: _tag);
     }
     return sl.get<AuthCubit>(instanceName: _tag);
