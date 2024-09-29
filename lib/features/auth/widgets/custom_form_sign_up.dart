@@ -23,7 +23,6 @@ class CustomFormSignUp extends StatelessWidget {
     return BlocBuilder<AuthCubit, AuthState>(
       bloc: AuthCubit.getInstance(),
       builder: (context, state) {
-        print("BlocBuilder rebuilt, state: $state");
         final authCubit = AuthCubit.getInstance();
         return Form(
           key: authCubit.signUpKey,
@@ -36,11 +35,10 @@ class CustomFormSignUp extends StatelessWidget {
                   },
                   child: Column(
                     children: [
-                      authCubit.profileImage != null
+                      state is ProfileImageSelected
                           ? CircleAvatar(
                               radius: 50,
-                              backgroundImage:
-                                  MemoryImage(authCubit.profileImage!),
+                              backgroundImage: MemoryImage(state.profileImage),
                             )
                           : CircleAvatar(
                               radius: 50,
@@ -55,7 +53,6 @@ class CustomFormSignUp extends StatelessWidget {
                   ),
                 ),
                 CustomTextFormField(
-                  // controller: context.read(),
                   onChanged: (username) {
                     authCubit.usernameController.text = username;
                   },
