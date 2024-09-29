@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import '../../../core/utils/app_assets.dart';
-import '../../../core/utils/custom_text_style.dart';
-import '../../../core/utils/snak_bar_messages.dart';
+import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:lottie/lottie.dart';
-import '../../../core/helper/extensions.dart';
-import '../presentation/manager/auth_cubit.dart';
-import '../../../core/utils/app_colors.dart';
+
+import '../../../../core/router/routes.dart';
+import '../../../../core/utils/app_assets.dart';
+import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_strings.dart';
+import '../../../../core/utils/custom_text_style.dart';
+import '../../../../core/utils/snak_bar_messages.dart';
+import '../../../../core/widgets/custom_button_widget.dart';
+import '../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../core/widgets/is_have_an_account_widget.dart';
+import '../manager/auth_cubit.dart';
 import 'padding_wrapper_widget.dart';
-import '../../../core/router/routes.dart';
-import '../../../core/utils/app_strings.dart';
-import '../../../core/widgets/custom_button_widget.dart';
-import '../../../core/widgets/custom_text_form_field.dart';
-import '../../../core/widgets/is_have_an_account_widget.dart';
 
 class CustomFormSignUp extends StatefulWidget {
   const CustomFormSignUp({super.key});

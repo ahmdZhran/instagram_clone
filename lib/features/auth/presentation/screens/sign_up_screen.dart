@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/features/auth/widgets/auth_text_styles.dart';
-import 'package:instagram_clone/features/auth/widgets/padding_wrapper_widget.dart';
+import 'package:instagram_clone/features/auth/presentation/widgets/auth_text_styles.dart';
+import 'package:instagram_clone/features/auth/presentation/widgets/padding_wrapper_widget.dart';
 
-import '../../widgets/custom_form_sign_up.dart';
+import '../widgets/custom_form_sign_up.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
