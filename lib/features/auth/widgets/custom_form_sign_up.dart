@@ -15,9 +15,14 @@ import '../../../core/widgets/custom_button_widget.dart';
 import '../../../core/widgets/custom_text_form_field.dart';
 import '../../../core/widgets/is_have_an_account_widget.dart';
 
-class CustomFormSignUp extends StatelessWidget {
+class CustomFormSignUp extends StatefulWidget {
   const CustomFormSignUp({super.key});
 
+  @override
+  State<CustomFormSignUp> createState() => _CustomFormSignUpState();
+}
+
+class _CustomFormSignUpState extends State<CustomFormSignUp> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
@@ -129,5 +134,11 @@ class CustomFormSignUp extends StatelessWidget {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    AuthCubit.deleteInstance();
+    super.dispose();
   }
 }

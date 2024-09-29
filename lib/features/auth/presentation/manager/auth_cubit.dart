@@ -5,12 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/core/helper/image_picker_service.dart';
 import 'package:instagram_clone/core/utils/injection_container.dart';
+import 'package:instagram_clone/features/auth/auth_di.dart';
 
 import '../../data/repositories/auth_repository.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit(this._authRepository, this._pickerService) : super(AuthInitial());
+  AuthCubit(this._authRepository, this._pickerImageService)
+      : super(AuthInitial());
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
@@ -20,7 +22,7 @@ class AuthCubit extends Cubit<AuthState> {
   Uint8List? profileImage;
 
   final AuthRepository _authRepository;
-  final ImageService _pickerService;
+  final ImagePickerService _pickerImageService;
   GlobalKey<FormState> loginFormKey = GlobalKey();
   GlobalKey<FormState> signUpKey = GlobalKey();
 
@@ -46,7 +48,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> selectedImageProfile() async {
-    Uint8List? image = await _pickerService.pickImage(ImageSource.gallery);
+    Uint8List? image = await _pickerImageService.pickImage(ImageSource.gallery);
     profileImage = image;
     print("Image selected successfully");
     emit(ProfileImageSelected(profileImage!));
@@ -70,7 +72,8 @@ class AuthCubit extends Cubit<AuthState> {
   static AuthCubit getInstance() {
     final isRegister = sl.isRegistered<AuthCubit>(instanceName: _tag);
     if (!isRegister) {
-      sl.registerSingleton<AuthCubit>(AuthCubit(sl(), sl<ImageService>()),
+      sl.registerSingleton<AuthCubit>(
+          AuthCubit(authDI(), authDI<ImagePickerService>()),
           instanceName: _tag);
     }
     return sl.get<AuthCubit>(instanceName: _tag);
