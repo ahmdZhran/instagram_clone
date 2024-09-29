@@ -50,7 +50,6 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> selectedImageProfile() async {
     Uint8List? image = await _pickerImageService.pickImage(ImageSource.gallery);
     profileImage = image;
-    print("Image selected successfully");
     emit(ProfileImageSelected(profileImage!));
   }
 
