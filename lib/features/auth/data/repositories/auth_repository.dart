@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/helper/errors/firebase_auth_errors_handler.dart';
+import '../../../../core/errors/firebase_auth_errors_handler.dart';
 
 class AuthRepository {
   final FirebaseAuth auth;
