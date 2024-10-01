@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/core/utils/app_assets.dart';
-import 'package:instagram_clone/core/utils/app_colors.dart';
-import 'package:instagram_clone/core/utils/snak_bar_messages.dart';
-import 'package:instagram_clone/core/widgets/custom_button_widget.dart';
-import 'package:instagram_clone/core/widgets/custom_text_form_field.dart';
-import 'package:instagram_clone/features/auth/presentation/widgets/padding_wrapper_widget.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../../core/helper/extensions.dart';
+import '../../../../core/router/routes.dart';
+import '../../../../core/utils/app_assets.dart';
+import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/custom_text_style.dart';
+import '../../../../core/utils/snak_bar_messages.dart';
+import '../../../../core/widgets/custom_button_widget.dart';
+import '../../../../core/widgets/custom_text_form_field.dart';
 import '../manager/auth_cubit.dart';
+import '../widgets/padding_wrapper_widget.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -42,6 +44,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 bloc: resetPasswordCubit,
                 listener: (context, state) {
                   if (state is ResetPasswordSuccess) {
+                    context.pushReplacementNamed(Routes.logIn);
                     SnackBarMessages.showConfirmingMessage(
                         context, AppStrings.passwordResetEmailSent);
                   } else if (state is ResetPasswordFailure) {
@@ -57,6 +60,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       Form(
                         key: resetPasswordCubit.resetPasswordKey,
                         child: CustomTextFormField(
+                          fieldName: AppStrings.password,
                           hintText: AppStrings.resetPassword,
                           onChanged: (email) => resetPasswordCubit
                               .passwordController.text = email,

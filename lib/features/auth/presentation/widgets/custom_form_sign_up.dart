@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/core/helper/extensions.dart';
+import '../../../../core/helper/extensions.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../core/router/routes.dart';
 import '../../../../core/utils/app_assets.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
-import '../../../../core/utils/custom_text_style.dart';
 import '../../../../core/utils/snak_bar_messages.dart';
 import '../../../../core/widgets/custom_button_widget.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../core/widgets/is_have_an_account_widget.dart';
 import '../manager/auth_cubit.dart';
+import 'auth_text_styles.dart';
 import 'padding_wrapper_widget.dart';
 
 class CustomFormSignUp extends StatefulWidget {
@@ -115,24 +115,20 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                 ),
                 const Gap(20),
                 CustomButton(
-                  color: AppColors.blueColor,
-                  onPressed: () {
-                    if (signUpCubit.signUpFormKey.currentState!.validate()) {
-                      if (signUpCubit.profileImage != null) {
-                        signUpCubit.createUserWithEmailAndPassword();
-                      } else {
-                        SnackBarMessages.showErrorMessage(
-                            context, 'Please select an image');
+                    color: AppColors.blueColor,
+                    onPressed: () {
+                      if (signUpCubit.signUpFormKey.currentState!.validate()) {
+                        if (signUpCubit.profileImage != null) {
+                          signUpCubit.createUserWithEmailAndPassword();
+                        } else {
+                          SnackBarMessages.showErrorMessage(
+                              context, 'Please select an image');
+                        }
                       }
-                    }
-                  },
-                  childOfCustomButton: signUpCubit.state is CreateUserLoading
-                      ? LottieBuilder.asset(AppAssets.loadingAnimation)
-                      : Text(
-                          AppStrings.signUp,
-                          style: CustomTextStyle.normalTextStyle,
-                        ),
-                ),
+                    },
+                    childOfCustomButton: signUpCubit.state is CreateUserLoading
+                        ? LottieBuilder.asset(AppAssets.loadingAnimation)
+                        : const SignUpTextButtonStyle()),
                 const Gap(20),
                 IsHaveAnAccountWidget(
                   titleOfTextOne: AppStrings.alreadyHaveAnAccount,

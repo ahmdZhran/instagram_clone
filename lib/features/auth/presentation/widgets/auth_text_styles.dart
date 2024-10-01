@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utils/custom_text_style.dart';
-import 'package:instagram_clone/core/utils/app_strings.dart';
+
+import '../../../../core/utils/app_strings.dart';
+import '../../../../core/utils/custom_text_style.dart';
 
 class LoginHeadTitleText extends StatelessWidget {
   const LoginHeadTitleText({super.key});

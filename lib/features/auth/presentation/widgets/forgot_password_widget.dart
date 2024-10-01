@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/helper/extensions.dart';
-import 'package:instagram_clone/core/router/routes.dart';
+import '../../../../core/helper/extensions.dart';
+import '../../../../core/router/routes.dart';
 import 'auth_text_styles.dart';
 
 class ForgotPasswordWidget extends StatelessWidget {
