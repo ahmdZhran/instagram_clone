@@ -50,8 +50,8 @@ class SignUpHeadTitleText extends StatelessWidget {
   }
 }
 
-class SignUpTextStyle extends StatelessWidget {
-  const SignUpTextStyle({super.key});
+class SignUpTextButtonStyle extends StatelessWidget {
+  const SignUpTextButtonStyle({super.key});
 
   @override
   Widget build(BuildContext context) {

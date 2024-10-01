@@ -8,11 +8,11 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Future.wait([
     InjectionContainer().init(),
     Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform),
   ]);
-
   runApp(
     EasyLocalization(
       supportedLocales: const [

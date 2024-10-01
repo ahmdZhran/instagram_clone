@@ -12,8 +12,10 @@ class CustomTextFormField extends StatelessWidget {
     this.onChanged,
     this.keyboardType,
     this.obscureText = false,
+    //  required this.controller,
   });
   final String hintText;
+  // final String controller;
   final String fieldName;
   final Widget? suffixIcon;
   final TextInputType? keyboardType;
@@ -33,6 +35,7 @@ class CustomTextFormField extends StatelessWidget {
           keyboardType: keyboardType,
           onChanged: onChanged,
           cursorHeight: 25,
+          // controller: controller,
           cursorColor: AppColors.blueColor,
           decoration: InputDecoration(
             contentPadding:
