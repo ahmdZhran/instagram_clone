@@ -2,7 +2,7 @@ class FirebaseAuthErrorHandler {
   static String getErrorMessage(String errorCode) {
     switch (errorCode) {
       case 'invalid-email':
-        return 'The email address is badly formatted.';
+        return 'The email address is invalid.';
       case 'user-disabled':
         return 'The user account has been disabled by an administrator.';
       case 'user-not-found':

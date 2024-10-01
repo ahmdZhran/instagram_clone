@@ -68,42 +68,7 @@ class AuthRepository {
         password: password,
       );
     } on FirebaseAuthException catch (error) {
-      String errorMessage;
-      switch (error.code) {
-        case 'invalid-email':
-          errorMessage = 'The email address is badly formatted.';
-          break;
-        case 'user-disabled':
-          errorMessage =
-              'The user account has been disabled by an administrator.';
-          break;
-        case 'user-not-found':
-          errorMessage = 'No user found for that email.';
-          break;
-        case 'wrong-password':
-          errorMessage = 'Wrong password provided for that user.';
-          break;
-        case 'too-many-requests':
-          errorMessage =
-              'Too many unsuccessful login attempts. Try again later.';
-          break;
-        case 'operation-not-allowed':
-          errorMessage = 'Signing in with email and password is not enabled.';
-          break;
-        case 'network-request-failed':
-          errorMessage =
-              'A network error occurred. Please check your internet connection.';
-          break;
-        case 'weak-password':
-          errorMessage = 'The password is too weak.';
-          break;
-        case 'email-already-in-use':
-          errorMessage = 'The email is already in use by another account.';
-          break;
-        default:
-          errorMessage = 'An error occurred during sign in.';
-      }
-      throw (errorMessage);
+      throw FirebaseAuthErrorHandler.getErrorMessage(error.code);
     }
   }
 
