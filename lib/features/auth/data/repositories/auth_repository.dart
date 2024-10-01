@@ -88,6 +88,10 @@ class AuthRepository {
     }
   }
 
+  Future<void> verifyEmail() async {
+    await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+  }
+
   Future<User?> getCurrentUser() async {
     return auth.currentUser;
   }
