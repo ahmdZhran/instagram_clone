@@ -31,12 +31,11 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
       listener: (context, state) {
         if (state is CreateUserSuccess) {
           SnackBarMessages.showConfirmingMessage(
-              context,  AppStrings.weSentVerifyEmail);
-          context.pushReplacementNamed(
-            Routes.logIn,
-          );
+              context, AppStrings.weSentVerifyEmail);
+          context.pushReplacementNamed(Routes.logIn);
         } else if (state is CreateUserFailure) {
-          SnackBarMessages.showErrorMessage(context, state.errMessage);
+          SnackBarMessages.showToastErrorBottom(
+              message: state.errMessage, context);
         }
       },
       builder: (context, state) {

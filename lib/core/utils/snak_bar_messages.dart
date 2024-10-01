@@ -8,7 +8,7 @@ import 'custom_text_style.dart';
 class SnackBarMessages {
 
 
-  static void showToastErrorBottom({
+  static void showToastErrorBottom(BuildContext context, {
     required String message,
     int? seconds,
   }) =>
