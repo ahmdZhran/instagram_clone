@@ -31,7 +31,7 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
       listener: (context, state) {
         if (state is CreateUserSuccess) {
           SnackBarMessages.showConfirmingMessage(
-              context, 'User created successfully!');
+              context,  AppStrings.weSentVerifyEmail);
           context.pushReplacementNamed(
             Routes.logIn,
           );
