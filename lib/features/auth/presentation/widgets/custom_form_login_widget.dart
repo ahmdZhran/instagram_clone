@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/core/utils/app_assets.dart';
-import 'package:instagram_clone/core/utils/snak_bar_messages.dart';
+import '../../../../core/utils/app_assets.dart';
+import '../../../../core/utils/snak_bar_messages.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../core/helper/extensions.dart';
 import '../../../../core/router/routes.dart';
