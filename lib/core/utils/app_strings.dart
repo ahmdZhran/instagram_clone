@@ -15,6 +15,7 @@ abstract class AppStrings {
   static const String alreadyHaveAnAccount = "Already have an account? ";
   static const String donnHaveAnAccount = "Don’t have an account? ";
   static const String forgotPassword = "Forgot Password?";
+  static const String resetItNow = "Reset it Now?";
   static const String loggedInSuccess = "Login successful";
   static const String weSentVerifyEmail = "We've sent a verification email.";
   // Reset Password View
@@ -22,7 +23,8 @@ abstract class AppStrings {
   static const String pleaseEnterYourEmail =
       'Please enter your registered email below to can reset your password.';
   static const String sendResetPasswordLink = 'Send reset password link';
-  static const String passwordResetEmailSent = 'Password reset email sent';
+  static const String passwordResetEmailSent =
+      "If your email exists, we have sent a verification link to reset your password. ";
   // Profile Strings
   static const String posts = 'Posts';
   static const String followers = 'Followers';

@@ -21,6 +21,7 @@ class AuthCubit extends Cubit<AuthState> {
   final AuthRepository _authRepository;
   GlobalKey<FormState> loginFormKey = GlobalKey();
   GlobalKey<FormState> signUpFormKey = GlobalKey();
+  GlobalKey<FormState> resetPasswordKey = GlobalKey();
 
   bool obscuredPasswordText = true;
 
@@ -57,6 +58,16 @@ class AuthCubit extends Cubit<AuthState> {
       emit(LogInSuccess());
     } catch (error) {
       emit(LogInFailure(errMessage: error.toString()));
+    }
+  }
+
+  Future<void> resetPassword() async {
+    emit(ResetPasswordLoading());
+    try {
+      _authRepository.resetPasswordWithEmail(
+          email: emailAddressController.text.trim());
+    } catch (error) {
+      emit(ResetPasswordFailure(errMessage: error.toString()));
     }
   }
 

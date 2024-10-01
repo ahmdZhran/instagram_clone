@@ -77,14 +77,8 @@ class AuthRepository {
   }) async {
     try {
       await auth.sendPasswordResetEmail(email: email);
-    } on FirebaseAuthException catch (e) {
-      String errorMessage;
-      if (e.code == 'invalid-email') {
-        errorMessage = 'Please enter a valid email.';
-      } else {
-        errorMessage = 'An error occurred while resetting password.';
-      }
-      throw (errorMessage);
+    } on FirebaseAuthException catch (error) {
+      throw FirebaseAuthErrorHandler.getErrorMessage(error.code);
     }
   }
 
