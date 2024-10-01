@@ -18,6 +18,8 @@ abstract class AppStrings {
   static const String resetItNow = "Reset it Now?";
   static const String loggedInSuccess = "Login successful";
   static const String weSentVerifyEmail = "We've sent a verification email.";
+  static const String cancel = "cancel";
+  static const String back = "Back";
   // Reset Password View
   static const String resetPassword = 'Reset Password';
   static const String pleaseEnterYourEmail =
