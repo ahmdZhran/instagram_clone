@@ -33,14 +33,14 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
         bloc: loginCubit,
         listener: (context, state) {
           if (state is LogInSuccess) {
-            SnackBarMessages.showToastSuccessBottom(
+            UtilsMessages.showToastSuccessBottom(
                 message: AppStrings.loggedInSuccess);
             context.pushNamedAndRemoveUntil(
               Routes.home,
               predicate: (route) => false,
             );
           } else if (state is LogInFailure) {
-            SnackBarMessages.showToastErrorBottom(
+            UtilsMessages.showToastErrorBottom(
               context,
               message: state.errMessage,
             );

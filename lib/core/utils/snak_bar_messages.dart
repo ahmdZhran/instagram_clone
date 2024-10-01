@@ -5,10 +5,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import 'custom_text_style.dart';
 
-class SnackBarMessages {
-
-
-  static void showToastErrorBottom(BuildContext context, {
+class UtilsMessages {
+  static void showToastErrorBottom(
+    BuildContext context, {
     required String message,
     int? seconds,
   }) =>

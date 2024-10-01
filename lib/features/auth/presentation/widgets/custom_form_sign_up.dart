@@ -30,11 +30,11 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
       bloc: signUpCubit,
       listener: (context, state) {
         if (state is CreateUserSuccess) {
-          SnackBarMessages.showConfirmingMessage(
+          UtilsMessages.showConfirmingMessage(
               context, AppStrings.weSentVerifyEmail);
           context.pushReplacementNamed(Routes.logIn);
         } else if (state is CreateUserFailure) {
-          SnackBarMessages.showToastErrorBottom(
+          UtilsMessages.showToastErrorBottom(
               message: state.errMessage, context);
         }
       },
@@ -130,7 +130,7 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                           if (signUpCubit.profileImage != null) {
                             signUpCubit.createUserWithEmailAndPassword();
                           } else {
-                            SnackBarMessages.showErrorMessage(
+                            UtilsMessages.showErrorMessage(
                                 context, 'Please select an image');
                           }
                         }

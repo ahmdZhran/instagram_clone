@@ -45,10 +45,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 listener: (context, state) {
                   if (state is ResetPasswordSuccess) {
                     context.pushReplacementNamed(Routes.logIn);
-                    SnackBarMessages.showConfirmingMessage(
+                    UtilsMessages.showConfirmingMessage(
                         context, AppStrings.passwordResetEmailSent);
                   } else if (state is ResetPasswordFailure) {
-                    SnackBarMessages.showToastErrorBottom(
+                    UtilsMessages.showToastErrorBottom(
                       context,
                       message: state.errMessage,
                     );
