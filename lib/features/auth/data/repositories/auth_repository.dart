@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/helper/errors/firebase_auth_errors_handler.dart';
+
 class AuthRepository {
   final FirebaseAuth auth;
   final FirebaseFirestore firestore;
@@ -40,21 +42,7 @@ class AuthRepository {
         'createdAt': FieldValue.serverTimestamp(),
       });
     } on FirebaseAuthException catch (error) {
-      String errorMessage;
-      switch (error.code) {
-        case 'weak-password':
-          errorMessage = 'The password provided is too weak.';
-          break;
-        case 'email-already-in-use':
-          errorMessage = 'The account already exists for that email.';
-          break;
-        case 'invalid-email':
-          errorMessage = 'The email is invalid';
-          break;
-        default:
-          errorMessage = error.message ?? 'An error occurred';
-      }
-      throw (errorMessage);
+      throw FirebaseAuthErrorHandler.getErrorMessage(error.code);
     }
     return null;
   }
@@ -82,11 +70,35 @@ class AuthRepository {
     } on FirebaseAuthException catch (error) {
       String errorMessage;
       switch (error.code) {
+        case 'invalid-email':
+          errorMessage = 'The email address is badly formatted.';
+          break;
+        case 'user-disabled':
+          errorMessage =
+              'The user account has been disabled by an administrator.';
+          break;
         case 'user-not-found':
           errorMessage = 'No user found for that email.';
           break;
         case 'wrong-password':
           errorMessage = 'Wrong password provided for that user.';
+          break;
+        case 'too-many-requests':
+          errorMessage =
+              'Too many unsuccessful login attempts. Try again later.';
+          break;
+        case 'operation-not-allowed':
+          errorMessage = 'Signing in with email and password is not enabled.';
+          break;
+        case 'network-request-failed':
+          errorMessage =
+              'A network error occurred. Please check your internet connection.';
+          break;
+        case 'weak-password':
+          errorMessage = 'The password is too weak.';
+          break;
+        case 'email-already-in-use':
+          errorMessage = 'The email is already in use by another account.';
           break;
         default:
           errorMessage = 'An error occurred during sign in.';
@@ -107,7 +119,7 @@ class AuthRepository {
       } else {
         errorMessage = 'An error occurred while resetting password.';
       }
-      throw Exception(errorMessage);
+      throw (errorMessage);
     }
   }
 
