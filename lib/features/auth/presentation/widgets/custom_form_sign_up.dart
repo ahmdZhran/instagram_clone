@@ -130,8 +130,10 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                           if (signUpCubit.profileImage != null) {
                             signUpCubit.createUserWithEmailAndPassword();
                           } else {
-                            UtilsMessages.showErrorMessage(
-                                context, 'Please select an image');
+                            UtilsMessages.showToastErrorBottom(
+                              context,
+                              message: 'Please select an image',
+                            );
                           }
                         }
                       },
