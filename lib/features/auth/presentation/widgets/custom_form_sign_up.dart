@@ -28,14 +28,20 @@ class CustomFormSignUp extends StatefulWidget {
 class _CustomFormSignUpState extends State<CustomFormSignUp> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthState>(
-      bloc: AuthCubit.getInstance(),
-      builder: (context, state) {
-        final authCubit = AuthCubit.getInstance();
-        Uint8List? profileImage;
-        if (state is ProfileImageSelected) {
-          profileImage = state.profileImage;
+    final authCubit = AuthCubit.getInstance();
+    return BlocConsumer<AuthCubit, AuthState>(
+      bloc: authCubit,
+      listener: (context, state) {
+        if (state is CreateUserSuccess) {
+          SnackBarMessages.showConfirmingMessage(
+              context, 'User created successfully!');
+          context.pushNamedAndRemoveUntil(Routes.home,
+              predicate: (route) => false);
+        } else if (state is CreateUserFailure) {
+          SnackBarMessages.showErrorMessage(context, state.errMessage);
         }
+      },
+      builder: (context, state) {
         return Form(
           key: authCubit.signUpFormKey,
           child: PaddingWrapperWidget(
@@ -44,13 +50,16 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                 GestureDetector(
                   onTap: () {
                     authCubit.selectedImageProfile();
+                    debugPrint('image seletected successfully ');
                   },
                   child: Column(
                     children: [
-                      profileImage != null
+                      state is ProfileImageSelected &&
+                              authCubit.profileImage != null
                           ? CircleAvatar(
                               radius: 50,
-                              backgroundImage: MemoryImage(profileImage),
+                              backgroundImage:
+                                  MemoryImage(authCubit.profileImage!),
                             )
                           : CircleAvatar(
                               radius: 50,
@@ -114,7 +123,7 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                   color: AppColors.blueColor,
                   onPressed: () {
                     if (authCubit.signUpFormKey.currentState!.validate()) {
-                      if (profileImage != null) {
+                      if (authCubit.profileImage != null) {
                         authCubit.createUserWithEmailAndPassword();
                       } else {
                         SnackBarMessages.showErrorMessage(
