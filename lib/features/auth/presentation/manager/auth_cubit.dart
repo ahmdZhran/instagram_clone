@@ -17,10 +17,11 @@ class AuthCubit extends Cubit<AuthState> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController bioController = TextEditingController();
   Uint8List? profileImage;
-  final ImageService _pickerImageService;
+  final ImagePickerService _pickerImageService;
   final AuthRepository _authRepository;
   GlobalKey<FormState> loginFormKey = GlobalKey();
   GlobalKey<FormState> signUpFormKey = GlobalKey();
+  GlobalKey<FormState> resetPasswordKey = GlobalKey();
 
   bool obscuredPasswordText = true;
 
@@ -29,17 +30,44 @@ class AuthCubit extends Cubit<AuthState> {
 
     try {
       await _authRepository.createUserWithEmailAndPassword(
-        email: emailAddressController.text,
-        password: passwordController.text,
-        username: usernameController.text,
-        name: nameController.text,
-        bio: bioController.text,
+        email: emailAddressController.text.trim(),
+        password: passwordController.text.trim(),
+        username: usernameController.text.trim(),
+        name: nameController.text.trim(),
+        bio: bioController.text.trim(),
         profileImage: profileImage,
       );
-
+      await verifyEmail();
       emit(CreateUserSuccess());
     } catch (e) {
       emit(CreateUserFailure(errMessage: e.toString()));
+    }
+  }
+
+  Future<void> verifyEmail() async {
+    await _authRepository.verifyEmail();
+  }
+
+  Future<void> logIn() async {
+    emit(LogInLoading());
+    try {
+      await _authRepository.signInWithEmailAndPassword(
+        email: emailAddressController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      emit(LogInSuccess());
+    } catch (error) {
+      emit(LogInFailure(errMessage: error.toString()));
+    }
+  }
+
+  Future<void> resetPassword() async {
+    emit(ResetPasswordLoading());
+    try {
+      _authRepository.resetPasswordWithEmail(
+          email: emailAddressController.text.trim());
+    } catch (error) {
+      emit(ResetPasswordFailure(errMessage: error.toString()));
     }
   }
 
@@ -71,7 +99,7 @@ class AuthCubit extends Cubit<AuthState> {
     final isRegister = authDI.isRegistered<AuthCubit>(instanceName: _tag);
     if (!isRegister) {
       authDI.registerSingleton<AuthCubit>(
-          AuthCubit(authDI(), authDI<ImageService>()),
+          AuthCubit(authDI(), authDI<ImagePickerService>()),
           instanceName: _tag);
     }
     return authDI.get<AuthCubit>(instanceName: _tag);

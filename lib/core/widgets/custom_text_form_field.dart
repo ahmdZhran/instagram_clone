@@ -8,7 +8,7 @@ class CustomTextFormField extends StatelessWidget {
     super.key,
     required this.hintText,
     this.suffixIcon,
-    required this.fieldName,
+    this.fieldName,
     this.onChanged,
     this.keyboardType,
     this.obscureText = false,
@@ -16,7 +16,7 @@ class CustomTextFormField extends StatelessWidget {
   });
   final String hintText;
   // final String controller;
-  final String fieldName;
+  final String? fieldName;
   final Widget? suffixIcon;
   final TextInputType? keyboardType;
   final void Function(String)? onChanged;

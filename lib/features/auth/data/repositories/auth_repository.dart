@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/helper/errors/firebase_auth_errors_handler.dart';
+
 class AuthRepository {
   final FirebaseAuth auth;
   final FirebaseFirestore firestore;
@@ -39,22 +41,8 @@ class AuthRepository {
         "profileImage": imageUrl,
         'createdAt': FieldValue.serverTimestamp(),
       });
-    } on FirebaseAuthException catch (e) {
-      String errorMessage;
-      switch (e.code) {
-        case 'weak-password':
-          errorMessage = 'The password provided is too weak.';
-          break;
-        case 'email-already-in-use':
-          errorMessage = 'The account already exists for that email.';
-          break;
-        case 'invalid-email':
-          errorMessage = 'The email is invalid';
-          break;
-        default:
-          errorMessage = e.message ?? 'An error occurred';
-      }
-      throw Exception(errorMessage);
+    } on FirebaseAuthException catch (error) {
+      throw FirebaseAuthErrorHandler.getErrorMessage(error.code);
     }
     return null;
   }
@@ -72,28 +60,15 @@ class AuthRepository {
     }
   }
 
-  Future<void> signInWithEmailAndPassword({
-    required String email,
-    required String password,
-  }) async {
+  Future<void> signInWithEmailAndPassword(
+      {required String email, required String password}) async {
     try {
       await auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-    } on FirebaseAuthException catch (e) {
-      String errorMessage;
-      switch (e.code) {
-        case 'user-not-found':
-          errorMessage = 'No user found for that email.';
-          break;
-        case 'wrong-password':
-          errorMessage = 'Wrong password provided for that user.';
-          break;
-        default:
-          errorMessage = 'An error occurred during sign in.';
-      }
-      throw Exception(errorMessage);
+    } on FirebaseAuthException catch (error) {
+      throw FirebaseAuthErrorHandler.getErrorMessage(error.code);
     }
   }
 
@@ -102,15 +77,13 @@ class AuthRepository {
   }) async {
     try {
       await auth.sendPasswordResetEmail(email: email);
-    } on FirebaseAuthException catch (e) {
-      String errorMessage;
-      if (e.code == 'invalid-email') {
-        errorMessage = 'Please enter a valid email.';
-      } else {
-        errorMessage = 'An error occurred while resetting password.';
-      }
-      throw Exception(errorMessage);
+    } on FirebaseAuthException catch (error) {
+      throw FirebaseAuthErrorHandler.getErrorMessage(error.code);
     }
+  }
+
+  Future<void> verifyEmail() async {
+    await FirebaseAuth.instance.currentUser!.sendEmailVerification();
   }
 
   Future<User?> getCurrentUser() async {

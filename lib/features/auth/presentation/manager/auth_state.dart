@@ -14,14 +14,14 @@ class CreateUserFailure extends AuthState {
   CreateUserFailure({required this.errMessage});
 }
 
-final class SignInLoading extends AuthState {}
+final class LogInLoading extends AuthState {}
 
-final class SignInSuccess extends AuthState {}
+final class LogInSuccess extends AuthState {}
 
-final class SignInFailure extends AuthState {
+final class LogInFailure extends AuthState {
   final String errMessage;
 
-  SignInFailure({required this.errMessage});
+  LogInFailure({required this.errMessage});
 }
 
 class VerifyEmailFailure extends AuthState {
@@ -44,10 +44,6 @@ class ProfileImageSelected extends AuthState {
   final Uint8List? profileImage;
 
   ProfileImageSelected(this.profileImage);
-}
-class ProfileImageSelectionFailed extends AuthState {
-  final String errMessage;
-  ProfileImageSelectionFailed({required this.errMessage});
 }
 
 final class ObscuredPasswordTextState extends AuthState {}

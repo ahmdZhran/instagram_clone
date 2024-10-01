@@ -15,7 +15,8 @@ class AuthDI {
         () => FirebaseFirestore.instance);
     authDI
         .registerLazySingleton<FirebaseStorage>(() => FirebaseStorage.instance);
-    authDI.registerLazySingleton<ImageService>(() => ImageService());
+    authDI
+        .registerLazySingleton<ImagePickerService>(() => ImagePickerService());
     authDI.registerLazySingleton<AuthRepository>(() => AuthRepository(
           auth: authDI<FirebaseAuth>(),
           firestore: authDI<FirebaseFirestore>(),
