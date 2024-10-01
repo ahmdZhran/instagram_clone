@@ -41,8 +41,13 @@ final class ResetPasswordFailure extends AuthState {
 }
 
 class ProfileImageSelected extends AuthState {
-  final Uint8List profileImage;
+  final Uint8List? profileImage;
+
   ProfileImageSelected(this.profileImage);
+}
+class ProfileImageSelectionFailed extends AuthState {
+  final String errMessage;
+  ProfileImageSelectionFailed({required this.errMessage});
 }
 
 final class ObscuredPasswordTextState extends AuthState {}

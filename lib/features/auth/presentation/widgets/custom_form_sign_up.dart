@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -30,8 +32,12 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
       bloc: AuthCubit.getInstance(),
       builder: (context, state) {
         final authCubit = AuthCubit.getInstance();
+        Uint8List? profileImage;
+        if (state is ProfileImageSelected) {
+          profileImage = state.profileImage;
+        }
         return Form(
-          key: authCubit.signUpKey,
+          key: authCubit.signUpFormKey,
           child: PaddingWrapperWidget(
             child: Column(
               children: [
@@ -41,10 +47,10 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                   },
                   child: Column(
                     children: [
-                      state is ProfileImageSelected
+                      profileImage != null
                           ? CircleAvatar(
                               radius: 50,
-                              backgroundImage: MemoryImage(state.profileImage),
+                              backgroundImage: MemoryImage(profileImage),
                             )
                           : CircleAvatar(
                               radius: 50,
@@ -107,8 +113,8 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                 CustomButton(
                   color: AppColors.blueColor,
                   onPressed: () {
-                    if (authCubit.signUpKey.currentState!.validate()) {
-                      if (authCubit.profileImage != null) {
+                    if (authCubit.signUpFormKey.currentState!.validate()) {
+                      if (profileImage != null) {
                         authCubit.createUserWithEmailAndPassword();
                       } else {
                         SnackBarMessages.showErrorMessage(

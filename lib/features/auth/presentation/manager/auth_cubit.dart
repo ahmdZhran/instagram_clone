@@ -1,12 +1,9 @@
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:instagram_clone/core/helper/image_picker_service.dart';
-import 'package:instagram_clone/core/utils/injection_container.dart';
 import 'package:instagram_clone/features/auth/auth_di.dart';
-
+import '../../../../core/helper/image_service.dart';
 import '../../data/repositories/auth_repository.dart';
 part 'auth_state.dart';
 
@@ -20,11 +17,10 @@ class AuthCubit extends Cubit<AuthState> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController bioController = TextEditingController();
   Uint8List? profileImage;
-
+  final ImageService _pickerImageService;
   final AuthRepository _authRepository;
-  final ImagePickerService _pickerImageService;
   GlobalKey<FormState> loginFormKey = GlobalKey();
-  GlobalKey<FormState> signUpKey = GlobalKey();
+  GlobalKey<FormState> signUpFormKey = GlobalKey();
 
   bool obscuredPasswordText = true;
 
@@ -47,15 +43,15 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  void obscuredPassword() {
+    obscuredPasswordText = !obscuredPasswordText;
+    emit(ObscuredPasswordTextState());
+  }
+
   Future<void> selectedImageProfile() async {
     Uint8List? image = await _pickerImageService.pickImage(ImageSource.gallery);
     profileImage = image;
     emit(ProfileImageSelected(profileImage!));
-  }
-
-  void obscuredPassword() {
-    obscuredPasswordText = !obscuredPasswordText;
-    emit(ObscuredPasswordTextState());
   }
 
   //TODO check user auth state
@@ -69,19 +65,19 @@ class AuthCubit extends Cubit<AuthState> {
 //     }
   static const String _tag = "auth_instance";
   static AuthCubit getInstance() {
-    final isRegister = sl.isRegistered<AuthCubit>(instanceName: _tag);
+    final isRegister = authDI.isRegistered<AuthCubit>(instanceName: _tag);
     if (!isRegister) {
-      sl.registerSingleton<AuthCubit>(
-          AuthCubit(authDI(), authDI<ImagePickerService>()),
+      authDI.registerSingleton<AuthCubit>(
+          AuthCubit(authDI(), authDI<ImageService>()),
           instanceName: _tag);
     }
-    return sl.get<AuthCubit>(instanceName: _tag);
+    return authDI.get<AuthCubit>(instanceName: _tag);
   }
 
   static Future<void> deleteInstance() async {
-    final isRegister = sl.isRegistered<AuthCubit>(instanceName: _tag);
+    final isRegister = authDI.isRegistered<AuthCubit>(instanceName: _tag);
     if (isRegister) {
-      await sl.unregister<AuthCubit>(instanceName: _tag);
+      await authDI.unregister<AuthCubit>(instanceName: _tag);
     }
   }
 }
