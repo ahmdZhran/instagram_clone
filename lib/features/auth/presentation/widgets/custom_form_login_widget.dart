@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import '../../../../core/utils/app_assets.dart';
@@ -46,58 +47,94 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
           }
         },
         builder: (context, state) {
-          return Form(
-            key: loginCubit.loginFormKey,
-            child: Column(
-              children: [
-                CustomTextFormField(
-                  onChanged: (email) =>
-                      loginCubit.emailAddressController.text = email,
-                  hintText: AppStrings.emailAddress,
-                  keyboardType: TextInputType.emailAddress,
-                  fieldName: AppStrings.name,
-                ),
-                const Gap(10),
-                CustomTextFormField(
-                  onChanged: (password) =>
-                      loginCubit.passwordController.text = password,
-                  suffixIcon: IconButton(
-                    onPressed: loginCubit.obscuredPassword,
-                    icon: Icon(
-                      loginCubit.obscuredPasswordText
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                    ),
+          return PopScope(
+            canPop: false,
+            onPopInvoked: (didPop) {
+              if (didPop) {
+                return;
+              }
+              showExitConfirmationDialog(context);
+            },
+            child: Form(
+              key: loginCubit.loginFormKey,
+              child: Column(
+                children: [
+                  CustomTextFormField(
+                    onChanged: (email) =>
+                        loginCubit.emailAddressController.text = email,
+                    hintText: AppStrings.emailAddress,
+                    keyboardType: TextInputType.emailAddress,
+                    fieldName: AppStrings.name,
                   ),
-                  obscureText: loginCubit.obscuredPasswordText,
-                  hintText: AppStrings.password,
-                  fieldName: AppStrings.password,
-                ),
-                const Gap(20),
-                const ForgotPasswordWidget(),
-                const Gap(20),
-                CustomButton(
-                  childOfCustomButton: loginCubit.state is LogInLoading
-                      ? LottieBuilder.asset(AppAssets.loadingAnimation)
-                      : const LoginTextStyleP16(),
-                  onPressed: () {
-                    if (loginCubit.loginFormKey.currentState!.validate()) {
-                      loginCubit.logIn();
-                    }
-                  },
-                  color: AppColors.blueColor,
-                ),
-                const Gap(30),
-                IsHaveAnAccountWidget(
-                  titleOfTextOne: AppStrings.donnHaveAnAccount,
-                  titleOfTextTwo: AppStrings.signUp,
-                  onTap: () => context.pushReplacementNamed(Routes.signUp),
-                ),
-              ],
+                  const Gap(10),
+                  CustomTextFormField(
+                    onChanged: (password) =>
+                        loginCubit.passwordController.text = password,
+                    suffixIcon: IconButton(
+                      onPressed: loginCubit.obscuredPassword,
+                      icon: Icon(
+                        loginCubit.obscuredPasswordText
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                      ),
+                    ),
+                    obscureText: loginCubit.obscuredPasswordText,
+                    hintText: AppStrings.password,
+                    fieldName: AppStrings.password,
+                  ),
+                  const Gap(20),
+                  const ForgotPasswordWidget(),
+                  const Gap(20),
+                  CustomButton(
+                    childOfCustomButton: loginCubit.state is LogInLoading
+                        ? LottieBuilder.asset(AppAssets.loadingAnimation)
+                        : const LoginTextStyleP16(),
+                    onPressed: () {
+                      if (loginCubit.loginFormKey.currentState!.validate()) {
+                        loginCubit.logIn();
+                      }
+                    },
+                    color: AppColors.blueColor,
+                  ),
+                  const Gap(30),
+                  IsHaveAnAccountWidget(
+                    titleOfTextOne: AppStrings.donnHaveAnAccount,
+                    titleOfTextTwo: AppStrings.signUp,
+                    onTap: () => context.pushNamed(Routes.signUp),
+                  ),
+                ],
+              ),
             ),
           );
         },
       ),
+    );
+  }
+
+  void showExitConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Exit Confirmation'),
+          content: const Text('Are you sure you want to exit the app?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Exit'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                SystemNavigator.pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
