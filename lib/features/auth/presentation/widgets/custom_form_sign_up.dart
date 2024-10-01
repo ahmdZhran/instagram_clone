@@ -32,8 +32,9 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
         if (state is CreateUserSuccess) {
           SnackBarMessages.showConfirmingMessage(
               context, 'User created successfully!');
-          context.pushNamedAndRemoveUntil(Routes.home,
-              predicate: (route) => false);
+          context.pushReplacementNamed(
+            Routes.logIn,
+          );
         } else if (state is CreateUserFailure) {
           SnackBarMessages.showErrorMessage(context, state.errMessage);
         }
