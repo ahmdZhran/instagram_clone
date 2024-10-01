@@ -39,9 +39,9 @@ class AuthRepository {
         "profileImage": imageUrl,
         'createdAt': FieldValue.serverTimestamp(),
       });
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (error) {
       String errorMessage;
-      switch (e.code) {
+      switch (error.code) {
         case 'weak-password':
           errorMessage = 'The password provided is too weak.';
           break;
@@ -52,7 +52,7 @@ class AuthRepository {
           errorMessage = 'The email is invalid';
           break;
         default:
-          errorMessage = e.message ?? 'An error occurred';
+          errorMessage = error.message ?? 'An error occurred';
       }
       throw (errorMessage);
     }
@@ -79,9 +79,9 @@ class AuthRepository {
         email: email,
         password: password,
       );
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (error) {
       String errorMessage;
-      switch (e.code) {
+      switch (error.code) {
         case 'user-not-found':
           errorMessage = 'No user found for that email.';
           break;
@@ -91,7 +91,7 @@ class AuthRepository {
         default:
           errorMessage = 'An error occurred during sign in.';
       }
-      throw Exception(errorMessage);
+      throw (errorMessage);
     }
   }
 

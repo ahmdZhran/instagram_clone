@@ -29,11 +29,11 @@ class AuthCubit extends Cubit<AuthState> {
 
     try {
       await _authRepository.createUserWithEmailAndPassword(
-        email: emailAddressController.text,
-        password: passwordController.text,
-        username: usernameController.text,
-        name: nameController.text,
-        bio: bioController.text,
+        email: emailAddressController.text.trim(),
+        password: passwordController.text.trim(),
+        username: usernameController.text.trim(),
+        name: nameController.text.trim(),
+        bio: bioController.text.trim(),
         profileImage: profileImage,
       );
 
@@ -47,8 +47,8 @@ class AuthCubit extends Cubit<AuthState> {
     emit(LogInLoading());
     try {
       await _authRepository.signInWithEmailAndPassword(
-        email: emailAddressController.text,
-        password: passwordController.text,
+        email: emailAddressController.text.trim(),
+        password: passwordController.text.trim(),
       );
       emit(LogInSuccess());
     } catch (error) {
