@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:instagram_clone/core/helper/extensions.dart';
+import 'package:instagram_clone/core/router/routes.dart';
 import 'package:instagram_clone/core/utils/app_assets.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/core/utils/snak_bar_messages.dart';
@@ -42,6 +44,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 bloc: resetPasswordCubit,
                 listener: (context, state) {
                   if (state is ResetPasswordSuccess) {
+                    context.pushReplacementNamed(Routes.logIn);
                     SnackBarMessages.showConfirmingMessage(
                         context, AppStrings.passwordResetEmailSent);
                   } else if (state is ResetPasswordFailure) {
