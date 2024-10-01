@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import '../../../../core/utils/app_assets.dart';
-import '../../../../core/utils/snak_bar_messages.dart';
+import '../../../../core/utils/utils_messages.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../core/helper/extensions.dart';
 import '../../../../core/router/routes.dart';
