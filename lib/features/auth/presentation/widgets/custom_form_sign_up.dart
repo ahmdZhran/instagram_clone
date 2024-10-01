@@ -51,8 +51,7 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                   },
                   child: Column(
                     children: [
-                      state is ProfileImageSelected &&
-                              authCubit.profileImage != null
+                      authCubit.profileImage != null
                           ? CircleAvatar(
                               radius: 50,
                               backgroundImage:
