@@ -47,7 +47,6 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                 GestureDetector(
                   onTap: () {
                     authCubit.selectedImageProfile();
-                    debugPrint('image seletected successfully ');
                   },
                   child: Column(
                     children: [
