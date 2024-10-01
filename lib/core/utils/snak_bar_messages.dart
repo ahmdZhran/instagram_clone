@@ -34,21 +34,7 @@ class UtilsMessages {
         textColor: Colors.white,
         fontSize: 14.sp,
       );
-  static void showErrorMessage(BuildContext context, String errMessage) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Row(
-          children: [
-            const Icon(Icons.error),
-            const SizedBox(width: 10),
-            Text(errMessage, style: CustomTextStyle.normalTextStyle),
-          ],
-        ),
-        backgroundColor: const Color.fromARGB(255, 229, 35, 21),
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
-  }
+
 
   static void showConfirmingMessage(BuildContext context, String text) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
