@@ -15,6 +15,7 @@ abstract class AppStrings {
   static const String alreadyHaveAnAccount = "Already have an account? ";
   static const String donnHaveAnAccount = "Don’t have an account? ";
   static const String forgotPassword = "Forgot Password?";
+  static const String loggedInSuccess = "Login successful";
   static const String weSentVerifyEmail = "We've sent a verification email.";
   // Reset Password View
   static const String resetPassword = 'Reset Password';

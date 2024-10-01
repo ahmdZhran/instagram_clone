@@ -43,6 +43,19 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  Future<void> logIn() async {
+    emit(LogInLoading());
+    try {
+      await _authRepository.signInWithEmailAndPassword(
+        email: emailAddressController.text,
+        password: passwordController.text,
+      );
+      emit(LogInSuccess());
+    } catch (error) {
+      emit(LogInFailure(errMessage: error.toString()));
+    }
+  }
+
   void obscuredPassword() {
     obscuredPasswordText = !obscuredPasswordText;
     emit(ObscuredPasswordTextState());

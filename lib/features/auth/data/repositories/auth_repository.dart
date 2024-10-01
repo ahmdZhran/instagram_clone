@@ -54,7 +54,7 @@ class AuthRepository {
         default:
           errorMessage = e.message ?? 'An error occurred';
       }
-      throw Exception(errorMessage);
+      throw (errorMessage);
     }
     return null;
   }
@@ -72,10 +72,8 @@ class AuthRepository {
     }
   }
 
-  Future<void> signInWithEmailAndPassword({
-    required String email,
-    required String password,
-  }) async {
+  Future<void> signInWithEmailAndPassword(
+      {required String email, required String password}) async {
     try {
       await auth.signInWithEmailAndPassword(
         email: email,
