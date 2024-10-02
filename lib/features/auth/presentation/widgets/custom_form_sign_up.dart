@@ -23,15 +23,17 @@ class CustomFormSignUp extends StatefulWidget {
 }
 
 class _CustomFormSignUpState extends State<CustomFormSignUp> {
+  final signUpCubit = AuthCubit.getInstance();
+
   @override
   Widget build(BuildContext context) {
-    final signUpCubit = AuthCubit.getInstance();
     return BlocConsumer<AuthCubit, AuthState>(
       bloc: signUpCubit,
       listener: (context, state) {
         if (state is CreateUserSuccess) {
           UtilsMessages.showConfirmingMessage(
               context, AppStrings.weSentVerifyEmail);
+          AuthCubit.getInstance();
           context.pushReplacementNamed(Routes.logIn);
         } else if (state is CreateUserFailure) {
           UtilsMessages.showToastErrorBottom(

@@ -25,9 +25,9 @@ class CustomFormLogInWidget extends StatefulWidget {
 }
 
 class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
+  final loginCubit = AuthCubit.getInstance();
   @override
   Widget build(BuildContext context) {
-    final loginCubit = AuthCubit.getInstance();
     return PaddingWrapperWidget(
       child: BlocConsumer<AuthCubit, AuthState>(
         bloc: loginCubit,
@@ -136,11 +136,5 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
         );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    AuthCubit.deleteInstance();
-    super.dispose();
   }
 }
