@@ -2,8 +2,7 @@ import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
-import 'custom_text_style.dart';
+import 'package:instagram_clone/core/utils/app_colors.dart';
 
 class UtilsMessages {
   static void showToastErrorBottom(
@@ -35,7 +34,6 @@ class UtilsMessages {
         fontSize: 14.sp,
       );
 
-
   static void showConfirmingMessage(BuildContext context, String text) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Container(
@@ -62,22 +60,33 @@ class UtilsMessages {
                 size: 40,
               ),
               const SizedBox(width: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    text,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        text,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                  ),
-                  Text(
-                    'Press here to check your inbox',
-                    style: CustomTextStyle.normalTextStyle,
-                  ),
-                ],
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Press here to check your inbox',
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          color: AppColors.whiteColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
