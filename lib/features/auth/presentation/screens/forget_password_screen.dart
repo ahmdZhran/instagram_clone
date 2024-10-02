@@ -9,7 +9,7 @@ import '../../../../core/utils/app_assets.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/custom_text_style.dart';
-import '../../../../core/utils/snak_bar_messages.dart';
+import '../../../../core/utils/utils_messages.dart';
 import '../../../../core/widgets/custom_button_widget.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../manager/auth_cubit.dart';
@@ -45,10 +45,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 listener: (context, state) {
                   if (state is ResetPasswordSuccess) {
                     context.pushReplacementNamed(Routes.logIn);
-                    SnackBarMessages.showConfirmingMessage(
+                    UtilsMessages.showConfirmingMessage(
                         context, AppStrings.passwordResetEmailSent);
                   } else if (state is ResetPasswordFailure) {
-                    SnackBarMessages.showToastErrorBottom(
+                    UtilsMessages.showToastErrorBottom(
                       context,
                       message: state.errMessage,
                     );

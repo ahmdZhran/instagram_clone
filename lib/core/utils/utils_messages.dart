@@ -2,13 +2,11 @@ import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:instagram_clone/core/utils/app_colors.dart';
 
-import 'custom_text_style.dart';
-
-class SnackBarMessages {
-
-
-  static void showToastErrorBottom(BuildContext context, {
+class UtilsMessages {
+  static void showToastErrorBottom(
+    BuildContext context, {
     required String message,
     int? seconds,
   }) =>
@@ -35,21 +33,6 @@ class SnackBarMessages {
         textColor: Colors.white,
         fontSize: 14.sp,
       );
-  static void showErrorMessage(BuildContext context, String errMessage) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Row(
-          children: [
-            const Icon(Icons.error),
-            const SizedBox(width: 10),
-            Text(errMessage, style: CustomTextStyle.normalTextStyle),
-          ],
-        ),
-        backgroundColor: const Color.fromARGB(255, 229, 35, 21),
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
-  }
 
   static void showConfirmingMessage(BuildContext context, String text) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -77,22 +60,33 @@ class SnackBarMessages {
                 size: 40,
               ),
               const SizedBox(width: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    text,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        text,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
-                  ),
-                  Text(
-                    'Press here to check your inbox',
-                    style: CustomTextStyle.normalTextStyle,
-                  ),
-                ],
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Press here to check your inbox',
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          color: AppColors.whiteColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

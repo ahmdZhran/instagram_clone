@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import '../../../../core/utils/app_assets.dart';
-import '../../../../core/utils/snak_bar_messages.dart';
+import '../../../../core/utils/utils_messages.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../core/helper/extensions.dart';
 import '../../../../core/router/routes.dart';
@@ -25,22 +25,22 @@ class CustomFormLogInWidget extends StatefulWidget {
 }
 
 class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
+  final loginCubit = AuthCubit.getInstance();
   @override
   Widget build(BuildContext context) {
-    final loginCubit = AuthCubit.getInstance();
     return PaddingWrapperWidget(
       child: BlocConsumer<AuthCubit, AuthState>(
         bloc: loginCubit,
         listener: (context, state) {
           if (state is LogInSuccess) {
-            SnackBarMessages.showToastSuccessBottom(
+            UtilsMessages.showToastSuccessBottom(
                 message: AppStrings.loggedInSuccess);
             context.pushNamedAndRemoveUntil(
               Routes.home,
               predicate: (route) => false,
             );
           } else if (state is LogInFailure) {
-            SnackBarMessages.showToastErrorBottom(
+            UtilsMessages.showToastErrorBottom(
               context,
               message: state.errMessage,
             );
@@ -136,11 +136,5 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
         );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    AuthCubit.deleteInstance();
-    super.dispose();
   }
 }

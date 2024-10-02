@@ -37,7 +37,7 @@ class AuthCubit extends Cubit<AuthState> {
         bio: bioController.text.trim(),
         profileImage: profileImage,
       );
-      await verifyEmail();
+      // await verifyEmail();
       emit(CreateUserSuccess());
     } catch (e) {
       emit(CreateUserFailure(errMessage: e.toString()));

@@ -7,7 +7,7 @@ import '../../../../core/router/routes.dart';
 import '../../../../core/utils/app_assets.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
-import '../../../../core/utils/snak_bar_messages.dart';
+import '../../../../core/utils/utils_messages.dart';
 import '../../../../core/widgets/custom_button_widget.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../core/widgets/is_have_an_account_widget.dart';
@@ -23,18 +23,20 @@ class CustomFormSignUp extends StatefulWidget {
 }
 
 class _CustomFormSignUpState extends State<CustomFormSignUp> {
+  final signUpCubit = AuthCubit.getInstance();
+
   @override
   Widget build(BuildContext context) {
-    final signUpCubit = AuthCubit.getInstance();
     return BlocConsumer<AuthCubit, AuthState>(
       bloc: signUpCubit,
       listener: (context, state) {
         if (state is CreateUserSuccess) {
-          SnackBarMessages.showConfirmingMessage(
+          UtilsMessages.showConfirmingMessage(
               context, AppStrings.weSentVerifyEmail);
+          AuthCubit.getInstance();
           context.pushReplacementNamed(Routes.logIn);
         } else if (state is CreateUserFailure) {
-          SnackBarMessages.showToastErrorBottom(
+          UtilsMessages.showToastErrorBottom(
               message: state.errMessage, context);
         }
       },
@@ -130,8 +132,10 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                           if (signUpCubit.profileImage != null) {
                             signUpCubit.createUserWithEmailAndPassword();
                           } else {
-                            SnackBarMessages.showErrorMessage(
-                                context, 'Please select an image');
+                            UtilsMessages.showToastErrorBottom(
+                              context,
+                              message: 'Please select an image',
+                            );
                           }
                         }
                       },
