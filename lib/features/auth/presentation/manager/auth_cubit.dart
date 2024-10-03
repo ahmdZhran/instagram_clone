@@ -108,6 +108,8 @@ class AuthCubit extends Cubit<AuthState> {
   static Future<void> deleteInstance() async {
     final isRegister = authDI.isRegistered<AuthCubit>(instanceName: _tag);
     if (isRegister) {
+      final cubit = authDI<AuthCubit>(instanceName: _tag);
+      await cubit.close();
       await authDI.unregister<AuthCubit>(instanceName: _tag);
     }
   }
