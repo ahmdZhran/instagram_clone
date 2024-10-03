@@ -110,7 +110,7 @@ class AuthCubit extends Cubit<AuthState> {
     if (isRegister) {
       final cubit = authDI<AuthCubit>(instanceName: _tag);
       await cubit.close();
-      await authDI.unregister<AuthCubit>(instanceName: _tag);
+      authDI.unregister<AuthCubit>(instanceName: _tag);
     }
   }
 }
