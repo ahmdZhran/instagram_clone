@@ -83,6 +83,7 @@ class AuthCubit extends Cubit<AuthState> {
       profileImage = image;
       emit(ProfileImageSelected(image));
     }
+
   }
 
   //TODO check user auth state
