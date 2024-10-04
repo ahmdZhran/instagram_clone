@@ -33,7 +33,7 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
         if (state is CreateUserSuccess) {
           UtilsMessages.showConfirmingMessage(
               context, AppStrings.weSentVerifyEmail);
-          AuthCubit.getInstance();
+          AuthCubit.deleteInstance();
           context.pushReplacementNamed(Routes.logIn);
         } else if (state is CreateUserFailure) {
           UtilsMessages.showToastErrorBottom(
@@ -183,11 +183,5 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
             ],
           );
         });
-  }
-
-  @override
-  void dispose() {
-    AuthCubit.deleteInstance();
-    super.dispose();
   }
 }
