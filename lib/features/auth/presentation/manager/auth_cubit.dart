@@ -34,7 +34,7 @@ class AuthCubit extends Cubit<AuthState> {
         bio: bioController.text.trim(),
         profileImage: profileImage,
       );
-      // await verifyEmail();
+      await verifyEmail();
       emit(CreateUserSuccess());
     } catch (e) {
       emit(CreateUserFailure(errMessage: e.toString()));
@@ -42,7 +42,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> verifyEmail() async {
-    await _authRepository.verifyEmail();
+    _authRepository.verifyEmail();
   }
 
   Future<void> logIn() async {

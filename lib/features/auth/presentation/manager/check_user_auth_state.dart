@@ -12,11 +12,11 @@ class CheckUserAuthState extends StatelessWidget {
       body: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return const HomeScreen();
-          } else {
+          User? user = FirebaseAuth.instance.currentUser;
+          if (user == null) {
             return const LogInScreen();
           }
+          return user.emailVerified ? const HomeScreen() : const LogInScreen();
         },
       ),
     );

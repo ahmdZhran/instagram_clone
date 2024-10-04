@@ -21,6 +21,10 @@ class FirebaseAuthErrorHandler {
         return 'The password is too weak.';
       case 'email-already-in-use':
         return 'The email is already in use by another account.';
+
+      case 'email-not-verified':
+        return 'Please verify your email before signing in.';
+
       default:
         return 'An unexpected error occurred.';
     }

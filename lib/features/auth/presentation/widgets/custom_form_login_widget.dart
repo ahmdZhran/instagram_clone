@@ -35,7 +35,6 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
         listener: (context, state) {
           if (state is LogInSuccess) {
             AuthCubit.deleteInstance();
-            debugPrint('we delete it really ');
             UtilsMessages.showToastSuccessBottom(
                 message: AppStrings.loggedInSuccess);
             context.pushNamedAndRemoveUntil(
