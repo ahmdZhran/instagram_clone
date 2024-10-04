@@ -26,6 +26,7 @@ class CustomFormLogInWidget extends StatefulWidget {
 
 class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
   final loginCubit = AuthCubit.getInstance();
+  final GlobalKey<FormState> _logInFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return PaddingWrapperWidget(
@@ -58,7 +59,7 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
               showExitConfirmationDialog(context);
             },
             child: Form(
-              key: loginCubit.loginFormKey,
+              key: _logInFormKey,
               child: Column(
                 children: [
                   CustomTextFormField(
@@ -92,7 +93,7 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
                         ? LottieBuilder.asset(AppAssets.loadingAnimation)
                         : const LoginTextStyleP16(),
                     onPressed: () {
-                      if (loginCubit.loginFormKey.currentState!.validate()) {
+                      if (_logInFormKey.currentState!.validate()) {
                         loginCubit.logIn();
                       }
                     },

@@ -23,6 +23,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  final GlobalKey<FormState> _resetPasswordFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final resetPasswordCubit = AuthCubit.getInstance();
@@ -44,9 +45,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 bloc: resetPasswordCubit,
                 listener: (context, state) {
                   if (state is ResetPasswordSuccess) {
-                    context.pushReplacementNamed(Routes.logIn);
                     UtilsMessages.showConfirmingMessage(
                         context, AppStrings.passwordResetEmailSent);
+                    context.pushReplacementNamed(Routes.logIn);
                   } else if (state is ResetPasswordFailure) {
                     UtilsMessages.showToastErrorBottom(
                       context,
@@ -58,12 +59,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   return Column(
                     children: [
                       Form(
-                        key: resetPasswordCubit.resetPasswordKey,
+                        key: _resetPasswordFormKey,
                         child: CustomTextFormField(
-                          fieldName: AppStrings.password,
-                          hintText: AppStrings.resetPassword,
+                          fieldName: AppStrings.emailAddress,
+                          hintText: AppStrings.emailAddress,
                           onChanged: (email) => resetPasswordCubit
-                              .passwordController.text = email,
+                              .emailAddressController.text = email,
                         ),
                       ),
                       const Gap(30),
@@ -76,8 +77,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               ),
                         color: AppColors.blueColor,
                         onPressed: () {
-                          if (resetPasswordCubit.resetPasswordKey.currentState!
-                              .validate()) {
+                          if (_resetPasswordFormKey.currentState!.validate()) {
                             resetPasswordCubit.resetPassword();
                           }
                         },
@@ -91,11 +91,5 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    AuthCubit.deleteInstance();
-    super.dispose();
   }
 }

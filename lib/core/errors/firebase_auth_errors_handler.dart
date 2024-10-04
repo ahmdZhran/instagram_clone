@@ -5,6 +5,8 @@ class FirebaseAuthErrorHandler {
         return 'The email address is invalid.';
       case 'user-disabled':
         return 'The user account has been disabled by an administrator.';
+      case 'The email address is badly formatted.':
+        return "The email address is invalid";
       case 'user-not-found':
         return 'No user found for that email.';
       case 'wrong-password':

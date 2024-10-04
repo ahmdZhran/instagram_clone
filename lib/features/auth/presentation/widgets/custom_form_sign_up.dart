@@ -24,7 +24,7 @@ class CustomFormSignUp extends StatefulWidget {
 
 class _CustomFormSignUpState extends State<CustomFormSignUp> {
   final signUpCubit = AuthCubit.getInstance();
-
+  final GlobalKey<FormState> _signUpFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
@@ -50,7 +50,7 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
             _showExitConfirmationDialog(context);
           },
           child: Form(
-            key: signUpCubit.signUpFormKey,
+            key: _signUpFormKey,
             child: PaddingWrapperWidget(
               child: Column(
                 children: [
@@ -127,8 +127,7 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                   CustomButton(
                       color: AppColors.blueColor,
                       onPressed: () {
-                        if (signUpCubit.signUpFormKey.currentState!
-                            .validate()) {
+                        if (_signUpFormKey.currentState!.validate()) {
                           if (signUpCubit.profileImage != null) {
                             signUpCubit.createUserWithEmailAndPassword();
                           } else {

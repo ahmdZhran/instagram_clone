@@ -19,9 +19,6 @@ class AuthCubit extends Cubit<AuthState> {
   Uint8List? profileImage;
   final ImagePickerService _pickerImageService;
   final AuthRepository _authRepository;
-  GlobalKey<FormState> loginFormKey = GlobalKey();
-  GlobalKey<FormState> signUpFormKey = GlobalKey();
-  GlobalKey<FormState> resetPasswordKey = GlobalKey();
 
   bool obscuredPasswordText = true;
 
@@ -62,12 +59,13 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> resetPassword() async {
-    emit(ResetPasswordLoading());
     try {
-      _authRepository.resetPasswordWithEmail(
-          email: emailAddressController.text.trim());
-    } catch (error) {
-      emit(ResetPasswordFailure(errMessage: error.toString()));
+      emit(ResetPasswordLoading());
+      await _authRepository.resetPasswordWithEmail(
+          email: emailAddressController.text);
+      emit(ResetPasswordSuccess());
+    } catch (e) {
+      emit(ResetPasswordFailure(errMessage: 'An unexpected error occurred'));
     }
   }
 

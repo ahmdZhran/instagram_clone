@@ -26,7 +26,7 @@ abstract class AppStrings {
       'Please enter your registered email below to can reset your password.';
   static const String sendResetPasswordLink = 'Send reset password link';
   static const String passwordResetEmailSent =
-      "If your email exists, we have sent a verification link to reset your password. ";
+      "Reset link sent if email is valid.";
   // Profile Strings
   static const String posts = 'Posts';
   static const String followers = 'Followers';
