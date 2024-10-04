@@ -33,11 +33,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void delayedNavigation() {
     Future.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 3),
       () {
         FirebaseAuth.instance.currentUser == null
             ? context.pushReplacementNamed(Routes.logIn)
-            : context.pushReplacementNamed(Routes.home);
+            : FirebaseAuth.instance.currentUser!.emailVerified == true
+                ? context.pushReplacementNamed(Routes.home)
+                : context.pushReplacementNamed(Routes.logIn);
       },
     );
   }

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,13 +35,15 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
         bloc: loginCubit,
         listener: (context, state) {
           if (state is LogInSuccess) {
+            FirebaseAuth.instance.currentUser!.emailVerified
+                ? context.pushNamedAndRemoveUntil(
+                    Routes.home,
+                    predicate: (route) => false,
+                  )
+                : UtilsMessages.showToastErrorBottom(context,
+                    message: AppStrings.pleaseVerifyEmail);
+
             AuthCubit.deleteInstance();
-            UtilsMessages.showToastSuccessBottom(
-                message: AppStrings.loggedInSuccess);
-            context.pushNamedAndRemoveUntil(
-              Routes.home,
-              predicate: (route) => false,
-            );
           } else if (state is LogInFailure) {
             UtilsMessages.showToastErrorBottom(
               context,
