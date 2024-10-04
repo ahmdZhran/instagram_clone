@@ -64,8 +64,8 @@ class AuthCubit extends Cubit<AuthState> {
       await _authRepository.resetPasswordWithEmail(
           email: emailAddressController.text);
       emit(ResetPasswordSuccess());
-    } catch (e) {
-      emit(ResetPasswordFailure(errMessage: 'An unexpected error occurred'));
+    } catch (error) {
+      emit(ResetPasswordFailure(errMessage: error.toString()));
     }
   }
 
