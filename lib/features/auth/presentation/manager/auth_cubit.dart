@@ -83,15 +83,6 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  //TODO check user auth state
-//  Future<void> checkAuthStatus() async {
-//       final user = await _authRepository.getCurrentUser();
-//       if (user != null) {
-//         emit(AuthSuccess(user));
-//       } else {
-//         emit(AuthLoggedOut());
-//       }
-//     }
   static const String _tag = "auth_instance";
   static AuthCubit getInstance() {
     final isRegister = authDI.isRegistered<AuthCubit>(instanceName: _tag);
