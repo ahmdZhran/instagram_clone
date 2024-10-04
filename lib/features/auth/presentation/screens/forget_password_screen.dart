@@ -92,4 +92,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    AuthCubit.deleteInstance();
+    super.dispose();
+  }
 }
