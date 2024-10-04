@@ -66,6 +66,7 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       _authRepository.resetPasswordWithEmail(
           email: emailAddressController.text.trim());
+      emit(ResetPasswordSuccess());
     } catch (error) {
       emit(ResetPasswordFailure(errMessage: error.toString()));
     }
@@ -83,7 +84,6 @@ class AuthCubit extends Cubit<AuthState> {
       profileImage = image;
       emit(ProfileImageSelected(image));
     }
-
   }
 
   //TODO check user auth state
