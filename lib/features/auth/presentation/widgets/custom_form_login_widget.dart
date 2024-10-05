@@ -65,16 +65,13 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
               child: Column(
                 children: [
                   CustomTextFormField(
-                    onChanged: (email) =>
-                        loginCubit.emailAddressController.text = email,
                     hintText: AppStrings.emailAddress,
                     keyboardType: TextInputType.emailAddress,
-                    fieldName: AppStrings.name,
+                    fieldName: AppStrings.emailAddress,
+                    controller: loginCubit.emailAddressController,
                   ),
                   const Gap(10),
                   CustomTextFormField(
-                    onChanged: (password) =>
-                        loginCubit.passwordController.text = password,
                     suffixIcon: IconButton(
                       onPressed: loginCubit.obscuredPassword,
                       icon: Icon(
@@ -86,6 +83,7 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
                     obscureText: loginCubit.obscuredPasswordText,
                     hintText: AppStrings.password,
                     fieldName: AppStrings.password,
+                    controller: loginCubit.passwordController,
                   ),
                   const Gap(20),
                   const ForgotPasswordWidget(),

@@ -79,38 +79,27 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                     ),
                   ),
                   CustomTextFormField(
-                    onChanged: (username) {
-                      signUpCubit.usernameController.text = username;
-                    },
+                    controller: signUpCubit.usernameController,
                     hintText: AppStrings.username,
                     fieldName: AppStrings.username,
                   ),
                   CustomTextFormField(
-                    onChanged: (name) {
-                      signUpCubit.nameController.text = name;
-                    },
+                    controller: signUpCubit.nameController,
                     fieldName: AppStrings.name,
                     hintText: AppStrings.name,
                   ),
                   CustomTextFormField(
-                    onChanged: (bio) {
-                      signUpCubit.bioController.text = bio;
-                    },
+                    controller: signUpCubit.bioController,
                     fieldName: AppStrings.bio,
                     hintText: AppStrings.bio,
                   ),
                   CustomTextFormField(
-                    onChanged: (emailAddress) {
-                      signUpCubit.emailAddressController.text = emailAddress;
-                    },
                     hintText: AppStrings.emailAddress,
                     keyboardType: TextInputType.emailAddress,
                     fieldName: AppStrings.emailAddress,
+                    controller: signUpCubit.emailAddressController,
                   ),
                   CustomTextFormField(
-                    onChanged: (password) {
-                      signUpCubit.passwordController.text = password;
-                    },
                     obscureText: signUpCubit.obscuredPasswordText,
                     suffixIcon: IconButton(
                       onPressed: signUpCubit.obscuredPassword,
@@ -122,6 +111,7 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                     ),
                     hintText: AppStrings.password,
                     fieldName: AppStrings.password,
+                    controller: signUpCubit.passwordController,
                   ),
                   const Gap(20),
                   CustomButton(

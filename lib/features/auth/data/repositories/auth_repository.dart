@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class AuthRepository {
     required this.firebaseStorage,
   });
 
-  Future<User?> createUserWithEmailAndPassword({
+  Future<Either<String, User?>> createUserWithEmailAndPassword({
     required String email,
     required String password,
     required String username,
@@ -41,10 +42,10 @@ class AuthRepository {
         "profileImage": imageUrl,
         'createdAt': FieldValue.serverTimestamp(),
       });
+      return Right(userCredential.user);
     } on FirebaseAuthException catch (error) {
-      throw FirebaseAuthErrorHandler.getErrorMessage(error.code);
+      return Left(FirebaseAuthErrorHandler.getErrorMessage(error.code));
     }
-    return null;
   }
 
   Future<String> _uploadProfileImage(Uint8List image, String userId) async {
@@ -60,30 +61,39 @@ class AuthRepository {
     }
   }
 
-  Future<void> signInWithEmailAndPassword(
-      {required String email, required String password}) async {
+  Future<Either<String, void>> logInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
     try {
       await auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      return const Right(null);
     } on FirebaseAuthException catch (error) {
-      throw FirebaseAuthErrorHandler.getErrorMessage(error.code);
+      return Left(FirebaseAuthErrorHandler.getErrorMessage(error.code));
     }
   }
 
-  Future<void> resetPasswordWithEmail({
+  Future<Either<String, void>> resetPasswordWithEmail({
     required String email,
   }) async {
     try {
       await auth.sendPasswordResetEmail(email: email);
+      return const Right(null);
     } on FirebaseAuthException catch (error) {
-      throw FirebaseAuthErrorHandler.getErrorMessage(error.code);
+      return Left(FirebaseAuthErrorHandler.getErrorMessage(error.code));
     }
   }
 
-  Future<void> verifyEmail() async {
-    await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+  Future<Either<String, void>> verifyEmail() async {
+    try {
+      await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+      return const Right(null);
+    } catch (error) {
+      return Left(error.toString());
+    }
   }
 
   Future<User?> getCurrentUser() async {

@@ -25,20 +25,24 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> createUserWithEmailAndPassword() async {
     emit(CreateUserLoading());
 
-    try {
-      await _authRepository.createUserWithEmailAndPassword(
-        email: emailAddressController.text.trim(),
-        password: passwordController.text.trim(),
-        username: usernameController.text.trim(),
-        name: nameController.text.trim(),
-        bio: bioController.text.trim(),
-        profileImage: profileImage,
-      );
-      await verifyEmail();
-      emit(CreateUserSuccess());
-    } catch (e) {
-      emit(CreateUserFailure(errMessage: e.toString()));
-    }
+    final result = await _authRepository.createUserWithEmailAndPassword(
+      email: emailAddressController.text.trim(),
+      password: passwordController.text.trim(),
+      username: usernameController.text.trim(),
+      name: nameController.text.trim(),
+      bio: bioController.text.trim(),
+      profileImage: profileImage,
+    );
+
+    result.fold(
+      (errorMessage) {
+        emit(CreateUserFailure(errMessage: errorMessage));
+      },
+      (_) async {
+        await verifyEmail();
+        emit(CreateUserSuccess());
+      },
+    );
   }
 
   Future<void> verifyEmail() async {
@@ -47,26 +51,35 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> logIn() async {
     emit(LogInLoading());
-    try {
-      await _authRepository.signInWithEmailAndPassword(
-        email: emailAddressController.text.trim(),
-        password: passwordController.text.trim(),
-      );
-      emit(LogInSuccess());
-    } catch (error) {
-      emit(LogInFailure(errMessage: error.toString()));
-    }
+    final result = await _authRepository.logInWithEmailAndPassword(
+      email: emailAddressController.text.trim(),
+      password: passwordController.text.trim(),
+    );
+
+    result.fold(
+      (errorMessage) {
+        emit(LogInFailure(errMessage: errorMessage));
+      },
+      (_) {
+        emit(LogInSuccess());
+      },
+    );
   }
 
   Future<void> resetPassword() async {
-    try {
-      emit(ResetPasswordLoading());
-      await _authRepository.resetPasswordWithEmail(
-          email: emailAddressController.text);
-      emit(ResetPasswordSuccess());
-    } catch (error) {
-      emit(ResetPasswordFailure(errMessage: error.toString()));
-    }
+    emit(ResetPasswordLoading());
+    final result = await _authRepository.resetPasswordWithEmail(
+      email: emailAddressController.text,
+    );
+
+    result.fold(
+      (errorMessage) {
+        emit(ResetPasswordFailure(errMessage: errorMessage));
+      },
+      (_) {
+        emit(ResetPasswordSuccess());
+      },
+    );
   }
 
   void obscuredPassword() {

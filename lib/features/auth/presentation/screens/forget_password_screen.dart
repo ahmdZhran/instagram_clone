@@ -61,10 +61,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       Form(
                         key: _resetPasswordFormKey,
                         child: CustomTextFormField(
+                          controller: resetPasswordCubit.emailAddressController,
                           fieldName: AppStrings.emailAddress,
                           hintText: AppStrings.emailAddress,
-                          onChanged: (email) => resetPasswordCubit
-                              .emailAddressController.text = email,
                         ),
                       ),
                       const Gap(30),
