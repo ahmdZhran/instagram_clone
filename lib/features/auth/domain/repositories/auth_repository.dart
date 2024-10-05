@@ -12,4 +12,10 @@ abstract class AuthRepository {
     required String email,
     required String password,
   });
+
+  Future<Either<String, void>> forgotPassword({
+    required String email,
+  });
+
+  Future<Either<String, void>> verifyEmail();
 }

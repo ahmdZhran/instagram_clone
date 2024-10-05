@@ -9,7 +9,9 @@ class LoginUseCase extends UseCase<void, LoginParams> {
   @override
   Future<Either<String, void>> call(params) {
     return _authRepository.loginWithEmailAndPassword(
-        email: params.email, password: params.password);
+      email: params.email,
+      password: params.password,
+    );
   }
 }
 
