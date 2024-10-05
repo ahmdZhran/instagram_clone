@@ -7,4 +7,9 @@ abstract class AuthRepository {
   Future<Either<String, AuthUserEntity>> createUserWithEmailAndPassword({
     required SignUpParams signUpParams,
   });
+
+  Future<Either<String, void>> loginWithEmailAndPassword({
+    required String email,
+    required String password,
+  });
 }
