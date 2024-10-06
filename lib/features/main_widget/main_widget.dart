@@ -7,7 +7,6 @@ import '../home/presentation/screens/home_screen.dart';
 import '../profile/profile_screen.dart';
 import '../reels/reels_screen.dart';
 import 'bottom_nav_bar_item_widget.dart';
-import 'bottom_nav_bar_svg_icons_widget.dart';
 
 class MainWidget extends StatefulWidget {
   const MainWidget({super.key});
@@ -73,15 +72,11 @@ class _MainWidgetState extends State<MainWidget> {
                       activeIcon: AppAssets.activeSearch,
                       inactiveIcon: AppAssets.searchIcon,
                     ),
-                    InkWell(
+                    BottomNavBarItemWidget(
                       onTap: () => onNavBarTap(2),
-                      child: AnimatedScale(
-                        duration: const Duration(milliseconds: 200),
-                        scale: index == 2 ? 1.3 : 1,
-                        child: const BottomNavBarSvgIconsWidget(
-                          asset: AppAssets.addPost,
-                        ),
-                      ),
+                      isActive: index == 2,
+                      activeIcon: AppAssets.activeAddPost,
+                      inactiveIcon: AppAssets.addPost,
                     ),
                     BottomNavBarItemWidget(
                       onTap: () => onNavBarTap(3),
@@ -93,12 +88,22 @@ class _MainWidgetState extends State<MainWidget> {
                       onTap: () => onNavBarTap(4),
                       child: AnimatedScale(
                         duration: const Duration(milliseconds: 200),
-                        scale: index == 4 ? 1.3 : 1,
-                        child: Icon(
-                          Icons.home_filled,
-                          color: index == 4
-                              ? Colors.white
-                              : Colors.white.withOpacity(0.5),
+                        scale: index == 4 ? 1.2 : 1,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: index == 4
+                                  ? Colors.white
+                                  : Colors.transparent,
+                              width: 2.0,
+                            ),
+                          ),
+                          child: const CircleAvatar(
+                            radius: 15,
+                            backgroundImage:
+                                AssetImage("assets/images/airen.jpg"),
+                          ),
                         ),
                       ),
                     ),

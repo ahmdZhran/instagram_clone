@@ -8,6 +8,7 @@ class AppAssets {
   static const String heartIcon = "assets/svg/heart.svg";
   static const String heartActiveIcon = "assets/svg/active_heart.svg";
   static const String addPost = "assets/svg/add_post.svg";
+  static const String activeAddPost = "assets/svg/active_add_post.svg";
   static const String chatIcon = "assets/images/chatIcon.svg";
   static const String commentIcon = "assets/images/comment.svg";
   static const String bookmark = "assets/images/bookmark.svg";
