@@ -1,6 +1,7 @@
 // main_widget.dart
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:instagram_clone/core/utils/app_assets.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/features/explore/explore_screen.dart';
@@ -53,9 +54,8 @@ class _MainWidgetState extends State<MainWidget> {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+                margin: EdgeInsets.symmetric(horizontal: 20.w),
+                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 18.h),
                 decoration: BoxDecoration(
                   color: AppColors.blueColor,
                   borderRadius: BorderRadius.circular(50),
