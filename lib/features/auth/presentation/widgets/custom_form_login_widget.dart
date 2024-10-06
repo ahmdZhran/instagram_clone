@@ -37,7 +37,7 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
           if (state is LogInSuccess) {
             FirebaseAuth.instance.currentUser!.emailVerified
                 ? context.pushNamedAndRemoveUntil(
-                    Routes.home,
+                    Routes.mainWidget,
                     predicate: (route) => false,
                   )
                 : UtilsMessages.showToastErrorBottom(context,
