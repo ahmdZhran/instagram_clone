@@ -7,8 +7,8 @@ import 'package:instagram_clone/features/explore/explore_screen.dart';
 import 'package:instagram_clone/features/home/presentation/screens/home_screen.dart';
 import 'package:instagram_clone/features/profile/profile_screen.dart';
 import 'package:instagram_clone/features/reels/reels_screen.dart';
-import 'main_widget/bottom_nav_bar_item_widget.dart';
-import 'main_widget/bottom_nav_bar_svg_icons_widget.dart';
+import 'bottom_nav_bar_item_widget.dart';
+import 'bottom_nav_bar_svg_icons_widget.dart';
 
 class MainWidget extends StatefulWidget {
   const MainWidget({super.key});
