@@ -23,7 +23,7 @@ class BottomNavBarItemWidget extends StatelessWidget {
       onTap: onTap,
       child: AnimatedScale(
         duration: const Duration(milliseconds: 200),
-        scale: isActive ? 1.3 : 1,
+        scale: isActive ? 1.2 : 1,
         child: SvgPicture.asset(
           colorFilter:
               const ColorFilter.mode(AppColors.whiteColor, BlendMode.srcIn),
