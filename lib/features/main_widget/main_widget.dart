@@ -1,13 +1,11 @@
-// main_widget.dart
-
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:instagram_clone/core/utils/app_assets.dart';
-import 'package:instagram_clone/core/utils/app_colors.dart';
-import 'package:instagram_clone/features/explore/explore_screen.dart';
-import 'package:instagram_clone/features/home/presentation/screens/home_screen.dart';
-import 'package:instagram_clone/features/profile/profile_screen.dart';
-import 'package:instagram_clone/features/reels/reels_screen.dart';
+import '../../core/utils/app_assets.dart';
+import '../../core/utils/app_colors.dart';
+import '../../core/utils/app_responsive_spacer_helper.dart';
+import '../explore/explore_screen.dart';
+import '../home/presentation/screens/home_screen.dart';
+import '../profile/profile_screen.dart';
+import '../reels/reels_screen.dart';
 import 'bottom_nav_bar_item_widget.dart';
 import 'bottom_nav_bar_svg_icons_widget.dart';
 
@@ -54,8 +52,8 @@ class _MainWidgetState extends State<MainWidget> {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 20.w),
-                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 18.h),
+                margin: AppResponsiveSpacerHelper.mediumMargin,
+                padding: AppResponsiveSpacerHelper.customPadding,
                 decoration: BoxDecoration(
                   color: AppColors.blueColor,
                   borderRadius: BorderRadius.circular(50),
