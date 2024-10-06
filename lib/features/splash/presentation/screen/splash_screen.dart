@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
         FirebaseAuth.instance.currentUser == null
             ? context.pushReplacementNamed(Routes.logIn)
             : FirebaseAuth.instance.currentUser!.emailVerified == true
-                ? context.pushReplacementNamed(Routes.home)
+                ? context.pushReplacementNamed(Routes.mainWidget)
                 : context.pushReplacementNamed(Routes.logIn);
       },
     );
