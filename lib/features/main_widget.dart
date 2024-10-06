@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/features/explore/explore_screen.dart';
 import 'package:instagram_clone/features/home/presentation/screens/home_screen.dart';
+import 'package:instagram_clone/features/profile/profile_screen.dart';
+import 'package:instagram_clone/features/reels/reels_screen.dart';
 
 class MainWidget extends StatefulWidget {
   const MainWidget({super.key});
@@ -18,8 +21,11 @@ class _MainWidgetState extends State<MainWidget> {
         children: [
           PageView(
             controller: controller,
-            children: [
+            children: const [
               HomeScreen(),
+              ExploreScreen(),
+              ReelsScreen(),
+              ProfileScreen()
             ],
           )
         ],

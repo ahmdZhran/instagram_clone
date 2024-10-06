@@ -1,5 +1,6 @@
 class Routes {
   static const String splashScreen = '/splashScreen';
+  static const String mainWidget = '/mainWidget';
   static const String home = '/home';
   static const String signUp = '/signUp';
   static const String logIn = '/login';
