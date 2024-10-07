@@ -13,10 +13,10 @@ import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/custom_button_widget.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../core/widgets/is_have_an_account_widget.dart';
+import '../../../../core/widgets/padding_wrapper_widget.dart';
 import '../manager/auth_cubit.dart';
 import 'auth_text_styles.dart';
 import 'forgot_password_widget.dart';
-import 'padding_wrapper_widget.dart';
 
 class CustomFormLogInWidget extends StatefulWidget {
   const CustomFormLogInWidget({super.key});
