@@ -17,6 +17,9 @@ abstract class CustomTextStyle {
   static final pacifico30 = TextStyle(
     fontSize: 30.sp,
   );
+  static final pacifico25 = TextStyle(
+    fontSize: 30.sp,
+  );
   static final pacifico18 = TextStyle(
     fontSize: 18.sp,
     color: AppColors.blueColor,

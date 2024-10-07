@@ -12,8 +12,8 @@ import '../../../../core/utils/custom_text_style.dart';
 import '../../../../core/utils/utils_messages.dart';
 import '../../../../core/widgets/custom_button_widget.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../core/widgets/padding_wrapper_widget.dart';
 import '../manager/auth_cubit.dart';
-import '../widgets/padding_wrapper_widget.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
