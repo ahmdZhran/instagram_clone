@@ -53,7 +53,7 @@ class _MainWidgetState extends State<MainWidget> {
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: AppResponsiveSpacerHelper.mediumMargin,
+                padding: AppResponsiveSpacerHelper.mediumPadding,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(50.r),
                   child: BackdropFilter(
