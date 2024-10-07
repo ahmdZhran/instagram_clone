@@ -5,7 +5,7 @@ class AppResponsiveSpacerHelper {
   static final EdgeInsets smallPadding = EdgeInsets.all(8.w);
   static final EdgeInsets smallSymmetricPadding =
       EdgeInsets.symmetric(horizontal: 10.w);
-  static final EdgeInsets smallPaddingOnly =
+  static final EdgeInsets smallOnlyPadding =
       EdgeInsets.only(top: 10.h, left: 10, right: 10);
   static final EdgeInsets mediumPadding = EdgeInsets.all(16.w);
   static final EdgeInsets largePadding = EdgeInsets.all(24.w);
