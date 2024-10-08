@@ -21,7 +21,7 @@ class InstagramApp extends StatelessWidget {
         locale: context.locale,
         theme: AppThemes.darkTheme,
         onGenerateRoute: appRouter.onGenerateRoute,
-        initialRoute: Routes.splashScreen,
+        initialRoute: Routes.logIn,
       ),
     );
   }
