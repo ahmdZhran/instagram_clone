@@ -63,7 +63,7 @@ class _MainWidgetState extends State<MainWidget> {
                     child: Container(
                       padding: AppResponsiveSpacerHelper.customPadding,
                       decoration: BoxDecoration(
-                        color: AppColors.blueColor.withOpacity(0.3),
+                        color: AppColors.primaryColor.withOpacity(0.3),
                         borderRadius: BorderRadius.circular(50.r),
                       ),
                       child: Row(

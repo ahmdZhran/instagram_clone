@@ -115,7 +115,7 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                   ),
                   const Gap(20),
                   CustomButton(
-                      color: AppColors.blueColor,
+                      color: AppColors.primaryColor,
                       onPressed: () {
                         if (_signUpFormKey.currentState!.validate()) {
                           if (signUpCubit.profileImage != null) {

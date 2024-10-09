@@ -57,7 +57,7 @@ class _MainWidgetState extends State<MainWidget> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
                 decoration: BoxDecoration(
-                  color: AppColors.blueColor,
+                  color: AppColors.primaryColor,
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: Row(

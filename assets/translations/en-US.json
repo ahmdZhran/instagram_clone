@@ -1,5 +1,7 @@
 {
-   "posts":"Posts",
+    "posts":"Posts",
     "followers": "Followers",
-    "following":"Following"
+    "following":"Following",
+    "edit_profile":"Edit profile",
+    "share_profile":"Share profile"
 }

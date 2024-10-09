@@ -1,6 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:instagram_clone/core/utils/app_colors.dart';
+import 'package:instagram_clone/core/utils/custom_text_style.dart';
+import 'package:instagram_clone/core/widgets/custom_button_widget.dart';
 
 import 'user_profile_information_widget.dart';
 
@@ -35,7 +39,35 @@ class UserProfileHeaderWidget extends StatelessWidget {
             const Gap(10),
             const Text(
               'we just try ',
-            )
+            ),
+            const Gap(10),
+            Row(
+              children: [
+                Expanded(
+                  child: CustomButton(
+                    height: 40,
+                    color: AppColors.deepGrey,
+                    onPressed: () {},
+                    childOfCustomButton: Text(
+                      "edit_profile".tr(),
+                      style: CustomTextStyle.pacifico14,
+                    ),
+                  ),
+                ),
+                const Gap(14),
+                Expanded(
+                  child: CustomButton(
+                    height: 40,
+                    color: AppColors.deepGrey,
+                    onPressed: () {},
+                    childOfCustomButton: Text(
+                      "share_profile".tr(),
+                      style: CustomTextStyle.pacifico14,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

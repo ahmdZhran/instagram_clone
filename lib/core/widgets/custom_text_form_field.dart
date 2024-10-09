@@ -36,7 +36,7 @@ class CustomTextFormField extends StatelessWidget {
           onChanged: onChanged,
           cursorHeight: 25,
           controller: controller,
-          cursorColor: AppColors.blueColor,
+          cursorColor: AppColors.primaryColor,
           decoration: InputDecoration(
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 20, vertical: 18),

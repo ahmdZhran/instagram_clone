@@ -25,7 +25,7 @@ abstract class CustomTextStyle {
   );
   static final pacifico18 = TextStyle(
     fontSize: 18.sp,
-    color: AppColors.blueColor,
+    color: AppColors.primaryColor,
     fontWeight: FontWeight.bold,
   );
   static final normalTextStyle = TextStyle(

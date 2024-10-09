@@ -1,5 +1,7 @@
 {
     "posts":"منشور",
     "followers": "متابعين",
-    "following":"متابع"
+    "following":"متابع",
+    "edit_profile":"تعديل الملف الشخصي",
+    "share_profile":"مشاركة الملف الشخصي"
 }
