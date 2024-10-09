@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utils/custom_text_style.dart';
 import 'package:sliver_tools/sliver_tools.dart';
-
-import '../../profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -48,5 +47,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void dispose() {
     _nestedScrollController.dispose();
     super.dispose();
+  }
+}
+
+class UserProfileAppBarWidget extends StatelessWidget {
+  const UserProfileAppBarWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      centerTitle: false,
+      pinned: ModalRoute.of(context)!.isFirst,
+      floating: ModalRoute.of(context)!.isFirst,
+      title: Row(
+        children: [
+          Flexible(
+            flex: 12,
+            child: Text(
+              '___ahmd.1',
+              style: CustomTextStyle.pacifico25,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

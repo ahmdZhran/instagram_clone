@@ -1,9 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:instagram_clone/features/notifications/notifications_screen.dart';
 import '../../core/utils/app_assets.dart';
 import '../../core/utils/app_colors.dart';
 import '../../core/utils/app_responsive_spacer_helper.dart';
+import '../add_post/add_post_screen.dart';
 import '../explore/explore_screen.dart';
 import '../home/presentation/screens/home_screen.dart';
 import '../profile/presentation/screens/profile_screen.dart';
@@ -45,7 +47,8 @@ class _MainWidgetState extends State<MainWidget> {
             children: const [
               HomeScreen(),
               ExploreScreen(),
-              ReelsScreen(),
+              AddPostScreen(),
+              NotificationsScreen(),
               ProfileScreen(),
             ],
           ),
