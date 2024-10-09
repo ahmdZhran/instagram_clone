@@ -1,32 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utils/app_responsive_spacer_helper.dart';
-import 'package:instagram_clone/core/utils/custom_text_style.dart';
 
-class ProfileScreen extends StatelessWidget {
+
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
   @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  late ScrollController _nestedScrollController;
+  @override
+  void initState() {
+    _nestedScrollController = ScrollController();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: AppResponsiveSpacerHelper.smallOnlyPadding,
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: SafeArea(
-                child: Row(
-                  children: [
-                    Text(
-                      '___ahmd.1',
-                      style: CustomTextStyle.pacifico25,
-                    ),
-                  ],
-                ),
-              ),
-            )
-          ],
+      body: DefaultTabController(length: 2,child: NestedScrollView(
+        controller: _nestedScrollController,
+        headerSliverBuilder: ,
+        body: ,
         ),
-      ),
+        )
     );
+  }
+
+  @override
+  void dispose() {
+    _nestedScrollController.dispose();
+    super.dispose();
   }
 }
