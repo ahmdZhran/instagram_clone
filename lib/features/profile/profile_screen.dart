@@ -20,7 +20,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       body: DefaultTabController(length: 2,child: NestedScrollView(
         controller: _nestedScrollController,
-        headerSliverBuilder: ,
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [SliverOverlapAbsorber(handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),sliver: ,)];
+        },
         body: ,
         ),
         )
