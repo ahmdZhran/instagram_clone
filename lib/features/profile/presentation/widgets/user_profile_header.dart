@@ -31,6 +31,10 @@ class UserProfileHeaderWidget extends StatelessWidget {
             const Gap(40),
             const Text(
               'Ahmed Muhamed',
+            ),
+            const Gap(10),
+            const Text(
+              'we just try ',
             )
           ],
         ),
