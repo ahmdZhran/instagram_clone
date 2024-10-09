@@ -1,4 +1,5 @@
 {
-    "name":"name",
-    "login": "Login"
+   "posts":"Posts",
+    "followers": "Followers",
+    "following":"Following"
 }
