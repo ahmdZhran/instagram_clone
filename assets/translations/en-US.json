@@ -3,5 +3,7 @@
     "followers": "Followers",
     "following":"Following",
     "edit_profile":"Edit profile",
-    "share_profile":"Share profile"
+    "share_profile":"Share profile",
+    "arabic":"Arabic",
+    "english":"English"
 }

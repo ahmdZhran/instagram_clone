@@ -5,8 +5,16 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_text_style.dart';
 
-class UserProfileAppBarWidget extends StatelessWidget {
+class UserProfileAppBarWidget extends StatefulWidget {
   const UserProfileAppBarWidget({super.key});
+
+  @override
+  UserProfileAppBarWidgetState createState() => UserProfileAppBarWidgetState();
+}
+
+class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
+  bool _isDarkMode = false;
+  String _selectedLanguage = 'English';
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +43,69 @@ class UserProfileAppBarWidget extends StatelessWidget {
           ),
           InkWell(
             borderRadius: BorderRadius.circular(12),
-            onTap: () {},
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                backgroundColor: AppColors.darkThemColor,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(20),
+                  ),
+                ),
+                builder: (BuildContext context) {
+                  return Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SwitchListTile(
+                          activeColor: AppColors.primaryColor,
+                          title: const Text('Dark Mode'),
+                          value: _isDarkMode,
+                          onChanged: (bool value) {
+                            setState(() {
+                              _isDarkMode = value;
+                            });
+                          },
+                          secondary: const Icon(Icons.dark_mode),
+                        ),
+                        ListTile(
+                          leading: const Icon(Icons.language),
+                          title: DropdownButton<String>(
+                            underline: Container(
+                              height: 2,
+                              width: 10,
+                              color: Colors.transparent,
+                            ),
+                            value: _selectedLanguage,
+                            icon: const Icon(Icons.arrow_drop_down),
+                            items: <String>['English', 'Arabic']
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                _selectedLanguage = newValue!;
+                              });
+                            },
+                          ),
+                        ),
+                        ListTile(
+                          leading: const Icon(Icons.logout),
+                          title: const Text('Logout'),
+                          onTap: () {
+                            // Handle logout tap
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
             child: SvgPicture.asset(
               height: 22.h,
               width: 22.w,

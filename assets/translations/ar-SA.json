@@ -3,5 +3,7 @@
     "followers": "متابعين",
     "following":"متابع",
     "edit_profile":"تعديل الملف الشخصي",
-    "share_profile":"مشاركة الملف الشخصي"
+    "share_profile":"مشاركة الملف الشخصي",
+    "arabic":"عربي",
+    "english":"انجليزي"
 }
