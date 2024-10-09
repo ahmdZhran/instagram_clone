@@ -2,8 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/core/utils/app_colors.dart';
-import 'package:instagram_clone/features/profile/presentation/widgets/user_profile_mentioned_posts_widget.dart';
+import '../../../../core/utils/app_colors.dart';
+import '../widgets/user_profile_mentioned_posts_widget.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 import '../widgets/user_posts_widget.dart';
 import '../widgets/user_profile_app_bar_widget.dart';
@@ -35,14 +35,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverOverlapAbsorber(
+                
                 handle:
                     NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                 sliver: MultiSliver(
+                  
                   children: [
                     const UserProfileAppBarWidget(),
                     const Gap(20),
                     const UserProfileHeaderWidget(),
                     SliverPersistentHeader(
+                      
                       pinned: ModalRoute.of(context)!.isFirst,
                       delegate: const _UserProfileBarDelegate(
                         TabBar(
