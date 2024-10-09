@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/core/utils/custom_text_style.dart';
 
 class UserProfileCountsInfoWidget extends StatelessWidget {
@@ -11,11 +12,16 @@ class UserProfileCountsInfoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Column(
-        children: [
-          Text(count, style: CustomTextStyle.pacifico20),
-          Text(title, style: CustomTextStyle.pacifico20),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          children: [
+            Text(count, style: CustomTextStyle.pacifico20),
+            Text(title,
+                style: CustomTextStyle.pacifico18
+                    .copyWith(color: AppColors.whiteColor)),
+          ],
+        ),
       ),
     );
   }

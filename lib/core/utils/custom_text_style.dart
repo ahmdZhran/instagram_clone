@@ -21,7 +21,7 @@ abstract class CustomTextStyle {
     fontSize: 30.sp,
   );
   static final pacifico25 = TextStyle(
-    fontSize: 30.sp,
+    fontSize: 25.sp,
   );
   static final pacifico18 = TextStyle(
     fontSize: 18.sp,
