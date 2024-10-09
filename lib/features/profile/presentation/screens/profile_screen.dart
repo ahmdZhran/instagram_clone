@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 import '../widgets/user_profile_app_bar_widget.dart';
+import '../widgets/user_profile_header.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -31,6 +33,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               sliver: MultiSliver(
                 children: const [
                   UserProfileAppBarWidget(),
+                  Gap(20),
+                  UserProfileHeaderWidget()
                 ],
               ),
             )
