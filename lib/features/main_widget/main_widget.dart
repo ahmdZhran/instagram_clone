@@ -1,13 +1,14 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:instagram_clone/features/notifications/notifications_screen.dart';
 import '../../core/utils/app_assets.dart';
 import '../../core/utils/app_colors.dart';
 import '../../core/utils/app_responsive_spacer_helper.dart';
+import '../add_post/add_post_screen.dart';
 import '../explore/explore_screen.dart';
 import '../home/presentation/screens/home_screen.dart';
-import '../profile/profile_screen.dart';
-import '../reels/reels_screen.dart';
+import '../profile/presentation/screens/profile_screen.dart';
 import 'bottom_nav_bar_item_widget.dart';
 
 class MainWidget extends StatefulWidget {
@@ -45,7 +46,8 @@ class _MainWidgetState extends State<MainWidget> {
             children: const [
               HomeScreen(),
               ExploreScreen(),
-              ReelsScreen(),
+              AddPostScreen(),
+              NotificationsScreen(),
               ProfileScreen(),
             ],
           ),
@@ -61,7 +63,7 @@ class _MainWidgetState extends State<MainWidget> {
                     child: Container(
                       padding: AppResponsiveSpacerHelper.customPadding,
                       decoration: BoxDecoration(
-                        color: AppColors.blueColor.withOpacity(0.3),
+                        color: AppColors.primaryColor.withOpacity(0.3),
                         borderRadius: BorderRadius.circular(50.r),
                       ),
                       child: Row(

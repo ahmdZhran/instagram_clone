@@ -14,15 +14,18 @@ abstract class CustomTextStyle {
     fontSize: 16.sp,
     fontWeight: FontWeight.bold,
   );
+  static final pacifico20 = TextStyle(
+    fontSize: 20.sp,
+  );
   static final pacifico30 = TextStyle(
     fontSize: 30.sp,
   );
   static final pacifico25 = TextStyle(
-    fontSize: 30.sp,
+    fontSize: 25.sp,
   );
   static final pacifico18 = TextStyle(
     fontSize: 18.sp,
-    color: AppColors.blueColor,
+    color: AppColors.primaryColor,
     fontWeight: FontWeight.bold,
   );
   static final normalTextStyle = TextStyle(

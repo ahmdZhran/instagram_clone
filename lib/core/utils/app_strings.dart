@@ -28,8 +28,12 @@ abstract class AppStrings {
   static const String passwordResetEmailSent =
       "Reset link sent if email is valid.";
   // Profile Strings
-  static const String posts = 'Posts';
-  static const String followers = 'Followers';
-  static const String following = 'Following';
-  static const String editProfile = 'Edit Profile';
+  static const String posts = 'posts';
+  static const String followers = 'followers';
+  static const String following = 'following';
+  static const String editProfile = 'edit_profile';
+  static const String shareProfile = "share_profile";
+  static const String darkMode = "dark_mode";
+  static const String lightMode = "light_mode";
+  static const String logout = "logout";
 }

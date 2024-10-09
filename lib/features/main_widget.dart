@@ -5,7 +5,7 @@ import 'package:instagram_clone/core/utils/app_assets.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/features/explore/explore_screen.dart';
 import 'package:instagram_clone/features/home/presentation/screens/home_screen.dart';
-import 'package:instagram_clone/features/profile/profile_screen.dart';
+import 'package:instagram_clone/features/profile/presentation/screens/profile_screen.dart';
 import 'package:instagram_clone/features/reels/reels_screen.dart';
 import 'main_widget/bottom_nav_bar_item_widget.dart';
 import 'main_widget/bottom_nav_bar_svg_icons_widget.dart';
@@ -57,7 +57,7 @@ class _MainWidgetState extends State<MainWidget> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
                 decoration: BoxDecoration(
-                  color: AppColors.blueColor,
+                  color: AppColors.primaryColor,
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: Row(

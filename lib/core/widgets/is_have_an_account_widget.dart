@@ -25,7 +25,7 @@ class IsHaveAnAccountWidget extends StatelessWidget {
             TextSpan(
               text: titleOfTextTwo,
               style: CustomTextStyle.pacifico16
-                  .copyWith(color: AppColors.blueColor),
+                  .copyWith(color: AppColors.primaryColor),
             ),
           ],
         ),

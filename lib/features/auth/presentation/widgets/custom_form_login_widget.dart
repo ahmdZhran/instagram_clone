@@ -97,7 +97,7 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
                         loginCubit.logIn();
                       }
                     },
-                    color: AppColors.blueColor,
+                    color: AppColors.primaryColor,
                   ),
                   const Gap(30),
                   IsHaveAnAccountWidget(

@@ -74,7 +74,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                 AppStrings.resetItNow,
                                 style: CustomTextStyle.pacifico14,
                               ),
-                        color: AppColors.blueColor,
+                        color: AppColors.primaryColor,
                         onPressed: () {
                           if (_resetPasswordFormKey.currentState!.validate()) {
                             resetPasswordCubit.resetPassword();

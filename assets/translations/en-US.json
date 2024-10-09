@@ -1,4 +1,12 @@
 {
-    "name":"name",
-    "login": "Login"
+    "posts":"Posts",
+    "followers": "Followers",
+    "following":"Following",
+    "edit_profile":"Edit profile",
+    "share_profile":"Share profile",
+    "arabic":"Arabic",
+    "english":"English",
+    "logout":"Logout",
+    "dark mode":"Dark mode",
+    "light mode":"Light mode"
 }
