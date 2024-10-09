@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 
+import '../../profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -15,18 +17,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _nestedScrollController = ScrollController();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: DefaultTabController(length: 2,child: NestedScrollView(
+        body: DefaultTabController(
+      length: 2,
+      child: NestedScrollView(
         controller: _nestedScrollController,
         headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return [SliverOverlapAbsorber(handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),sliver: ,)];
+          return [
+            SliverOverlapAbsorber(
+              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+              sliver: MultiSliver(
+                children: const [
+                  UserProfileAppBarWidget(),
+                ],
+              ),
+            )
+          ];
         },
-        body: ,
+        body: const Column(
+          children: [],
         ),
-        )
-    );
+      ),
+    ));
   }
 
   @override

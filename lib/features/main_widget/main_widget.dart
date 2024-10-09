@@ -6,7 +6,7 @@ import '../../core/utils/app_colors.dart';
 import '../../core/utils/app_responsive_spacer_helper.dart';
 import '../explore/explore_screen.dart';
 import '../home/presentation/screens/home_screen.dart';
-import '../profile/profile_screen.dart';
+import '../profile/presentation/screens/profile_screen.dart';
 import '../reels/reels_screen.dart';
 import 'bottom_nav_bar_item_widget.dart';
 
