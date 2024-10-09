@@ -15,6 +15,7 @@ class AppAssets {
   static const String bookmarkActive = "assets/images/bookmark_active.svg";
   static const String shareIcon = "assets/svg/paper-plane.svg";
   static const String loadingAnimation = "assets/lottie/loading_animation.json";
+  static const String settingsIcon = "assets/svg/settings.svg";
   static const String instagramAnimationLogo =
       'assets/lottie/intagram_logo_animation.json';
 }
