@@ -9,7 +9,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: AppResponsiveSpacerHelper.smallPaddingOnly,
+        padding: AppResponsiveSpacerHelper.smallOnlyPadding,
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
