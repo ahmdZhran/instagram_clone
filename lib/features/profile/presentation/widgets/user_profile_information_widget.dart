@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'user_profile_counts_info_widget.dart';
@@ -12,17 +13,17 @@ class UserProfileInformationWidget extends StatelessWidget {
         UserProfileCountsInfoWidget(
           onTap: () {},
           count: '0',
-          title: 'posts',
+          title: 'posts'.tr(),
         ),
         UserProfileCountsInfoWidget(
           onTap: () {},
           count: '0',
-          title: 'Followers',
+          title: 'Followers'.tr(),
         ),
         UserProfileCountsInfoWidget(
           onTap: () {},
           count: '0',
-          title: 'Following',
+          title: 'Following'.tr(),
         )
       ],
     );
