@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 
 import 'user_profile_information_widget.dart';
 
@@ -15,6 +16,7 @@ class UserProfileHeaderWidget extends StatelessWidget {
       ),
       sliver: SliverToBoxAdapter(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -25,6 +27,10 @@ class UserProfileHeaderWidget extends StatelessWidget {
                 ),
                 const UserProfileInformationWidget()
               ],
+            ),
+            const Gap(40),
+            const Text(
+              'Ahmed Muhamed',
             )
           ],
         ),
