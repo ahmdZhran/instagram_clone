@@ -32,4 +32,8 @@ abstract class AppStrings {
   static const String followers = 'Followers';
   static const String following = 'Following';
   static const String editProfile = 'Edit Profile';
+
+  static const String darkMode = "Dark theme";
+  static const String lightMode = "Light theme";
+  static const String logout = "Logout";
 }

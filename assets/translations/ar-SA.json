@@ -5,5 +5,8 @@
     "edit_profile":"تعديل الملف الشخصي",
     "share_profile":"مشاركة الملف الشخصي",
     "arabic":"عربي",
-    "english":"انجليزي"
+    "english":"انجليزي",
+    "logout":"تسجيل الخروج",
+    "dark mode":"الوضع الليلي",
+    "light mode":"الوضع المضئ"
 }

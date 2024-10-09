@@ -5,5 +5,8 @@
     "edit_profile":"Edit profile",
     "share_profile":"Share profile",
     "arabic":"Arabic",
-    "english":"English"
+    "english":"English",
+    "logout":"Logout",
+    "dark mode":"Dark mode",
+    "light mode":"Light mode"
 }

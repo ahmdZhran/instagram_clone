@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:instagram_clone/core/utils/app_strings.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_text_style.dart';
@@ -60,7 +62,7 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                       children: [
                         SwitchListTile(
                           activeColor: AppColors.primaryColor,
-                          title: const Text('Dark Mode'),
+                          title: Text(AppStrings.darkMode.tr()),
                           value: _isDarkMode,
                           onChanged: (bool value) {
                             setState(() {
@@ -79,7 +81,7 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                             ),
                             value: _selectedLanguage,
                             icon: const Icon(Icons.arrow_drop_down),
-                            items: <String>['English', 'Arabic']
+                            items: <String>['English'.tr(), 'Arabic'.tr()]
                                 .map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -95,7 +97,7 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                         ),
                         ListTile(
                           leading: const Icon(Icons.logout),
-                          title: const Text('Logout'),
+                          title: Text('Logout'.tr()),
                           onTap: () {
                             // Handle logout tap
                           },
