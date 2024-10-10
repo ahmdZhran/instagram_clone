@@ -37,13 +37,6 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
           ),
           const Spacer(),
           InkWell(
-            onTap: () {},
-            child: const Icon(
-              Icons.add_box_outlined,
-              size: 30,
-            ),
-          ),
-          InkWell(
             borderRadius: BorderRadius.circular(12),
             onTap: () {
               showModalBottomSheet(
@@ -81,8 +74,10 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                             ),
                             value: _selectedLanguage,
                             icon: const Icon(Icons.arrow_drop_down),
-                            items: <String>['English'.tr(), 'Arabic'.tr()]
-                                .map<DropdownMenuItem<String>>((String value) {
+                            items: <String>[
+                              AppStrings.english.tr(),
+                              AppStrings.arabic.tr()
+                            ].map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
                                 child: Text(value),
@@ -97,7 +92,7 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                         ),
                         ListTile(
                           leading: const Icon(Icons.logout),
-                          title: Text('Logout'.tr()),
+                          title: Text(AppStrings.logout.tr()),
                           onTap: () {
                             // Handle logout tap
                           },
