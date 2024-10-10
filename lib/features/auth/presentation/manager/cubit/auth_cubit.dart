@@ -103,8 +103,9 @@ class AuthCubit extends Cubit<AuthState> {
     final isRegister = authDI.isRegistered<AuthCubit>(instanceName: _tag);
     if (!isRegister) {
       authDI.registerSingleton<AuthCubit>(
-          AuthCubit(authDI(), authDI<ImagePickerService>()),
-          instanceName: _tag);
+        AuthCubit(authDI(), authDI<ImagePickerService>()),
+        instanceName: _tag,
+      );
     }
     return authDI.get<AuthCubit>(instanceName: _tag);
   }

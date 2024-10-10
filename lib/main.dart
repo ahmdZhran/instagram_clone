@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/core/router/app_router.dart';
-import 'package:instagram_clone/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:instagram_clone/my_bloc_observer.dart';
 import 'app/instagram_app.dart';
 import 'core/helper/shared_pref_helper.dart';
@@ -29,11 +28,8 @@ Future<void> main() async {
       ],
       path: 'assets/translations',
       startLocale: const Locale('en', 'US'),
-      child: BlocProvider(
-        create: (context) => ProfileCubit(sharedPrefHelper)..loadTheme(),
-        child: InstagramApp(
-          appRouter: AppRouter(),
-        ),
+      child: InstagramApp(
+        appRouter: AppRouter(),
       ),
     ),
   );

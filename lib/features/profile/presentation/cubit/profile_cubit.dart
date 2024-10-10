@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/core/helper/shared_pref_helper.dart';
 import 'package:instagram_clone/core/utils/app_them.dart';
+import 'package:instagram_clone/features/profile/profile_di.dart';
 
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
-  ProfileCubit(this.sharedPrefHelper) : super(ProfileInitial());
+  ProfileCubit({required this.sharedPrefHelper}) : super(ProfileInitial());
 
   static const _themeKey = "theme";
   final SharedPrefHelper sharedPrefHelper;
@@ -28,5 +29,17 @@ class ProfileCubit extends Cubit<ProfileState> {
     } else {
       emit(ProfileThemeChanged(themeData: AppThemes.lightTheme));
     }
+  }
+
+  static const String _tag = "profile_instance";
+  static ProfileCubit getInstance() {
+    final isRegister = profileDI.isRegistered<ProfileCubit>(instanceName: _tag);
+    if (!isRegister) {
+      profileDI.registerSingleton<ProfileCubit>(
+        ProfileCubit(sharedPrefHelper: profileDI()),
+        instanceName: _tag,
+      );
+    }
+    return profileDI.get<ProfileCubit>(instanceName: _tag);
   }
 }
