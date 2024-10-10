@@ -107,6 +107,12 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                               onChanged: (String? newValue) {
                                 setState(() {
                                   _selectedLanguage = newValue!;
+                                  if (_selectedLanguage ==
+                                      AppStrings.english.tr()) {
+                                    profileCubit.changeLanguage(context, 'en');
+                                  } else {
+                                    profileCubit.changeLanguage(context, 'ar');
+                                  }
                                 });
                               },
                             ),

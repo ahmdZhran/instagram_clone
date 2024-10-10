@@ -24,6 +24,15 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
+  void loadTheme() {
+    final bool isDarkMode = SharedPrefHelper().getData(key: _themeKey) ?? true;
+    if (isDarkMode) {
+      emit(ProfileThemeChanged(themeData: AppThemes.darkTheme));
+    } else {
+      emit(ProfileThemeChanged(themeData: AppThemes.lightTheme));
+    }
+  }
+
   void changeLanguage(context, String languageCode) async {
     final locale = Locale(languageCode);
     context.setLocale(locale);
@@ -31,12 +40,11 @@ class ProfileCubit extends Cubit<ProfileState> {
     emit(ProfileLanguageChanged(locale: locale));
   }
 
-  void loadTheme() {
-    final bool isDarkMode = SharedPrefHelper().getData(key: _themeKey) ?? true;
-    if (isDarkMode) {
-      emit(ProfileThemeChanged(themeData: AppThemes.darkTheme));
-    } else {
-      emit(ProfileThemeChanged(themeData: AppThemes.lightTheme));
+  void loadLanguage(context) {
+    final String? languageCode = sharedPrefHelper.getData(key: _languageKey);
+    if (languageCode != null) {
+      context.setLocale(Locale(languageCode));
+      emit(ProfileLanguageChanged(locale: Locale(languageCode)));
     }
   }
 
