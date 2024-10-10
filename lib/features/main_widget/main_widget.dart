@@ -103,7 +103,10 @@ class _MainWidgetState extends State<MainWidget> {
                                   shape: BoxShape.circle,
                                   border: Border.all(
                                     color: index == 4
-                                        ? Colors.white
+                                        ? (Theme.of(context).brightness ==
+                                                Brightness.dark
+                                            ? AppColors.whiteColor
+                                            : AppColors.darkThemColor)
                                         : Colors.transparent,
                                     width: 2.0,
                                   ),
