@@ -59,7 +59,6 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
               onTap: () {
                 showModalBottomSheet(
                   context: context,
-                  backgroundColor: AppColors.darkThemColor,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(20),
@@ -124,8 +123,11 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                 height: 22.h,
                 width: 22.w,
                 'assets/svg/settings.svg',
-                colorFilter: const ColorFilter.mode(
-                    AppColors.whiteColor, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(
+                    Theme.of(context).brightness == Brightness.dark
+                        ? AppColors.whiteColor
+                        : AppColors.darkThemColor,
+                    BlendMode.srcIn),
               ),
             ),
           ],
