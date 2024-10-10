@@ -14,17 +14,15 @@ class InstagramApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<ProfileCubit>().loadTheme();
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       child: BlocBuilder<ProfileCubit, ProfileState>(
+        bloc: ProfileCubit.getInstance()..loadTheme(),
         builder: (context, state) {
           ThemeData theme = AppThemes.darkTheme;
-
           if (state is ProfileThemeChanged) {
             theme = state.themeData;
           }
-
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: AppStrings.appName,

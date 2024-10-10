@@ -5,6 +5,6 @@ final profileDI = GetIt.instance;
 
 class ProfileDI {
   Future<void> init() async {
-    profileDI.registerLazySingleton(() => SharedPrefHelper());
+    profileDI.registerLazySingleton<SharedPrefHelper>(() => SharedPrefHelper());
   }
 }

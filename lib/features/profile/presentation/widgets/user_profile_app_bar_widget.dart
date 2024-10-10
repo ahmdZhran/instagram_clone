@@ -18,11 +18,12 @@ class UserProfileAppBarWidget extends StatefulWidget {
 class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
   bool _isDarkMode = true;
   String _selectedLanguage = 'English';
-
+  final profileCubit = ProfileCubit.getInstance();
   @override
   void initState() {
     super.initState();
-    final themeState = context.read<ProfileCubit>().state;
+    final themeState = profileCubit.state;
+
     if (themeState is ProfileThemeChanged) {
       _isDarkMode = themeState.themeData.brightness == Brightness.dark;
     }
@@ -31,6 +32,7 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<ProfileCubit, ProfileState>(
+      bloc: profileCubit,
       listener: (context, state) {
         if (state is ProfileThemeChanged) {
           setState(() {
@@ -79,7 +81,7 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                               setState(() {
                                 _isDarkMode = value;
                               });
-                              context.read<ProfileCubit>().toggleTheme(value);
+                              profileCubit.toggleTheme(value);
                             },
                             secondary: const Icon(Icons.dark_mode),
                           ),
