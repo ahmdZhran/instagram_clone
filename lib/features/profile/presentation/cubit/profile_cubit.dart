@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/core/helper/shared_pref_helper.dart';
+import 'package:instagram_clone/core/utils/app_them.dart';
 
 part 'profile_state.dart';
 
@@ -12,10 +13,10 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   void toggleTheme(bool isDarkMode) async {
     if (isDarkMode) {
-      emit(ProfileThemeChanged(themeData: ThemeData.dark()));
+      emit(ProfileThemeChanged(themeData: AppThemes.darkTheme));
       await sharedPrefHelper.saveData(key: _themeKey, value: true);
     } else {
-      emit(ProfileThemeChanged(themeData: ThemeData.light()));
+      emit(ProfileThemeChanged(themeData: AppThemes.lightTheme));
       await sharedPrefHelper.saveData(key: _themeKey, value: false);
     }
   }
@@ -23,9 +24,9 @@ class ProfileCubit extends Cubit<ProfileState> {
   void loadTheme() {
     final bool isDarkMode = SharedPrefHelper().getData(key: _themeKey) ?? true;
     if (isDarkMode) {
-      emit(ProfileThemeChanged(themeData: ThemeData.dark()));
+      emit(ProfileThemeChanged(themeData: AppThemes.darkTheme));
     } else {
-      emit(ProfileThemeChanged(themeData: ThemeData.light()));
+      emit(ProfileThemeChanged(themeData: AppThemes.lightTheme));
     }
   }
 }

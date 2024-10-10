@@ -14,18 +14,15 @@ class InstagramApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Load theme from shared preferences when the app starts
     context.read<ProfileCubit>().loadTheme();
-
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       child: BlocBuilder<ProfileCubit, ProfileState>(
         builder: (context, state) {
-          // Set the theme based on the ProfileCubit state
-          ThemeData theme = AppThemes.darkTheme; // Default to darkTheme
+          ThemeData theme = AppThemes.darkTheme;
 
           if (state is ProfileThemeChanged) {
-            theme = state.themeData; // Apply the dynamic theme
+            theme = state.themeData;
           }
 
           return MaterialApp(
@@ -34,7 +31,7 @@ class InstagramApp extends StatelessWidget {
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,
-            theme: theme, // Use the theme from ProfileCubit
+            theme: theme,
             onGenerateRoute: appRouter.onGenerateRoute,
             initialRoute: Routes.splashScreen,
           );
