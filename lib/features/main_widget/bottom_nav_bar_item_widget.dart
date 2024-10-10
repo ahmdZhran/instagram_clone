@@ -19,14 +19,16 @@ class BottomNavBarItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final iconColor = Theme.of(context).brightness == Brightness.dark
+        ? AppColors.whiteColor
+        : AppColors.darkThemColor;
     return InkWell(
       onTap: onTap,
       child: AnimatedScale(
         duration: const Duration(milliseconds: 200),
         scale: isActive ? 1.2 : 1,
         child: SvgPicture.asset(
-          colorFilter:
-              const ColorFilter.mode(AppColors.whiteColor, BlendMode.srcIn),
+          colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
           height: 18.h,
           width: 18.w,
           isActive ? activeIcon : inactiveIcon,
