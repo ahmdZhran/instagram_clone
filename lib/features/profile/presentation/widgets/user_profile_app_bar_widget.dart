@@ -81,7 +81,7 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                             ),
                             value: _selectedLanguage,
                             icon: const Icon(Icons.arrow_drop_down),
-                            items: <String>['English'.tr(), 'Arabic'.tr()]
+                            items: <String>[AppStrings.english.tr(), AppStrings.arabic.tr()]
                                 .map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -97,7 +97,7 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                         ),
                         ListTile(
                           leading: const Icon(Icons.logout),
-                          title: Text('Logout'.tr()),
+                          title: Text(AppStrings.logout.tr()),
                           onTap: () {
                             // Handle logout tap
                           },
