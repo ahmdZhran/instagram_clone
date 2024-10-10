@@ -10,6 +10,8 @@ class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit({required this.sharedPrefHelper}) : super(ProfileInitial());
 
   static const _themeKey = "theme";
+  static const _languageKey = "language";
+
   final SharedPrefHelper sharedPrefHelper;
 
   void toggleTheme(bool isDarkMode) async {
@@ -20,6 +22,13 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(ProfileThemeChanged(themeData: AppThemes.lightTheme));
       await sharedPrefHelper.saveData(key: _themeKey, value: false);
     }
+  }
+
+  void changeLanguage(context, String languageCode) async {
+    final locale = Locale(languageCode);
+    context.setLocale(locale);
+    await sharedPrefHelper.saveData(key: _languageKey, value: languageCode);
+    emit(ProfileLanguageChanged(locale: locale));
   }
 
   void loadTheme() {
