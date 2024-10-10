@@ -71,6 +71,7 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           SwitchListTile(
+                            inactiveThumbColor: AppColors.primaryColor,
                             activeColor: AppColors.primaryColor,
                             title: Text(AppStrings.darkMode.tr()),
                             value: _isDarkMode,
