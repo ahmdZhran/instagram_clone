@@ -16,6 +16,7 @@ class AppThemes {
         color: Colors.black,
         fontWeight: FontWeight.bold,
         fontSize: 20,
+        fontFamily: 'Pacifico',
       ),
     ),
     iconTheme: const IconThemeData(
