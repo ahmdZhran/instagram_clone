@@ -10,7 +10,7 @@ abstract class AppStrings {
   static const String emailAddress = "Email Address";
   static const String password = "Password";
   static const String signUp = "Sign Up";
-  static const String logIn = "Sign In";
+  static const String logIn = "Login In";
   static const String pleaseVerifyEmail = 'Please verify your email';
   static const String alreadyHaveAnAccount = "Already have an account? ";
   static const String donnHaveAnAccount = "Don’t have an account? ";
