@@ -109,8 +109,14 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                             ),
                           ),
                           ListTile(
-                            leading: const Icon(Icons.logout),
-                            title: Text(AppStrings.logout.tr()),
+                            leading: const Icon(
+                              Icons.logout,
+                              color: AppColors.redColor,
+                            ),
+                            title: Text(AppStrings.logout.tr(),
+                                style: CustomTextStyle.pacifico14.copyWith(
+                                  color: AppColors.redColor,
+                                )),
                             onTap: () {},
                           ),
                         ],
