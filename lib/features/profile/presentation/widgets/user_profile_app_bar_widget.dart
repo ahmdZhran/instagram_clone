@@ -144,4 +144,10 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    ProfileCubit.deleteInstance();
+    super.dispose();
+  }
 }

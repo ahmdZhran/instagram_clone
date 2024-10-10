@@ -42,4 +42,13 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
     return profileDI.get<ProfileCubit>(instanceName: _tag);
   }
+
+  static Future<void> deleteInstance() async {
+    final isRegister = profileDI.isRegistered<ProfileCubit>(instanceName: _tag);
+    if (isRegister) {
+      final cubit = profileDI<ProfileCubit>(instanceName: _tag);
+      await cubit.close();
+      profileDI.unregister<ProfileCubit>(instanceName: _tag);
+    }
+  }
 }
