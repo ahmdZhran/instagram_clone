@@ -34,7 +34,7 @@ class AppThemes {
     ),
     fontFamily: 'Pacifico',
     bottomSheetTheme: const BottomSheetThemeData(
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: AppColors.lightModeColor,
     ),
   );
 
@@ -49,7 +49,7 @@ class AppThemes {
       backgroundColor: AppColors.darkThemColor,
       iconTheme: IconThemeData(color: Colors.white),
       titleTextStyle: TextStyle(
-        color: AppColors.whiteColor,
+        color: AppColors.lightModeColor,
         fontWeight: FontWeight.bold,
         fontSize: 20,
         fontFamily: 'Pacifico',

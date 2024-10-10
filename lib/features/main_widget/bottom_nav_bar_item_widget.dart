@@ -20,7 +20,7 @@ class BottomNavBarItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final iconColor = Theme.of(context).brightness == Brightness.dark
-        ? AppColors.whiteColor
+        ? AppColors.lightModeColor
         : AppColors.darkThemColor;
     return InkWell(
       onTap: onTap,

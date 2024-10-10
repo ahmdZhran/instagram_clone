@@ -99,7 +99,7 @@ class _UserProfileBarDelegate extends SliverPersistentHeaderDelegate {
     return ColoredBox(
       color: Theme.of(context).brightness == Brightness.dark
           ? AppColors.darkThemColor
-          : AppColors.whiteColor,
+          : AppColors.lightModeColor,
       child: tabBar,
     );
   }
