@@ -21,7 +21,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   void loadTheme() {
-    final bool isDarkMode = SharedPrefHelper().getData(key: _themeKey) ?? false;
+    final bool isDarkMode = SharedPrefHelper().getData(key: _themeKey) ?? true;
     if (isDarkMode) {
       emit(ProfileThemeChanged(themeData: ThemeData.dark()));
     } else {

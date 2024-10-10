@@ -30,6 +30,9 @@ class AppThemes {
       bodyMedium: TextStyle(color: Colors.black),
     ),
     fontFamily: 'Pacifico',
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: AppColors.whiteColor,
+    ),
   );
 
   static final darkTheme = ThemeData(
@@ -60,5 +63,8 @@ class AppThemes {
       bodyMedium: TextStyle(color: Colors.white),
     ),
     fontFamily: 'Pacifico',
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: AppColors.darkThemColor,
+    ),
   );
 }
