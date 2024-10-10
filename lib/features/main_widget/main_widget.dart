@@ -63,7 +63,9 @@ class _MainWidgetState extends State<MainWidget> {
                     child: Container(
                       padding: AppResponsiveSpacerHelper.customPadding,
                       decoration: BoxDecoration(
-                        color: AppColors.primaryColor.withOpacity(0.3),
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? AppColors.primaryColor.withOpacity(0.3)
+                            : AppColors.greyColor.withOpacity(0.3),
                         borderRadius: BorderRadius.circular(50.r),
                       ),
                       child: Row(
@@ -103,7 +105,10 @@ class _MainWidgetState extends State<MainWidget> {
                                   shape: BoxShape.circle,
                                   border: Border.all(
                                     color: index == 4
-                                        ? Colors.white
+                                        ? (Theme.of(context).brightness ==
+                                                Brightness.dark
+                                            ? AppColors.lightModeColor
+                                            : AppColors.darkThemColor)
                                         : Colors.transparent,
                                     width: 2.0,
                                   ),

@@ -23,7 +23,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _nestedScrollController = ScrollController();
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,17 +34,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
               SliverOverlapAbsorber(
-                
                 handle:
                     NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                 sliver: MultiSliver(
-                  
                   children: [
                     const UserProfileAppBarWidget(),
                     const Gap(20),
                     const UserProfileHeaderWidget(),
                     SliverPersistentHeader(
-                      
                       pinned: ModalRoute.of(context)!.isFirst,
                       delegate: const _UserProfileBarDelegate(
                         TabBar(
@@ -101,7 +97,9 @@ class _UserProfileBarDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     return ColoredBox(
-      color: AppColors.darkThemColor,
+      color: Theme.of(context).brightness == Brightness.dark
+          ? AppColors.darkThemColor
+          : AppColors.lightModeColor,
       child: tabBar,
     );
   }

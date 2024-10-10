@@ -16,6 +16,7 @@ class AppThemes {
         color: Colors.black,
         fontWeight: FontWeight.bold,
         fontSize: 20,
+        fontFamily: 'Pacifico',
       ),
     ),
     iconTheme: const IconThemeData(
@@ -27,9 +28,15 @@ class AppThemes {
       unselectedItemColor: Colors.grey,
     ),
     textTheme: const TextTheme(
-      bodyMedium: TextStyle(color: Colors.black),
+      bodyMedium: TextStyle(
+        color: Colors.black,
+        fontFamily: 'Pacifico',
+      ),
     ),
     fontFamily: 'Pacifico',
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: AppColors.lightModeColor,
+    ),
   );
 
   static final darkTheme = ThemeData(
@@ -43,11 +50,13 @@ class AppThemes {
       backgroundColor: AppColors.darkThemColor,
       iconTheme: IconThemeData(color: Colors.white),
       titleTextStyle: TextStyle(
-        color: Colors.white,
+        color: AppColors.lightModeColor,
         fontWeight: FontWeight.bold,
         fontSize: 20,
+        fontFamily: 'Pacifico',
       ),
     ),
+    fontFamily: 'Pacifico',
     iconTheme: const IconThemeData(
       color: Colors.white,
     ),
@@ -57,8 +66,14 @@ class AppThemes {
       unselectedItemColor: Colors.grey,
     ),
     textTheme: const TextTheme(
-      bodyMedium: TextStyle(color: Colors.white),
+      bodyMedium: TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+        fontFamily: 'Pacifico',
+      ),
     ),
-    fontFamily: 'Pacifico',
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: AppColors.darkThemColor,
+    ),
   );
 }
