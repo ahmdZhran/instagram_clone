@@ -28,7 +28,6 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
         if (state is ProfileThemeChanged) {
           _isDarkMode = state.themeData.brightness == Brightness.dark;
         }
-
         if (state is ProfileLanguageChanged) {
           _selectedLanguage = state.locale.languageCode;
           context.setLocale(state.locale);
@@ -135,11 +134,5 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    ProfileCubit.deleteInstance();
-    super.dispose();
   }
 }

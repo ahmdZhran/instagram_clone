@@ -16,7 +16,7 @@ class UserProfileCountsInfoWidget extends StatelessWidget {
         child: Column(
           children: [
             Text(count, style: CustomTextStyle.pacifico20),
-            Text(title, style: CustomTextStyle.pacifico14),
+            Text(title, style: CustomTextStyle.pacifico10),
           ],
         ),
       ),
