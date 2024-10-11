@@ -14,27 +14,37 @@ class InstagramApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final profileCubit = ProfileCubit.getInstance();
+    profileCubit.loadTheme();
+    profileCubit.loadLanguage();
+
     return ScreenUtilInit(
       designSize: const Size(360, 690),
-      child: BlocBuilder<ProfileCubit, ProfileState>(
-        bloc: ProfileCubit.getInstance()..loadTheme(),
-        builder: (context, state) {
-          ThemeData theme = AppThemes.darkTheme;
-          if (state is ProfileThemeChanged) {
-            theme = state.themeData;
-          }
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: AppStrings.appName,
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
-            locale: context.locale,
-            theme: theme,
-            onGenerateRoute: appRouter.onGenerateRoute,
-            initialRoute: Routes.splashScreen,
-          );
-        },
-      ),
+      builder: (context, child) {
+        return BlocBuilder<ProfileCubit, ProfileState>(
+          bloc: profileCubit,
+          builder: (context, state) {
+            ThemeData theme = AppThemes.darkTheme;
+            Locale locale = context.locale;
+            if (state is ProfileThemeChanged) {
+              theme = state.themeData;
+            }
+            if (state is ProfileLanguageChanged) {
+              locale = state.locale;
+            }
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: AppStrings.appName,
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: locale,
+              theme: theme,
+              onGenerateRoute: appRouter.onGenerateRoute,
+              initialRoute: Routes.splashScreen,
+            );
+          },
+        );
+      },
     );
   }
 }

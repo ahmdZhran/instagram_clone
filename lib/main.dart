@@ -11,10 +11,8 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   final sharedPrefHelper = SharedPrefHelper();
   await sharedPrefHelper.init();
-
   Bloc.observer = MyBlocObserver();
   await Future.wait([
     InjectionContainer().init(),
@@ -23,11 +21,11 @@ Future<void> main() async {
   runApp(
     EasyLocalization(
       supportedLocales: const [
-        Locale('en', 'US'),
-        Locale('ar', 'SA'),
+        Locale('en'),
+        Locale('ar'),
       ],
       path: 'assets/translations',
-      startLocale: const Locale('en', 'US'),
+      startLocale: const Locale('en'),
       child: InstagramApp(
         appRouter: AppRouter(),
       ),

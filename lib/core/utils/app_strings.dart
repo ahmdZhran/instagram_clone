@@ -36,6 +36,8 @@ abstract class AppStrings {
   static const String darkMode = "dark_mode";
   static const String lightMode = "light_mode";
   static const String logout = "logout";
+  static const String englishCode = "en";
+  static const String arabicCode = "ar";
   static const String english = "english";
   static const String arabic = "arabic";
 }

@@ -17,17 +17,8 @@ class UserProfileAppBarWidget extends StatefulWidget {
 
 class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
   bool _isDarkMode = true;
-  String _selectedLanguage = 'English';
+  String _selectedLanguage = AppStrings.englishCode;
   final profileCubit = ProfileCubit.getInstance();
-  @override
-  void initState() {
-    super.initState();
-    final themeState = profileCubit.state;
-
-    if (themeState is ProfileThemeChanged) {
-      _isDarkMode = themeState.themeData.brightness == Brightness.dark;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +26,12 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
       bloc: profileCubit,
       listener: (context, state) {
         if (state is ProfileThemeChanged) {
-          setState(() {
-            _isDarkMode = state.themeData.brightness == Brightness.dark;
-          });
+          _isDarkMode = state.themeData.brightness == Brightness.dark;
+        }
+
+        if (state is ProfileLanguageChanged) {
+          _selectedLanguage = state.locale.languageCode;
+          context.setLocale(state.locale);
         }
       },
       child: SliverAppBar(
@@ -78,9 +72,6 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                             title: Text(AppStrings.darkMode.tr()),
                             value: _isDarkMode,
                             onChanged: (bool value) {
-                              setState(() {
-                                _isDarkMode = value;
-                              });
                               profileCubit.toggleTheme(value);
                             },
                             secondary: const Icon(Icons.dark_mode),
@@ -90,30 +81,25 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                             title: DropdownButton<String>(
                               underline: Container(
                                 height: 2,
-                                width: 10,
                                 color: Colors.transparent,
                               ),
                               value: _selectedLanguage,
                               icon: const Icon(Icons.arrow_drop_down),
                               items: <String>[
-                                AppStrings.english.tr(),
-                                AppStrings.arabic.tr()
+                                AppStrings.englishCode,
+                                AppStrings.arabicCode
                               ].map<DropdownMenuItem<String>>((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
-                                  child: Text(value),
+                                  child: Text(value == AppStrings.englishCode
+                                      ? AppStrings.english.tr()
+                                      : AppStrings.arabic.tr()),
                                 );
                               }).toList(),
                               onChanged: (String? newValue) {
-                                setState(() {
-                                  _selectedLanguage = newValue!;
-                                  if (_selectedLanguage ==
-                                      AppStrings.english.tr()) {
-                                    profileCubit.changeLanguage(context, 'en');
-                                  } else {
-                                    profileCubit.changeLanguage(context, 'ar');
-                                  }
-                                });
+                                if (newValue != null) {
+                                  profileCubit.changeLanguage(newValue);
+                                }
                               },
                             ),
                           ),

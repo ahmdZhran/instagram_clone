@@ -33,18 +33,17 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  void changeLanguage(context, String languageCode) async {
-    final locale = Locale(languageCode);
-    context.setLocale(locale);
+  void changeLanguage(String languageCode) async {
     await sharedPrefHelper.saveData(key: _languageKey, value: languageCode);
-    emit(ProfileLanguageChanged(locale: locale));
+    emit(ProfileLanguageChanged(locale: Locale(languageCode)));
   }
 
-  void loadLanguage(context) {
+  void loadLanguage() {
     final String? languageCode = sharedPrefHelper.getData(key: _languageKey);
     if (languageCode != null) {
-      context.setLocale(Locale(languageCode));
       emit(ProfileLanguageChanged(locale: Locale(languageCode)));
+    } else {
+      emit(ProfileLanguageChanged(locale: const Locale('en')));
     }
   }
 
