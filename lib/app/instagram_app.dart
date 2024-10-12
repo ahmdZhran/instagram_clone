@@ -35,7 +35,7 @@ class _InstagramAppState extends State<InstagramApp> {
               title: AppStrings.appName,
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,
-              locale: locale, 
+              locale: locale,
               theme: theme,
               onGenerateRoute: widget.appRouter.onGenerateRoute,
               initialRoute: Routes.splashScreen,
