@@ -20,7 +20,7 @@ class ColorsExtension extends ThemeExtension<ColorsExtension> {
       return this;
     }
     return ColorsExtension(
-      mainColor: Color.lerp(mainColor, other.mainColor, t)!,
+      mainColor: mainColor,
     );
   }
 
