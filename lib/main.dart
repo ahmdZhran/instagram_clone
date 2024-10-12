@@ -26,7 +26,7 @@ Future<void> main() async {
         Locale(AppStrings.arabicCode)
       ],
       path: 'assets/translations',
-      startLocale: const Locale(AppStrings.arabicCode),
+      startLocale: const Locale(AppStrings.englishCode),
       child: InstagramApp(
         appRouter: AppRouter(),
       ),
