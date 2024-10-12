@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart' show Locale, LocalizationsDelegate;
-import 'lang_keys.dart';
+import 'lang_code.dart';
 
 import 'app_localization.dart';
 
@@ -10,7 +10,7 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   // Override method to check if a given locale is supported by the app.
   @override
   bool isSupported(Locale locale) {
-    return [LangKeys.englishCode, LangKeys.arabicCode]
+    return [LangCode.englishCode, LangCode.arabicCode]
         .contains(locale.languageCode);
   }
 

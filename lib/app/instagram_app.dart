@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:instagram_clone/core/languages/app_localization_setup.dart';
-import 'package:instagram_clone/core/languages/lang_keys.dart';
+import 'package:instagram_clone/core/languages/lang_code.dart';
 import 'package:instagram_clone/core/router/app_router.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import '../core/router/routes.dart';
@@ -35,12 +35,12 @@ class _InstagramAppState extends State<InstagramApp> {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               title: AppStrings.appName,
-              localizationsDelegates: AppLocalizationsSetup.localizationsDelegates,
+              localizationsDelegates:
+                  AppLocalizationsSetup.localizationsDelegates,
               supportedLocales: AppLocalizationsSetup.supportedLocales,
-              
               localeResolutionCallback:
                   AppLocalizationsSetup.localeResolutionCallback,
-              locale: const Locale(LangKeys.englishCode),
+              locale: const Locale(LangCode.englishCode),
               theme: theme,
               onGenerateRoute: widget.appRouter.onGenerateRoute,
               initialRoute: Routes.splashScreen,
