@@ -131,7 +131,7 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                 'assets/svg/settings.svg',
                 colorFilter: ColorFilter.mode(
                     Theme.of(context).brightness == Brightness.dark
-                        ? AppColors.lightModeColor
+                        ? AppColors.lightThemeColor
                         : AppColors.darkThemColor,
                     BlendMode.srcIn),
               ),

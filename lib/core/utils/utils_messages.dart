@@ -83,7 +83,7 @@ class UtilsMessages {
                         'Press here to check your inbox',
                         style: TextStyle(
                           fontSize: 14.sp,
-                          color: AppColors.lightModeColor,
+                          color: AppColors.lightThemeColor,
                         ),
                       ),
                     ),

@@ -107,7 +107,7 @@ class _MainWidgetState extends State<MainWidget> {
                                     color: index == 4
                                         ? (Theme.of(context).brightness ==
                                                 Brightness.dark
-                                            ? AppColors.lightModeColor
+                                            ? AppColors.lightThemeColor
                                             : AppColors.darkThemColor)
                                         : Colors.transparent,
                                     width: 2.0,

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/theme/colors_extension.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 
 class AppThemes {
   static final lightTheme = ThemeData(
-    extensions: ThemeExtension<dynamic>[],
+    extensions: const <ThemeExtension<dynamic>>[ColorsExtension.light],
     brightness: Brightness.light,
-    primaryColor: AppColors.lightModeColor,
-    scaffoldBackgroundColor: AppColors.lightModeColor,
+    primaryColor: AppColors.lightThemeColor,
+    scaffoldBackgroundColor: AppColors.lightThemeColor,
     colorScheme: const ColorScheme.light(
       primary: Colors.black,
     ),
     appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.lightModeColor,
+      backgroundColor: AppColors.lightThemeColor,
       iconTheme: IconThemeData(color: Colors.black),
       titleTextStyle: TextStyle(
         color: Colors.black,
@@ -23,7 +24,6 @@ class AppThemes {
     iconTheme: const IconThemeData(
       color: Colors.black,
     ),
-  
     textTheme: const TextTheme(
       bodyMedium: TextStyle(
         color: Colors.black,
@@ -32,11 +32,12 @@ class AppThemes {
     ),
     fontFamily: 'Pacifico',
     bottomSheetTheme: const BottomSheetThemeData(
-      backgroundColor: AppColors.lightModeColor,
+      backgroundColor: AppColors.lightThemeColor,
     ),
   );
 
   static final darkTheme = ThemeData(
+    extensions: const <ThemeExtension<dynamic>>[ColorsExtension.dark],
     brightness: Brightness.dark,
     primaryColor: AppColors.darkThemColor,
     scaffoldBackgroundColor: AppColors.darkThemColor,
@@ -47,7 +48,7 @@ class AppThemes {
       backgroundColor: AppColors.darkThemColor,
       iconTheme: IconThemeData(color: Colors.white),
       titleTextStyle: TextStyle(
-        color: AppColors.lightModeColor,
+        color: AppColors.lightThemeColor,
         fontWeight: FontWeight.bold,
         fontSize: 20,
         fontFamily: 'Pacifico',

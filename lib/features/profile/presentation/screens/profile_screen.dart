@@ -23,6 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _nestedScrollController = ScrollController();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,7 +100,7 @@ class _UserProfileBarDelegate extends SliverPersistentHeaderDelegate {
     return ColoredBox(
       color: Theme.of(context).brightness == Brightness.dark
           ? AppColors.darkThemColor
-          : AppColors.lightModeColor,
+          : AppColors.lightThemeColor,
       child: tabBar,
     );
   }
