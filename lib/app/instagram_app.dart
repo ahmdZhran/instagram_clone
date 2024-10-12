@@ -5,13 +5,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:instagram_clone/core/router/app_router.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import '../core/router/routes.dart';
-import '../core/utils/app_them.dart';
-import '../features/profile/presentation/cubit/profile_cubit.dart';
+import '../features/profile/presentation/cubits/profile_cubit.dart';
 
-class InstagramApp extends StatelessWidget {
+class InstagramApp extends StatefulWidget {
   const InstagramApp({super.key, required this.appRouter});
   final AppRouter appRouter;
 
+  @override
+  State<InstagramApp> createState() => _InstagramAppState();
+}
+
+class _InstagramAppState extends State<InstagramApp> {
   @override
   Widget build(BuildContext context) {
     final profileCubit = ProfileCubit.getInstance();
@@ -24,22 +28,16 @@ class InstagramApp extends StatelessWidget {
         return BlocBuilder<ProfileCubit, ProfileState>(
           bloc: profileCubit,
           builder: (context, state) {
-            ThemeData theme = AppThemes.darkTheme;
-            Locale locale = context.locale;
-            if (state is ProfileThemeChanged) {
-              theme = state.themeData;
-            }
-            if (state is ProfileLanguageChanged) {
-              locale = state.locale;
-            }
+            ThemeData theme = state.themeData;
+            Locale locale = state.locale;
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               title: AppStrings.appName,
               localizationsDelegates: context.localizationDelegates,
               supportedLocales: context.supportedLocales,
-              locale: locale,
+              locale: locale, 
               theme: theme,
-              onGenerateRoute: appRouter.onGenerateRoute,
+              onGenerateRoute: widget.appRouter.onGenerateRoute,
               initialRoute: Routes.splashScreen,
             );
           },

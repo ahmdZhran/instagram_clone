@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_text_style.dart';
-import '../cubit/profile_cubit.dart';
+import '../cubits/profile_cubit.dart';
 
 class UserProfileAppBarWidget extends StatefulWidget {
   const UserProfileAppBarWidget({super.key});
@@ -16,22 +16,26 @@ class UserProfileAppBarWidget extends StatefulWidget {
 }
 
 class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
-  bool _isDarkMode = true;
-  String _selectedLanguage = AppStrings.englishCode;
+  late bool _isDarkMode;
+  late String _selectedLanguage;
   final profileCubit = ProfileCubit.getInstance();
+
+  @override
+  void initState() {
+    super.initState();
+    final state = profileCubit.state;
+    _isDarkMode = state.themeData.brightness == Brightness.dark;
+    _selectedLanguage = state.locale.languageCode;
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<ProfileCubit, ProfileState>(
       bloc: profileCubit,
       listener: (context, state) {
-        if (state is ProfileThemeChanged) {
-          _isDarkMode = state.themeData.brightness == Brightness.dark;
-        }
-        if (state is ProfileLanguageChanged) {
-          _selectedLanguage = state.locale.languageCode;
-          context.setLocale(state.locale);
-        }
+        _isDarkMode = state.themeData.brightness == Brightness.dark;
+        _selectedLanguage = state.locale.languageCode;
+        context.setLocale(state.locale);
       },
       child: SliverAppBar(
         centerTitle: false,
@@ -97,6 +101,8 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                               }).toList(),
                               onChanged: (String? newValue) {
                                 if (newValue != null) {
+                                  Locale locale = Locale(newValue);
+                                  context.setLocale(locale);
                                   profileCubit.changeLanguage(newValue);
                                 }
                               },
