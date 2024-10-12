@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/languages/app_localization.dart';
 import 'package:instagram_clone/core/theme/colors_extension.dart';
 
 extension ExtensionsHelper on BuildContext {
-
-
-
   Future<dynamic> pushNamed(String routeName, {Object? arguments}) {
     return Navigator.of(this).pushNamed(routeName, arguments: arguments);
   }
@@ -19,7 +17,12 @@ extension ExtensionsHelper on BuildContext {
     return Navigator.of(this)
         .pushNamedAndRemoveUntil(routeName, predicate, arguments: arguments);
   }
+
   void pop() => Navigator.of(this).pop();
 
   ColorsExtension get color => Theme.of(this).extension<ColorsExtension>()!;
+
+  String translate(String langKey) {
+    return AppLocalizations.of(this)!.translate(langKey).toString();
+  }
 }
