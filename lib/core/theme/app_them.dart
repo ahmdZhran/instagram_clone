@@ -22,11 +22,7 @@ class AppThemes {
     iconTheme: const IconThemeData(
       color: Colors.black,
     ),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: Colors.white,
-      selectedItemColor: Colors.black,
-      unselectedItemColor: Colors.grey,
-    ),
+  
     textTheme: const TextTheme(
       bodyMedium: TextStyle(
         color: Colors.black,
@@ -59,11 +55,6 @@ class AppThemes {
     fontFamily: 'Pacifico',
     iconTheme: const IconThemeData(
       color: Colors.white,
-    ),
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: AppColors.darkThemColor,
-      selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.grey,
     ),
     textTheme: const TextTheme(
       bodyMedium: TextStyle(
