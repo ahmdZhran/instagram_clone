@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/core/helper/shared_pref_helper.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
-import 'package:instagram_clone/core/utils/app_them.dart';
+import 'package:instagram_clone/core/theme/app_them.dart';
 import 'package:instagram_clone/features/profile/profile_di.dart';
 
 part 'profile_state.dart';
