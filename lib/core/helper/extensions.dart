@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/theme/app_them.dart';
 import 'package:instagram_clone/core/theme/colors_extension.dart';
 
 extension ExtensionsHelper on BuildContext {
