@@ -3,6 +3,7 @@ import 'package:instagram_clone/core/utils/app_colors.dart';
 
 class AppThemes {
   static final lightTheme = ThemeData(
+    extensions: ThemeExtension<dynamic>[],
     brightness: Brightness.light,
     primaryColor: AppColors.lightModeColor,
     scaffoldBackgroundColor: AppColors.lightModeColor,
