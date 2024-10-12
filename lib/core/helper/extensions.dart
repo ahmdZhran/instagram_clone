@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/theme/colors_extension.dart';
 
-extension Navigation on BuildContext {
+extension ExtensionsHelper on BuildContext {
+
+
+
   Future<dynamic> pushNamed(String routeName, {Object? arguments}) {
     return Navigator.of(this).pushNamed(routeName, arguments: arguments);
   }
@@ -16,9 +20,6 @@ extension Navigation on BuildContext {
         .pushNamedAndRemoveUntil(routeName, predicate, arguments: arguments);
   }
   void pop() => Navigator.of(this).pop();
-}
 
-
-extension StringExtension on String? {
-  bool isNullOrEmpty() => this == null || this == "";
+  ColorsExtension get color => Theme.of(this).extension<ColorsExtension>()!;
 }

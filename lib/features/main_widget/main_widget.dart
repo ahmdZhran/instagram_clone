@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/features/notifications/notifications_screen.dart';
 import '../../core/utils/app_assets.dart';
 import '../../core/utils/app_colors.dart';
@@ -105,10 +106,7 @@ class _MainWidgetState extends State<MainWidget> {
                                   shape: BoxShape.circle,
                                   border: Border.all(
                                     color: index == 4
-                                        ? (Theme.of(context).brightness ==
-                                                Brightness.dark
-                                            ? AppColors.lightModeColor
-                                            : AppColors.darkThemColor)
+                                        ? context.color.mainColor
                                         : Colors.transparent,
                                     width: 2.0,
                                   ),

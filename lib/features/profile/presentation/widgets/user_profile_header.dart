@@ -52,7 +52,7 @@ class UserProfileHeaderWidget extends StatelessWidget {
                     childOfCustomButton: Text(
                       AppStrings.editProfile.tr(),
                       style: CustomTextStyle.pacifico14
-                          .copyWith(color: AppColors.lightModeColor),
+                          .copyWith(color: AppColors.lightThemeColor),
                     ),
                   ),
                 ),
@@ -65,7 +65,7 @@ class UserProfileHeaderWidget extends StatelessWidget {
                     childOfCustomButton: Text(
                       AppStrings.shareProfile.tr(),
                       style: CustomTextStyle.pacifico14
-                          .copyWith(color: AppColors.lightModeColor),
+                          .copyWith(color: AppColors.lightThemeColor),
                     ),
                   ),
                 ),

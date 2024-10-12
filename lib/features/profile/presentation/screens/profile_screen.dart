@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import '../../../../core/utils/app_colors.dart';
 import '../widgets/user_profile_mentioned_posts_widget.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 import '../widgets/user_posts_widget.dart';
@@ -23,6 +22,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _nestedScrollController = ScrollController();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,9 +97,7 @@ class _UserProfileBarDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     return ColoredBox(
-      color: Theme.of(context).brightness == Brightness.dark
-          ? AppColors.darkThemColor
-          : AppColors.lightModeColor,
+      color: Theme.of(context).scaffoldBackgroundColor,
       child: tabBar,
     );
   }
