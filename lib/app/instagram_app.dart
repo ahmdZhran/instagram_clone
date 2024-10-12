@@ -5,36 +5,44 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:instagram_clone/core/router/app_router.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import '../core/router/routes.dart';
-import '../core/utils/app_them.dart';
-import '../features/profile/presentation/cubit/profile_cubit.dart';
+import '../features/profile/presentation/cubits/profile_cubit.dart';
 
-class InstagramApp extends StatelessWidget {
+class InstagramApp extends StatefulWidget {
   const InstagramApp({super.key, required this.appRouter});
   final AppRouter appRouter;
 
   @override
+  State<InstagramApp> createState() => _InstagramAppState();
+}
+
+class _InstagramAppState extends State<InstagramApp> {
+  @override
   Widget build(BuildContext context) {
+    final profileCubit = ProfileCubit.getInstance();
+    profileCubit.loadTheme();
+    profileCubit.loadLanguage();
+
     return ScreenUtilInit(
       designSize: const Size(360, 690),
-      child: BlocBuilder<ProfileCubit, ProfileState>(
-        bloc: ProfileCubit.getInstance()..loadTheme(),
-        builder: (context, state) {
-          ThemeData theme = AppThemes.darkTheme;
-          if (state is ProfileThemeChanged) {
-            theme = state.themeData;
-          }
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: AppStrings.appName,
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
-            locale: context.locale,
-            theme: theme,
-            onGenerateRoute: appRouter.onGenerateRoute,
-            initialRoute: Routes.splashScreen,
-          );
-        },
-      ),
+      builder: (context, child) {
+        return BlocBuilder<ProfileCubit, ProfileState>(
+          bloc: profileCubit,
+          builder: (context, state) {
+            ThemeData theme = state.themeData;
+            Locale locale = state.locale;
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: AppStrings.appName,
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: locale, 
+              theme: theme,
+              onGenerateRoute: widget.appRouter.onGenerateRoute,
+              initialRoute: Routes.splashScreen,
+            );
+          },
+        );
+      },
     );
   }
 }

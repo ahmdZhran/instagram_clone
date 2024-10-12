@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_text_style.dart';
-import '../cubit/profile_cubit.dart';
+import '../cubits/profile_cubit.dart';
 
 class UserProfileAppBarWidget extends StatefulWidget {
   const UserProfileAppBarWidget({super.key});
@@ -16,17 +16,16 @@ class UserProfileAppBarWidget extends StatefulWidget {
 }
 
 class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
-  bool _isDarkMode = true;
-  String _selectedLanguage = 'English';
+  late bool _isDarkMode;
+  late String _selectedLanguage;
   final profileCubit = ProfileCubit.getInstance();
+
   @override
   void initState() {
     super.initState();
-    final themeState = profileCubit.state;
-
-    if (themeState is ProfileThemeChanged) {
-      _isDarkMode = themeState.themeData.brightness == Brightness.dark;
-    }
+    final state = profileCubit.state;
+    _isDarkMode = state.themeData.brightness == Brightness.dark;
+    _selectedLanguage = state.locale.languageCode;
   }
 
   @override
@@ -34,11 +33,9 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
     return BlocListener<ProfileCubit, ProfileState>(
       bloc: profileCubit,
       listener: (context, state) {
-        if (state is ProfileThemeChanged) {
-          setState(() {
-            _isDarkMode = state.themeData.brightness == Brightness.dark;
-          });
-        }
+        _isDarkMode = state.themeData.brightness == Brightness.dark;
+        _selectedLanguage = state.locale.languageCode;
+        context.setLocale(state.locale);
       },
       child: SliverAppBar(
         centerTitle: false,
@@ -78,9 +75,6 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                             title: Text(AppStrings.darkMode.tr()),
                             value: _isDarkMode,
                             onChanged: (bool value) {
-                              setState(() {
-                                _isDarkMode = value;
-                              });
                               profileCubit.toggleTheme(value);
                             },
                             secondary: const Icon(Icons.dark_mode),
@@ -90,24 +84,27 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                             title: DropdownButton<String>(
                               underline: Container(
                                 height: 2,
-                                width: 10,
                                 color: Colors.transparent,
                               ),
                               value: _selectedLanguage,
                               icon: const Icon(Icons.arrow_drop_down),
                               items: <String>[
-                                AppStrings.english.tr(),
-                                AppStrings.arabic.tr()
+                                AppStrings.englishCode,
+                                AppStrings.arabicCode
                               ].map<DropdownMenuItem<String>>((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
-                                  child: Text(value),
+                                  child: Text(value == AppStrings.englishCode
+                                      ? AppStrings.english.tr()
+                                      : AppStrings.arabic.tr()),
                                 );
                               }).toList(),
                               onChanged: (String? newValue) {
-                                setState(() {
-                                  _selectedLanguage = newValue!;
-                                });
+                                if (newValue != null) {
+                                  Locale locale = Locale(newValue);
+                                  context.setLocale(locale);
+                                  profileCubit.changeLanguage(newValue);
+                                }
                               },
                             ),
                           ),
@@ -143,11 +140,5 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    ProfileCubit.deleteInstance();
-    super.dispose();
   }
 }
