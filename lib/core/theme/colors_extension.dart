@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 
 class ColorsExtension extends ThemeExtension<ColorsExtension> {
-  final Color? mainColor;
+  final Color mainColor;
 
- const ColorsExtension({required this.mainColor});
+  const ColorsExtension({required this.mainColor});
+
   @override
   ThemeExtension<ColorsExtension> copyWith({Color? mainColor}) {
     return ColorsExtension(
-      mainColor: mainColor,
+      mainColor: mainColor ?? this.mainColor,
     );
   }
 
@@ -19,15 +20,15 @@ class ColorsExtension extends ThemeExtension<ColorsExtension> {
       return this;
     }
     return ColorsExtension(
-      mainColor: mainColor,
+      mainColor: Color.lerp(mainColor, other.mainColor, t)!,
     );
   }
 
   static const ColorsExtension dark = ColorsExtension(
-    mainColor: AppColors.darkThemColor,
+    mainColor: AppColors.lightThemeColor,
   );
 
   static const ColorsExtension light = ColorsExtension(
-    mainColor: AppColors.lightThemeColor,
+    mainColor: AppColors.darkThemColor,
   );
 }

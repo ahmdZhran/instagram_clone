@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:instagram_clone/core/utils/app_colors.dart';
+import 'package:instagram_clone/core/helper/extensions.dart';
 
 class BottomNavBarItemWidget extends StatelessWidget {
   final VoidCallback onTap;
@@ -19,9 +19,7 @@ class BottomNavBarItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final iconColor = Theme.of(context).brightness == Brightness.dark
-        ? AppColors.lightThemeColor
-        : AppColors.darkThemColor;
+    final iconColor = context.color.mainColor;
     return InkWell(
       onTap: onTap,
       child: AnimatedScale(

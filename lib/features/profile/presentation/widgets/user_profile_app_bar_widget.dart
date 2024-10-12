@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_text_style.dart';
@@ -130,10 +131,9 @@ class UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                 width: 22.w,
                 'assets/svg/settings.svg',
                 colorFilter: ColorFilter.mode(
-                    Theme.of(context).brightness == Brightness.dark
-                        ? AppColors.lightThemeColor
-                        : AppColors.darkThemColor,
-                    BlendMode.srcIn),
+                  context.color.mainColor,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
           ],
