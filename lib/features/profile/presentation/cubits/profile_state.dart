@@ -5,8 +5,7 @@ sealed class ProfileState {}
 final class ProfileInitial extends ProfileState {}
 
 class ProfileThemeChanged extends ProfileState {
-  final ThemeData themeData;
+  final bool isDark;
 
-  ProfileThemeChanged({required this.themeData});
-
+  ProfileThemeChanged({required this.isDark});
 }
