@@ -30,7 +30,7 @@ class _InstagramAppState extends State<InstagramApp> {
           bloc: profileCubit,
           builder: (context, state) {
             ThemeData theme = state.themeData;
-            Locale locale = state.locale;
+            // Locale locale = state.locale;
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               title: AppStrings.appName,

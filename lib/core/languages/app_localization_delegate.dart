@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart' show Locale, LocalizationsDelegate;
-import 'lang_code.dart';
-
-import 'app_localization.dart';
+import 'package:instagram_clone/core/languages/app_localization.dart';
 
 // Defining a custom LocalizationsDelegate for AppLocalizations.
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -10,8 +8,7 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   // Override method to check if a given locale is supported by the app.
   @override
   bool isSupported(Locale locale) {
-    return [LangCode.englishCode, LangCode.arabicCode]
-        .contains(locale.languageCode);
+    return ['en', 'ar'].contains(locale.languageCode);
   }
 
   // Override method to load the AppLocalizations for a given locale.

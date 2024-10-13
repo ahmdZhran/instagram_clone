@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'lang_code.dart';
 
 import 'app_localization.dart';
 
 class AppLocalizationsSetup {
   static const Iterable<Locale> supportedLocales = [
-    Locale(LangCode.englishCode),
-    Locale(LangCode.arabicCode),
+    Locale('en'),
+    Locale('ar'),
   ];
 
   static const Iterable<LocalizationsDelegate<dynamic>> localizationsDelegates =
