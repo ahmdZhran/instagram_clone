@@ -1,47 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/core/helper/shared_pref_helper.dart';
-import 'package:instagram_clone/core/helper/shared_pref_keys.dart';
-import 'package:instagram_clone/core/utils/app_strings.dart';
-import 'package:instagram_clone/core/theme/app_them.dart';
 import 'package:instagram_clone/features/profile/profile_di.dart';
+
+import '../../../../core/theme/app_them.dart';
 
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
-  ProfileCubit({required this.sharedPrefHelper})
-      : super(ProfileState(
-          themeData: AppThemes.darkTheme,
-          locale: const Locale(
-            AppStrings.englishCode,
-          ),
-        ));
+  ProfileCubit({required this.sharedPrefHelper}) : super(ProfileInitial());
 
-
+  static const _themeKey = "theme";
   final SharedPrefHelper sharedPrefHelper;
 
   void toggleTheme(bool isDarkMode) async {
-    ThemeData newTheme =
-        isDarkMode ? AppThemes.darkTheme : AppThemes.lightTheme;
-    await sharedPrefHelper.saveData(key: SharedPrefKeys.themeKey, value: isDarkMode);
-    emit(state.copyWith(themeData: newTheme));
+    if (isDarkMode) {
+      emit(ProfileThemeChanged(themeData: AppThemes.darkTheme));
+      await sharedPrefHelper.saveData(key: _themeKey, value: true);
+    } else {
+      emit(ProfileThemeChanged(themeData: AppThemes.lightTheme));
+      await sharedPrefHelper.saveData(key: _themeKey, value: false);
+    }
   }
 
   void loadTheme() {
-    final bool isDarkMode = sharedPrefHelper.getData(key: SharedPrefKeys.themeKey) ?? true;
-    ThemeData theme = isDarkMode ? AppThemes.darkTheme : AppThemes.lightTheme;
-    emit(state.copyWith(themeData: theme));
-  }
-
-  void changeLanguage(String languageCode) async {
-    await sharedPrefHelper.saveData(key: SharedPrefKeys.themeKey, value: languageCode);
-    emit(state.copyWith(locale: Locale(languageCode)));
-  }
-
-  void loadLanguage() {
-    final String? languageCode = sharedPrefHelper.getData(key: SharedPrefKeys.themeKey);
-    Locale locale = Locale(languageCode ?? AppStrings.englishCode);
-    emit(state.copyWith(locale: locale));
+    final bool isDarkMode = SharedPrefHelper().getData(key: _themeKey) ?? true;
+    if (isDarkMode) {
+      emit(ProfileThemeChanged(themeData: AppThemes.darkTheme));
+    } else {
+      emit(ProfileThemeChanged(themeData: AppThemes.lightTheme));
+    }
   }
 
   static const String _tag = "profile_instance";
