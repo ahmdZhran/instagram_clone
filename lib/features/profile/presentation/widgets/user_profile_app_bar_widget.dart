@@ -19,14 +19,14 @@ class UserProfileAppBarWidget extends StatefulWidget {
 }
 
 class _UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
-  final authCubit = AuthCubit.getInstance();
+  late final authCubit = AuthCubit.getInstance();
 
-  UserDataEntity? userDataEntity;
+  late UserDataEntity? userDataEntity = authCubit.currentUser;
 
   @override
   Widget build(BuildContext context) {
     final profileCubit = ProfileCubit.getInstance();
-
+    print("userDataEntityyyyyyyyyyyyy $userDataEntity");
     return SliverAppBar(
       centerTitle: false,
       pinned: ModalRoute.of(context)!.isFirst,
@@ -37,7 +37,7 @@ class _UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
           Flexible(
             flex: 2,
             child: Text(
-              userDataEntity!.name.toString(),
+              userDataEntity!.email.toString(),
               style: CustomTextStyle.pacifico25,
               overflow: TextOverflow.ellipsis,
             ),

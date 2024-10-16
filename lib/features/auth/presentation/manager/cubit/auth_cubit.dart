@@ -25,15 +25,7 @@ class AuthCubit extends Cubit<AuthState> {
   UserDataEntity? currentUser;
   bool obscuredPasswordText = true;
 
-  Future<void> checkAuthState() async {
-    final UserDataEntity? user = await _authRepository.getCurrentUser();
-    if (user != null) {
-      currentUser = user;
-      emit(Authenticated(user));
-    } else {
-      emit(Unauthenticated());
-    }
-  }
+
 
   Future<void> createUserWithEmailAndPassword() async {
     emit(CreateUserLoading());

@@ -1,4 +1,3 @@
-
 class UserDataEntity {
   final String uid;
   final String email;
@@ -11,17 +10,18 @@ class UserDataEntity {
   UserDataEntity({
     required this.uid,
     required this.email,
-     this.password,
-     this.username,
-     this.name,
-     this.bio,
-     this.profileImage,
+    this.password,
+    this.username,
+    this.name,
+    this.bio,
+    this.profileImage,
   });
 
   Map<String, dynamic> toJson() {
     return {
       'uid': uid,
       'email': email,
+      'name': name,
       'password': password,
       'user_name': username,
       'bio': bio,

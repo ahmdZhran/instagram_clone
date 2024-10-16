@@ -4,13 +4,6 @@ sealed class AuthState {}
 
 final class AuthInitial extends AuthState {}
 
-class Authenticated extends AuthState {
-  final UserDataEntity userData;
-  Authenticated(this.userData);
-}
-
-class Unauthenticated extends AuthState {}
-
 class AuthLoading extends AuthState {}
 
 class CreateUserLoading extends AuthState {}

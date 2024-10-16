@@ -43,9 +43,11 @@ class AuthRepository {
         bio: bio,
         profileImage: imageUrl,
       );
+
       await firestore.collection('users').doc(userCredential.user!.uid).set(
             userEntity.toJson(),
           );
+
       return Right(userEntity);
     } on FirebaseAuthException catch (error) {
       return Left(FirebaseAuthErrorHandler.getErrorMessage(error.code));
@@ -67,6 +69,8 @@ class AuthRepository {
         email: email,
         password: password,
       );
+      debugPrint('User UID: ${userData.uid}');
+      debugPrint('User Email: ${userData.email}');
       return Right(userData);
     } on FirebaseAuthException catch (error) {
       return Left(FirebaseAuthErrorHandler.getErrorMessage(error.code));
@@ -96,8 +100,6 @@ class AuthRepository {
       return Left(FirebaseAuthErrorHandler.getErrorMessage(error.code));
     }
   }
-
-
 
   Future<UserDataEntity?> getCurrentUser() async {
     final userState = auth.currentUser;
