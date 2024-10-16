@@ -16,6 +16,9 @@ abstract class CustomTextStyle {
     fontSize: 16.sp,
     fontWeight: FontWeight.bold,
   );
+  static final pacifico13 = TextStyle(
+    fontSize: 13.sp,
+  );
   static final pacifico20 = TextStyle(
     fontSize: 20.sp,
   );

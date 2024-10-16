@@ -1,21 +1,17 @@
 part of 'profile_cubit.dart';
 
-class ProfileState {
-  final ThemeData themeData;
+sealed class ProfileState {}
+
+final class ProfileInitial extends ProfileState {}
+
+class ProfileThemeChanged extends ProfileState {
+  final bool isDark;
+
+  ProfileThemeChanged({required this.isDark});
+}
+
+class ProfileLanguageChanged extends ProfileState {
   final Locale locale;
 
-  const ProfileState({
-    required this.themeData,
-    required this.locale,
-  });
-  
-  ProfileState copyWith({
-    ThemeData? themeData,
-    Locale? locale,
-  }) {
-    return ProfileState(
-      themeData: themeData ?? this.themeData,
-      locale: locale ?? this.locale,
-    );
-  }
+  ProfileLanguageChanged({required this.locale});
 }
