@@ -8,16 +8,20 @@ import '../core/languages/app_localization_setup.dart';
 import '../core/router/routes.dart';
 import '../features/profile/presentation/cubits/profile_cubit.dart';
 
-class InstagramApp extends StatelessWidget {
+class InstagramApp extends StatefulWidget {
   const InstagramApp({super.key, required this.appRouter});
   final AppRouter appRouter;
 
   @override
-  Widget build(BuildContext context) {
-    final profileCubit = ProfileCubit.getInstance()
-      ..loadTheme()
-      ..loadLanguage();
+  State<InstagramApp> createState() => _InstagramAppState();
+}
 
+class _InstagramAppState extends State<InstagramApp> {
+  final profileCubit = ProfileCubit.getInstance()
+    ..loadTheme()
+    ..loadLanguage();
+  @override
+  Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       child: BlocBuilder<ProfileCubit, ProfileState>(
@@ -35,7 +39,7 @@ class InstagramApp extends StatelessWidget {
             theme: profileCubit.isDark
                 ? AppThemes.darkTheme
                 : AppThemes.lightTheme,
-            onGenerateRoute: appRouter.onGenerateRoute,
+            onGenerateRoute: widget.appRouter.onGenerateRoute,
             initialRoute: Routes.splashScreen,
           );
         },
