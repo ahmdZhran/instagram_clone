@@ -4,12 +4,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
+import 'package:instagram_clone/features/auth/domain/entities/user_data_entity.dart';
+import 'package:instagram_clone/features/auth/presentation/manager/cubit/auth_cubit.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_text_style.dart';
 import '../cubits/profile_cubit.dart';
 
-class UserProfileAppBarWidget extends StatelessWidget {
+class UserProfileAppBarWidget extends StatefulWidget {
   const UserProfileAppBarWidget({super.key});
+
+  @override
+  State<UserProfileAppBarWidget> createState() =>
+      _UserProfileAppBarWidgetState();
+}
+
+class _UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
+  final authCubit = AuthCubit.getInstance();
+
+  UserDataEntity? userDataEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +37,7 @@ class UserProfileAppBarWidget extends StatelessWidget {
           Flexible(
             flex: 2,
             child: Text(
-              '___ahmd.1',
+              userDataEntity!.name.toString(),
               style: CustomTextStyle.pacifico25,
               overflow: TextOverflow.ellipsis,
             ),

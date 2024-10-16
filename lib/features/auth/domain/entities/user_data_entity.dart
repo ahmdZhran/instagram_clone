@@ -2,7 +2,7 @@
 class UserDataEntity {
   final String uid;
   final String email;
-  final String password;
+  final String? password;
   final String? username;
   final String? name;
   final String? bio;
@@ -11,7 +11,7 @@ class UserDataEntity {
   UserDataEntity({
     required this.uid,
     required this.email,
-    required this.password,
+     this.password,
      this.username,
      this.name,
      this.bio,

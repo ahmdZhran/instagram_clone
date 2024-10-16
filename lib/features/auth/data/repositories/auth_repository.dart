@@ -106,7 +106,15 @@ class AuthRepository {
     }
   }
 
-  Future<User?> getCurrentUser() async {
-    return auth.currentUser;
+  Future<UserDataEntity?> getCurrentUser() async {
+    final userState = auth.currentUser;
+    if (userState == null) {
+      return null;
+    } else {
+      return UserDataEntity(
+        uid: userState.uid,
+        email: userState.email.toString(),
+      );
+    }
   }
 }
