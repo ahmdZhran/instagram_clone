@@ -4,8 +4,8 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../core/errors/firebase_auth_errors_handler.dart';
+import '../../domain/entities/user_data_entity.dart';
 
 class AuthRepository {
   final FirebaseAuth auth;
@@ -18,7 +18,7 @@ class AuthRepository {
     required this.firebaseStorage,
   });
 
-  Future<Either<String, User?>> createUserWithEmailAndPassword({
+  Future<Either<String, UserDataEntity?>> createUserWithEmailAndPassword({
     required String email,
     required String password,
     required String username,
@@ -34,14 +34,44 @@ class AuthRepository {
       String imageUrl =
           await _uploadProfileImage(profileImage!, userCredential.user!.uid);
 
-      await firestore.collection('users').doc(userCredential.user!.uid).set({
-        "username": username,
-        "name": name,
-        "bio": bio,
-        "profileImage": imageUrl,
-        'createdAt': FieldValue.serverTimestamp(),
-      });
-      return Right(userCredential.user);
+      UserDataEntity userEntity = UserDataEntity(
+        uid: userCredential.user!.uid,
+        email: email,
+        password: password,
+        username: username,
+        name: name,
+        bio: bio,
+        profileImage: imageUrl,
+      );
+
+      await firestore.collection('users').doc(userCredential.user!.uid).set(
+            userEntity.toJson(),
+          );
+
+      return Right(userEntity);
+    } on FirebaseAuthException catch (error) {
+      return Left(FirebaseAuthErrorHandler.getErrorMessage(error.code));
+    }
+  }
+
+  Future<Either<String, UserDataEntity?>> logInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      UserDataEntity userData = UserDataEntity(
+        uid: userCredential.user!.uid,
+        email: email,
+        password: password,
+      );
+      debugPrint('User UID: ${userData.uid}');
+      debugPrint('User Email: ${userData.email}');
+      return Right(userData);
     } on FirebaseAuthException catch (error) {
       return Left(FirebaseAuthErrorHandler.getErrorMessage(error.code));
     }
@@ -60,21 +90,6 @@ class AuthRepository {
     }
   }
 
-  Future<Either<String, void>> logInWithEmailAndPassword({
-    required String email,
-    required String password,
-  }) async {
-    try {
-      await auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      return const Right(null);
-    } on FirebaseAuthException catch (error) {
-      return Left(FirebaseAuthErrorHandler.getErrorMessage(error.code));
-    }
-  }
-
   Future<Either<String, void>> resetPasswordWithEmail({
     required String email,
   }) async {
@@ -86,16 +101,4 @@ class AuthRepository {
     }
   }
 
-  Future<Either<String, void>> verifyEmail() async {
-    try {
-      await FirebaseAuth.instance.currentUser!.sendEmailVerification();
-      return const Right(null);
-    } catch (error) {
-      return Left(error.toString());
-    }
-  }
-
-  Future<User?> getCurrentUser() async {
-    return auth.currentUser;
-  }
 }
