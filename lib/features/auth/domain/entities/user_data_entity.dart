@@ -1,22 +1,21 @@
-import 'dart:typed_data';
 
 class UserDataEntity {
   final String uid;
   final String email;
   final String password;
-  final String userName;
-  final String name;
-  final String bio;
-  final Uint8List? profileImage;
+  final String? username;
+  final String? name;
+  final String? bio;
+  final String? profileImage;
 
   UserDataEntity({
     required this.uid,
     required this.email,
     required this.password,
-    required this.userName,
-    required this.name,
-    required this.bio,
-    required this.profileImage,
+     this.username,
+     this.name,
+     this.bio,
+     this.profileImage,
   });
 
   Map<String, dynamic> toJson() {
@@ -24,7 +23,7 @@ class UserDataEntity {
       'uid': uid,
       'email': email,
       'password': password,
-      'user_name': userName,
+      'user_name': username,
       'bio': bio,
       'profile_image': profileImage,
     };
@@ -35,7 +34,7 @@ class UserDataEntity {
       uid: json['uid'],
       email: json['email'],
       password: json['password'],
-      userName: json['user_name'],
+      username: json['user_name'],
       name: json['name'],
       bio: json['bio'],
       profileImage: json['profileImage'],
