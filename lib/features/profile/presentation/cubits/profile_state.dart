@@ -9,3 +9,9 @@ class ProfileThemeChanged extends ProfileState {
 
   ProfileThemeChanged({required this.isDark});
 }
+
+class ProfileLanguageChanged extends ProfileState {
+  final Locale locale;
+
+  ProfileLanguageChanged({required this.locale});
+}
