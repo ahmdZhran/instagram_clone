@@ -9,22 +9,23 @@ part 'profile_state.dart';
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit({required this.sharedPrefHelper}) : super(ProfileInitial());
 
-  bool isDark = true;
   final SharedPrefHelper sharedPrefHelper;
 
+  bool isDark = true;
+  String currentLangCode = 'en';
+
   void changeLanguage(String languageCode) async {
+    currentLangCode = languageCode;
     await sharedPrefHelper.saveData(
         key: SharedPrefKeys.languageKey, value: languageCode);
     emit(ProfileLanguageChanged(locale: Locale(languageCode)));
   }
 
   void loadLanguage() async {
-    final String? languageCode = sharedPrefHelper.getData(key: SharedPrefKeys.languageKey);
-    if (languageCode != null) {
-      emit(ProfileLanguageChanged(locale: Locale(languageCode)));
-    } else {
-      emit(ProfileLanguageChanged(locale: const Locale('en')));
-    }
+    final String? languageCode =
+        sharedPrefHelper.getData(key: SharedPrefKeys.languageKey);
+    currentLangCode = languageCode ?? 'en';
+    emit(ProfileLanguageChanged(locale: Locale(currentLangCode)));
   }
 
   void changeTheme() async {

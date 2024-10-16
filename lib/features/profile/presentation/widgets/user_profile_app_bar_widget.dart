@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -54,7 +53,7 @@ class UserProfileAppBarWidget extends StatelessWidget {
                             return SwitchListTile(
                               inactiveThumbColor: AppColors.primaryColor,
                               activeColor: AppColors.primaryColor,
-                              title: Text(AppStrings.darkMode.tr()),
+                              title: const Text(AppStrings.darkMode),
                               value: profileCubit.isDark,
                               onChanged: (bool value) {
                                 profileCubit.changeTheme();
@@ -63,7 +62,38 @@ class UserProfileAppBarWidget extends StatelessWidget {
                             );
                           },
                         ),
-                        // Additional ListTile items...
+                        BlocBuilder<ProfileCubit, ProfileState>(
+                          bloc: profileCubit,
+                          builder: (context, state) {
+                            return ListTile(
+                              leading: const Icon(Icons.language),
+                              title: DropdownButton<String>(
+                                underline: Container(
+                                  height: 2,
+                                  color: Colors.transparent,
+                                ),
+                                value: profileCubit.currentLangCode,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                items: <String>[
+                                  AppStrings.englishCode,
+                                  AppStrings.arabicCode
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value == AppStrings.englishCode
+                                        ? AppStrings.english
+                                        : AppStrings.arabic),
+                                  );
+                                }).toList(),
+                                onChanged: (String? newValue) {
+                                  if (newValue != null) {
+                                    profileCubit.changeLanguage(newValue);
+                                  }
+                                },
+                              ),
+                            );
+                          },
+                        ),
                       ],
                     ),
                   );

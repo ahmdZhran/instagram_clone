@@ -1,5 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 
 import 'user_profile_counts_info_widget.dart';
@@ -14,17 +14,17 @@ class UserProfileInformationWidget extends StatelessWidget {
         UserProfileCountsInfoWidget(
           onTap: () {},
           count: '0',
-          title: AppStrings.posts.tr(),
+          title: context.translate(AppStrings.posts),
         ),
         UserProfileCountsInfoWidget(
           onTap: () {},
           count: '0',
-          title: AppStrings.followers.tr(),
+          title: context.translate(AppStrings.followers),
         ),
         UserProfileCountsInfoWidget(
           onTap: () {},
           count: '0',
-          title: AppStrings.following.tr(),
+          title: context.translate(AppStrings.following),
         )
       ],
     );

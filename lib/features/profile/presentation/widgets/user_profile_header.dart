@@ -1,7 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:instagram_clone/core/utils/custom_text_style.dart';
@@ -50,7 +50,7 @@ class UserProfileHeaderWidget extends StatelessWidget {
                     color: AppColors.deepGrey,
                     onPressed: () {},
                     childOfCustomButton: Text(
-                      AppStrings.editProfile.tr(),
+                      context.translate(AppStrings.editProfile),
                       style: CustomTextStyle.pacifico14
                           .copyWith(color: AppColors.lightThemeColor),
                     ),
@@ -63,7 +63,7 @@ class UserProfileHeaderWidget extends StatelessWidget {
                     color: AppColors.deepGrey,
                     onPressed: () {},
                     childOfCustomButton: Text(
-                      AppStrings.shareProfile.tr(),
+                      context.translate(AppStrings.shareProfile),
                       style: CustomTextStyle.pacifico14
                           .copyWith(color: AppColors.lightThemeColor),
                     ),

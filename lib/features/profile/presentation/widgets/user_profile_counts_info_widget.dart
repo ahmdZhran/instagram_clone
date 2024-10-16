@@ -15,7 +15,7 @@ class UserProfileCountsInfoWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 18),
         child: Column(
           children: [
-            Text(count, style: CustomTextStyle.pacifico20),
+            Text(count, style: CustomTextStyle.pacifico13),
             Text(title, style: CustomTextStyle.pacifico10),
           ],
         ),

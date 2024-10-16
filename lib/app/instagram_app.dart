@@ -5,7 +5,6 @@ import 'package:instagram_clone/core/router/app_router.dart';
 import 'package:instagram_clone/core/theme/app_them.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import '../core/languages/app_localization_setup.dart';
-import '../core/languages/lang_code.dart';
 import '../core/router/routes.dart';
 import '../features/profile/presentation/cubits/profile_cubit.dart';
 
@@ -15,7 +14,9 @@ class InstagramApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final profileCubit = ProfileCubit.getInstance()..loadTheme();
+    final profileCubit = ProfileCubit.getInstance()
+      ..loadTheme()
+      ..loadLanguage();
 
     return ScreenUtilInit(
       designSize: const Size(360, 690),
@@ -30,7 +31,7 @@ class InstagramApp extends StatelessWidget {
             supportedLocales: AppLocalizationsSetup.supportedLocales,
             localeResolutionCallback:
                 AppLocalizationsSetup.localeResolutionCallback,
-            locale: const Locale(LangCode.englishCode),
+            locale: Locale(profileCubit.currentLangCode),
             theme: profileCubit.isDark
                 ? AppThemes.darkTheme
                 : AppThemes.lightTheme,
