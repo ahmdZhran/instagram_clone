@@ -12,6 +12,21 @@ class ProfileCubit extends Cubit<ProfileState> {
   bool isDark = true;
   final SharedPrefHelper sharedPrefHelper;
 
+  void changeLanguage(String languageCode) async {
+    await sharedPrefHelper.saveData(
+        key: SharedPrefKeys.languageKey, value: languageCode);
+    emit(ProfileLanguageChanged(locale: Locale(languageCode)));
+  }
+
+  void loadLanguage() async {
+    final String? languageCode = sharedPrefHelper.getData(key: SharedPrefKeys.languageKey);
+    if (languageCode != null) {
+      emit(ProfileLanguageChanged(locale: Locale(languageCode)));
+    } else {
+      emit(ProfileLanguageChanged(locale: const Locale('en')));
+    }
+  }
+
   void changeTheme() async {
     isDark = !isDark;
     emit(ProfileThemeChanged(isDark: isDark));
