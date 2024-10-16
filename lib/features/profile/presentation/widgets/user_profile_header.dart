@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -62,9 +63,10 @@ class UserProfileHeaderWidget extends StatelessWidget {
                     height: 40,
                     color: AppColors.deepGrey,
                     onPressed: () {},
-                    childOfCustomButton: Text(
+                    childOfCustomButton: AutoSizeText(
                       context.translate(AppStrings.shareProfile),
-                      style: CustomTextStyle.pacifico14
+                      maxLines: 1,
+                      style: CustomTextStyle.pacifico13
                           .copyWith(color: AppColors.lightThemeColor),
                     ),
                   ),
