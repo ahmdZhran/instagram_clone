@@ -8,11 +8,11 @@ part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit({required this.sharedPrefHelper}) : super(ProfileInitial());
-  
+
   bool isDark = true;
   final SharedPrefHelper sharedPrefHelper;
 
-  void toggleTheme() async {
+  void changeTheme() async {
     isDark = !isDark;
     emit(ProfileThemeChanged(isDark: isDark));
     await sharedPrefHelper.saveData(

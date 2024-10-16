@@ -57,7 +57,7 @@ class UserProfileAppBarWidget extends StatelessWidget {
                               title: Text(AppStrings.darkMode.tr()),
                               value: profileCubit.isDark,
                               onChanged: (bool value) {
-                                profileCubit.toggleTheme();
+                                profileCubit.changeTheme();
                               },
                               secondary: const Icon(Icons.dark_mode),
                             );
