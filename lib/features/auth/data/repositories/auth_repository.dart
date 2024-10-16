@@ -97,14 +97,7 @@ class AuthRepository {
     }
   }
 
-  Future<Either<String, void>> verifyEmail() async {
-    try {
-      await FirebaseAuth.instance.currentUser!.sendEmailVerification();
-      return const Right(null);
-    } catch (error) {
-      return Left(error.toString());
-    }
-  }
+
 
   Future<UserDataEntity?> getCurrentUser() async {
     final userState = auth.currentUser;

@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -58,7 +59,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> verifyEmail() async {
-    _authRepository.verifyEmail();
+    await FirebaseAuth.instance.currentUser?.sendEmailVerification();
   }
 
   Future<void> logIn() async {
