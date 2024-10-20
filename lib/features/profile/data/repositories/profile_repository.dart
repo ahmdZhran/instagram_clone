@@ -5,12 +5,12 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../models/user_model.dart';
 
-class UserRepository {
+class ProfileRepository {
   final UserRemoteDataSource _remoteDataSource;
   final UserLocalDataSource _localDataSource;
   final InternetConnectionChecker _connectionChecker;
 
-  UserRepository(
+  ProfileRepository(
     this._remoteDataSource,
     this._localDataSource,
     this._connectionChecker,

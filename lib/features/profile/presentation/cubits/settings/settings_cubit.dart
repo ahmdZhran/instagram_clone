@@ -42,7 +42,7 @@ class SettingsCubit extends Cubit<SettingsState> {
     emit(ThemeChanged(isDark: isDark));
   }
 
-  static const String _tag = "profile_instance";
+  static const String _tag = "settings_instance";
 
   static SettingsCubit getInstance() {
     final isRegistered =

@@ -13,7 +13,7 @@ class UserProfileAppBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final profileCubit = SettingsCubit.getInstance();
+    final settingsCubit = SettingsCubit.getInstance();
 
     return SliverAppBar(
       centerTitle: false,
@@ -48,22 +48,22 @@ class UserProfileAppBarWidget extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         BlocBuilder<SettingsCubit, SettingsState>(
-                          bloc: profileCubit,
+                          bloc: settingsCubit,
                           builder: (context, state) {
                             return SwitchListTile(
                               inactiveThumbColor: AppColors.primaryColor,
                               activeColor: AppColors.primaryColor,
                               title: const Text(AppStrings.darkMode),
-                              value: profileCubit.isDark,
+                              value: settingsCubit.isDark,
                               onChanged: (bool value) {
-                                profileCubit.changeTheme();
+                                settingsCubit.changeTheme();
                               },
                               secondary: const Icon(Icons.dark_mode),
                             );
                           },
                         ),
                         BlocBuilder<SettingsCubit, SettingsState>(
-                          bloc: profileCubit,
+                          bloc: settingsCubit,
                           builder: (context, state) {
                             return ListTile(
                               leading: const Icon(Icons.language),
@@ -72,7 +72,7 @@ class UserProfileAppBarWidget extends StatelessWidget {
                                   height: 2,
                                   color: Colors.transparent,
                                 ),
-                                value: profileCubit.currentLangCode,
+                                value: settingsCubit.currentLangCode,
                                 icon: const Icon(Icons.arrow_drop_down),
                                 items: <String>[
                                   AppStrings.englishCode,
@@ -87,7 +87,7 @@ class UserProfileAppBarWidget extends StatelessWidget {
                                 }).toList(),
                                 onChanged: (String? newValue) {
                                   if (newValue != null) {
-                                    profileCubit.changeLanguage(newValue);
+                                    settingsCubit.changeLanguage(newValue);
                                   }
                                 },
                               ),

@@ -7,7 +7,7 @@ final class ProfileInitial extends ProfileState {}
 final class ProfileLoading extends ProfileState {}
 
 final class ProfileSuccess extends ProfileState {
-  final UserDataEntity userData;
+  final UserProfileEntity userData;
 
   ProfileSuccess({required this.userData});
 }

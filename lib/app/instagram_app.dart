@@ -17,7 +17,7 @@ class InstagramApp extends StatefulWidget {
 }
 
 class _InstagramAppState extends State<InstagramApp> {
-  final profileCubit = SettingsCubit.getInstance()
+  final settingsCubit = SettingsCubit.getInstance()
     ..loadTheme()
     ..loadLanguage();
   @override
@@ -25,7 +25,7 @@ class _InstagramAppState extends State<InstagramApp> {
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       child: BlocBuilder<SettingsCubit, SettingsState>(
-        bloc: profileCubit,
+        bloc: settingsCubit,
         builder: (context, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -35,8 +35,8 @@ class _InstagramAppState extends State<InstagramApp> {
             supportedLocales: AppLocalizationsSetup.supportedLocales,
             localeResolutionCallback:
                 AppLocalizationsSetup.localeResolutionCallback,
-            locale: Locale(profileCubit.currentLangCode),
-            theme: profileCubit.isDark
+            locale: Locale(settingsCubit.currentLangCode),
+            theme: settingsCubit.isDark
                 ? AppThemes.darkTheme
                 : AppThemes.lightTheme,
             onGenerateRoute: widget.appRouter.onGenerateRoute,
