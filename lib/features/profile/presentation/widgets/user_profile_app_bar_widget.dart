@@ -6,14 +6,14 @@ import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_text_style.dart';
-import '../cubits/profile_cubit.dart';
+import '../cubits/settings_cubit.dart';
 
 class UserProfileAppBarWidget extends StatelessWidget {
   const UserProfileAppBarWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final profileCubit = ProfileCubit.getInstance();
+    final profileCubit = SettingsCubit.getInstance();
 
     return SliverAppBar(
       centerTitle: false,
@@ -47,7 +47,7 @@ class UserProfileAppBarWidget extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        BlocBuilder<ProfileCubit, ProfileState>(
+                        BlocBuilder<SettingsCubit, SettingsState>(
                           bloc: profileCubit,
                           builder: (context, state) {
                             return SwitchListTile(
@@ -62,7 +62,7 @@ class UserProfileAppBarWidget extends StatelessWidget {
                             );
                           },
                         ),
-                        BlocBuilder<ProfileCubit, ProfileState>(
+                        BlocBuilder<SettingsCubit, SettingsState>(
                           bloc: profileCubit,
                           builder: (context, state) {
                             return ListTile(

@@ -6,7 +6,7 @@ import 'package:instagram_clone/core/theme/app_them.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import '../core/languages/app_localization_setup.dart';
 import '../core/router/routes.dart';
-import '../features/profile/presentation/cubits/profile_cubit.dart';
+import '../features/profile/presentation/cubits/settings_cubit.dart';
 
 class InstagramApp extends StatefulWidget {
   const InstagramApp({super.key, required this.appRouter});
@@ -17,14 +17,14 @@ class InstagramApp extends StatefulWidget {
 }
 
 class _InstagramAppState extends State<InstagramApp> {
-  final profileCubit = ProfileCubit.getInstance()
+  final profileCubit = SettingsCubit.getInstance()
     ..loadTheme()
     ..loadLanguage();
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(360, 690),
-      child: BlocBuilder<ProfileCubit, ProfileState>(
+      child: BlocBuilder<SettingsCubit, SettingsState>(
         bloc: profileCubit,
         builder: (context, state) {
           return MaterialApp(
