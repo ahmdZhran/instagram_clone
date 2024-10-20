@@ -1,3 +1,4 @@
+
 import '../data_source/local/user_local_data_source.dart';
 import '../data_source/remote/user_remote_data_source.dart';
 import '../../domain/entities/user_profile_entity.dart';
@@ -21,6 +22,7 @@ class ProfileRepository {
     if (isConnected) {
       final UserModel remoteData =
           await remoteDataSource.getUserProfile(userId);
+
       localDataSource.cacheUserProfile(remoteData);
       return remoteData.toEntity();
     } else {

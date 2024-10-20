@@ -1,22 +1,54 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/custom_text_style.dart';
+import '../cubits/profile_cubit/profile_cubit.dart';
 
-class UserNameWidget extends StatelessWidget {
-  const UserNameWidget({
-    super.key,
-  });
+class UserNameWidget extends StatefulWidget {
+  const UserNameWidget({super.key, required this.uid});
+  final String uid;
+
+  @override
+  State<UserNameWidget> createState() => _UserNameWidgetState();
+}
+
+class _UserNameWidgetState extends State<UserNameWidget> {
+  @override
+  void initState() {
+    super.initState();
+    ProfileCubit.getInstance().getUserData(widget.uid);
+    debugPrint(widget.uid);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      flex: 2,
-      child: Text(
-        '___ahmd.1',
-        style: CustomTextStyle.pacifico25,
-        overflow: TextOverflow.ellipsis,
-      ),
+    return BlocBuilder<ProfileCubit, ProfileState>(
+      bloc: ProfileCubit.getInstance(),
+      builder: (context, state) {
+        if (state is ProfileLoading) {
+          return const CircularProgressIndicator();
+        } else if (state is ProfileSuccess) {
+          // Display the user's name
+          return Flexible(
+            flex: 2,
+            child: Text(
+              state.userData.username,
+              style: CustomTextStyle.pacifico25,
+              overflow: TextOverflow.ellipsis,
+            ),
+          );
+        } else if (state is ProfileFailure) {
+          // Display an error message
+          return Text(
+            maxLines: 3,
+            state.errMessage,
+            style: const TextStyle(color: Colors.red, fontSize: 15),
+          );
+        } else {
+          // Initial state or unknown state
+          return const Text('Loading...');
+        }
+      },
     );
   }
 }

@@ -9,8 +9,8 @@ import '../cubits/settings/settings_cubit.dart';
 import 'user_name_widget.dart';
 
 class UserProfileAppBarWidget extends StatelessWidget {
-  const UserProfileAppBarWidget({super.key});
-
+  const UserProfileAppBarWidget({super.key, required this.uid});
+  final String uid;
   @override
   Widget build(BuildContext context) {
     final settingsCubit = SettingsCubit.getInstance();
@@ -22,7 +22,7 @@ class UserProfileAppBarWidget extends StatelessWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const UserNameWidget(),
+          UserNameWidget(uid: uid),
           const Spacer(),
           InkWell(
             borderRadius: BorderRadius.circular(12),

@@ -4,14 +4,12 @@ import '../../domain/entities/user_profile_entity.dart';
 class UserModel {
   final String uid;
   final String username;
-  final String name;
   final String bio;
   final String profileImageUrl;
 
   UserModel({
     required this.uid,
     required this.username,
-    required this.name,
     required this.bio,
     required this.profileImageUrl,
   });
@@ -19,30 +17,27 @@ class UserModel {
   factory UserModel.fromDocument(DocumentSnapshot doc) {
     return UserModel(
       uid: doc['uid'],
-      username: doc['username'],
-      name: doc['name'],
+      username: doc['user_name'],
       bio: doc['bio'],
-      profileImageUrl: doc['profileImageUrl'],
+      profileImageUrl: doc['profile_image'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
       'uid':uid,
-      'username': username,
-      'name': name,
+      'user_name': username,
       'bio': bio,
-      'profileImageUrl': profileImageUrl,
+      'profile_image': profileImageUrl,
     };
   }
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       uid: json['uid'],
-      username: json['username'],
-      name: json['name'],
+      username: json['user_name'],
       bio: json['bio'],
-      profileImageUrl: json['profileImageUrl'],
+      profileImageUrl: json['profile_image'],
     );
   }
 
@@ -50,7 +45,6 @@ class UserModel {
     return UserProfileEntity(
       uid: uid,
       username: username,
-      name: name,
       bio: bio,
       profileImageUrl: profileImageUrl,
     );
@@ -60,7 +54,6 @@ class UserModel {
     return UserModel(
       uid:entity.uid,
       username: entity.username,
-      name: entity.name,
       bio: entity.bio,
       profileImageUrl: entity.profileImageUrl,
     );

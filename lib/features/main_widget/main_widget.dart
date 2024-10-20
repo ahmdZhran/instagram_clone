@@ -50,7 +50,9 @@ class _MainWidgetState extends State<MainWidget> {
               const ExploreScreen(),
               const AddPostScreen(),
               const NotificationsScreen(),
-              ProfileScreen(uid: uid!),
+              ProfileScreen(
+                uid: FirebaseAuth.instance.currentUser!.uid,
+              ),
             ],
           ),
           SafeArea(

@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/features/profile/presentation/cubits/profile_cubit/cubit/profile_cubit.dart';
+import 'package:instagram_clone/features/profile/presentation/cubits/profile_cubit/profile_cubit.dart';
 import '../widgets/user_profile_mentioned_posts_widget.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 import '../widgets/user_posts_widget.dart';
@@ -12,7 +12,6 @@ import '../widgets/user_profile_header.dart';
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key, required this.uid});
   final String uid;
-
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
@@ -42,7 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                 sliver: MultiSliver(
                   children: [
-                    const UserProfileAppBarWidget(),
+                    UserProfileAppBarWidget(uid: widget.uid),
                     const Gap(20),
                     const UserProfileHeaderWidget(),
                     SliverPersistentHeader(
