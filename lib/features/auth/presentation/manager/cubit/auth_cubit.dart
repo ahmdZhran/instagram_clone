@@ -7,7 +7,6 @@ import 'package:instagram_clone/features/auth/auth_di.dart';
 import '../../../../../core/helper/image_service.dart';
 import '../../../../../core/utils/internet_checker.dart';
 import '../../../data/repositories/auth_repository.dart';
-import '../../../domain/entities/user_data_entity.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -22,7 +21,6 @@ class AuthCubit extends Cubit<AuthState> {
   Uint8List? profileImage;
   final ImagePickerService _pickerImageService;
   final AuthRepository _authRepository;
-  UserDataEntity? currentUser;
   bool obscuredPasswordText = true;
 
 
