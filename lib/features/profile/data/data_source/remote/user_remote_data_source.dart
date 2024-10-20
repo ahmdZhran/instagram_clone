@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../../../auth/data/models/user_model.dart';
+import '../../models/user_model.dart';
 
 class UserRemoteDataSource {
   final FirebaseFirestore _firebaseFirestore;

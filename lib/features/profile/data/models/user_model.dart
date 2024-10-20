@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../domain/entities/user_profile_entity.dart';
 
 class UserModel {
   final String username;
@@ -37,6 +38,24 @@ class UserModel {
       name: json['name'],
       bio: json['bio'],
       profileImageUrl: json['profileImageUrl'],
+    );
+  }
+
+  UserProfileEntity toEntity() {
+    return UserProfileEntity(
+      username: username,
+      name: name,
+      bio: bio,
+      profileImageUrl: profileImageUrl,
+    );
+  }
+
+  factory UserModel.fromEntity(UserProfileEntity entity) {
+    return UserModel(
+      username: entity.username,
+      name: entity.name,
+      bio: entity.bio,
+      profileImageUrl: entity.profileImageUrl,
     );
   }
 }

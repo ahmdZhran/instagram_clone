@@ -2,7 +2,7 @@ import 'package:instagram_clone/core/helper/shared_pref_helper.dart';
 import 'package:instagram_clone/core/helper/shared_pref_keys.dart';
 import 'dart:convert';
 
-import '../../../../auth/data/models/user_model.dart';
+import '../../models/user_model.dart';
 
 class UserLocalDataSource {
   final SharedPrefHelper _sharedPrefHelper;
