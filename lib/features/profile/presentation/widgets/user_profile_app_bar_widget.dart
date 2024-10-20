@@ -6,7 +6,7 @@ import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_text_style.dart';
-import '../cubits/settings_cubit.dart';
+import '../cubits/settings/settings_cubit.dart';
 
 class UserProfileAppBarWidget extends StatelessWidget {
   const UserProfileAppBarWidget({super.key});

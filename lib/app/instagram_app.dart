@@ -6,7 +6,7 @@ import 'package:instagram_clone/core/theme/app_them.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import '../core/languages/app_localization_setup.dart';
 import '../core/router/routes.dart';
-import '../features/profile/presentation/cubits/settings_cubit.dart';
+import '../features/profile/presentation/cubits/settings/settings_cubit.dart';
 
 class InstagramApp extends StatefulWidget {
   const InstagramApp({super.key, required this.appRouter});
