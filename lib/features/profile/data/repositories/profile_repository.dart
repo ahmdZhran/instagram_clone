@@ -6,24 +6,25 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../models/user_model.dart';
 
 class ProfileRepository {
-  final UserRemoteDataSource _remoteDataSource;
-  final UserLocalDataSource _localDataSource;
-  final InternetConnectionChecker _connectionChecker;
+  final UserRemoteDataSource remoteDataSource;
+  final UserLocalDataSource localDataSource;
+  final InternetConnectionChecker connectionChecker;
 
-  ProfileRepository(
-    this._remoteDataSource,
-    this._localDataSource,
-    this._connectionChecker,
-  );
+  ProfileRepository({
+    required this.remoteDataSource,
+    required this.localDataSource,
+    required this.connectionChecker,
+  });
 
   Future<UserProfileEntity> getProfileData(String userId) async {
-    bool isConnected = await _connectionChecker.hasConnection;
+    bool isConnected = await connectionChecker.hasConnection;
     if (isConnected) {
-      final UserModel  remoteData = await _remoteDataSource.getUserProfile(userId);
-      _localDataSource.cacheUserProfile(remoteData);
+      final UserModel remoteData =
+          await remoteDataSource.getUserProfile(userId);
+      localDataSource.cacheUserProfile(remoteData);
       return remoteData.toEntity();
     } else {
-      final UserModel? localData = _localDataSource.getCachedUserProfile();
+      final UserModel? localData = localDataSource.getCachedUserProfile();
       if (localData != null) {
         return localData.toEntity();
       } else {

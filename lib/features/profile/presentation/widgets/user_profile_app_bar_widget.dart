@@ -5,8 +5,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/custom_text_style.dart';
 import '../cubits/settings/settings_cubit.dart';
+import 'user_name_widget.dart';
 
 class UserProfileAppBarWidget extends StatelessWidget {
   const UserProfileAppBarWidget({super.key});
@@ -22,14 +22,7 @@ class UserProfileAppBarWidget extends StatelessWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Flexible(
-            flex: 2,
-            child: Text(
-              '___ahmd.1',
-              style: CustomTextStyle.pacifico25,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
+          const UserNameWidget(),
           const Spacer(),
           InkWell(
             borderRadius: BorderRadius.circular(12),
