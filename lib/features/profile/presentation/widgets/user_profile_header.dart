@@ -65,7 +65,9 @@ class _UserProfileHeaderWidgetState extends State<UserProfileHeaderWidget> {
                         child: CustomButton(
                           height: 40,
                           color: AppColors.deepGrey,
-                          onPressed: () {},
+                          onPressed: () {
+                            
+                          },
                           childOfCustomButton: Text(
                             context.translate(AppStrings.editProfile),
                             style: CustomTextStyle.pacifico14

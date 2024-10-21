@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/features/main_widget/main_widget.dart';
+import 'package:instagram_clone/features/profile/presentation/screens/edit_profile_screen.dart';
 import '../../features/auth/presentation/screens/forget_password_screen.dart';
 import '../../features/auth/presentation/screens/login_screen.dart';
 import '../../features/auth/presentation/screens/sign_up_screen.dart';
@@ -33,6 +34,10 @@ class AppRouter {
       case Routes.forgotPassword:
         return MaterialPageRoute(
           builder: (_) => const ForgotPasswordScreen(),
+        );
+          case Routes.editProfileScreen:
+        return MaterialPageRoute(
+          builder: (_) => const EditProfileScreen(),
         );
       default:
         return null;
