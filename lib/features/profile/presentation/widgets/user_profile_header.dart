@@ -46,7 +46,7 @@ class _UserProfileHeaderWidgetState extends State<UserProfileHeaderWidget> {
                       CircleAvatar(
                         radius: 40.r,
                         backgroundImage: NetworkImage(
-                          profileCubit.cachedUserProfile!.profileImageUrl,
+                          profileCubit.userProfileData!.profileImageUrl,
                         ),
                       ),
                       const UserProfileInformationWidget()
@@ -54,10 +54,10 @@ class _UserProfileHeaderWidgetState extends State<UserProfileHeaderWidget> {
                   ),
                   const Gap(40),
                   Text(
-                    profileCubit.cachedUserProfile!.name,
+                    profileCubit.userProfileData!.name,
                   ),
                   const Gap(10),
-                  Text(profileCubit.cachedUserProfile!.bio),
+                  Text(profileCubit.userProfileData!.bio),
                   const Gap(10),
                   Row(
                     children: [

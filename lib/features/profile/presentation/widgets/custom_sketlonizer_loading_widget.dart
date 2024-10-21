@@ -6,9 +6,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../core/utils/app_colors.dart';
 
 class CustomSketlonizerLoadingWidget extends StatelessWidget {
-  const CustomSketlonizerLoadingWidget({
-    super.key,
-  });
+  const CustomSketlonizerLoadingWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
