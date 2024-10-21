@@ -1,5 +1,7 @@
 {
     "name":"Name",
+    "user_name":"username",
+    "bio":"Bio",
     "posts":"Posts",
     "followers": "Followers",
     "following":"Following",

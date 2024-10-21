@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
+import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:instagram_clone/core/utils/custom_text_style.dart';
 
@@ -21,6 +22,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              size: 30,
+              Icons.check,
+              color: AppColors.primaryColor,
+            ),
+          )
+        ],
         title: Text(
           context.translate(AppStrings.editProfile),
         ),
@@ -53,12 +64,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   const Gap(10),
                   CustomOutlineTextFormFieldWidget(
                     controller: name,
-                    labelName: context.translate(AppStrings.name),
+                    labelName: context.translate(AppStrings.username),
                   ),
                   const Gap(10),
                   CustomOutlineTextFormFieldWidget(
                     controller: name,
-                    labelName: context.translate(AppStrings.name),
+                    labelName: context.translate(AppStrings.bio),
                   ),
                 ],
               ),
