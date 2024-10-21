@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
@@ -22,7 +23,7 @@ class MainWidget extends StatefulWidget {
 class _MainWidgetState extends State<MainWidget> {
   PageController controller = PageController(initialPage: 0);
   int index = 0;
-
+  final String? uid = FirebaseAuth.instance.currentUser?.uid;
   void onNavBarTap(int newIndex) {
     if (index != newIndex) {
       controller.jumpToPage(newIndex);
@@ -44,12 +45,14 @@ class _MainWidgetState extends State<MainWidget> {
               });
             },
             controller: controller,
-            children: const [
-              HomeScreen(),
-              ExploreScreen(),
-              AddPostScreen(),
-              NotificationsScreen(),
-              ProfileScreen(),
+            children: [
+              const HomeScreen(),
+              const ExploreScreen(),
+              const AddPostScreen(),
+              const NotificationsScreen(),
+              ProfileScreen(
+                uid: FirebaseAuth.instance.currentUser!.uid,
+              ),
             ],
           ),
           SafeArea(
