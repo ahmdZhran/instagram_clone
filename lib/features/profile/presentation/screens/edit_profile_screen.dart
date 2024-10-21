@@ -14,6 +14,24 @@ class EditProfileScreen extends StatelessWidget {
           context.translate(AppStrings.editProfile),
         ),
       ),
+      body: Column(
+        children: [
+          GestureDetector(
+            onTap: () {},
+            child: const Column(
+              children: [
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: CircleAvatar(
+                    radius: 50,
+                  ),
+                ),
+                Text('')
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

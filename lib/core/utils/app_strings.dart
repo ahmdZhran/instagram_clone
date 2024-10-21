@@ -40,4 +40,5 @@ abstract class AppStrings {
   static const String arabicCode = "ar";
   static const String english = "english";
   static const String arabic = "arabic";
+  static const String changePhoto = "change_photo";
 }
