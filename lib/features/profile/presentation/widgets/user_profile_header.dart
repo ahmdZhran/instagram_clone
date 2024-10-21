@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:instagram_clone/core/router/routes.dart';
 import '../../../../core/helper/extensions.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
@@ -66,7 +67,7 @@ class _UserProfileHeaderWidgetState extends State<UserProfileHeaderWidget> {
                           height: 40,
                           color: AppColors.deepGrey,
                           onPressed: () {
-                            
+                            context.pushNamed(Routes.editProfileScreen);
                           },
                           childOfCustomButton: Text(
                             context.translate(AppStrings.editProfile),
