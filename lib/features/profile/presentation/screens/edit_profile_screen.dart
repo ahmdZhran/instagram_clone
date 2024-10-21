@@ -5,13 +5,13 @@ import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:instagram_clone/core/utils/custom_text_style.dart';
+import 'package:instagram_clone/features/profile/domain/entities/user_profile_entity.dart';
 
 import '../../../../core/widgets/custom_out_line_text_form_field.dart';
-import '../../domain/entities/user_profile_entity.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
-
+  const EditProfileScreen({super.key, required this.userProfileData});
+  final UserProfileEntity userProfileData;
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
@@ -20,7 +20,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController name = TextEditingController();
   final TextEditingController username = TextEditingController();
   final TextEditingController bio = TextEditingController();
-  UserProfileEntity? userProfileEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +47,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               padding: EdgeInsets.symmetric(horizontal: 10.w),
               child: Column(
                 children: [
-                  const Align(
+                  Align(
                     alignment: Alignment.topCenter,
                     child: CircleAvatar(
                       radius: 50,
+                      backgroundImage:
+                          NetworkImage(widget.userProfileData.profileImageUrl),
                     ),
                   ),
                   TextButton(
@@ -63,16 +64,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                   CustomOutlineTextFormFieldWidget(
                     controller: name,
-                    hintText: '__ahmed',
+                    hintText: widget.userProfileData.name,
                   ),
                   const Gap(10),
                   CustomOutlineTextFormFieldWidget(
                     controller: username,
-                    hintText: 'username',
+                    hintText: widget.userProfileData.username,
                   ),
                   const Gap(10),
                   CustomOutlineTextFormFieldWidget(
-                    hintText: 'bio',
+                    hintText: widget.userProfileData.bio,
                     controller: bio,
                   ),
                 ],

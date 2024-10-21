@@ -67,7 +67,10 @@ class _UserProfileHeaderWidgetState extends State<UserProfileHeaderWidget> {
                           height: 40,
                           color: AppColors.deepGrey,
                           onPressed: () {
-                            context.pushNamed(Routes.editProfileScreen,);
+                            context.pushNamed(
+                              Routes.editProfileScreen,
+                              arguments: profileCubit.userProfileData,
+                            );
                           },
                           childOfCustomButton: Text(
                             context.translate(AppStrings.editProfile),
