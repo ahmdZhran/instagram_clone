@@ -10,18 +10,18 @@ class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit(this._profileRepository) : super(ProfileInitial());
 
   final ProfileRepository _profileRepository;
-  UserProfileEntity? _cachedUserProfile;
+  UserProfileEntity? cachedUserProfile;
 
   Future<void> getUserData(String userId) async {
-    if (_cachedUserProfile != null) {
-      emit(ProfileSuccess(_cachedUserProfile!));
+    if (cachedUserProfile != null) {
+      emit(ProfileSuccess(cachedUserProfile!));
 
       return;
     }
     try {
       emit(ProfileLoading());
       final userData = await _profileRepository.getProfileData(userId);
-      _cachedUserProfile = userData;
+      cachedUserProfile = userData;
       emit(ProfileSuccess(userData));
     } catch (error) {
       emit(ProfileFailure(errMessage: error.toString()));
