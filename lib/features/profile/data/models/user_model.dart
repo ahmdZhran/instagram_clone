@@ -6,8 +6,9 @@ class UserModel {
   final String username;
   final String bio;
   final String profileImageUrl;
-
+  final String name;
   UserModel({
+    required this.name,
     required this.uid,
     required this.username,
     required this.bio,
@@ -16,6 +17,7 @@ class UserModel {
 
   factory UserModel.fromDocument(DocumentSnapshot doc) {
     return UserModel(
+      name: doc['name'],
       uid: doc['uid'],
       username: doc['user_name'],
       bio: doc['bio'],
@@ -25,7 +27,8 @@ class UserModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'uid':uid,
+      name: name,
+      'uid': uid,
       'user_name': username,
       'bio': bio,
       'profile_image': profileImageUrl,
@@ -34,6 +37,7 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
+      name: json['name'],
       uid: json['uid'],
       username: json['user_name'],
       bio: json['bio'],
@@ -47,12 +51,14 @@ class UserModel {
       username: username,
       bio: bio,
       profileImageUrl: profileImageUrl,
+      name: name,
     );
   }
 
   factory UserModel.fromEntity(UserProfileEntity entity) {
     return UserModel(
-      uid:entity.uid,
+      name: entity.name,
+      uid: entity.uid,
       username: entity.username,
       bio: entity.bio,
       profileImageUrl: entity.profileImageUrl,
