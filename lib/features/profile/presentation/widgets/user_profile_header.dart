@@ -58,7 +58,7 @@ class _UserProfileHeaderWidgetState extends State<UserProfileHeaderWidget> {
                     profileCubit.userProfileData!.name,
                   ),
                   const Gap(10),
-                  Text(profileCubit.userProfileData!.bio),
+                  Text(profileCubit.userProfileData?.bio ?? ""),
                   const Gap(10),
                   Row(
                     children: [
@@ -67,7 +67,7 @@ class _UserProfileHeaderWidgetState extends State<UserProfileHeaderWidget> {
                           height: 40,
                           color: AppColors.deepGrey,
                           onPressed: () {
-                            context.pushNamed(Routes.editProfileScreen);
+                            context.pushNamed(Routes.editProfileScreen,);
                           },
                           childOfCustomButton: Text(
                             context.translate(AppStrings.editProfile),

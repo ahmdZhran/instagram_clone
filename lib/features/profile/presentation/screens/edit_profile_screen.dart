@@ -7,6 +7,7 @@ import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:instagram_clone/core/utils/custom_text_style.dart';
 
 import '../../../../core/widgets/custom_out_line_text_form_field.dart';
+import '../../domain/entities/user_profile_entity.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -17,6 +18,9 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController name = TextEditingController();
+  final TextEditingController username = TextEditingController();
+  final TextEditingController bio = TextEditingController();
+  UserProfileEntity? userProfileEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -59,17 +63,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                   CustomOutlineTextFormFieldWidget(
                     controller: name,
-                    labelName: context.translate(AppStrings.name),
+                    hintText: '__ahmed',
                   ),
                   const Gap(10),
                   CustomOutlineTextFormFieldWidget(
-                    controller: name,
-                    labelName: context.translate(AppStrings.username),
+                    controller: username,
+                    hintText: 'username',
                   ),
                   const Gap(10),
                   CustomOutlineTextFormFieldWidget(
-                    controller: name,
-                    labelName: context.translate(AppStrings.bio),
+                    hintText: 'bio',
+                    controller: bio,
                   ),
                 ],
               ),
