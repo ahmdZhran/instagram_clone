@@ -14,13 +14,6 @@ class UserNameWidget extends StatefulWidget {
 
 class _UserNameWidgetState extends State<UserNameWidget> {
   @override
-  void initState() {
-    super.initState();
-    ProfileCubit.getInstance().getUserData(widget.uid);
-    debugPrint(widget.uid);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileCubit, ProfileState>(
       bloc: ProfileCubit.getInstance(),
@@ -28,11 +21,10 @@ class _UserNameWidgetState extends State<UserNameWidget> {
         if (state is ProfileLoading) {
           return const CircularProgressIndicator();
         } else if (state is ProfileSuccess) {
-          // Display the user's name
           return Flexible(
             flex: 2,
             child: Text(
-              state.userData.username,
+              state.userData!.username,
               style: CustomTextStyle.pacifico25,
               overflow: TextOverflow.ellipsis,
             ),
@@ -45,8 +37,7 @@ class _UserNameWidgetState extends State<UserNameWidget> {
             style: const TextStyle(color: Colors.red, fontSize: 15),
           );
         } else {
-          // Initial state or unknown state
-          return const Text('Loading...');
+          return const SizedBox.shrink();
         }
       },
     );
