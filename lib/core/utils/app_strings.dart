@@ -5,7 +5,7 @@ abstract class AppStrings {
   static const String createYourEmail = 'Create your email';
   static const String welcomeBack = 'Welcome Back!';
   static const String username = "User name";
-  static const String name = "Name";
+  static const String name = "name";
   static const String bio = 'Bio';
   static const String emailAddress = "Email Address";
   static const String password = "Password";
