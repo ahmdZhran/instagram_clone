@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/core/helper/extensions.dart';
-import 'package:instagram_clone/core/utils/app_colors.dart';
-import 'package:instagram_clone/core/utils/app_strings.dart';
-import 'package:instagram_clone/core/utils/custom_text_style.dart';
-import 'package:instagram_clone/features/profile/domain/entities/user_profile_entity.dart';
-
+import '../../../../core/helper/extensions.dart';
+import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_strings.dart';
+import '../../../../core/utils/custom_text_style.dart';
+import '../../domain/entities/user_profile_entity.dart';
 import '../../../../core/widgets/custom_out_line_text_form_field.dart';
 
 class EditProfileScreen extends StatefulWidget {
