@@ -63,18 +63,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                   ),
                   CustomOutlineTextFormFieldWidget(
-                    controller: name,
                     hintText: widget.userProfileData.name,
+                    onChanged: (name) {},
                   ),
                   const Gap(20),
                   CustomOutlineTextFormFieldWidget(
-                    controller: username,
                     hintText: widget.userProfileData.username,
+                    onChanged: (username) {},
                   ),
                   const Gap(20),
                   CustomOutlineTextFormFieldWidget(
                     hintText: widget.userProfileData.bio,
-                    controller: bio,
+                  
+                    onChanged: (bio) {},
                   ),
                 ],
               ),

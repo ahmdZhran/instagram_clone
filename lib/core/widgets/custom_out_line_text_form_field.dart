@@ -7,17 +7,17 @@ import '../utils/app_colors.dart';
 class CustomOutlineTextFormFieldWidget extends StatelessWidget {
   const CustomOutlineTextFormFieldWidget({
     super.key,
-    required this.controller,
     required this.hintText,
+    required this.onChanged,
   });
 
-  final TextEditingController controller;
   final String hintText;
+ final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
+      onChanged: onChanged,
       cursorColor: AppColors.primaryColor,
       decoration: InputDecoration(
         hintText: hintText,
