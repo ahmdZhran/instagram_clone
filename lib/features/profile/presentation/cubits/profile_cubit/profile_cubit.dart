@@ -10,8 +10,11 @@ class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit(this._profileRepository) : super(ProfileInitial());
 
   final ProfileRepository _profileRepository;
-  
+
   UserProfileEntity? userProfileData;
+  String? name;
+  String? username;
+  String? bio;
 
   Future<void> getUserData(String userId) async {
     if (userProfileData != null) {

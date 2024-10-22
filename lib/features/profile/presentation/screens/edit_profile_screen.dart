@@ -16,19 +16,25 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
+  String? name;
+  String? username;
+  String? bio;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: const Icon(
+            onPressed: isNotEmpty ? () {} : null,
+            icon: Icon(
               size: 30,
               Icons.check,
-              color: AppColors.primaryColor,
+              color: isNotEmpty
+                  ? AppColors.primaryColor
+                  : AppColors.primaryColor.withOpacity(.4),
             ),
-          )
+          ),
         ],
         title: Text(
           context.translate(AppStrings.editProfile),
@@ -59,17 +65,29 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                   CustomOutlineTextFormFieldWidget(
                     hintText: widget.userProfileData.name,
-                    onChanged: (name) {},
+                    onChanged: (value) {
+                      setState(() {
+                        name = value;
+                      });
+                    },
                   ),
                   const Gap(20),
                   CustomOutlineTextFormFieldWidget(
                     hintText: widget.userProfileData.username,
-                    onChanged: (username) {},
+                    onChanged: (value) {
+                      setState(() {
+                        username = value;
+                      });
+                    },
                   ),
                   const Gap(20),
                   CustomOutlineTextFormFieldWidget(
                     hintText: widget.userProfileData.bio,
-                    onChanged: (bio) {},
+                    onChanged: (value) {
+                      setState(() {
+                        bio = value;
+                      });
+                    },
                   ),
                 ],
               ),
@@ -78,5 +96,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ],
       ),
     );
+  }
+
+  bool get isNotEmpty {
+    return (name?.isNotEmpty ?? false) ||
+        (username?.isNotEmpty ?? false) ||
+        (bio?.isNotEmpty ?? false);
   }
 }
