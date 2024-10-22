@@ -17,10 +17,6 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  final TextEditingController name = TextEditingController();
-  final TextEditingController username = TextEditingController();
-  final TextEditingController bio = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +70,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   const Gap(20),
                   CustomOutlineTextFormFieldWidget(
                     hintText: widget.userProfileData.bio,
-                  
                     onChanged: (bio) {},
                   ),
                 ],
