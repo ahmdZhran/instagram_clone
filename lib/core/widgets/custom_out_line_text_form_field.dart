@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/helper/extensions.dart';
-import 'package:instagram_clone/core/utils/custom_text_style.dart';
+import '../helper/extensions.dart';
+import '../utils/custom_text_style.dart';
 
 import '../utils/app_colors.dart';
 

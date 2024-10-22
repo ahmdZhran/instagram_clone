@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utils/custom_text_style.dart';
+import '../../../../core/utils/custom_text_style.dart';
 
 class UserProfileCountsInfoWidget extends StatelessWidget {
   const UserProfileCountsInfoWidget(

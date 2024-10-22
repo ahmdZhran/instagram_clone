@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/core/helper/shared_pref_helper.dart';
-import 'package:instagram_clone/core/helper/shared_pref_keys.dart';
-import 'package:instagram_clone/features/profile/profile_di.dart';
+import '../../../../../core/helper/shared_pref_helper.dart';
+import '../../../../../core/helper/shared_pref_keys.dart';
+import '../../../profile_di.dart';
 
 part 'settings_state.dart';
 

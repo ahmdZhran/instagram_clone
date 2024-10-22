@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:instagram_clone/core/helper/extensions.dart';
+import '../../core/helper/extensions.dart';
 
 class BottomNavBarItemWidget extends StatelessWidget {
   final VoidCallback onTap;

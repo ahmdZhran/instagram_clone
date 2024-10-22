@@ -3,7 +3,7 @@ import 'package:external_app_launcher/external_app_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:instagram_clone/core/utils/app_colors.dart';
+import 'app_colors.dart';
 
 class UtilsMessages {
   static void showToastErrorBottom(

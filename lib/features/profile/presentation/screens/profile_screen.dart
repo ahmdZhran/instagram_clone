@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/features/profile/presentation/cubits/profile_cubit/profile_cubit.dart';
+import '../cubits/profile_cubit/profile_cubit.dart';
 import '../widgets/user_profile_mentioned_posts_widget.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 import '../widgets/user_posts_widget.dart';

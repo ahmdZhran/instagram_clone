@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/theme/colors_extension.dart';
-import 'package:instagram_clone/core/utils/app_colors.dart';
+import 'colors_extension.dart';
+import '../utils/app_colors.dart';
 
 class AppThemes {
   static final lightTheme = ThemeData(
