@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/repositories/profile_repository.dart';
 import '../../../domain/entities/user_profile_entity.dart';
@@ -29,6 +31,16 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(ProfileSuccess());
     } catch (error) {
       emit(ProfileFailure(errMessage: error.toString()));
+    }
+  }
+
+  Future<void> updatedUserData(UserProfileEntity profileEntity) async {
+    try {
+      emit(ProfileUpdateLoading());
+      await _profileRepository.updateProfileData(profileEntity);
+      emit(ProfileUpdateSuccess());
+    } catch (error) {
+      emit(ProfileUpdateFailure(errMessage: error.toString()));
     }
   }
 
