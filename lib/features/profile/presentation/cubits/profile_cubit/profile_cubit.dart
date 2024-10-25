@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import '../../../../../core/helper/image_service.dart';
 import '../../../data/repositories/profile_repository.dart';
 import '../../../domain/entities/user_profile_entity.dart';
 
@@ -12,12 +15,13 @@ class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit(this._profileRepository) : super(ProfileInitial());
 
   final ProfileRepository _profileRepository;
-
+  ImagePickerService? _pickerImageService;
   UserProfileEntity? userProfileData;
   String? name;
   String? username;
   String? bio;
-
+  Uint8List? profileImage;
+  
   Future<void> getUserData(String userId) async {
     if (userProfileData != null) {
       emit(ProfileSuccess());
@@ -41,6 +45,15 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(ProfileUpdateSuccess());
     } catch (error) {
       emit(ProfileUpdateFailure(errMessage: error.toString()));
+    }
+  }
+
+  Future<void> selectedImageProfile() async {
+    final Uint8List? image =
+        await _pickerImageService?.pickImage(ImageSource.gallery);
+    if (image != null) {
+      profileImage = image;
+      emit(ProfileImageUpdated(image: image));
     }
   }
 
