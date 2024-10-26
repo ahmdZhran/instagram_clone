@@ -55,7 +55,7 @@ class _UserProfileHeaderWidgetState extends State<UserProfileHeaderWidget> {
                   ),
                   const Gap(40),
                   Text(
-                    profileCubit.userProfileData!.name,
+                    profileCubit.userProfileData?.name ?? "",
                   ),
                   const Gap(10),
                   Text(profileCubit.userProfileData?.bio ?? ""),

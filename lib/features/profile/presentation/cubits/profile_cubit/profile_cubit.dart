@@ -12,16 +12,16 @@ import '../../../profile_di.dart';
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
-  ProfileCubit(this._profileRepository) : super(ProfileInitial());
+  ProfileCubit(this._profileRepository) : super(ProfileInitial()) {
+    _pickerImageService = ImagePickerService();
+  }
 
   final ProfileRepository _profileRepository;
   ImagePickerService? _pickerImageService;
   UserProfileEntity? userProfileData;
-  String? name;
-  String? username;
-  String? bio;
+
   Uint8List? profileImage;
-  
+
   Future<void> getUserData(String userId) async {
     if (userProfileData != null) {
       emit(ProfileSuccess());
@@ -48,13 +48,14 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  Future<void> selectedImageProfile() async {
-    final Uint8List? image =
-        await _pickerImageService?.pickImage(ImageSource.gallery);
+  Future<Uint8List?> selectedImageProfile() async {
+    final image = await _pickerImageService?.pickImage(ImageSource.gallery);
     if (image != null) {
       profileImage = image;
       emit(ProfileImageUpdated(image: image));
+      return image;
     }
+    return null;
   }
 
   static const String _tag = "profile_instance";

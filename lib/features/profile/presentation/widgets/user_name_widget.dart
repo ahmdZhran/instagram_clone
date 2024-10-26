@@ -33,7 +33,7 @@ class _UserNameWidgetState extends State<UserNameWidget> {
           return Flexible(
             flex: 2,
             child: Text(
-              profileCubit.userProfileData!.username,
+              profileCubit.userProfileData?.username ?? "",
               style: CustomTextStyle.pacifico25,
               overflow: TextOverflow.ellipsis,
             ),

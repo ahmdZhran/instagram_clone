@@ -46,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const UserProfileHeaderWidget(),
                     SliverPersistentHeader(
                       pinned: ModalRoute.of(context)!.isFirst,
-                      delegate: const _UserProfileBarDelegate(
+                      delegate: const UserProfileBarDelegate(
                         TabBar(
                           dividerColor: Colors.transparent,
                           indicatorSize: TabBarIndicatorSize.tab,
@@ -86,12 +86,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void dispose() {
     _nestedScrollController.dispose();
+    ProfileCubit.deleteInstance();
     super.dispose();
   }
 }
 
-class _UserProfileBarDelegate extends SliverPersistentHeaderDelegate {
-  const _UserProfileBarDelegate(this.tabBar);
+class UserProfileBarDelegate extends SliverPersistentHeaderDelegate {
+  const UserProfileBarDelegate(this.tabBar);
   final TabBar tabBar;
   @override
   Widget build(
@@ -112,7 +113,7 @@ class _UserProfileBarDelegate extends SliverPersistentHeaderDelegate {
   double get minExtent => tabBar.preferredSize.height;
 
   @override
-  bool shouldRebuild(covariant _UserProfileBarDelegate oldDelegate) {
+  bool shouldRebuild(covariant UserProfileBarDelegate oldDelegate) {
     return tabBar != oldDelegate.tabBar;
   }
 }
