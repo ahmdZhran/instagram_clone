@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:instagram_clone/core/utils/utils_messages.dart';
 import '../../../../core/services/firebase_storage_service.dart';
 import '../cubits/profile_cubit/profile_cubit.dart';
 import '../../../../core/helper/extensions.dart';
@@ -164,9 +165,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       );
       profileCubit.updatedUserData(updatedProfile);
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to update profile: $e')),
-      );
+      if (mounted) {
+        UtilsMessages.showToastErrorBottom(context,
+            message: "Can't update your profile");
+      }
     }
   }
 }
