@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/helper/extensions.dart';
-import 'package:instagram_clone/core/utils/app_strings.dart';
+import '../../../../core/helper/extensions.dart';
+import '../../../../core/utils/app_strings.dart';
 
 import 'user_profile_counts_info_widget.dart';
 

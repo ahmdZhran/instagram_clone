@@ -27,8 +27,7 @@ class UserModel {
 
   Map<String, dynamic> toJson() {
     return {
-      name: name,
-      'uid': uid,
+      'name': name,
       'user_name': username,
       'bio': bio,
       'profile_image': profileImageUrl,

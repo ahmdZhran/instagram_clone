@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/features/auth/presentation/widgets/custom_form_login_widget.dart';
+import '../widgets/custom_form_login_widget.dart';
 import '../widgets/auth_text_styles.dart';
 
 class LogInScreen extends StatelessWidget {

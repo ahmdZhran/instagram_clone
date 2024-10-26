@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/utils/app_colors.dart';
+import '../utils/app_colors.dart';
 
 class ColorsExtension extends ThemeExtension<ColorsExtension> {
   final Color mainColor;

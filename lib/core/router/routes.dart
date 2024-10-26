@@ -6,4 +6,5 @@ class Routes {
   static const String logIn = '/login';
   static const String forgotPassword = '/forgetPassword';
   static const String checkUserAuthState = '/checkUserAuthState';
+  static const String editProfileScreen = '/editProfileScreen';
 }

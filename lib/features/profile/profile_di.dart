@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
-import 'package:instagram_clone/core/helper/shared_pref_helper.dart';
-import 'package:instagram_clone/features/profile/data/data_source/remote/user_remote_data_source.dart';
-import 'package:instagram_clone/features/profile/data/repositories/profile_repository.dart';
+import '../../core/helper/shared_pref_helper.dart';
+import 'data/data_source/remote/user_remote_data_source.dart';
+import 'data/repositories/profile_repository.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import 'data/data_source/local/user_local_data_source.dart';

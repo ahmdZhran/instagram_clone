@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/languages/app_localization.dart';
-import 'package:instagram_clone/core/theme/colors_extension.dart';
+import '../languages/app_localization.dart';
+import '../theme/colors_extension.dart';
 
 extension ExtensionsHelper on BuildContext {
   Future<dynamic> pushNamed(String routeName, {Object? arguments}) {

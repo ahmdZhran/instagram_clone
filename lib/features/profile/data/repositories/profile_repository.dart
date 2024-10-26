@@ -1,4 +1,3 @@
-
 import '../data_source/local/user_local_data_source.dart';
 import '../data_source/remote/user_remote_data_source.dart';
 import '../../domain/entities/user_profile_entity.dart';
@@ -32,6 +31,27 @@ class ProfileRepository {
       } else {
         throw Exception("no internet");
       }
+    }
+  }
+
+  Future<UserProfileEntity> updateProfileData(
+      UserProfileEntity profileEntity) async {
+    bool isConnected = await connectionChecker.hasConnection;
+    if (isConnected) {
+      final userModel = UserModel(
+        name: profileEntity.name,
+        username: profileEntity.username,
+        bio: profileEntity.bio,
+        profileImageUrl: profileEntity.profileImageUrl,
+        uid: profileEntity.uid,
+      );
+      final updatedUser = await remoteDataSource.updateUserProfile(
+        profileEntity.uid,
+        userModel,
+      );
+      return updatedUser.toEntity();
+    } else {
+      throw Exception("No internet connection");
     }
   }
 }

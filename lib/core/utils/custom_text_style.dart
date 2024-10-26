@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:instagram_clone/core/utils/app_colors.dart';
+import 'app_colors.dart';
 
 abstract class CustomTextStyle {
   static final pacifico40 = TextStyle(

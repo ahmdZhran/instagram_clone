@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/helper/extensions.dart';
-import 'package:instagram_clone/core/router/routes.dart';
-import 'package:instagram_clone/core/utils/app_assets.dart';
+import '../../../../core/helper/extensions.dart';
+import '../../../../core/router/routes.dart';
+import '../../../../core/utils/app_assets.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void delayedNavigation() {
     Future.delayed(
-      const Duration(seconds: 3),
+      const Duration(seconds: 2),
       () {
         FirebaseAuth.instance.currentUser == null
             ? context.pushReplacementNamed(Routes.logIn)

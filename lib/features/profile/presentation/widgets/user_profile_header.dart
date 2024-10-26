@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import '../../../../core/router/routes.dart';
 import '../../../../core/helper/extensions.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
@@ -54,10 +55,10 @@ class _UserProfileHeaderWidgetState extends State<UserProfileHeaderWidget> {
                   ),
                   const Gap(40),
                   Text(
-                    profileCubit.userProfileData!.name,
+                    profileCubit.userProfileData?.name ?? "",
                   ),
                   const Gap(10),
-                  Text(profileCubit.userProfileData!.bio),
+                  Text(profileCubit.userProfileData?.bio ?? ""),
                   const Gap(10),
                   Row(
                     children: [
@@ -65,7 +66,12 @@ class _UserProfileHeaderWidgetState extends State<UserProfileHeaderWidget> {
                         child: CustomButton(
                           height: 40,
                           color: AppColors.deepGrey,
-                          onPressed: () {},
+                          onPressed: () {
+                            context.pushNamed(
+                              Routes.editProfileScreen,
+                              arguments: profileCubit.userProfileData,
+                            );
+                          },
                           childOfCustomButton: Text(
                             context.translate(AppStrings.editProfile),
                             style: CustomTextStyle.pacifico14

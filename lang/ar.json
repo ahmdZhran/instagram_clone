@@ -1,4 +1,7 @@
 {
+    "name":"الاسم",
+    "user_name":"اسم المستخدم",
+    "bio":"وصف",
     "posts":"منشور",
     "followers": "متابعين",
     "following":"متابع",
@@ -8,5 +11,6 @@
     "english":"انجليزي",
     "logout":"تسجيل الخروج",
     "dark_mode":"الوضع الليلي",
-    "light_mode":"الوضع المضئ"
+    "light_mode":"الوضع المضئ",
+    "change_photo":"تغيير الصورة"
 }

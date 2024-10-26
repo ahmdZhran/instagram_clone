@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/core/utils/app_colors.dart';
+import '../../../../core/utils/app_colors.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/utils/custom_text_style.dart';
@@ -33,7 +33,7 @@ class _UserNameWidgetState extends State<UserNameWidget> {
           return Flexible(
             flex: 2,
             child: Text(
-              profileCubit.userProfileData!.username,
+              profileCubit.userProfileData?.username ?? "",
               style: CustomTextStyle.pacifico25,
               overflow: TextOverflow.ellipsis,
             ),
