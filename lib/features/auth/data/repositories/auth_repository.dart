@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:instagram_clone/features/profile/presentation/screens/edit_profile_screen.dart';
 import '../../../../core/errors/firebase_auth_errors_handler.dart';
 import '../../../../core/services/firebase_storage_service.dart';
 import '../../domain/entities/user_data_entity.dart';
