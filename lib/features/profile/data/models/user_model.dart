@@ -17,17 +17,17 @@ class UserModel {
 
   factory UserModel.fromDocument(DocumentSnapshot doc) {
     return UserModel(
-      name: doc['name'] ?? "",
-      uid: doc['uid'] ?? "",
-      username: doc['user_name'] ?? "",
-      bio: doc['bio']?? "",
-      profileImageUrl: doc['profile_image'] ?? "",
+      name: doc['name'],
+      uid: doc['uid'],
+      username: doc['user_name'],
+      bio: doc['bio'],
+      profileImageUrl: doc['profile_image'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      name: name,
+      'name': name,
       'user_name': username,
       'bio': bio,
       'profile_image': profileImageUrl,

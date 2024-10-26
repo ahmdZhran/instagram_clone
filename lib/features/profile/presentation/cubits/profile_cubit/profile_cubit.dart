@@ -41,7 +41,9 @@ class ProfileCubit extends Cubit<ProfileState> {
   Future<void> updatedUserData(UserProfileEntity profileEntity) async {
     try {
       emit(ProfileUpdateLoading());
-      await _profileRepository.updateProfileData(profileEntity);
+      final updatedProfile =
+          await _profileRepository.updateProfileData(profileEntity);
+      userProfileData = updatedProfile;
       emit(ProfileUpdateSuccess());
     } catch (error) {
       emit(ProfileUpdateFailure(errMessage: error.toString()));

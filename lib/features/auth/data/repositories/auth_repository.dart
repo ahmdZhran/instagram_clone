@@ -3,19 +3,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
+import 'package:instagram_clone/features/profile/presentation/screens/edit_profile_screen.dart';
 import '../../../../core/errors/firebase_auth_errors_handler.dart';
+import '../../../../core/services/firebase_storage_service.dart';
 import '../../domain/entities/user_data_entity.dart';
 
 class AuthRepository {
   final FirebaseAuth auth;
   final FirebaseFirestore firestore;
   final FirebaseStorage firebaseStorage;
-
+  final FirebaseStorageService firebaseStorageService;
   AuthRepository({
     required this.auth,
     required this.firestore,
     required this.firebaseStorage,
+    required this.firebaseStorageService,
   });
 
   Future<Either<String, UserDataEntity?>> createUserWithEmailAndPassword({
@@ -32,7 +34,7 @@ class AuthRepository {
         password: password,
       );
       String imageUrl =
-          await _uploadProfileImage(profileImage!, userCredential.user!.uid);
+          await StorageService.uploadProfileImage(profileImage!, userCredential.user!.uid);
 
       UserDataEntity userEntity = UserDataEntity(
         uid: userCredential.user!.uid,
@@ -76,18 +78,7 @@ class AuthRepository {
     }
   }
 
-  Future<String> _uploadProfileImage(Uint8List image, String userId) async {
-    try {
-      TaskSnapshot snapshot = await firebaseStorage
-          .ref()
-          .child('profileImages/$userId')
-          .putData(image);
-      return await snapshot.ref.getDownloadURL();
-    } catch (error) {
-      debugPrint('error to upload image profile$error');
-      rethrow;
-    }
-  }
+
 
   Future<Either<String, void>> resetPasswordWithEmail({
     required String email,

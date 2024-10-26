@@ -34,7 +34,8 @@ class ProfileRepository {
     }
   }
 
-  Future<void> updateProfileData(UserProfileEntity profileEntity) async {
+  Future<UserProfileEntity> updateProfileData(
+      UserProfileEntity profileEntity) async {
     bool isConnected = await connectionChecker.hasConnection;
     if (isConnected) {
       final userModel = UserModel(
@@ -44,10 +45,11 @@ class ProfileRepository {
         profileImageUrl: profileEntity.profileImageUrl,
         uid: profileEntity.uid,
       );
-      await remoteDataSource.updateUserProfile(
+      final updatedUser = await remoteDataSource.updateUserProfile(
         profileEntity.uid,
         userModel,
       );
+      return updatedUser.toEntity();
     } else {
       throw Exception("No internet connection");
     }

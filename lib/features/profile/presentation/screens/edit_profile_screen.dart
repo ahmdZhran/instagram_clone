@@ -1,5 +1,7 @@
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +17,7 @@ import '../../../../core/widgets/custom_out_line_text_form_field.dart';
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key, required this.userProfileData});
   final UserProfileEntity userProfileData;
+
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
@@ -24,7 +27,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   String? username;
   String? bio;
   Uint8List? profileImage;
-  final profileCubit = ProfileCubit.getInstance();
+  late ProfileCubit profileCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    profileCubit = ProfileCubit.getInstance();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +41,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: isNotEmpty ? () {} : null,
+            onPressed: isNotEmpty ? _saveProfileChanges : null,
             icon: Icon(
               size: 30,
               Icons.check,
@@ -46,8 +55,27 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           context.translate(AppStrings.editProfile),
         ),
       ),
-      body: BlocBuilder<ProfileCubit, ProfileState>(
+      body: BlocConsumer<ProfileCubit, ProfileState>(
         bloc: profileCubit,
+        listener: (context, state) {
+          if (state is ProfileUpdateLoading) {
+            // Show a loading indicator
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Updating profile...")),
+            );
+          } else if (state is ProfileUpdateSuccess) {
+            // Show a success message
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Profile updated successfully")),
+            );
+            Navigator.pop(context); // Go back to the previous screen
+          } else if (state is ProfileUpdateFailure) {
+            // Show an error message
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(state.errMessage)),
+            );
+          }
+        },
         builder: (context, state) {
           return Column(
             children: [
@@ -68,9 +96,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     TextButton(
                       onPressed: () async {
-                        final selectedImage  =
+                        final selectedImage =
                             await profileCubit.selectedImageProfile();
-                        if (selectedImage  != null) {
+                        if (selectedImage != null) {
                           setState(() {
                             profileImage = selectedImage;
                           });
@@ -122,5 +150,45 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         (username?.isNotEmpty ?? false) ||
         (bio?.isNotEmpty ?? false) ||
         (profileImage?.isNotEmpty ?? false);
+  }
+
+  void _saveProfileChanges() async {
+    try {
+      String? profileImageUrl = widget.userProfileData.profileImageUrl;
+
+      // If a new image is selected, upload it
+      if (profileImage != null) {
+        profileImageUrl = await StorageService.uploadProfileImage(
+            profileImage!, widget.userProfileData.uid);
+      }
+      final updatedProfile = UserProfileEntity(
+        name: name ?? widget.userProfileData.name,
+        username: username ?? widget.userProfileData.username,
+        bio: bio ?? widget.userProfileData.bio,
+        profileImageUrl: profileImageUrl,
+        uid: widget.userProfileData.uid,
+      );
+      profileCubit.updatedUserData(updatedProfile);
+    } catch (e) {
+      // Handle any errors, e.g., show a Snackbar with the error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to update profile: $e')),
+      );
+    }
+  }
+}
+
+class StorageService {
+  static Future<String> uploadProfileImage(
+      Uint8List imageData, String userId) async {
+    try {
+      final storageRef =
+          FirebaseStorage.instance.ref().child('profileImages').child(userId);
+      final uploadTask = await storageRef.putData(imageData);
+      final downloadUrl = await uploadTask.ref.getDownloadURL();
+      return downloadUrl;
+    } catch (e) {
+      throw Exception('Failed to upload image: $e');
+    }
   }
 }
