@@ -64,7 +64,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text("Profile updated successfully")),
             );
-            Navigator.pop(context); 
+            Navigator.pop(context);
           } else if (state is ProfileUpdateFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.errMessage)),
@@ -147,7 +147,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         (profileImage?.isNotEmpty ?? false);
   }
 
-  void _saveProfileChanges() async {
+  Future<void> _saveProfileChanges() async {
     try {
       String? profileImageUrl = widget.userProfileData.profileImageUrl;
 
