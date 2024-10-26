@@ -1,9 +1,9 @@
 import 'dart:typed_data';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import '../../../../core/services/firebase_storage_service.dart';
 import '../cubits/profile_cubit/profile_cubit.dart';
 import '../../../../core/helper/extensions.dart';
 import '../../../../core/utils/app_colors.dart';
@@ -57,18 +57,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         bloc: profileCubit,
         listener: (context, state) {
           if (state is ProfileUpdateLoading) {
-            // Show a loading indicator
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text("Updating profile...")),
             );
           } else if (state is ProfileUpdateSuccess) {
-            // Show a success message
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text("Profile updated successfully")),
             );
-            Navigator.pop(context); // Go back to the previous screen
+            Navigator.pop(context);
           } else if (state is ProfileUpdateFailure) {
-            // Show an error message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.errMessage)),
             );
@@ -154,9 +151,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     try {
       String? profileImageUrl = widget.userProfileData.profileImageUrl;
 
-      // If a new image is selected, upload it
       if (profileImage != null) {
-        profileImageUrl = await StorageService.uploadProfileImage(
+        profileImageUrl = await FirebaseStorageService.uploadProfileImage(
             profileImage!, widget.userProfileData.uid);
       }
       final updatedProfile = UserProfileEntity(
@@ -168,25 +164,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       );
       profileCubit.updatedUserData(updatedProfile);
     } catch (e) {
-      // Handle any errors, e.g., show a Snackbar with the error message
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to update profile: $e')),
       );
-    }
-  }
-}
-
-class StorageService {
-  static Future<String> uploadProfileImage(
-      Uint8List imageData, String userId) async {
-    try {
-      final storageRef =
-          FirebaseStorage.instance.ref().child('profileImages').child(userId);
-      final uploadTask = await storageRef.putData(imageData);
-      final downloadUrl = await uploadTask.ref.getDownloadURL();
-      return downloadUrl;
-    } catch (e) {
-      throw Exception('Failed to upload image: $e');
     }
   }
 }

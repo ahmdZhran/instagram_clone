@@ -1,22 +1,18 @@
 import 'dart:typed_data';
+
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
 
 class FirebaseStorageService {
-  final FirebaseStorage firebaseStorage;
-
-  FirebaseStorageService({required this.firebaseStorage});
-
-  Future<String> uploadProfileImage(Uint8List image, String userId) async {
+  static Future<String> uploadProfileImage(
+      Uint8List imageData, String userId) async {
     try {
-      TaskSnapshot snapshot = await firebaseStorage
-          .ref()
-          .child('profileImages/$userId')
-          .putData(image);
-      return await snapshot.ref.getDownloadURL();
-    } catch (error) {
-      debugPrint('Error uploading profile image: $error');
-      rethrow;
+      final storageRef =
+          FirebaseStorage.instance.ref().child('profileImages').child(userId);
+      final uploadTask = await storageRef.putData(imageData);
+      final downloadUrl = await uploadTask.ref.getDownloadURL();
+      return downloadUrl;
+    } catch (e) {
+      throw Exception('Failed to upload image: $e');
     }
   }
 }

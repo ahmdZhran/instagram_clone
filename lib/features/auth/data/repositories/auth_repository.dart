@@ -33,8 +33,8 @@ class AuthRepository {
         email: email,
         password: password,
       );
-      String imageUrl =
-          await StorageService.uploadProfileImage(profileImage!, userCredential.user!.uid);
+      String imageUrl = await FirebaseStorageService.uploadProfileImage(
+          profileImage!, userCredential.user!.uid);
 
       UserDataEntity userEntity = UserDataEntity(
         uid: userCredential.user!.uid,
@@ -77,8 +77,6 @@ class AuthRepository {
       return Left(FirebaseAuthErrorHandler.getErrorMessage(error.code));
     }
   }
-
-
 
   Future<Either<String, void>> resetPasswordWithEmail({
     required String email,
