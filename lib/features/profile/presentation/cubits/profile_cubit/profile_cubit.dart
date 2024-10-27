@@ -1,12 +1,10 @@
 import 'dart:async';
 import 'dart:typed_data';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../../core/helper/image_service.dart';
 import '../../../data/repositories/profile_repository.dart';
 import '../../../domain/entities/user_profile_entity.dart';
-
 import '../../../profile_di.dart';
 
 part 'profile_state.dart';
@@ -19,19 +17,22 @@ class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepository _profileRepository;
   ImagePickerService? _pickerImageService;
   UserProfileEntity? userProfileData;
+  static UserProfileEntity? _cachedUserProfile;
 
   Uint8List? profileImage;
 
   Future<void> getUserData(String userId) async {
-    if (userProfileData != null) {
+    if (_cachedUserProfile != null) {
+      userProfileData = _cachedUserProfile;
       emit(ProfileSuccess());
-
       return;
     }
+
     try {
       emit(ProfileLoading());
       final userData = await _profileRepository.getProfileData(userId);
       userProfileData = userData;
+      _cachedUserProfile = userData; 
       emit(ProfileSuccess());
     } catch (error) {
       emit(ProfileFailure(errMessage: error.toString()));
@@ -43,7 +44,10 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(ProfileUpdateLoading());
       final updatedProfile =
           await _profileRepository.updateProfileData(profileEntity);
+
       userProfileData = updatedProfile;
+
+      _cachedUserProfile = updatedProfile;
       emit(ProfileUpdateSuccess());
     } catch (error) {
       emit(ProfileUpdateFailure(errMessage: error.toString()));

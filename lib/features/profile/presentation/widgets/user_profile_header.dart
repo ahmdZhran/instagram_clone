@@ -26,9 +26,6 @@ class UserProfileHeaderWidget extends StatefulWidget {
 class _UserProfileHeaderWidgetState extends State<UserProfileHeaderWidget> {
   final profileCubit = ProfileCubit.getInstance();
   @override
-
-// Inside your _UserProfileHeaderWidgetState's build method
-  @override
   Widget build(BuildContext context) {
     return SliverPadding(
       padding: const EdgeInsets.symmetric(
