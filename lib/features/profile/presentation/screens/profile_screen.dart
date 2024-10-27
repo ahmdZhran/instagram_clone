@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import '../cubits/profile_cubit/profile_cubit.dart';
+import '../widgets/user_profile_bar_delegate_widget.dart';
 import '../widgets/user_profile_mentioned_posts_widget.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 import '../widgets/user_posts_widget.dart';
@@ -46,7 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     const UserProfileHeaderWidget(),
                     SliverPersistentHeader(
                       pinned: ModalRoute.of(context)!.isFirst,
-                      delegate: const UserProfileBarDelegate(
+                      delegate: const UserProfileBarDelegateWidget(
                         TabBar(
                           dividerColor: Colors.transparent,
                           indicatorSize: TabBarIndicatorSize.tab,
@@ -88,32 +89,5 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _nestedScrollController.dispose();
     ProfileCubit.deleteInstance();
     super.dispose();
-  }
-}
-
-class UserProfileBarDelegate extends SliverPersistentHeaderDelegate {
-  const UserProfileBarDelegate(this.tabBar);
-  final TabBar tabBar;
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return ColoredBox(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      child: tabBar,
-    );
-  }
-
-  @override
-  double get maxExtent => tabBar.preferredSize.height;
-
-  @override
-  double get minExtent => tabBar.preferredSize.height;
-
-  @override
-  bool shouldRebuild(covariant UserProfileBarDelegate oldDelegate) {
-    return tabBar != oldDelegate.tabBar;
   }
 }
