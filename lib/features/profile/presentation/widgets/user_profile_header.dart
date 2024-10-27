@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,6 +26,9 @@ class UserProfileHeaderWidget extends StatefulWidget {
 class _UserProfileHeaderWidgetState extends State<UserProfileHeaderWidget> {
   final profileCubit = ProfileCubit.getInstance();
   @override
+
+// Inside your _UserProfileHeaderWidgetState's build method
+  @override
   Widget build(BuildContext context) {
     return SliverPadding(
       padding: const EdgeInsets.symmetric(
@@ -44,10 +48,19 @@ class _UserProfileHeaderWidgetState extends State<UserProfileHeaderWidget> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      CircleAvatar(
-                        radius: 40.r,
-                        backgroundImage: NetworkImage(
-                          profileCubit.userProfileData!.profileImageUrl,
+                      ClipOval(
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              profileCubit.userProfileData!.profileImageUrl,
+                          width: 80.r,
+                          height: 80.r,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(
+                            color: AppColors.primaryColor,
+                          ),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
                         ),
                       ),
                       const UserProfileInformationWidget()
