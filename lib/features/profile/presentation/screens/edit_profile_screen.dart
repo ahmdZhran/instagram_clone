@@ -1,4 +1,6 @@
 import 'dart:typed_data';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -83,11 +85,33 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       alignment: Alignment.topCenter,
                       child: CircleAvatar(
                         radius: 50,
-                        backgroundImage: profileImage != null
-                            ? MemoryImage(profileImage!)
-                            : NetworkImage(
-                                widget.userProfileData.profileImageUrl,
-                              ) as ImageProvider,
+                        backgroundColor: Colors.grey[200], // Placeholder color
+                        child: profileImage != null
+                            ? ClipOval(
+                                child: Image.memory(
+                                  profileImage!,
+                                  fit: BoxFit.cover,
+                                  width: 100,
+                                  height: 100,
+                                ),
+                              )
+                            : CachedNetworkImage(
+                                imageUrl:
+                                    widget.userProfileData.profileImageUrl,
+                                placeholder: (context, url) =>
+                                    const CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                                imageBuilder: (context, imageProvider) =>
+                                    ClipOval(
+                                  child: Image(
+                                    image: imageProvider,
+                                    fit: BoxFit.cover,
+                                    width: 100,
+                                    height: 100,
+                                  ),
+                                ),
+                              ),
                       ),
                     ),
                     TextButton(
