@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:instagram_clone/core/services/media_services.dart';
 import 'package:photo_manager/photo_manager.dart';
 
@@ -33,6 +34,36 @@ class _InstagramMediaPickerState extends State<InstagramMediaPicker> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Select your post '),
+      ),
+      body: Column(
+        children: [
+          Flexible(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 15.w,
+                  vertical: 5.h,
+                ),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: 10.w,
+                      ),
+                      child: const Icon(Icons.arrow_downward),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ))
+        ],
+      ),
+    );
   }
 }
