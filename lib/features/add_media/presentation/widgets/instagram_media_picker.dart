@@ -55,7 +55,7 @@ class _InstagramMediaPickerState extends State<InstagramMediaPicker> {
                       padding: EdgeInsets.only(
                         left: 10.w,
                       ),
-                      child: Icon(Icons.),
+                      child: const Icon(Icons.arrow_downward),
                     ),
                   ],
                 ),
