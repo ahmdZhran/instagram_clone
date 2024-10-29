@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:instagram_clone/core/utils/app_colors.dart';
 import '../../data/models/media_model.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
@@ -118,9 +119,17 @@ class _PickerScreenState extends State<PickerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Media Picker"),
-      ),
+      appBar: AppBar(title: const Text("Media Picker"), actions: [
+        IconButton(
+          icon: const Icon(
+            Iconsax.arrow_right_1,
+            color: AppColors.primaryColor,
+          ),
+          onPressed: () {
+            Navigator.pop(context, _selectedMedias);
+          },
+        ),
+      ]),
       body: Column(
         children: [
           _selectedMedias.isNotEmpty
@@ -182,12 +191,6 @@ class _PickerScreenState extends State<PickerScreen> {
           ),
         ],
       ),
-      floatingActionButton: _selectedMedias.isEmpty
-          ? null
-          : FloatingActionButton(
-              onPressed: () => Navigator.pop(context, _selectedMedias),
-              child: const Icon(Icons.check_rounded),
-            ),
     );
   }
 }
