@@ -2,24 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:instagram_clone/core/utils/app_colors.dart';
-import '../../data/models/media_model.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import '../../../../core/services/fetch_albums.dart';
 import '../../../../core/services/fetch_medias.dart';
+import '../../data/models/media_model.dart';
 import 'medias_grid_view.dart';
 
-class PickerScreen extends StatefulWidget {
+class PickImagePostWidget extends StatefulWidget {
   final List<MediaModel> selectedMedias;
 
-  const PickerScreen({super.key, required this.selectedMedias});
+  const PickImagePostWidget({super.key, required this.selectedMedias});
 
   @override
-  State<PickerScreen> createState() => _PickerScreenState();
+  State<PickImagePostWidget> createState() => _PickImagePostWidgetState();
 }
 
-class _PickerScreenState extends State<PickerScreen> {
+class _PickImagePostWidgetState extends State<PickImagePostWidget> {
   final ScrollController _scrollController = ScrollController();
   AssetPathEntity? _currentAlbum;
   List<AssetPathEntity> _albums = [];
@@ -119,17 +118,6 @@ class _PickerScreenState extends State<PickerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Media Picker"), actions: [
-        IconButton(
-          icon: const Icon(
-            Iconsax.arrow_right_1,
-            color: AppColors.primaryColor,
-          ),
-          onPressed: () {
-            Navigator.pop(context, _selectedMedias);
-          },
-        ),
-      ]),
       body: Column(
         children: [
           _selectedMedias.isNotEmpty
@@ -156,7 +144,6 @@ class _PickerScreenState extends State<PickerScreen> {
               : SizedBox(
                   height: 350.h,
                 ),
-          // Album Selector Row
           GestureDetector(
             onTap: _showAlbumPicker,
             child: Container(
