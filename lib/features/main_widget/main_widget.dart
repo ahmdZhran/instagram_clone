@@ -21,15 +21,24 @@ class MainWidget extends StatefulWidget {
 }
 
 class _MainWidgetState extends State<MainWidget> {
-  PageController controller = PageController(initialPage: 0);
   int index = 0;
   final String? uid = FirebaseAuth.instance.currentUser?.uid;
-  void onNavBarTap(int newIndex) {
-    if (index != newIndex) {
-      controller.jumpToPage(newIndex);
-      setState(() {
-        index = newIndex;
-      });
+
+  // Method to get the widget for the current index
+  Widget _getSelectedScreen() {
+    switch (index) {
+      case 0:
+        return const HomeScreen();
+      case 1:
+        return const ExploreScreen();
+      case 2:
+        return const AddPostScreen();
+      case 3:
+        return const NotificationsScreen();
+      case 4:
+        return ProfileScreen(uid: uid!);
+      default:
+        return const HomeScreen();
     }
   }
 
@@ -38,23 +47,7 @@ class _MainWidgetState extends State<MainWidget> {
     return Scaffold(
       body: Stack(
         children: [
-          PageView(
-            onPageChanged: (value) {
-              setState(() {
-                index = value;
-              });
-            },
-            controller: controller,
-            children: [
-              const HomeScreen(),
-              const ExploreScreen(),
-              const AddPostScreen(),
-              const NotificationsScreen(),
-              ProfileScreen(
-                uid: FirebaseAuth.instance.currentUser!.uid,
-              ),
-            ],
-          ),
+          _getSelectedScreen(),
           SafeArea(
             child: Align(
               alignment: Alignment.bottomCenter,
@@ -76,31 +69,31 @@ class _MainWidgetState extends State<MainWidget> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           BottomNavBarItemWidget(
-                            onTap: () => onNavBarTap(0),
+                            onTap: () => setState(() => index = 0),
                             isActive: index == 0,
                             activeIcon: AppAssets.activeHomeIcon,
                             inactiveIcon: AppAssets.homeIcon,
                           ),
                           BottomNavBarItemWidget(
-                            onTap: () => onNavBarTap(1),
+                            onTap: () => setState(() => index = 1),
                             isActive: index == 1,
                             activeIcon: AppAssets.activeSearch,
                             inactiveIcon: AppAssets.searchIcon,
                           ),
                           BottomNavBarItemWidget(
-                            onTap: () => onNavBarTap(2),
+                            onTap: () => setState(() => index = 2),
                             isActive: index == 2,
                             activeIcon: AppAssets.activeAddPost,
                             inactiveIcon: AppAssets.addPost,
                           ),
                           BottomNavBarItemWidget(
-                            onTap: () => onNavBarTap(3),
+                            onTap: () => setState(() => index = 3),
                             isActive: index == 3,
                             activeIcon: AppAssets.heartActiveIcon,
                             inactiveIcon: AppAssets.heartIcon,
                           ),
                           InkWell(
-                            onTap: () => onNavBarTap(4),
+                            onTap: () => setState(() => index = 4),
                             child: AnimatedScale(
                               duration: const Duration(milliseconds: 200),
                               scale: index == 4 ? 1.2 : 1,

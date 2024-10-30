@@ -127,14 +127,17 @@ class _PickImagePostWidgetState extends State<PickImagePostWidget> {
                     itemCount: _selectedMedias.length,
                     itemBuilder: (context, index) {
                       return Center(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image(
-                            image: AssetEntityImageProvider(
-                              _selectedMedias[index].assetEntity,
-                              isOriginal: true,
+                        child: InteractiveViewer(
+                          clipBehavior: Clip.none,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image(
+                              image: AssetEntityImageProvider(
+                                _selectedMedias[index].assetEntity,
+                                isOriginal: true,
+                              ),
+                              fit: BoxFit.cover,
                             ),
-                            fit: BoxFit.cover,
                           ),
                         ),
                       );
