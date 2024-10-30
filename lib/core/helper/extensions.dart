@@ -25,4 +25,7 @@ extension ExtensionsHelper on BuildContext {
   String translate(String langKey) {
     return AppLocalizations.of(this)!.translate(langKey).toString();
   }
+
+  bool get isArabic => Localizations.localeOf(this).languageCode == 'ar';
+  bool get isEnglish => Localizations.localeOf(this).languageCode == 'en';
 }
