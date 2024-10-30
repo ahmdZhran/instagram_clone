@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/features/add_media/presentation/widgets/picker_screen.dart';
 
@@ -19,7 +20,7 @@ class _HomeScreenState extends State<AddPostScreen> {
         actions: [
           IconButton(
             icon: Icon(
-              Localizations.localeOf(context).languageCode == 'en'
+            context.isEnglish
                   ? Iconsax.arrow_right_1
                   : Iconsax.arrow_left_1,
               color: AppColors.primaryColor,
