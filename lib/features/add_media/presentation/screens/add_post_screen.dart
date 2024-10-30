@@ -18,8 +18,10 @@ class _HomeScreenState extends State<AddPostScreen> {
         title: const Text("Add Post"),
         actions: [
           IconButton(
-            icon: const Icon(
-              Iconsax.arrow_right_1,
+            icon: Icon(
+              Localizations.localeOf(context).languageCode == 'en'
+                  ? Iconsax.arrow_right_1
+                  : Iconsax.arrow_left_1,
               color: AppColors.primaryColor,
             ),
             onPressed: () {},
