@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../core/helper/extensions.dart';
 import '../../../../core/utils/app_colors.dart';
-import '../widgets/picker_screen.dart';
+import '../widgets/pick_image_post_widget.dart';
 
 class AddPostScreen extends StatelessWidget {
   const AddPostScreen({super.key});
