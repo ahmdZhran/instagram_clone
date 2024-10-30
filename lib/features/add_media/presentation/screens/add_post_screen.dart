@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/features/add_media/presentation/widgets/picker_screen.dart';
 
 class AddPostScreen extends StatefulWidget {
@@ -14,6 +16,15 @@ class _HomeScreenState extends State<AddPostScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Post"),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Iconsax.arrow_right_1,
+              color: AppColors.primaryColor,
+            ),
+            onPressed: () {},
+          )
+        ],
       ),
       body: const PickImagePostWidget(
         selectedMedias: [],
