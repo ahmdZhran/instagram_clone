@@ -4,14 +4,9 @@ import '../../../../core/helper/extensions.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../widgets/picker_screen.dart';
 
-class AddPostScreen extends StatefulWidget {
+class AddPostScreen extends StatelessWidget {
   const AddPostScreen({super.key});
 
-  @override
-  State<AddPostScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<AddPostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,9 +15,7 @@ class _HomeScreenState extends State<AddPostScreen> {
         actions: [
           IconButton(
             icon: Icon(
-            context.isEnglish
-                  ? Iconsax.arrow_right_1
-                  : Iconsax.arrow_left_1,
+              context.isEnglish ? Iconsax.arrow_right_1 : Iconsax.arrow_left_1,
               color: AppColors.primaryColor,
             ),
             onPressed: () {},
