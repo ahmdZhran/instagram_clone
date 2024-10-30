@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:instagram_clone/core/helper/extensions.dart';
-import 'package:instagram_clone/core/utils/app_colors.dart';
-import 'package:instagram_clone/features/add_media/presentation/widgets/picker_screen.dart';
+import '../../../../core/helper/extensions.dart';
+import '../../../../core/utils/app_colors.dart';
+import '../widgets/picker_screen.dart';
 
 class AddPostScreen extends StatefulWidget {
   const AddPostScreen({super.key});
