@@ -24,7 +24,6 @@ class _MainWidgetState extends State<MainWidget> {
   int index = 0;
   final String? uid = FirebaseAuth.instance.currentUser?.uid;
 
-  // Method to get the widget for the current index
   Widget _getSelectedScreen() {
     switch (index) {
       case 0:
