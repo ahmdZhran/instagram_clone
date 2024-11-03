@@ -124,10 +124,9 @@ class PickImagePostWidgetState extends State<PickImagePostWidget>
                   const Gap(10),
                   const Icon(Iconsax.arrow_down_1),
                   const Spacer(),
-                  TextButton(
-                    child: const Text('Select Multiple'),
-                    onPressed: () {},
-                  ),
+                  //TODO change it to real multible icon 
+                  IconButton(
+                      onPressed: () {}, icon: const Icon(Icons.multiple_stop)),
                   IconButton(
                     enableFeedback: true,
                     icon: const Icon(Icons.camera),
