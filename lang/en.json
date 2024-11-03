@@ -12,5 +12,6 @@
     "logout":"Logout",
     "dark_mode":"Dark mode",
     "light_mode":"Light mode",
-    "change_photo":"Change photo"
+    "change_photo":"Change photo",
+    "reset":"Reset"
 }

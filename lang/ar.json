@@ -12,5 +12,6 @@
     "logout":"تسجيل الخروج",
     "dark_mode":"الوضع الليلي",
     "light_mode":"الوضع المضئ",
-    "change_photo":"تغيير الصورة"
+    "change_photo":"تغيير الصورة",
+    "reset":"اعادة"
 }

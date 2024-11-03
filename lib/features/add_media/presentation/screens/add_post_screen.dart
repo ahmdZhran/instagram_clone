@@ -15,16 +15,14 @@ class AddPostScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(
-              context.isEnglish ? Iconsax.arrow_right_1 : Iconsax.arrow_left_1,
+              context.isEnglish ? Iconsax.arrow_right_1 : Iconsax.arrow_left,
               color: AppColors.primaryColor,
             ),
             onPressed: () {},
           )
         ],
       ),
-      body: const PickImagePostWidget(
-    
-      ),
+      body: const PickImagePostWidget(),
     );
   }
 }
