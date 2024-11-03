@@ -23,7 +23,7 @@ class AddPostScreen extends StatelessWidget {
         ],
       ),
       body: const PickImagePostWidget(
-        selectedMedias: [],
+    
       ),
     );
   }
