@@ -1,40 +1,72 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:instagram_clone/core/helper/extensions.dart';
-import 'package:instagram_clone/core/services/media_services.dart';
+import 'package:instagram_clone/core/services/fetch_albums.dart';
+import 'package:instagram_clone/features/add_media/data/models/media_model.dart';
 import 'package:photo_manager/photo_manager.dart';
 
+import '../../../../core/services/fetch_medias.dart';
 import '../../../../core/utils/custom_text_style.dart';
 
 class MediaPickerWidget extends StatefulWidget {
-  const MediaPickerWidget(
-      {super.key, required this.maxCount, required this.requestType});
-  final int maxCount;
-  final RequestType requestType;
+  const MediaPickerWidget({super.key});
+
   @override
   State<MediaPickerWidget> createState() => _MediaPickerWidgetState();
 }
 
 class _MediaPickerWidgetState extends State<MediaPickerWidget> {
-  AssetPathEntity? selectedAlbum;
-  List<AssetPathEntity> albumList = [];
-  List<AssetEntity> assetList = [];
-  List<AssetEntity> selectedAssetsList = [];
+  final List<MediaModel> _selectedMedia = [];
+  AssetPathEntity? _currentAlbum;
+  List<AssetPathEntity> _albumList = [];
+  List<MediaModel> _mediaList = [];
+  final int _currentPage = 0;
+
   @override
   void initState() {
-    MediaServices().loadAlbums(widget.requestType).then((value) {
-      setState(() {
-        selectedAlbum = value[0];
-        albumList = value;
-      });
-      MediaServices().loadAssets(selectedAlbum!).then((value) {
-        setState(() {
-          assetList = value;
-        });
-      });
-    });
     super.initState();
+    loadAlbums();
+  }
+
+  void loadAlbums() async {
+    List<AssetPathEntity> albums = await fetchAlbums();
+    if (albums.isNotEmpty) {
+      setState(() {
+        _currentAlbum = albums.first;
+        _albumList = albums;
+      });
+      _loadMedias();
+    }
+  }
+
+  void _loadMedias() async {
+    if (_currentAlbum != null) {
+      List<MediaModel> medias =
+          await fetchMedias(page: _currentPage, album: _currentAlbum!);
+      setState(() {
+        _mediaList = medias;
+      });
+    }
+  }
+
+  void _showMediaFiles() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return ListView.builder(
+          itemCount: _mediaList.length,
+          itemBuilder: (context, index) {
+            final media = _mediaList[index];
+            return ListTile(
+              title: Text(media.assetEntity.id), 
+              onTap: () {
+                Navigator.pop(context);
+              },
+            );
+          },
+        );
+      },
+    );
   }
 
   @override
@@ -46,7 +78,7 @@ class _MediaPickerWidgetState extends State<MediaPickerWidget> {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Row(
           children: [
-            Text(selectedAlbum?.name ?? "Select Album",
+            Text(_currentAlbum?.name ?? "Select Album",
                 style: CustomTextStyle.pacifico20),
             IconButton(
               icon: const Icon(Iconsax.arrow_down_1),
@@ -55,16 +87,17 @@ class _MediaPickerWidgetState extends State<MediaPickerWidget> {
                   context: context,
                   builder: (context) {
                     return ListView.builder(
-                      itemCount: albumList.length,
+                      itemCount: _albumList.length,
                       itemBuilder: (context, index) {
-                        final album = albumList[index];
+                        final album = _albumList[index];
                         return ListTile(
                           title: Text(album.name),
                           onTap: () {
                             setState(() {
-                              selectedAlbum = album;
+                              _currentAlbum = album;
                             });
-                            context.pop();
+                            Navigator.pop(context);
+                            _loadMedias();
                           },
                         );
                       },
@@ -75,11 +108,10 @@ class _MediaPickerWidgetState extends State<MediaPickerWidget> {
             ),
             const Spacer(),
             IconButton(
-              onPressed: () {},
+              onPressed: _showMediaFiles,
               icon: const Icon(Icons.multiple_stop),
             ),
             IconButton(
-              enableFeedback: true,
               icon: const Icon(Icons.camera),
               onPressed: () {},
             ),

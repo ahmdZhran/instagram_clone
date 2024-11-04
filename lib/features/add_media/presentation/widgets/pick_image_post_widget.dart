@@ -18,10 +18,7 @@ class PickImagePostWidgetState extends State<PickImagePostWidget> {
       body: Column(
         children: [
           PickerImageInteractionWidget(),
-          MediaPickerWidget(
-            maxCount: 5,
-            requestType: RequestType.image,
-          ),
+          MediaPickerWidget(),
         ],
       ),
     );
