@@ -12,9 +12,15 @@ abstract class CustomTextStyle {
   static final pacifico10 = TextStyle(
     fontSize: 10.sp,
   );
+  static final pacifico15 = TextStyle(
+    fontSize: 16.sp,
+  );
   static final pacifico16 = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeight.bold,
+  );
+   static final pacifico17 = TextStyle(
+    fontSize: 17.sp,
   );
   static final pacifico13 = TextStyle(
     fontSize: 13.sp,
