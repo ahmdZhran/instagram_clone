@@ -5,6 +5,9 @@ import 'package:iconsax/iconsax.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
+import 'package:instagram_clone/core/utils/custom_text_style.dart';
+
+import 'gride_painter_widget.dart';
 
 class PickImagePostWidget extends StatefulWidget {
   const PickImagePostWidget({super.key});
@@ -114,17 +117,17 @@ class PickImagePostWidgetState extends State<PickImagePostWidget>
             ),
           ),
           SizedBox(
-            height: 40.h,
+            height: 60.h,
             width: double.infinity,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 children: [
-                  const Text('Recent'),
+                  Text('Recent', style: CustomTextStyle.pacifico20),
                   const Gap(10),
                   const Icon(Iconsax.arrow_down_1),
                   const Spacer(),
-                  //TODO change it to real multible icon 
+                  //TODO change it to real multible icon
                   IconButton(
                       onPressed: () {}, icon: const Icon(Icons.multiple_stop)),
                   IconButton(
@@ -142,31 +145,3 @@ class PickImagePostWidgetState extends State<PickImagePostWidget>
   }
 }
 
-class GridPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.white.withOpacity(0.5)
-      ..strokeWidth = 1.0;
-
-    int rows = 3;
-    int columns = 3;
-    double rowSpacing = size.height / rows;
-    double columnSpacing = size.width / columns;
-
-    for (int i = 1; i < columns; i++) {
-      double x = columnSpacing * i;
-      canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
-    }
-
-    for (int i = 1; i < rows; i++) {
-      double y = rowSpacing * i;
-      canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
-  }
-}
