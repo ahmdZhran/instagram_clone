@@ -2,12 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/services/fetch_albums.dart';
-import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/features/add_media/data/models/media_model.dart';
 import 'package:photo_manager/photo_manager.dart';
-
 import '../../../../core/services/fetch_medias.dart';
 import '../../../../core/utils/custom_text_style.dart';
 
@@ -24,10 +21,19 @@ class _MediaPickerWidgetState extends State<MediaPickerWidget> {
   AssetPathEntity? _currentAlbum;
   List<AssetPathEntity> _albumList = [];
   List<MediaModel> _mediaList = [];
-  final int _currentPage = 0;
-  // void loadMoreMedias(){
-  //   if(_scrollController.position.pixels / _scrollController.position.maxScrollExtent > 0.33){}
-  // }
+  int _currentPage = 0;
+  int _lastPage = 0;
+
+  void loadMoreMedias() {
+    if (_scrollController.position.pixels /
+            _scrollController.position.maxScrollExtent >
+        0.33) {
+      if (_currentPage != _currentPage) {
+        _loadMedias();
+      }
+    }
+  }
+
   @override
   void initState() {
     super.initState();
