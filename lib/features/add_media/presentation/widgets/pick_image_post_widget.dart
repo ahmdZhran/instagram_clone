@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:photo_manager/photo_manager.dart';
 
 import 'media_picker_widget.dart';
 import 'picked_image_interaction_widget.dart';
