@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
 
-import 'package:instagram_clone/features/add_media/presentation/widgets/media_picker_widget.dart';
-import 'package:instagram_clone/features/add_media/presentation/widgets/picked_image_interaction_widget.dart';
+import 'media_picker_widget.dart';
+import 'picked_image_interaction_widget.dart';
 
 class PickImagePostWidget extends StatefulWidget {
   const PickImagePostWidget({super.key});
