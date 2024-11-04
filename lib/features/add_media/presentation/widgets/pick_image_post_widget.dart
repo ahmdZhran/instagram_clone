@@ -14,7 +14,6 @@ class PickImagePostWidget extends StatefulWidget {
 }
 
 class PickImagePostWidgetState extends State<PickImagePostWidget> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +21,7 @@ class PickImagePostWidgetState extends State<PickImagePostWidget> {
         children: [
           const PickerImageInteractionWidget(),
           SizedBox(
-            height: 60.h,
+            height: 40.h,
             width: double.infinity,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
