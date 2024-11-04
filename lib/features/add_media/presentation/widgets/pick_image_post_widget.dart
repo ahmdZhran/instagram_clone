@@ -14,11 +14,6 @@ class PickImagePostWidget extends StatefulWidget {
 }
 
 class PickImagePostWidgetState extends State<PickImagePostWidget> {
-  void _resetImage() {
-    setState(() {
-      // Reset logic if any additional tasks are required.
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
