@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 
 import '../../data/models/media_model.dart';
-import 'gride_painter_widget.dart';
+import 'build_grid_overlay_widget.dart';
 
 class PickerImageInteractionWidget extends StatefulWidget {
   const PickerImageInteractionWidget({
@@ -63,7 +63,8 @@ class _PickerImageInteractionWidgetState
                   alignment: Alignment.center,
                   children: [
                     InteractiveViewer(
-                      panEnabled: false,
+                      panEnabled: true,
+                      scaleEnabled: true,
                       clipBehavior: Clip.none,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
@@ -77,25 +78,13 @@ class _PickerImageInteractionWidgetState
                       ),
                     ),
                     // Conditionally render the grid overlay
-                    if (_showGrid) _buildGridOverlay(),
+                    if (_showGrid) const BuildGridOverlayWidget(),
                   ],
                 ),
               ),
             ),
           );
         },
-      ),
-    );
-  }
-
-  Widget _buildGridOverlay() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.1),
-      ),
-      child: CustomPaint(
-        size: Size.infinite,
-        painter: GridPainter(),
       ),
     );
   }
