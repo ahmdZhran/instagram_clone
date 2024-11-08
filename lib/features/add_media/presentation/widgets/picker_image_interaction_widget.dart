@@ -57,15 +57,15 @@ class _PickerImageInteractionWidgetState
                   _showGrid = false;
                 });
               },
-              child: Transform.translate(
-                offset: _dragOffset,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    InteractiveViewer(
-                      panEnabled: true,
-                      scaleEnabled: true,
-                      clipBehavior: Clip.none,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  InteractiveViewer(
+                    panEnabled: true,
+                    scaleEnabled: true,
+                    clipBehavior: Clip.none,
+                    child: Transform.translate(
+                      offset: _dragOffset,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Image(
@@ -77,10 +77,9 @@ class _PickerImageInteractionWidgetState
                         ),
                       ),
                     ),
-                    // Conditionally render the grid overlay
-                    if (_showGrid) const BuildGridOverlayWidget(),
-                  ],
-                ),
+                  ),
+                  if (_showGrid) const BuildGridOverlayWidget(),
+                ],
               ),
             ),
           );
