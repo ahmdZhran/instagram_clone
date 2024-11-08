@@ -44,5 +44,5 @@ abstract class AppStrings {
 
   // add post strings
   static const String reset = "reset";
-  
+  static const String sleetedYourPost = "select_your_post_below";
 }

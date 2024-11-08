@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import '../../../../core/helper/extensions.dart';
+import 'package:instagram_clone/core/helper/extensions.dart';
+
 import '../../../../core/utils/app_colors.dart';
 import '../widgets/pick_image_post_widget.dart';
 
@@ -15,14 +16,16 @@ class AddPostScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(
-              context.isEnglish ? Iconsax.arrow_right_1 : Iconsax.arrow_left,
+              context.isEnglish ? Iconsax.arrow_right_1 : Iconsax.arrow_left_1,
               color: AppColors.primaryColor,
             ),
             onPressed: () {},
           )
         ],
       ),
-      body: const PickImagePostWidget(),
+      body: const PickImagePostWidget(
+        selectedMedias: [],
+      ),
     );
   }
 }
