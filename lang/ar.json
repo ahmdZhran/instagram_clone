@@ -13,5 +13,10 @@
     "dark_mode":"الوضع الليلي",
     "light_mode":"الوضع المضئ",
     "change_photo":"تغيير الصورة",
-    "reset":"اعادة"
+    "reset":"اعادة",
+    "select_your_post_below":"اختر الصورة من اسفل",
+    "add_post":"اضافة منشور",
+    "post":"نشر",
+    "new_post":"منشور جديد",
+    "add_description":"اضافة وصف"
 }

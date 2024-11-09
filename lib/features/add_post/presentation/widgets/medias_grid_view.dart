@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/features/add_media/data/models/media_model.dart';
-import 'package:instagram_clone/features/add_media/presentation/widgets/media_item.dart';
+import 'package:instagram_clone/features/add_post/data/models/media_model.dart';
+import 'package:instagram_clone/features/add_post/presentation/widgets/media_item.dart';
 
 class MediasGridView extends StatelessWidget {
   final List<MediaModel> medias;
@@ -25,7 +25,7 @@ class MediasGridView extends StatelessWidget {
             controller: scrollController,
             padding: const EdgeInsets.symmetric(horizontal: 3.0),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
+              crossAxisCount: 4,
               mainAxisSpacing: 3,
               crossAxisSpacing: 3,
             ),

@@ -7,24 +7,17 @@ class GridPainter extends CustomPainter {
       ..color = Colors.white.withOpacity(0.5)
       ..strokeWidth = 1.0;
 
-    int rows = 3;
-    int columns = 3;
-    double rowSpacing = size.height / rows;
-    double columnSpacing = size.width / columns;
-
-    for (int i = 1; i < columns; i++) {
-      double x = columnSpacing * i;
+    // Draw vertical lines
+    for (double x = size.width / 3; x < size.width; x += size.width / 3) {
       canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
     }
 
-    for (int i = 1; i < rows; i++) {
-      double y = rowSpacing * i;
+    // Draw horizontal lines
+    for (double y = size.height / 3; y < size.height; y += size.height / 3) {
       canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
     }
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
-  }
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

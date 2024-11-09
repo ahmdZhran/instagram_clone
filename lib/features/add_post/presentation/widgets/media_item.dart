@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/features/add_media/data/models/media_model.dart';
+import 'package:instagram_clone/core/utils/app_colors.dart';
+import 'package:instagram_clone/features/add_post/data/models/media_model.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 class MediaItem extends StatelessWidget {
@@ -48,7 +49,6 @@ class MediaItem extends StatelessWidget {
     return Positioned.fill(
       child: Padding(
         padding: EdgeInsets.all(isSelected ? 10.0 : 0.0),
-        // Display the media widget
         child: media.widget,
       ),
     );
@@ -61,8 +61,7 @@ class MediaItem extends StatelessWidget {
         child: const Center(
           child: Icon(
             Icons.check_circle_rounded,
-            color: Colors.white,
-            // Size of the icon
+            color: AppColors.primaryColor,
             size: 30,
           ),
         ),

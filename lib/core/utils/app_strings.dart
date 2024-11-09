@@ -43,6 +43,10 @@ abstract class AppStrings {
   static const String changePhoto = "change_photo";
 
   // add post strings
+  static const String addPost = "add_post";
+  static const String newPost = "new_post";
+  static const String post = "post";
   static const String reset = "reset";
-  
+  static const String sleetedYourPost = "select_your_post_below";
+  static const String addDescription = "add_description";
 }
