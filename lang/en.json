@@ -14,5 +14,6 @@
     "light_mode":"Light mode",
     "change_photo":"Change photo",
     "reset":"Reset",
-     "select_your_post_below":"Select your post below"
+     "select_your_post_below":"Select your post below",
+     "add_post":"Add post"
 }

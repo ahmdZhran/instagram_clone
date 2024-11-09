@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/router/routes.dart';
+import 'package:instagram_clone/core/utils/app_strings.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../data/models/media_model.dart';
@@ -22,7 +23,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add Post"),
+        title: Text(context.translate(AppStrings.addPost)),
         actions: [
           hasImages
               ? IconButton(
