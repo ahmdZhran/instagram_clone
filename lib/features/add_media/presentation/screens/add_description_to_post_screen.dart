@@ -10,27 +10,20 @@ class AddDescriptionToPostScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("Received selectedMedias: $selectedMedias");
-
-    if (selectedMedias == null || selectedMedias!.isEmpty) {
-      return const Scaffold(
-        body: Center(child: Text("No images selected")),
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Description"),
       ),
       body: ListView.builder(
-        itemCount: selectedMedias!.length,
+        itemCount: 1,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text('Image ${index + 1}'),
+            title: const Text('Image'),
             leading: Image(
               image: AssetEntityImageProvider(
                 selectedMedias![index].assetEntity,
               ),
+              fit: BoxFit.cover,
             ),
           );
         },
