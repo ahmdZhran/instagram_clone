@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:instagram_clone/core/helper/extensions.dart';
+import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import '../../data/models/media_model.dart';
 import 'gride_painter_widget.dart';
@@ -82,8 +84,11 @@ class _PickerImageInteractionWidgetState
                     left: 10,
                     child: ElevatedButton(
                       onPressed: _resetImage,
-                      style: ElevatedButton.styleFrom(),
-                      child: const Text("Reset"),
+                      style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.all(1)),
+                      child: Text(
+                        context.translate(AppStrings.reset),
+                      ),
                     ),
                   ),
                 ],
