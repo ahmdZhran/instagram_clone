@@ -21,7 +21,16 @@ class PickerImageInteractionWidget extends StatefulWidget {
 class _PickerImageInteractionWidgetState
     extends State<PickerImageInteractionWidget> {
   Offset _dragOffset = Offset.zero;
+  double _scale = 1.0;
   bool _showGrid = false;
+
+  void _resetImage() {
+    setState(() {
+      _scale = 1.0;
+      _dragOffset = Offset.zero;
+      _showGrid = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +44,6 @@ class _PickerImageInteractionWidgetState
               onPanUpdate: (details) {
                 setState(() {
                   _dragOffset += details.delta;
-                  _dragOffset = Offset(
-                    _dragOffset.dx.clamp(-30, 30),
-                    _dragOffset.dy.clamp(-30, 30),
-                  );
                 });
               },
               onPanEnd: (_) {
@@ -64,10 +69,10 @@ class _PickerImageInteractionWidgetState
                     panEnabled: true,
                     scaleEnabled: true,
                     clipBehavior: Clip.none,
-                    child: Transform.translate(
-                      offset: _dragOffset,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Transform.translate(
+                        offset: _dragOffset, // Apply offset directly here
                         child: Image(
                           image: AssetEntityImageProvider(
                             widget._selectedMedias[index].assetEntity,
@@ -78,6 +83,7 @@ class _PickerImageInteractionWidgetState
                       ),
                     ),
                   ),
+                  // Conditionally render the grid overlay
                   if (_showGrid) const BuildGridOverlayWidget(),
                 ],
               ),
