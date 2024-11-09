@@ -15,5 +15,8 @@
     "change_photo":"Change photo",
     "reset":"Reset",
      "select_your_post_below":"Select your post below",
-     "add_post":"Add post"
+     "add_post":"Add post",
+     "post":"Post",
+     "new_post":"New post",
+     "add_description":"Add Description"
 }

@@ -15,5 +15,8 @@
     "change_photo":"تغيير الصورة",
     "reset":"اعادة",
     "select_your_post_below":"اختر الصورة من اسفل",
-    "add_post":"اضافة منشور"
+    "add_post":"اضافة منشور",
+    "post":"نشر",
+    "new_post":"منشور جديد",
+    "add_description":"اضافة وصف"
 }
