@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
-import '../../data/models/media_model.dart';
 import 'gride_painter_widget.dart';
+import '../../data/models/media_model.dart';
 
 class PickerImageInteractionWidget extends StatefulWidget {
   const PickerImageInteractionWidget({
@@ -20,12 +20,39 @@ class PickerImageInteractionWidget extends StatefulWidget {
 }
 
 class _PickerImageInteractionWidgetState
-    extends State<PickerImageInteractionWidget> {
+    extends State<PickerImageInteractionWidget>
+    with SingleTickerProviderStateMixin {
   double _scale = 1.0;
   double _previousScale = 1.0;
   Offset _offset = Offset.zero;
   Offset _startOffset = Offset.zero;
   bool _showGrid = false;
+
+  late AnimationController _controller;
+  late Animation<Offset> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+
+    _animation =
+        Tween<Offset>(begin: Offset.zero, end: Offset.zero).animate(_controller)
+          ..addListener(() {
+            setState(() {
+              _offset = _animation.value;
+            });
+          });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   void _resetImage() {
     setState(() {
@@ -43,56 +70,68 @@ class _PickerImageInteractionWidgetState
         itemCount: widget._selectedMedias.length,
         itemBuilder: (context, index) {
           return Center(
-            child: GestureDetector(
-              onScaleStart: (details) {
-                _previousScale = _scale;
-                _startOffset = details.focalPoint - _offset;
-                setState(() => _showGrid = true);
-              },
-              onScaleUpdate: (details) {
-                setState(() {
-                  _scale = _previousScale * details.scale;
-                  _offset = details.focalPoint - _startOffset;
-                });
-              },
-              onScaleEnd: (_) {
-                setState(() => _showGrid = false);
-                _previousScale = 1.0;
-              },
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Transform(
+            child: Stack(
+              children: [
+                GestureDetector(
+                  onScaleStart: (details) {
+                    _previousScale = _scale;
+                    _startOffset = details.focalPoint - _offset;
+                    setState(() => _showGrid = true);
+                  },
+                  onScaleUpdate: (details) {
+                    setState(() {
+                      _scale = _previousScale * details.scale;
+                      _offset = details.focalPoint - _startOffset;
+                    });
+                  },
+                  onScaleEnd: (_) {
+                    setState(() => _showGrid = false);
+
+                    if (_scale == 1.0) {
+                      _controller.reset();
+                      _animation =
+                          Tween<Offset>(begin: _offset, end: Offset.zero)
+                              .animate(_controller);
+                      _controller.forward();
+                    }
+                  },
+                  child: Stack(
                     alignment: Alignment.center,
-                    transform: Matrix4.identity()
-                      ..translate(_offset.dx, _offset.dy)
-                      ..scale(_scale),
-                    child: Image(
-                      image: AssetEntityImageProvider(
-                        widget._selectedMedias[index].assetEntity,
+                    children: [
+                      Transform(
+                        alignment: Alignment.center,
+                        transform: Matrix4.identity()
+                          ..translate(_offset.dx, _offset.dy)
+                          ..scale(_scale),
+                        child: Image(
+                          image: AssetEntityImageProvider(
+                            widget._selectedMedias[index].assetEntity,
+                          ),
+                        ),
                       ),
-                    ),
+                      if (_showGrid)
+                        Positioned.fill(
+                          child: CustomPaint(
+                            painter: GridPainter(),
+                          ),
+                        ),
+                      Positioned(
+                        bottom: 0,
+                        left: 10,
+                        child: ElevatedButton(
+                          onPressed: _resetImage,
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.all(1),
+                          ),
+                          child: Text(
+                            context.translate(AppStrings.reset),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  if (_showGrid)
-                    Positioned.fill(
-                      child: CustomPaint(
-                        painter: GridPainter(),
-                      ),
-                    ),
-                  Positioned(
-                    bottom: 0,
-                    left: 10,
-                    child: ElevatedButton(
-                      onPressed: _resetImage,
-                      style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.all(1)),
-                      child: Text(
-                        context.translate(AppStrings.reset),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         },
