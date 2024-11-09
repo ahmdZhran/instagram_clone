@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/features/add_media/presentation/screens/add_description_to_post_screen.dart';
 import '../../features/main_widget/main_widget.dart';
 import '../../features/profile/domain/entities/user_profile_entity.dart';
 import '../../features/profile/presentation/screens/edit_profile_screen.dart';
@@ -42,6 +43,10 @@ class AppRouter {
           builder: (_) => EditProfileScreen(
             userProfileData: userProfileData,
           ),
+        );
+      case Routes.addDescriptionToPost:
+        return MaterialPageRoute(
+          builder: (_) => const AddDescriptionToPostScreen(),
         );
       default:
         return null;

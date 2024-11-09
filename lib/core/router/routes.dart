@@ -7,4 +7,5 @@ class Routes {
   static const String forgotPassword = '/forgetPassword';
   static const String checkUserAuthState = '/checkUserAuthState';
   static const String editProfileScreen = '/editProfileScreen';
+  static const String addDescriptionToPost = '/addDescriptionToPost';
 }
