@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
-
 import '../../data/models/media_model.dart';
-import 'build_grid_overlay_widget.dart';
+import 'gride_painter_widget.dart';
 
 class PickerImageInteractionWidget extends StatefulWidget {
   const PickerImageInteractionWidget({
@@ -20,14 +19,16 @@ class PickerImageInteractionWidget extends StatefulWidget {
 
 class _PickerImageInteractionWidgetState
     extends State<PickerImageInteractionWidget> {
-  Offset _dragOffset = Offset.zero;
   double _scale = 1.0;
+  double _previousScale = 1.0;
+  Offset _offset = Offset.zero;
+  Offset _startOffset = Offset.zero;
   bool _showGrid = false;
 
   void _resetImage() {
     setState(() {
       _scale = 1.0;
-      _dragOffset = Offset.zero;
+      _offset = Offset.zero;
       _showGrid = false;
     });
   }
@@ -41,50 +42,50 @@ class _PickerImageInteractionWidgetState
         itemBuilder: (context, index) {
           return Center(
             child: GestureDetector(
-              onPanUpdate: (details) {
+              onScaleStart: (details) {
+                _previousScale = _scale;
+                _startOffset = details.focalPoint - _offset;
+                setState(() => _showGrid = true);
+              },
+              onScaleUpdate: (details) {
                 setState(() {
-                  _dragOffset += details.delta;
+                  _scale = _previousScale * details.scale;
+                  _offset = details.focalPoint - _startOffset;
                 });
               },
-              onPanEnd: (_) {
-                setState(() {
-                  _dragOffset = Offset.zero;
-                  _showGrid = false;
-                });
-              },
-              onTapDown: (_) {
-                setState(() {
-                  _showGrid = true;
-                });
-              },
-              onTapUp: (_) {
-                setState(() {
-                  _showGrid = false;
-                });
+              onScaleEnd: (_) {
+                setState(() => _showGrid = false);
+                _previousScale = 1.0;
               },
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  InteractiveViewer(
-                    panEnabled: true,
-                    scaleEnabled: true,
-                    clipBehavior: Clip.none,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Transform.translate(
-                        offset: _dragOffset, // Apply offset directly here
-                        child: Image(
-                          image: AssetEntityImageProvider(
-                            widget._selectedMedias[index].assetEntity,
-                            isOriginal: true,
-                          ),
-                          fit: BoxFit.cover,
-                        ),
+                  Transform(
+                    alignment: Alignment.center,
+                    transform: Matrix4.identity()
+                      ..translate(_offset.dx, _offset.dy)
+                      ..scale(_scale),
+                    child: Image(
+                      image: AssetEntityImageProvider(
+                        widget._selectedMedias[index].assetEntity,
                       ),
                     ),
                   ),
-                  // Conditionally render the grid overlay
-                  if (_showGrid) const BuildGridOverlayWidget(),
+                  if (_showGrid)
+                    Positioned.fill(
+                      child: CustomPaint(
+                        painter: GridPainter(),
+                      ),
+                    ),
+                  Positioned(
+                    bottom: 0,
+                    left: 10,
+                    child: ElevatedButton(
+                      onPressed: _resetImage,
+                      style: ElevatedButton.styleFrom(),
+                      child: const Text("Reset"),
+                    ),
+                  ),
                 ],
               ),
             ),
