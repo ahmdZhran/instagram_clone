@@ -12,8 +12,11 @@ import 'picker_image_interaction_widget.dart';
 
 class PickImagePostWidget extends StatefulWidget {
   final List<MediaModel> selectedMedias;
-
-  const PickImagePostWidget({super.key, required this.selectedMedias});
+  final ValueChanged<List<MediaModel>> onSelectionChanged;
+  const PickImagePostWidget(
+      {super.key,
+      required this.selectedMedias,
+      required this.onSelectionChanged});
 
   @override
   State<PickImagePostWidget> createState() => _PickImagePostWidgetState();
@@ -85,6 +88,7 @@ class _PickImagePostWidgetState extends State<PickImagePostWidget> {
       } else {
         _selectedMedias.add(media);
       }
+      widget.onSelectionChanged(List<MediaModel>.from(_selectedMedias));
     });
   }
 

@@ -4,10 +4,19 @@ import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/router/routes.dart';
 
 import '../../../../core/utils/app_colors.dart';
+import '../../data/models/media_model.dart';
 import '../widgets/pick_image_post_widget.dart';
 
-class AddPostScreen extends StatelessWidget {
+class AddPostScreen extends StatefulWidget {
   const AddPostScreen({super.key});
+
+  @override
+  State<AddPostScreen> createState() => _AddPostScreenState();
+}
+
+class _AddPostScreenState extends State<AddPostScreen> {
+  List<MediaModel> selectedMedias = [];
+  bool hasImages = false;
 
   @override
   Widget build(BuildContext context) {
@@ -15,19 +24,41 @@ class AddPostScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Add Post"),
         actions: [
-          IconButton(
-            icon: Icon(
-              context.isEnglish ? Iconsax.arrow_right_1 : Iconsax.arrow_left_1,
-              color: AppColors.primaryColor,
-            ),
-            onPressed: () {
-              context.pushNamed(Routes.addDescriptionToPost);
-            },
-          )
+          hasImages
+              ? IconButton(
+                  icon: Icon(
+                    context.isEnglish
+                        ? Iconsax.arrow_right_1
+                        : Iconsax.arrow_left_1,
+                    color: AppColors.primaryColor,
+                  ),
+                  onPressed: () {
+                    context.pushNamed(
+                      Routes.addDescriptionToPost,
+                      arguments: selectedMedias,
+                    );
+                    print("Navigating with selectedMedias: $selectedMedias");
+                  },
+                )
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Icon(
+                    context.isEnglish
+                        ? Iconsax.arrow_right_1
+                        : Iconsax.arrow_left_1,
+                    color: AppColors.darkBlueColor,
+                  ),
+                ),
         ],
       ),
-      body: const PickImagePostWidget(
-        selectedMedias: [],
+      body: PickImagePostWidget(
+        selectedMedias: selectedMedias,
+        onSelectionChanged: (selected) {
+          setState(() {
+            selectedMedias = selected;
+            hasImages = selectedMedias.isNotEmpty;
+          });
+        },
       ),
     );
   }

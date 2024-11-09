@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/features/add_media/data/models/media_model.dart';
 import 'package:instagram_clone/features/add_media/presentation/screens/add_description_to_post_screen.dart';
 import '../../features/main_widget/main_widget.dart';
 import '../../features/profile/domain/entities/user_profile_entity.dart';
@@ -45,8 +46,9 @@ class AppRouter {
           ),
         );
       case Routes.addDescriptionToPost:
+        final selectedMedias = settings.arguments as List<MediaModel>?;
         return MaterialPageRoute(
-          builder: (_) => const AddDescriptionToPostScreen(),
+          builder: (_) =>  AddDescriptionToPostScreen(selectedMedias: selectedMedias,),
         );
       default:
         return null;
