@@ -49,7 +49,6 @@ class MediaItem extends StatelessWidget {
     return Positioned.fill(
       child: Padding(
         padding: EdgeInsets.all(isSelected ? 10.0 : 0.0),
-        // Display the media widget
         child: media.widget,
       ),
     );
