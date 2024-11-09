@@ -37,7 +37,6 @@ class _AddPostScreenState extends State<AddPostScreen> {
                       Routes.addDescriptionToPost,
                       arguments: selectedMedias,
                     );
-                    print("Navigating with selectedMedias: $selectedMedias");
                   },
                 )
               : Padding(
