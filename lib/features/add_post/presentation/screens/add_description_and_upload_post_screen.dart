@@ -24,8 +24,8 @@ class AddDescriptionAndUploadPostScreen extends StatelessWidget {
           context.translate(AppStrings.newPost),
           style: CustomTextStyle.pacifico13,
         ),
-        actions: const [
-          UploadUserPostWidget(),
+        actions:  [
+          UploadUserPostWidget(image: ,description: ,),
         ],
       ),
       body: ListView.builder(

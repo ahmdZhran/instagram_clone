@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   auto_size_text: ^3.0.0
+  cached_network_image: ^3.4.1
   cloud_firestore: ^5.4.2
   cupertino_icons: ^1.0.6
   dartz: ^0.10.1
@@ -38,29 +39,29 @@ dependencies:
   firebase_storage: ^12.3.1
   flutter:
     sdk: flutter
+  flutter_bloc: ^8.1.6
   flutter_localizations:
     sdk: flutter
-  flutter_bloc: ^8.1.6
   flutter_native_splash: ^2.4.1
   flutter_screenutil: ^5.9.3
   flutter_svg: ^2.0.10+1
-  photo_manager: ^3.5.2
-  image_cropper: ^8.0.2
-  iconsax: ^0.0.8
   fluttertoast: ^8.2.8
   gap: ^3.0.1
   get_it: ^7.7.0
   glassmorphism: ^3.0.0
-  permission_handler: ^11.3.1
-  photo_manager_image_provider: ^2.2.0
+  iconsax: ^0.0.8
+  image_cropper: ^8.0.2
   image_picker: ^1.1.2
   internet_connection_checker: ^1.0.0+1
-  transparent_image: ^2.0.1
   lottie: ^3.1.2
+  permission_handler: ^11.3.1
+  photo_manager: ^3.5.2
+  photo_manager_image_provider: ^2.2.0
   shared_preferences: ^2.3.2
-  sliver_tools: ^0.2.12
   skeletonizer: ^1.4.2
-  cached_network_image: ^3.4.1
+  sliver_tools: ^0.2.12
+  transparent_image: ^2.0.1
+  uuid: ^4.5.1
 dev_dependencies:
   flutter_lints: ^3.0.0
   flutter_test:
