@@ -7,10 +7,10 @@ import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 
 import '../../data/models/media_model.dart';
 
-class AddDescriptionToPostScreen extends StatelessWidget {
+class AddDescriptionAndUploadPostScreen extends StatelessWidget {
   final List<MediaModel>? selectedMedias;
 
-  const AddDescriptionToPostScreen({
+  const AddDescriptionAndUploadPostScreen({
     super.key,
     required this.selectedMedias,
   });
