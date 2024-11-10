@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/core/helper/extensions.dart';
-import 'package:instagram_clone/core/utils/app_colors.dart';
-import 'package:instagram_clone/core/utils/app_strings.dart';
-import 'package:instagram_clone/core/utils/custom_text_style.dart';
+import '../../../../core/helper/extensions.dart';
+import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_strings.dart';
+import '../../../../core/utils/custom_text_style.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 
 import '../../data/models/media_model.dart';
+import '../widgets/upload_user_post_widget.dart';
 
 class AddDescriptionAndUploadPostScreen extends StatelessWidget {
   final List<MediaModel>? selectedMedias;
@@ -23,16 +24,8 @@ class AddDescriptionAndUploadPostScreen extends StatelessWidget {
           context.translate(AppStrings.newPost),
           style: CustomTextStyle.pacifico13,
         ),
-        actions: [
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              context.translate(AppStrings.post),
-              style: CustomTextStyle.pacifico14.copyWith(
-                color: AppColors.primaryColor,
-              ),
-            ),
-          )
+        actions: const [
+          UploadUserPostWidget(),
         ],
       ),
       body: ListView.builder(
@@ -59,3 +52,4 @@ class AddDescriptionAndUploadPostScreen extends StatelessWidget {
     );
   }
 }
+
