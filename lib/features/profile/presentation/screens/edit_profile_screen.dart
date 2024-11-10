@@ -178,7 +178,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
       if (profileImage != null) {
         profileImageUrl = await FirebaseStorageService.uploadProfileImage(
-            profileImage!, widget.userProfileData.uid);
+            profileImage!, widget.userProfileData.uid,"profileImages");
       }
       final updatedProfile = UserProfileEntity(
         name: name ?? widget.userProfileData.name,

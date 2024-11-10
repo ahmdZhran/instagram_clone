@@ -4,7 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 class FirebaseStorageService {
   static Future<String> uploadProfileImage(
-      Uint8List imageData, String userId) async {
+      Uint8List imageData, String userId,String folderName) async {
     try {
       final storageRef =
           FirebaseStorage.instance.ref().child('profileImages').child(userId);
@@ -13,6 +13,7 @@ class FirebaseStorageService {
       return downloadUrl;
     } catch (e) {
       throw Exception('Failed to upload image: $e');
+      
     }
   }
 }

@@ -33,7 +33,7 @@ class AuthRepository {
         password: password,
       );
       String imageUrl = await FirebaseStorageService.uploadProfileImage(
-          profileImage!, userCredential.user!.uid);
+          profileImage!, userCredential.user!.uid,"profileImages");
 
       UserDataEntity userEntity = UserDataEntity(
         uid: userCredential.user!.uid,
