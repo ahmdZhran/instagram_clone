@@ -3,8 +3,8 @@ import 'dart:typed_data';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class FirebaseStorageService {
-  static Future<String> uploadProfileImage(
-      Uint8List imageData, String userId) async {
+  static Future<String> uploadImagesToFireStorage(
+      Uint8List imageData, String userId, String folderName) async {
     try {
       final storageRef =
           FirebaseStorage.instance.ref().child('profileImages').child(userId);
