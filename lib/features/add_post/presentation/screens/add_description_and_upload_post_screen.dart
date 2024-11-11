@@ -33,7 +33,7 @@ class _AddDescriptionAndUploadPostScreenState
     super.initState();
     loadSelectedMedia();
   }
-
+  //TODO refactor this 
   Future<void> loadSelectedMedia() async {
     final file = await widget.selectedMedias?[0].assetEntity.file;
     _imageBytes = await file!.readAsBytes();
