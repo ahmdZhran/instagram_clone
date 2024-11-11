@@ -1,14 +1,17 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/core/router/routes.dart';
+import 'package:instagram_clone/core/utils/app_strings.dart';
+import 'package:instagram_clone/core/utils/utils_messages.dart';
 import 'package:instagram_clone/features/add_post/presentation/cubit/posts_cubit.dart';
 import '../../../../core/helper/extensions.dart';
 import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/custom_text_style.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 
 import '../../data/models/media_model.dart';
+import '../../domain/entities/post_entity.dart';
 import '../widgets/upload_user_post_widget.dart';
 
 class AddDescriptionAndUploadPostScreen extends StatefulWidget {
@@ -28,64 +31,107 @@ class _AddDescriptionAndUploadPostScreenState
     extends State<AddDescriptionAndUploadPostScreen> {
   Uint8List? _imageBytes;
   String? description;
+  final PostsCubit _postsCubit = PostsCubit.getInstance();
+
   @override
   void initState() {
     super.initState();
     loadSelectedMedia();
   }
-  //TODO refactor this 
+
   Future<void> loadSelectedMedia() async {
     final file = await widget.selectedMedias?[0].assetEntity.file;
-    _imageBytes = await file!.readAsBytes();
-    setState(() {});
+    if (file != null) {
+      _imageBytes = await file.readAsBytes();
+      setState(() {});
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PostsCubit, PostsState>(
-      bloc: PostsCubit.getInstance(),
+    return BlocConsumer<PostsCubit, PostsState>(
+      bloc: _postsCubit,
+      listener: (context, state) {
+        if (state is PostsSuccess) {
+          UtilsMessages.showToastSuccessBottom(
+              message: AppStrings.yourPostUploaded);
+          context.pushReplacementNamed(Routes.mainWidget);
+        } else if (state is PostsFailure) {
+          UtilsMessages.showToastErrorBottom(context,
+              message: AppStrings.somethingWentWrong);
+        }
+      },
       builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(
-              context.translate(AppStrings.newPost),
-              style: CustomTextStyle.pacifico13,
-            ),
-            actions: [
-              if (_imageBytes != null)
-                UploadUserPostWidget(
-                  image: _imageBytes!,
-                  description: description ?? "",
-                )
-              else
-                const Text('Error loading image'),
-            ],
-          ),
-          body: ListView.builder(
-            itemCount: 1,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: TextField(
-                  cursorColor: AppColors.primaryColor,
-                  decoration: InputDecoration(
-                    hintText: context.translate(
-                      AppStrings.addDescription,
+        return Stack(
+          children: [
+            Scaffold(
+              appBar: AppBar(
+                title: Text(
+                  context.translate(AppStrings.newPost),
+                  style: CustomTextStyle.pacifico13,
+                ),
+                actions: [
+                  if (_imageBytes != null)
+                    UploadUserPostWidget(
+                      image: _imageBytes!,
+                      description: description ?? "",
+                      onPost: () async {
+                        final postEntity = PostEntity(
+                          id: DateTime.now().millisecondsSinceEpoch.toString(),
+                          userId:
+                              'currentUserId', 
+                          userName:
+                              'currentUserName', // Replace with actual username
+                          imageUrl:
+                              'imageUrlString', // Replace with uploaded URL
+                          timesTamp: DateTime.now(),
+                          description: description ?? "",
+                        );
+                        await _postsCubit.createPost(
+                          image: _imageBytes!,
+                          post: postEntity,
+                          folderName: 'post_images',
+                        );
+                      },
+                    )
+                  else
+                    const Text('Error loading image'),
+                ],
+              ),
+              body: ListView.builder(
+                itemCount: 1,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: TextField(
+                      cursorColor: AppColors.primaryColor,
+                      decoration: InputDecoration(
+                        hintText: context.translate(
+                          AppStrings.addDescription,
+                        ),
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          description = value;
+                        });
+                      },
                     ),
-                  ),
-                  onChanged: (value) {
-                    setState(() {
-                      description = value;
-                    });
-                  },
+                    leading: Image(
+                      image: AssetEntityImageProvider(
+                        widget.selectedMedias![index].assetEntity,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            if (state is PostsLoading)
+              Container(
+                color: Colors.black45,
+                child: const Center(
+                  child: CircularProgressIndicator(),
                 ),
-                leading: Image(
-                  image: AssetEntityImageProvider(
-                    widget.selectedMedias![index].assetEntity,
-                  ),
-                ),
-              );
-            },
-          ),
+              ),
+          ],
         );
       },
     );
