@@ -76,9 +76,6 @@ class _AddDescriptionAndUploadPostScreenState
                     setState(() {
                       description = value;
                     });
-
-                    print(
-                        'this is the value of description image $description');
                   },
                 ),
                 leading: Image(
