@@ -17,11 +17,11 @@ class UploadUserPostWidget extends StatefulWidget {
   const UploadUserPostWidget({
     super.key,
     required this.image,
-    this.description,
+    required this.description,
   });
 
   final Uint8List image;
-  final String? description;
+  final String description;
 
   @override
   State<UploadUserPostWidget> createState() => _UploadUserPostWidgetState();
@@ -41,7 +41,7 @@ class _UploadUserPostWidgetState extends State<UploadUserPostWidget> {
               message: context.translate(
             AppStrings.yourPostUploaded,
           ));
-          context.pushReplacementNamed(Routes.home);
+          context.pushReplacementNamed(Routes.mainWidget);
         } else if (state is PostsFailure) {
           UtilsMessages.showToastErrorBottom(context,
               message: context.translate(AppStrings.somethingWentWrong));
@@ -64,7 +64,6 @@ class _UploadUserPostWidgetState extends State<UploadUserPostWidget> {
             ),
           );
         }
-
         return TextButton(
           onPressed: state is! PostsLoading
               ? () async {
