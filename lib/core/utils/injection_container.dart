@@ -10,6 +10,6 @@ class InjectionContainer {
   Future<void> init() async {
     AuthDI().init();
     ProfileDI().init();
-    AddPostDi().init();
+    AddPostDI().init();
   }
 }

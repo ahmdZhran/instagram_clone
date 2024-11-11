@@ -51,8 +51,7 @@ class PostsCubit extends Cubit<PostsState> {
     }
   }
 
-
-   static const String _tag = "posts";
+  static const String _tag = "posts";
   static PostsCubit getInstance() {
     final isRegister = addPostDi.isRegistered<PostsCubit>(instanceName: _tag);
     if (!isRegister) {

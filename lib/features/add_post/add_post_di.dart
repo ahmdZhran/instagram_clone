@@ -6,11 +6,16 @@ import 'package:instagram_clone/features/add_post/domain/repositories/add_post_r
 
 final addPostDi = GetIt.instance;
 
-class AddPostDi {
+class AddPostDI {
   Future<void> init() async {
-    addPostDi.registerLazySingleton(() => FirebaseFirestore.instance);
-    addPostDi.registerSingleton(() => FirebaseStorageService());
+    addPostDi.registerLazySingleton<FirebaseFirestore>(
+      () => FirebaseFirestore.instance,
+    );
+    addPostDi.registerLazySingleton<FirebaseStorageService>(
+      () => FirebaseStorageService(),
+    );
     addPostDi.registerLazySingleton<AddPostRepository>(
-        () => AddPostRepositoryImpl());
+      () => AddPostRepositoryImpl(),
+    );
   }
 }

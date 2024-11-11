@@ -23,11 +23,15 @@ class UploadUserPostWidget extends StatefulWidget {
 
 class _UploadUserPostWidgetState extends State<UploadUserPostWidget> {
   final String? folderName = "post_image";
+
   UserDataEntity? _userDataEntity;
+
+  final PostsCubit _postsCubit = PostsCubit.getInstance();
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PostsCubit, PostsState>(
-      bloc: PostsCubit.getInstance(),
+      bloc: _postsCubit,
       builder: (context, state) {
         return TextButton(
           onPressed: () async {
@@ -39,9 +43,7 @@ class _UploadUserPostWidgetState extends State<UploadUserPostWidget> {
               timesTamp: DateTime.now(),
               description: widget.description,
             );
-            // TODO make on instance here and use it here and 
-            // in bloc under BlocBuilder to create on instance of PostsCubit
-            await PostsCubit.getInstance().createPost(
+            await _postsCubit.createPost(
               image: widget.image,
               post: postEntity,
               folderName: folderName!,
