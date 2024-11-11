@@ -12,8 +12,12 @@ import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/custom_text_style.dart';
 
 class UploadUserPostWidget extends StatefulWidget {
-  const UploadUserPostWidget(
-      {super.key, required this.image, this.description});
+  const UploadUserPostWidget({
+    super.key,
+    required this.image,
+    this.description,
+  });
+
   final Uint8List image;
   final String? description;
 
@@ -22,23 +26,53 @@ class UploadUserPostWidget extends StatefulWidget {
 }
 
 class _UploadUserPostWidgetState extends State<UploadUserPostWidget> {
-  final String? folderName = "post_image";
-
   UserDataEntity? _userDataEntity;
-
   final PostsCubit _postsCubit = PostsCubit.getInstance();
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PostsCubit, PostsState>(
+    return BlocConsumer<PostsCubit, PostsState>(
       bloc: _postsCubit,
+      listener: (context, state) {
+        if (state is PostsSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(context.translate('AppStrings.uploadSuccess'))),
+          );
+        } else if (state is PostsFailure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                context.translate('AppStrings.uploadFailed'),
+                style: TextStyle(color: Colors.red),
+              ),
+            ),
+          );
+        }
+      },
       builder: (context, state) {
+        Widget buttonChild;
+        
+        if (state is PostsLoading) {
+          buttonChild = const CircularProgressIndicator(color: Colors.white);
+        } else if (state is PostsSuccess) {
+          buttonChild = const Icon(Icons.check_circle, color: Colors.green);
+        } else if (state is PostsFailure) {
+          buttonChild = const Icon(Icons.error, color: Colors.red);
+        } else {
+          buttonChild = Text(
+            context.translate(AppStrings.post),
+            style: CustomTextStyle.pacifico14.copyWith(
+              color: AppColors.primaryColor,
+            ),
+          );
+        }
+
         return TextButton(
-          onPressed: () async {
+          onPressed: state is! PostsLoading ? () async {
             final postEntity = PostEntity(
               id: DateTime.now().millisecondsSinceEpoch.toString(),
               userId: FirebaseAuth.instance.currentUser!.uid,
-              userName: _userDataEntity!.username!,
+              userName: _userDataEntity?.username ?? '',
               imageUrl: widget.image.toString(),
               timesTamp: DateTime.now(),
               description: widget.description,
@@ -46,15 +80,10 @@ class _UploadUserPostWidgetState extends State<UploadUserPostWidget> {
             await _postsCubit.createPost(
               image: widget.image,
               post: postEntity,
-              folderName: folderName!,
+              folderName: 'post_images',
             );
-          },
-          child: Text(
-            context.translate(AppStrings.post),
-            style: CustomTextStyle.pacifico14.copyWith(
-              color: AppColors.primaryColor,
-            ),
-          ),
+          } : null,
+          child: buttonChild,
         );
       },
     );

@@ -7,7 +7,7 @@ class FirebaseStorageService {
       Uint8List imageData, String userId, String folderName) async {
     try {
       final storageRef =
-          FirebaseStorage.instance.ref().child('profileImages').child(userId);
+          FirebaseStorage.instance.ref().child(folderName).child(userId);
       final uploadTask = await storageRef.putData(imageData);
       final downloadUrl = await uploadTask.ref.getDownloadURL();
       return downloadUrl;
