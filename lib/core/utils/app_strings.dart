@@ -49,4 +49,6 @@ abstract class AppStrings {
   static const String reset = "reset";
   static const String sleetedYourPost = "select_your_post_below";
   static const String addDescription = "add_description";
+  static const String yourPostUploaded = "your_post_uploaded_successfully";
+  static const String somethingWentWrong = "something_went_wrong";
 }

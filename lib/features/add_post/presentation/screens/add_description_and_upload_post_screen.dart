@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/features/add_post/presentation/cubit/posts_cubit.dart';
@@ -27,10 +26,18 @@ class AddDescriptionAndUploadPostScreen extends StatefulWidget {
 
 class _AddDescriptionAndUploadPostScreenState
     extends State<AddDescriptionAndUploadPostScreen> {
+  Uint8List? _imageBytes;
+  String? description;
   @override
   void initState() {
-    PostsCubit.getInstance();
     super.initState();
+    loadSelectedMedia();
+  }
+
+  Future<void> loadSelectedMedia() async {
+    final file = await widget.selectedMedias?[0].assetEntity.file;
+    _imageBytes = await file!.readAsBytes();
+    setState(() {});
   }
 
   @override
@@ -45,46 +52,37 @@ class _AddDescriptionAndUploadPostScreenState
               style: CustomTextStyle.pacifico13,
             ),
             actions: [
-              FutureBuilder<Uint8List>(
-                future: widget.selectedMedias![0].assetEntity.file
-                    .then((file) => file!.readAsBytes()),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return const Text('Error loading image');
-                  } else {
-                    return UploadUserPostWidget(
-                      image: snapshot.data!,
-                      description: ' descriptionController.text',
-                    );
-                  }
-                },
-              ),
+              if (_imageBytes != null)
+                UploadUserPostWidget(
+                  image: _imageBytes!,
+                  description: description ?? "",
+                )
+              else
+                const Text('Error loading image'),
             ],
           ),
           body: ListView.builder(
             itemCount: 1,
             itemBuilder: (context, index) {
-              return Column(
-                children: [
-                  ListTile(
-                    title: TextField(
-                      cursorColor: AppColors.primaryColor,
-                      decoration: InputDecoration(
-                        hintText: context.translate(
-                          AppStrings.addDescription,
-                        ),
-                      ),
-                      onChanged: (value) {},
-                    ),
-                    leading: Image(
-                      image: AssetEntityImageProvider(
-                        widget.selectedMedias![index].assetEntity,
-                      ),
+              return ListTile(
+                title: TextField(
+                  cursorColor: AppColors.primaryColor,
+                  decoration: InputDecoration(
+                    hintText: context.translate(
+                      AppStrings.addDescription,
                     ),
                   ),
-                ],
+                  onChanged: (value) {
+                    setState(() {
+                      description = value;
+                    });
+                  },
+                ),
+                leading: Image(
+                  image: AssetEntityImageProvider(
+                    widget.selectedMedias![index].assetEntity,
+                  ),
+                ),
               );
             },
           ),

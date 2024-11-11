@@ -3,6 +3,8 @@ import 'dart:typed_data';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/core/router/routes.dart';
+import 'package:instagram_clone/core/utils/utils_messages.dart';
 import 'package:instagram_clone/features/add_post/domain/entities/post_entity.dart';
 import 'package:instagram_clone/features/add_post/presentation/cubit/posts_cubit.dart';
 import 'package:instagram_clone/features/auth/domain/entities/user_data_entity.dart';
@@ -15,11 +17,11 @@ class UploadUserPostWidget extends StatefulWidget {
   const UploadUserPostWidget({
     super.key,
     required this.image,
-    this.description,
+    required this.description,
   });
 
   final Uint8List image;
-  final String? description;
+  final String description;
 
   @override
   State<UploadUserPostWidget> createState() => _UploadUserPostWidgetState();
@@ -35,23 +37,19 @@ class _UploadUserPostWidgetState extends State<UploadUserPostWidget> {
       bloc: _postsCubit,
       listener: (context, state) {
         if (state is PostsSuccess) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(context.translate('AppStrings.uploadSuccess'))),
-          );
+          UtilsMessages.showToastSuccessBottom(
+              message: context.translate(
+            AppStrings.yourPostUploaded,
+          ));
+          context.pushReplacementNamed(Routes.mainWidget);
         } else if (state is PostsFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                context.translate('AppStrings.uploadFailed'),
-                style: TextStyle(color: Colors.red),
-              ),
-            ),
-          );
+          UtilsMessages.showToastErrorBottom(context,
+              message: context.translate(AppStrings.somethingWentWrong));
         }
       },
       builder: (context, state) {
         Widget buttonChild;
-        
+
         if (state is PostsLoading) {
           buttonChild = const CircularProgressIndicator(color: Colors.white);
         } else if (state is PostsSuccess) {
@@ -66,23 +64,24 @@ class _UploadUserPostWidgetState extends State<UploadUserPostWidget> {
             ),
           );
         }
-
         return TextButton(
-          onPressed: state is! PostsLoading ? () async {
-            final postEntity = PostEntity(
-              id: DateTime.now().millisecondsSinceEpoch.toString(),
-              userId: FirebaseAuth.instance.currentUser!.uid,
-              userName: _userDataEntity?.username ?? '',
-              imageUrl: widget.image.toString(),
-              timesTamp: DateTime.now(),
-              description: widget.description,
-            );
-            await _postsCubit.createPost(
-              image: widget.image,
-              post: postEntity,
-              folderName: 'post_images',
-            );
-          } : null,
+          onPressed: state is! PostsLoading
+              ? () async {
+                  final postEntity = PostEntity(
+                    id: DateTime.now().millisecondsSinceEpoch.toString(),
+                    userId: FirebaseAuth.instance.currentUser!.uid,
+                    userName: _userDataEntity?.username ?? '',
+                    imageUrl: widget.image.toString(),
+                    timesTamp: DateTime.now(),
+                    description: widget.description,
+                  );
+                  await _postsCubit.createPost(
+                    image: widget.image,
+                    post: postEntity,
+                    folderName: 'post_images',
+                  );
+                }
+              : null,
           child: buttonChild,
         );
       },
