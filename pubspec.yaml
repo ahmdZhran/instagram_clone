@@ -62,7 +62,6 @@ dependencies:
   skeletonizer: ^1.4.2
   sliver_tools: ^0.2.12
   transparent_image: ^2.0.1
-  uuid: ^4.5.1
 dev_dependencies:
   flutter_lints: ^3.0.0
   flutter_test:
