@@ -5,6 +5,7 @@ import 'package:instagram_clone/core/router/routes.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:instagram_clone/core/utils/utils_messages.dart';
 import 'package:instagram_clone/features/add_post/presentation/cubit/posts_cubit.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../../core/helper/extensions.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_text_style.dart';
@@ -78,8 +79,7 @@ class _AddDescriptionAndUploadPostScreenState
                       onPost: () async {
                         final postEntity = PostEntity(
                           id: DateTime.now().millisecondsSinceEpoch.toString(),
-                          userId:
-                              'currentUserId', 
+                          userId: 'currentUserId',
                           userName:
                               'currentUserName', // Replace with actual username
                           imageUrl:
@@ -127,8 +127,11 @@ class _AddDescriptionAndUploadPostScreenState
             if (state is PostsLoading)
               Container(
                 color: Colors.black45,
-                child: const Center(
-                  child: CircularProgressIndicator(),
+                child: Center(
+                  child: LoadingAnimationWidget.staggeredDotsWave(
+                    color: AppColors.primaryColor,
+                    size: 100,
+                  ),
                 ),
               ),
           ],
