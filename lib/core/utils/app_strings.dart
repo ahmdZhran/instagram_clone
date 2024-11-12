@@ -1,5 +1,9 @@
 abstract class AppStrings {
   static const String appName = "Instagram";
+  // main widgets
+  static const String areYouSure = "are_you_sure_you_want_to_exit_the_app";
+  static const String exitConfirmation = "exit_confirmation";
+  static const String exit = "exit";
   //  Auth strings
   static const String headInstagramTitle = 'Instagram';
   static const String createYourEmail = 'Create your email';

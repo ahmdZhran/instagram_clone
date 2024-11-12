@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import '../../../../core/utils/app_assets.dart';
@@ -58,7 +57,7 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
               if (didPop) {
                 return;
               }
-              showExitConfirmationDialog(context);
+              context.showExitConfirmationDialog();
             },
             child: Form(
               key: _logInFormKey,
@@ -111,33 +110,6 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
           );
         },
       ),
-    );
-  }
-
-  void showExitConfirmationDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Exit Confirmation'),
-          content: const Text('Are you sure you want to exit the app?'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: const Text('Exit'),
-              onPressed: () {
-                Navigator.of(context).pop();
-                SystemNavigator.pop();
-              },
-            ),
-          ],
-        );
-      },
     );
   }
 }
