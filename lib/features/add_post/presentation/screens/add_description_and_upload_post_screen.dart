@@ -75,6 +75,7 @@ class _AddDescriptionAndUploadPostScreenState
                   style: CustomTextStyle.pacifico13,
                 ),
                 actions: [
+                  //TODO upload more than one image
                   if (_imageBytes != null)
                     UploadUserPostWidget(
                       image: _imageBytes!,
