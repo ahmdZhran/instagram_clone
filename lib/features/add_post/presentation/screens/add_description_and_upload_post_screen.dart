@@ -118,6 +118,7 @@ class _AddDescriptionAndUploadPostScreenState
                       },
                     ),
                     leading: Image(
+                      width: 50,
                       image: AssetEntityImageProvider(
                         widget.selectedMedias![index].assetEntity,
                       ),
