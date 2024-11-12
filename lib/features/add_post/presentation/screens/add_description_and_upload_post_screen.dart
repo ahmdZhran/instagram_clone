@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/core/router/routes.dart';
@@ -33,6 +34,7 @@ class _AddDescriptionAndUploadPostScreenState
   Uint8List? _imageBytes;
   String? description;
   final PostsCubit _postsCubit = PostsCubit.getInstance();
+  final AudioPlayer _audioPlayer = AudioPlayer();
 
   @override
   void initState() {
@@ -52,11 +54,10 @@ class _AddDescriptionAndUploadPostScreenState
   Widget build(BuildContext context) {
     return BlocConsumer<PostsCubit, PostsState>(
       bloc: _postsCubit,
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is PostsSuccess) {
-          UtilsMessages.showToastSuccessBottom(
-              message: AppStrings.yourPostUploaded);
           context.pushReplacementNamed(Routes.mainWidget);
+          await _audioPlayer.play(AssetSource('post_uploaded.mp3'));
         } else if (state is PostsFailure) {
           UtilsMessages.showToastErrorBottom(context,
               message: AppStrings.somethingWentWrong);

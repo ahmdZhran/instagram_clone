@@ -87,7 +87,7 @@ flutter:
     - assets/images/profile_image/
     - assets/lottie/
     - assets/svg/
-    - assets/audios/post_uploaded.mp3
+    - assets/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see
