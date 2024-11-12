@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/core/router/routes.dart';
@@ -12,6 +13,7 @@ import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_text_style.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 
+import '../../../auth/domain/entities/user_data_entity.dart';
 import '../../data/models/media_model.dart';
 import '../../domain/entities/post_entity.dart';
 import '../widgets/upload_user_post_widget.dart';
@@ -35,7 +37,7 @@ class _AddDescriptionAndUploadPostScreenState
   String? description;
   final PostsCubit _postsCubit = PostsCubit.getInstance();
   final AudioPlayer _audioPlayer = AudioPlayer();
-
+  UserDataEntity? _userDataEntity;
   @override
   void initState() {
     super.initState();
@@ -80,11 +82,9 @@ class _AddDescriptionAndUploadPostScreenState
                       onPost: () async {
                         final postEntity = PostEntity(
                           id: DateTime.now().millisecondsSinceEpoch.toString(),
-                          userId: 'currentUserId',
-                          userName:
-                              'currentUserName', // Replace with actual username
-                          imageUrl:
-                              'imageUrlString', // Replace with uploaded URL
+                          userId: FirebaseAuth.instance.currentUser!.uid,
+                          userName: _userDataEntity?.username ?? '',
+                          imageUrl: _imageBytes.toString(),
                           timesTamp: DateTime.now(),
                           description: description ?? "",
                         );
