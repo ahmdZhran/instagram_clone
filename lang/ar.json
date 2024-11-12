@@ -20,5 +20,9 @@
     "new_post":"منشور جديد",
     "add_description":"اضافة وصف",
     "your_post_uploaded_successfully":"تم رفع منشورك بنجاح",
-    "something_went_wrong":"حدث خطأ, من فضلك أعد المحاولة"
+    "something_went_wrong":"حدث خطأ, من فضلك أعد المحاولة",
+    "exit_confirmation":"تأكيد الخروج",
+    "are_you_sure_you_want_to_exit_the_app?":"هل أنت متأكد أنك تريد الخروج من التطبيق",
+    "cancel":"إلغاء",
+    "exit":"خروج"
 }

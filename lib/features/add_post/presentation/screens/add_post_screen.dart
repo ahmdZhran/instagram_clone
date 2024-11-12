@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/router/routes.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
+import 'package:instagram_clone/features/add_post/presentation/cubit/posts_cubit.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../data/models/media_model.dart';
@@ -18,6 +19,11 @@ class AddPostScreen extends StatefulWidget {
 class _AddPostScreenState extends State<AddPostScreen> {
   List<MediaModel> selectedMedias = [];
   bool hasImages = false;
+  @override
+  void initState() {
+    PostsCubit.getInstance();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,5 +67,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    PostsCubit.deleteInstance();
+    super.dispose();
   }
 }
