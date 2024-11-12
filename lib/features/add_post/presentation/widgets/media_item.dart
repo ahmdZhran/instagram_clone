@@ -21,7 +21,12 @@ class MediaItem extends StatelessWidget {
       onTap: () => selectMedia(media),
       child: Stack(
         children: [
-          _buildMediaWidget(),
+          Positioned.fill(
+            child: Padding(
+              padding: EdgeInsets.all(isSelected ? 10.0 : 0.0),
+              child: media.widget,
+            ),
+          ),
           Positioned.fill(
             child: Container(
               color: Colors.black.withOpacity(0.15),
@@ -39,32 +44,20 @@ class MediaItem extends StatelessWidget {
                   : null,
             ),
           ),
-          if (isSelected) _buildIsSelectedOverlay(),
+          if (isSelected)
+            Positioned.fill(
+              child: Container(
+                color: Colors.black.withOpacity(0.1),
+                child: const Center(
+                  child: Icon(
+                    Icons.check_circle_rounded,
+                    color: AppColors.primaryColor,
+                    size: 30,
+                  ),
+                ),
+              ),
+            ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildMediaWidget() {
-    return Positioned.fill(
-      child: Padding(
-        padding: EdgeInsets.all(isSelected ? 10.0 : 0.0),
-        child: media.widget,
-      ),
-    );
-  }
-
-  Widget _buildIsSelectedOverlay() {
-    return Positioned.fill(
-      child: Container(
-        color: Colors.black.withOpacity(0.1),
-        child: const Center(
-          child: Icon(
-            Icons.check_circle_rounded,
-            color: AppColors.primaryColor,
-            size: 30,
-          ),
-        ),
       ),
     );
   }
