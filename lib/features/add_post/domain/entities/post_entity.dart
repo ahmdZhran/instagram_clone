@@ -36,7 +36,7 @@ class PostEntity {
       'id': id,
       'userId': userId,
       'likes' : likes,
-      'name': userName,
+      'username': userName,
       "description": description,
       "imageUrl": imageUrl,
       "timesTamp": Timestamp.fromDate(timesTamp),
@@ -49,7 +49,7 @@ class PostEntity {
       likes: json['likes'],
       description: json['description'],
       userId: json['userId'],
-      userName: json['name'],
+      userName: json['username'],
       imageUrl: json['imageUrl'],
       timesTamp: json['timesTamp'].toDate(),
     );

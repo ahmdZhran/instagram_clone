@@ -94,7 +94,8 @@ class _AddDescriptionAndUploadPostScreenState
                         await _postsCubit.createPost(
                           image: _imageBytes!,
                           post: postEntity,
-                          folderName: 'post_images',
+                          folderName:
+                              'post_images/${FirebaseAuth.instance.currentUser!.uid}',
                         );
                       },
                     )
