@@ -10,15 +10,6 @@ class HomeScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           CustomSliverAppBarWidget(),
-        
-          // SliverList(
-          //   delegate: SliverChildBuilderDelegate(
-          //     (context, index) => ListTile(
-          //       title: Text('Item $index'),
-          //     ),
-          //     childCount: 50, // Example content
-          //   ),
-          // ),
         ],
       ),
     );
