@@ -33,10 +33,10 @@ class PostEntity {
 
   Map<String, dynamic> toJson() {
     return {
+      'user_name': userName,
       'id': id,
       'userId': userId,
-      'likes' : likes,
-      'username': userName,
+      'likes': likes,
       "description": description,
       "imageUrl": imageUrl,
       "timesTamp": Timestamp.fromDate(timesTamp),
@@ -49,7 +49,7 @@ class PostEntity {
       likes: json['likes'],
       description: json['description'],
       userId: json['userId'],
-      userName: json['username'],
+      userName: json['user_name'],
       imageUrl: json['imageUrl'],
       timesTamp: json['timesTamp'].toDate(),
     );
