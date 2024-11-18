@@ -35,7 +35,7 @@ class CustomCircularAvatar extends StatelessWidget {
           height: heightOfImage,
           width: widthOfImage,
           fit: BoxFit.cover,
-          image: const AssetImage(),
+          image: AssetImage(assetName),
         ),
       )),
     );
