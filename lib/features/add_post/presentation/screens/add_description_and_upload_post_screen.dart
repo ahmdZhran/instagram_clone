@@ -83,11 +83,13 @@ class _AddDescriptionAndUploadPostScreenState
                       onPost: () async {
                         final postEntity = PostEntity(
                           id: DateTime.now().millisecondsSinceEpoch.toString(),
+                          //TODO save this uid in secure storage and call it instead firebase instance
                           userId: FirebaseAuth.instance.currentUser!.uid,
                           userName: _userDataEntity?.username ?? '',
                           imageUrl: _imageBytes.toString(),
                           timesTamp: DateTime.now(),
                           description: description ?? "",
+                          likes: [],
                         );
                         await _postsCubit.createPost(
                           image: _imageBytes!,
