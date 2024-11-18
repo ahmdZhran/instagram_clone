@@ -7,13 +7,12 @@ import 'package:instagram_clone/core/router/routes.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:instagram_clone/core/utils/utils_messages.dart';
 import 'package:instagram_clone/features/add_post/presentation/cubit/posts_cubit.dart';
+import 'package:instagram_clone/features/profile/data/models/user_model.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../../core/helper/extensions.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_text_style.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
-
-import '../../../auth/domain/entities/user_data_entity.dart';
 import '../../data/models/media_model.dart';
 import '../../domain/entities/post_entity.dart';
 import '../widgets/upload_user_post_widget.dart';
@@ -37,7 +36,7 @@ class _AddDescriptionAndUploadPostScreenState
   String? description;
   final PostsCubit _postsCubit = PostsCubit.getInstance();
   final AudioPlayer _audioPlayer = AudioPlayer();
-  UserDataEntity? _userDataEntity;
+  UserModel? _userDataEntity;
   @override
   void initState() {
     super.initState();
@@ -83,16 +82,20 @@ class _AddDescriptionAndUploadPostScreenState
                       onPost: () async {
                         final postEntity = PostEntity(
                           id: DateTime.now().millisecondsSinceEpoch.toString(),
+                          //TODO save this uid in secure storage and call it instead firebase instance
+                          //TODO get username and send it with this data
                           userId: FirebaseAuth.instance.currentUser!.uid,
                           userName: _userDataEntity?.username ?? '',
                           imageUrl: _imageBytes.toString(),
                           timesTamp: DateTime.now(),
                           description: description ?? "",
+                          likes: [],
                         );
                         await _postsCubit.createPost(
                           image: _imageBytes!,
                           post: postEntity,
-                          folderName: 'post_images',
+                          folderName:
+                              'post_images/${FirebaseAuth.instance.currentUser!.uid}',
                         );
                       },
                     )

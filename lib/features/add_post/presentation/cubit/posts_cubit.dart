@@ -19,7 +19,10 @@ class PostsCubit extends Cubit<PostsState> {
     emit(PostsLoading());
     try {
       final imageUrl = await FirebaseStorageService.uploadImagesToFireStorage(
-          image, post.id, folderName);
+        image,
+        post.id,
+        folderName,
+      );
 
       final postWithImage = post.copyWith(imageUrl: imageUrl);
 

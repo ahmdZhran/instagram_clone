@@ -4,7 +4,10 @@ import 'package:firebase_storage/firebase_storage.dart';
 
 class FirebaseStorageService {
   static Future<String> uploadImagesToFireStorage(
-      Uint8List imageData, String userId, String folderName) async {
+    Uint8List imageData,
+    String userId,
+    String folderName,
+  ) async {
     try {
       final storageRef =
           FirebaseStorage.instance.ref().child(folderName).child(userId);

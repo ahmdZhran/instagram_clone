@@ -4,7 +4,6 @@ import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/router/routes.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:instagram_clone/features/add_post/presentation/cubit/posts_cubit.dart';
-
 import '../../../../core/utils/app_colors.dart';
 import '../../data/models/media_model.dart';
 import '../widgets/pick_image_post_widget.dart';
