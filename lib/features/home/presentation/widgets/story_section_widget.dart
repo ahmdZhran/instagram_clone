@@ -11,6 +11,7 @@ class StorySectionWidget extends StatelessWidget {
         height: 100.h,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
+          physics: const BouncingScrollPhysics(),
           itemCount: 20,
           itemBuilder: (context, index) {
             return Padding(
