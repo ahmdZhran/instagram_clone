@@ -79,6 +79,7 @@ class PostsSectionWidget extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20.0),
                               child: SizedBox(
                                 height: 300.h,
+                                // width: 250.w,
                                 child: Image(
                                   fit: BoxFit.cover,
                                   image: NetworkImage(imageUrl),
