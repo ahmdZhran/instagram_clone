@@ -77,9 +77,7 @@ class _MainWidgetState extends State<MainWidget> {
                       child: Container(
                         padding: AppResponsiveSpacerHelper.customPadding,
                         decoration: BoxDecoration(
-                          color: context.isDart
-                              ? AppColors.greyColor.withOpacity(0.3)
-                              : AppColors.greyColor.withOpacity(0.3),
+                          color: AppColors.greyColor.withOpacity(0.3),
                           borderRadius: BorderRadius.circular(50.r),
                         ),
                         child: Row(
