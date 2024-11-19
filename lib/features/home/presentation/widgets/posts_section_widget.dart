@@ -18,43 +18,31 @@ class PostsSectionWidget extends StatelessWidget {
         scrollDirection: Axis.vertical,
         itemCount: 5,
         itemBuilder: (context, index) {
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(25.0),
-            child: Stack(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: 420.0.h,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25.0),
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        AppColors.deepGrey.withOpacity(0.4),
-                        AppColors.deepGrey.withOpacity(0.2),
-                      ],
-                    ),
-                  ),
-                ),
-                BackdropFilter(
-                  filter: ImageFilter.blur(
-                    sigmaX: 5.0,
-                    sigmaY: 5.0,
-                  ),
-                  child: Container(
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(25.0),
+              child: Stack(
+                children: [
+                  Container(
                     width: double.infinity,
                     height: 400.0.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25.0),
-                      color: AppColors.lightThemeColor.withOpacity(0.2),
-                      boxShadow: const [
-                        BoxShadow(
-                          offset: Offset(0, 4),
-                          blurRadius: 10.0,
-                          color: Colors.black12,
-                        ),
-                      ],
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          AppColors.greyColor.withOpacity(0.5),
+                          AppColors.greyColor.withOpacity(0.3),
+                        ],
+                      ),
+                    ),
+                  ),
+                  BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 10.0,
+                      sigmaY: 10.0,
                     ),
                     child: Column(
                       children: [
@@ -99,8 +87,8 @@ class PostsSectionWidget extends StatelessWidget {
                       ],
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },
