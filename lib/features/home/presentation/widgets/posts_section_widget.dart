@@ -39,8 +39,8 @@ class PostsSectionWidget extends StatelessWidget {
                 ),
                 BackdropFilter(
                   filter: ImageFilter.blur(
-                    sigmaX: 10.0,
-                    sigmaY: 10.0,
+                    sigmaX: 5.0,
+                    sigmaY: 5.0,
                   ),
                   child: Container(
                     width: double.infinity,
