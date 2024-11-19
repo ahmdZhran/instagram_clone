@@ -27,7 +27,7 @@ class CustomSliverAppBarWidget extends StatelessWidget {
           ),
           const Spacer(),
           SvgPicture.asset(
-            AppAssets.chatIcon,
+            AppAssets.chatSvg,
             colorFilter: ColorFilter.mode(
               context.color.mainColor,
               BlendMode.srcIn,

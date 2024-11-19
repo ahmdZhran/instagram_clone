@@ -9,84 +9,80 @@ import 'react_icons_widget.dart';
 
 class PostsSectionWidget extends StatelessWidget {
   const PostsSectionWidget({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Expanded(
-        child: ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          itemCount: 5,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: GlassmorphicContainer(
-                width: double.infinity,
-                height: 420.0.h,
-                borderRadius: 25.0,
-                linearGradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    AppColors.greyColor.withOpacity(0.4),
-                    AppColors.greyColor.withOpacity(0.4),
-                  ],
-                ),
-                border: 0,
-                blur: 100,
-                borderGradient: const LinearGradient(
-                  colors: [Colors.pink, Colors.teal],
-                ),
-                child: Column(children: [
-                  Column(
-                    children: [
-                      ListTile(
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 10),
-                        horizontalTitleGap: 10,
-                        dense: true,
-                        leading: const CustomCircularAvatar(
-                          widthOfContainer: 40,
-                          heightOfImage: 50,
-                          widthOfImage: 50,
-                          margin: EdgeInsets.all(2),
-                          assetName: 'assets/images/profile_image/post1.jpg',
-                        ),
-                        title: Text('ahmed__21',
-                            style: CustomTextStyle.pacifico13),
-                        subtitle: const Text('1 min'),
-                        trailing: const Icon(Icons.more_horiz),
+      child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        itemCount: 5,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: GlassmorphicContainer(
+              width: double.infinity,
+              height: 420.0.h,
+              borderRadius: 25.0,
+              linearGradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  AppColors.greyColor.withOpacity(0.4),
+                  AppColors.greyColor.withOpacity(0.4),
+                ],
+              ),
+              border: 0,
+              blur: 100,
+              borderGradient: const LinearGradient(
+                colors: [Colors.pink, Colors.teal],
+              ),
+              child: Column(children: [
+                Column(
+                  children: [
+                    ListTile(
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                      horizontalTitleGap: 10,
+                      dense: true,
+                      leading: const CustomCircularAvatar(
+                        widthOfContainer: 40,
+                        heightOfImage: 50,
+                        widthOfImage: 50,
+                        margin: EdgeInsets.all(2),
+                        assetName: 'assets/images/profile_image/post1.jpg',
                       ),
-                      Container(
-                        margin: const EdgeInsets.all(10),
-                        width: double.infinity,
-                        height: 300.h,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25.0),
-                          boxShadow: const [
-                            BoxShadow(
-                              offset: Offset(0, 4),
-                              blurRadius: 7.0,
-                            ),
-                          ],
-                          image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage(
-                              "assets/images/profile_image/profile.png",
-                            ),
+                      title: Text('ahmed__21', style: CustomTextStyle.pacifico13),
+                      subtitle: const Text('1 min'),
+                      trailing: const Icon(Icons.more_horiz),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(10),
+                      width: double.infinity,
+                      height: 300.h,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25.0),
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(0, 4),
+                            blurRadius: 7.0,
+                          ),
+                        ],
+                        image: const DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage(
+                            "assets/images/profile_image/profile.png",
                           ),
                         ),
                       ),
-                      const ReactIconsWidget()
-                    ],
-                  ),
-                ]),
-              ),
-            );
-          },
-        ),
+                    ),
+                    // const ReactIconsWidget()
+                  ],
+                ),
+              ]),
+            ),
+          );
+        },
       ),
     );
   }
