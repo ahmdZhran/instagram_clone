@@ -1,6 +1,6 @@
 import 'package:timeago/timeago.dart' as timeago;
 
-class CustomShortMessages extends timeago.LookupMessages {
+class CustomShortMessagesForTimeAgo extends timeago.LookupMessages {
   @override
   String prefixAgo() => '';
   @override

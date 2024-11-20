@@ -3,7 +3,6 @@ import '../../domain/entities/post_entity.dart';
 import '../../domain/repositories/post_repository.dart';
 
 class AddPostRepositoryImpl implements AddPostRepository {
-  
   final CollectionReference postCollection =
       FirebaseFirestore.instance.collection("posts");
   @override
@@ -21,16 +20,19 @@ class AddPostRepositoryImpl implements AddPostRepository {
   }
 
   @override
-  Future<List<PostEntity>> fetchAllPosts() async {
+  Future<Stream<List<PostEntity>>> fetchAllPosts() async {
     try {
-      final postsSnapShot =
-          await postCollection.orderBy('timestamp', descending: true).get();
-      final List<PostEntity> allPosts = postsSnapShot.docs
-          .map((doc) => PostEntity.fromJson(doc.data() as Map<String, dynamic>))
-          .toList();
-      return allPosts;
+      return postCollection
+          .orderBy('timestamp', descending: true)
+          .snapshots()
+          .map((snapshot) {
+        return snapshot.docs
+            .map((doc) =>
+                PostEntity.fromJson(doc.data() as Map<String, dynamic>))
+            .toList();
+      });
     } catch (error) {
-      throw Exception("Error fetching posts $error");
+      throw Exception("Error fetching posts: $error");
     }
   }
 

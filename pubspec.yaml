@@ -60,6 +60,7 @@ dependencies:
   photo_manager: ^3.5.2
   photo_manager_image_provider: ^2.2.0
   shared_preferences: ^2.3.2
+  shimmer: ^3.0.0
   skeletonizer: ^1.4.2
   sliver_tools: ^0.2.12
   timeago: ^3.7.0
