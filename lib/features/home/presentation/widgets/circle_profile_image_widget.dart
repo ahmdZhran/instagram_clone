@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:skeletonizer/skeletonizer.dart';
-
 import '../../../../core/utils/app_colors.dart';
 
 class CircleProfileImageWidget extends StatelessWidget {
