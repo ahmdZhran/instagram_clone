@@ -28,7 +28,6 @@ class PostsSectionWidget extends StatelessWidget {
             itemBuilder: (context, index) {
               final doc = documents[index];
               final imageUrl = doc['imageUrl'];
-
               return Padding(
                 padding: const EdgeInsets.only(bottom: 20, left: 5, right: 5),
                 child: ClipRRect(
