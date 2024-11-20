@@ -9,6 +9,7 @@ import 'package:instagram_clone/features/posts/presentation/cubit/posts_cubit.da
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_text_style.dart';
 import 'circle_profile_image_widget.dart';
+import 'post_loading_shimmer_widget.dart';
 import 'react_icons_widget.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -34,7 +35,7 @@ class _PostsSectionWidgetState extends State<PostsSectionWidget> {
         bloc: _postsCubit,
         builder: (context, state) {
           if (state is PostsLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const PostsLoadingShimmerWidget();
           } else if (state is PostsFailure) {
             return const Center(
               child: Text('Failed to load posts'),
