@@ -49,6 +49,7 @@ class _PostsSectionWidgetState extends State<PostsSectionWidget> {
               itemCount: posts!.length,
               itemBuilder: (context, index) {
                 final post = posts[index];
+                //TODO make the cusotm message here 
                 final timeAgo =
                     timeago.format(post.timestamp, locale: 'custom');
                 return Padding(
