@@ -8,7 +8,7 @@ class PostEntity {
   final String imageUrl;
   final String userProfileImage;
   final List likes;
-  final DateTime timesTamp;
+  final DateTime timestamp;
 
   PostEntity({
     required this.id,
@@ -16,7 +16,7 @@ class PostEntity {
     required this.description,
     required this.userName,
     required this.imageUrl,
-    required this.timesTamp,
+    required this.timestamp,
     required this.likes,
     required this.userProfileImage,
   });
@@ -29,7 +29,7 @@ class PostEntity {
       userName: userName,
       description: description,
       imageUrl: imageUrl ?? this.imageUrl,
-      timesTamp: timesTamp,
+      timestamp: timestamp,
       userProfileImage: userProfileImage,
     );
   }
@@ -42,8 +42,8 @@ class PostEntity {
       'likes': likes,
       "description": description,
       "imageUrl": imageUrl,
-      "timesTamp": Timestamp.fromDate(timesTamp),
-      "user_profile_image":userProfileImage,
+      "timestamp": Timestamp.fromDate(timestamp),
+      "user_profile_image": userProfileImage,
     };
   }
 
@@ -55,7 +55,7 @@ class PostEntity {
       userId: json['userId'],
       userName: json['user_name'],
       imageUrl: json['imageUrl'],
-      timesTamp: json['timesTamp'].toDate(),
+      timestamp: json['timestamp'].toDate(),
       userProfileImage: json['user_profile_image'],
     );
   }

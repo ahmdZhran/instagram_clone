@@ -103,7 +103,7 @@ class _AddDescriptionAndUploadPostScreenState
                           userId: FirebaseAuth.instance.currentUser!.uid,
                           userName: _userProfileEntity!.username,
                           imageUrl: _imageBytes.toString(),
-                          timesTamp: DateTime.now(),
+                          timestamp: DateTime.now(),
                           description: description ?? "",
                           likes: [],
                           userProfileImage: _userProfileEntity!.profileImageUrl,

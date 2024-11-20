@@ -21,7 +21,7 @@ class PostsSectionWidget extends StatelessWidget {
       child: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('posts')
-            .orderBy('timesTamp', descending: true)
+            .orderBy('timestamp', descending: true)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -39,7 +39,7 @@ class PostsSectionWidget extends StatelessWidget {
               final username = doc['user_name'];
               final userProfileImage = doc['user_profile_image'];
               final description = doc['description'];
-              final publishedAt = doc['timesTamp'];
+              final publishedAt = doc['timestamp'];
               final postTime = (publishedAt as Timestamp).toDate();
               timeago.setLocaleMessages('custom', CustomShortMessages());
               final timeAgo = timeago.format(postTime, locale: 'custom');
