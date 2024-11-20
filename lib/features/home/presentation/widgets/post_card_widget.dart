@@ -35,7 +35,7 @@ class PostCard extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
-              height: 420.0.h,
+              height: 430.0.h,
               decoration: _postCardGradient(),
             ),
             BackdropFilter(
