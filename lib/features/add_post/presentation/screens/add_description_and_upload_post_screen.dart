@@ -71,13 +71,13 @@ class _AddDescriptionAndUploadPostScreenState
   Widget build(BuildContext context) {
     return BlocConsumer<PostsCubit, PostsState>(
       bloc: _postsCubit,
-      listener: (context, state) async {
+      listener: (context, state) {
         if (state is PostsSuccess) {
           Future.delayed(const Duration(seconds: 1), () {
             context.pushReplacementNamed(Routes.mainWidget);
           });
 
-          await _audioPlayer.play(AssetSource('post_uploaded.mp3'));
+          _audioPlayer.play(AssetSource('post_uploaded.mp3'));
         } else if (state is PostsFailure) {
           UtilsMessages.showToastErrorBottom(context,
               message: AppStrings.somethingWentWrong);
