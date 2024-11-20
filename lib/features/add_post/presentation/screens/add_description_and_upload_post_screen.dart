@@ -73,11 +73,10 @@ class _AddDescriptionAndUploadPostScreenState
       bloc: _postsCubit,
       listener: (context, state) {
         if (state is PostsSuccess) {
+          _audioPlayer.play(AssetSource('post_uploaded.mp3'));
           Future.delayed(const Duration(seconds: 1), () {
             context.pushReplacementNamed(Routes.mainWidget);
           });
-
-          _audioPlayer.play(AssetSource('post_uploaded.mp3'));
         } else if (state is PostsFailure) {
           UtilsMessages.showToastErrorBottom(context,
               message: AppStrings.somethingWentWrong);
