@@ -8,6 +8,7 @@ import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_text_style.dart';
 import 'circle_profile_image_widget.dart';
 import 'react_icons_widget.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class PostsSectionWidget extends StatelessWidget {
   const PostsSectionWidget({super.key});
@@ -33,6 +34,9 @@ class PostsSectionWidget extends StatelessWidget {
               final username = doc['user_name'];
               final userProfileImage = doc['user_profile_image'];
               final description = doc['description'];
+              final publishedAt = doc['timesTamp'];
+              final postTime = (publishedAt as Timestamp).toDate();
+              final timeAgo = timeago.format(postTime);
               return Padding(
                 padding: const EdgeInsets.only(bottom: 20, left: 5, right: 5),
                 child: ClipRRect(
@@ -70,7 +74,7 @@ class PostsSectionWidget extends StatelessWidget {
                                   userProfileImage: userProfileImage),
                               title: Text(username,
                                   style: CustomTextStyle.pacifico13),
-                              // subtitle: Text(timeAgo),
+                              subtitle: Text(timeAgo),
                               trailing: const Icon(Icons.more_horiz),
                             ),
                             ClipRRect(
