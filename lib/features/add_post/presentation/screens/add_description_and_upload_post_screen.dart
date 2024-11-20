@@ -63,6 +63,7 @@ class _AddDescriptionAndUploadPostScreenState
   @override
   void dispose() {
     _audioPlayer.dispose();
+    ProfileCubit.deleteInstance();
     super.dispose();
   }
 
@@ -72,7 +73,10 @@ class _AddDescriptionAndUploadPostScreenState
       bloc: _postsCubit,
       listener: (context, state) async {
         if (state is PostsSuccess) {
-          context.pushReplacementNamed(Routes.mainWidget);
+          Future.delayed(const Duration(seconds: 1), () {
+            context.pushReplacementNamed(Routes.mainWidget);
+          });
+
           await _audioPlayer.play(AssetSource('post_uploaded.mp3'));
         } else if (state is PostsFailure) {
           UtilsMessages.showToastErrorBottom(context,
