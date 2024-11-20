@@ -1,7 +1,9 @@
 import 'dart:ui';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_text_style.dart';
 import 'circle_profile_image_widget.dart';
@@ -38,7 +40,7 @@ class PostsSectionWidget extends StatelessWidget {
                     children: [
                       Container(
                         width: double.infinity,
-                        height: 400.0.h,
+                        height: 420.0.h,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25.0),
                           gradient: LinearGradient(
@@ -80,6 +82,25 @@ class PostsSectionWidget extends StatelessWidget {
                                 ),
                               ),
                             ),
+                            const Gap(10),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 20,
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Flexible(
+                                    child: AutoSizeText(
+                                      overflow: TextOverflow.ellipsis,
+                                      'dataffffffffffffffffffffffffdsfaaaaaaadfffffffffdkflsajfsaldk;fjas;dlkfjl;k',
+                                      maxLines: 1,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Gap(10),
                             const ReactIconsWidget()
                           ],
                         ),

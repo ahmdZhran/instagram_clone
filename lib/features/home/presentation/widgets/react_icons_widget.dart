@@ -10,7 +10,9 @@ class ReactIconsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      padding: EdgeInsets.symmetric(
+        horizontal: 20,
+      ),
       child: Row(
         children: [
           ThemedSvgIcon(
