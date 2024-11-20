@@ -1,11 +1,15 @@
 import 'dart:ui';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/custom_short_messages_for_time_ago.dart';
 import '../../../../core/utils/custom_text_style.dart';
-import 'custom_circle_avatar.dart';
+import 'circle_profile_image_widget.dart';
 import 'react_icons_widget.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class PostsSectionWidget extends StatelessWidget {
   const PostsSectionWidget({super.key});
@@ -28,6 +32,13 @@ class PostsSectionWidget extends StatelessWidget {
             itemBuilder: (context, index) {
               final doc = documents[index];
               final imageUrl = doc['imageUrl'];
+              final username = doc['user_name'];
+              final userProfileImage = doc['user_profile_image'];
+              final description = doc['description'];
+              final publishedAt = doc['timesTamp'];
+              final postTime = (publishedAt as Timestamp).toDate();
+              timeago.setLocaleMessages('custom', CustomShortMessages());
+              final timeAgo = timeago.format(postTime, locale: 'custom');
               return Padding(
                 padding: const EdgeInsets.only(bottom: 20, left: 5, right: 5),
                 child: ClipRRect(
@@ -36,7 +47,7 @@ class PostsSectionWidget extends StatelessWidget {
                     children: [
                       Container(
                         width: double.infinity,
-                        height: 400.0.h,
+                        height: 420.0.h,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(25.0),
                           gradient: LinearGradient(
@@ -61,30 +72,43 @@ class PostsSectionWidget extends StatelessWidget {
                                   horizontal: 10, vertical: 10),
                               horizontalTitleGap: 10,
                               dense: true,
-                              leading: const CustomCircularAvatar(
-                                widthOfContainer: 40,
-                                heightOfImage: 50,
-                                widthOfImage: 50,
-                                margin: EdgeInsets.all(2),
-                                assetName:
-                                    'assets/images/profile_image/post1.jpg',
-                              ),
-                              title: Text('userName',
+                              leading: CircleProfileImageWidget(
+                                  userProfileImage: userProfileImage),
+                              title: Text(username,
                                   style: CustomTextStyle.pacifico13),
-                              // subtitle: Text(timeAgo),
+                              subtitle: Text(timeAgo),
                               trailing: const Icon(Icons.more_horiz),
                             ),
                             ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),
                               child: SizedBox(
+                                width: 300.w,
                                 height: 300.h,
-                                // width: 250.w,
                                 child: Image(
                                   fit: BoxFit.cover,
                                   image: NetworkImage(imageUrl),
                                 ),
                               ),
                             ),
+                            const Gap(10),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Flexible(
+                                    child: AutoSizeText(
+                                      overflow: TextOverflow.ellipsis,
+                                      description,
+                                      maxLines: 1,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Gap(10),
                             const ReactIconsWidget()
                           ],
                         ),
