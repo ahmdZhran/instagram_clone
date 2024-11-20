@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/custom_short_messages_for_time_ago.dart';
 import '../../../../core/utils/custom_text_style.dart';
 import 'circle_profile_image_widget.dart';
 import 'react_icons_widget.dart';
@@ -36,7 +37,8 @@ class PostsSectionWidget extends StatelessWidget {
               final description = doc['description'];
               final publishedAt = doc['timesTamp'];
               final postTime = (publishedAt as Timestamp).toDate();
-              final timeAgo = timeago.format(postTime);
+              timeago.setLocaleMessages('custom', CustomShortMessages());
+              final timeAgo = timeago.format(postTime, locale: 'custom');
               return Padding(
                 padding: const EdgeInsets.only(bottom: 20, left: 5, right: 5),
                 child: ClipRRect(
