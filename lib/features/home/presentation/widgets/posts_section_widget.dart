@@ -32,6 +32,7 @@ class PostsSectionWidget extends StatelessWidget {
               final imageUrl = doc['imageUrl'];
               final username = doc['user_name'];
               final userProfileImage = doc['user_profile_image'];
+              final description = doc['description'];
               return Padding(
                 padding: const EdgeInsets.only(bottom: 20, left: 5, right: 5),
                 child: ClipRRect(
@@ -83,8 +84,8 @@ class PostsSectionWidget extends StatelessWidget {
                               ),
                             ),
                             const Gap(10),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
                                 horizontal: 20,
                               ),
                               child: Row(
@@ -93,7 +94,7 @@ class PostsSectionWidget extends StatelessWidget {
                                   Flexible(
                                     child: AutoSizeText(
                                       overflow: TextOverflow.ellipsis,
-                                      'dataffffffffffffffffffffffffdsfaaaaaaadfffffffffdkflsajfsaldk;fjas;dlkfjl;k',
+                                      description,
                                       maxLines: 1,
                                     ),
                                   ),
