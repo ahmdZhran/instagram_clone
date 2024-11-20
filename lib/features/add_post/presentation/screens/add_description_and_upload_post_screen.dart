@@ -7,7 +7,6 @@ import 'package:instagram_clone/core/router/routes.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:instagram_clone/core/utils/utils_messages.dart';
 import 'package:instagram_clone/features/add_post/presentation/cubit/posts_cubit.dart';
-import 'package:instagram_clone/features/profile/data/models/user_model.dart';
 import 'package:instagram_clone/features/profile/presentation/cubits/profile_cubit/profile_cubit.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../../core/helper/extensions.dart';
@@ -62,6 +61,12 @@ class _AddDescriptionAndUploadPostScreenState
   }
 
   @override
+  void dispose() {
+    _audioPlayer.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocConsumer<PostsCubit, PostsState>(
       bloc: _postsCubit,
@@ -92,13 +97,13 @@ class _AddDescriptionAndUploadPostScreenState
                       onPost: () async {
                         final postEntity = PostEntity(
                           id: DateTime.now().millisecondsSinceEpoch.toString(),
-                          //TODO get username and send it with this data
                           userId: FirebaseAuth.instance.currentUser!.uid,
                           userName: _userProfileEntity!.username,
                           imageUrl: _imageBytes.toString(),
                           timesTamp: DateTime.now(),
                           description: description ?? "",
                           likes: [],
+                          userProfileImage: _userProfileEntity!.profileImageUrl,
                         );
                         await _postsCubit.createPost(
                           image: _imageBytes!,
