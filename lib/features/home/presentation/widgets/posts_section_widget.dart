@@ -38,12 +38,10 @@ class _PostsSectionWidgetState extends State<PostsSectionWidget> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    PostsCubit.deleteInstance();
+    super.dispose();
+  }
 }
-
-
-
-
-
-
-
-
