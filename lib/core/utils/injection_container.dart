@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:instagram_clone/features/posts/add_post_di.dart';
+import 'package:instagram_clone/features/posts/post_di.dart';
 import '../../features/profile/profile_di.dart';
 
 import '../../features/auth/auth_di.dart';
