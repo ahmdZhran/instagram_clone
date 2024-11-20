@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:insta_image_viewer/insta_image_viewer.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_short_messages_for_time_ago.dart';
 import '../../../../core/utils/custom_text_style.dart';
@@ -87,9 +88,12 @@ class PostsSectionWidget extends StatelessWidget {
                               child: SizedBox(
                                 width: 300.w,
                                 height: 300.h,
-                                child: Image(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(imageUrl),
+                                child: InstaImageViewer(
+                                  imageUrl: imageUrl,
+                                  child: Image(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(imageUrl),
+                                  ),
                                 ),
                               ),
                             ),
