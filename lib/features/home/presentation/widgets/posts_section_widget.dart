@@ -82,6 +82,7 @@ class PostsSectionWidget extends StatelessWidget {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),
                               child: SizedBox(
+                                width: 300.w,
                                 height: 300.h,
                                 child: Image(
                                   fit: BoxFit.cover,
