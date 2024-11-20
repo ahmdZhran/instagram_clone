@@ -7,12 +7,13 @@ import 'package:instagram_clone/core/router/routes.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:instagram_clone/core/utils/utils_messages.dart';
 import 'package:instagram_clone/features/add_post/presentation/cubit/posts_cubit.dart';
-import 'package:instagram_clone/features/profile/data/models/user_model.dart';
+import 'package:instagram_clone/features/profile/presentation/cubits/profile_cubit/profile_cubit.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../../core/helper/extensions.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_text_style.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
+import '../../../profile/domain/entities/user_profile_entity.dart';
 import '../../data/models/media_model.dart';
 import '../../domain/entities/post_entity.dart';
 import '../widgets/upload_user_post_widget.dart';
@@ -36,11 +37,19 @@ class _AddDescriptionAndUploadPostScreenState
   String? description;
   final PostsCubit _postsCubit = PostsCubit.getInstance();
   final AudioPlayer _audioPlayer = AudioPlayer();
-  UserModel? _userDataEntity;
+  UserProfileEntity? _userProfileEntity;
   @override
   void initState() {
     super.initState();
     loadSelectedMedia();
+    fetchUserData();
+  }
+
+  Future<void> fetchUserData() async {
+    final user = FirebaseAuth.instance.currentUser!.uid;
+    final profileCubit = ProfileCubit.getInstance();
+    await profileCubit.getUserData(user);
+    _userProfileEntity = profileCubit.userProfileData;
   }
 
   Future<void> loadSelectedMedia() async {
@@ -52,12 +61,22 @@ class _AddDescriptionAndUploadPostScreenState
   }
 
   @override
+  void dispose() {
+    _audioPlayer.dispose();
+    ProfileCubit.deleteInstance();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocConsumer<PostsCubit, PostsState>(
       bloc: _postsCubit,
       listener: (context, state) async {
         if (state is PostsSuccess) {
-          context.pushReplacementNamed(Routes.mainWidget);
+          Future.delayed(const Duration(seconds: 1), () {
+            context.pushReplacementNamed(Routes.mainWidget);
+          });
+
           await _audioPlayer.play(AssetSource('post_uploaded.mp3'));
         } else if (state is PostsFailure) {
           UtilsMessages.showToastErrorBottom(context,
@@ -82,14 +101,13 @@ class _AddDescriptionAndUploadPostScreenState
                       onPost: () async {
                         final postEntity = PostEntity(
                           id: DateTime.now().millisecondsSinceEpoch.toString(),
-                          //TODO save this uid in secure storage and call it instead firebase instance
-                          //TODO get username and send it with this data
                           userId: FirebaseAuth.instance.currentUser!.uid,
-                          userName: _userDataEntity?.username ?? '',
+                          userName: _userProfileEntity!.username,
                           imageUrl: _imageBytes.toString(),
                           timesTamp: DateTime.now(),
                           description: description ?? "",
                           likes: [],
+                          userProfileImage: _userProfileEntity!.profileImageUrl,
                         );
                         await _postsCubit.createPost(
                           image: _imageBytes!,
