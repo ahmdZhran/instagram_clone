@@ -1,4 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+
+import '../../../../core/utils/app_colors.dart';
 
 class CircleProfileImageWidget extends StatelessWidget {
   const CircleProfileImageWidget({
@@ -11,21 +15,25 @@ class CircleProfileImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 45,
-      width: 45,
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black,
-            offset: Offset(0, 2),
-            blurRadius: 6.0,
+        height: 45,
+        width: 45,
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black,
+              offset: Offset(0, 2),
+              blurRadius: 6.0,
+            ),
+          ],
+        ),
+        child: ClipOval(
+          child: CachedNetworkImage(
+            imageUrl: userProfileImage,
+            placeholder: (context, url) => const CircularProgressIndicator(
+              color: AppColors.primaryColor,
+            ),
           ),
-        ],
-      ),
-      child: ClipOval(
-        child: Image.network(userProfileImage),
-      ),
-    );
+        ));
   }
 }
