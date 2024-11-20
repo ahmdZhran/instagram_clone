@@ -7,7 +7,7 @@ import '../notifications/notifications_screen.dart';
 import '../../core/utils/app_assets.dart';
 import '../../core/utils/app_colors.dart';
 import '../../core/utils/app_responsive_spacer_helper.dart';
-import '../add_post/presentation/screens/add_post_screen.dart';
+import '../posts/presentation/screens/add_post_screen.dart';
 import '../explore/explore_screen.dart';
 import '../home/presentation/screens/home_screen.dart';
 import '../profile/presentation/screens/profile_screen.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
-import 'package:instagram_clone/features/add_post/data/models/media_model.dart';
+import 'package:instagram_clone/features/posts/data/models/media_model.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 class MediaItem extends StatelessWidget {

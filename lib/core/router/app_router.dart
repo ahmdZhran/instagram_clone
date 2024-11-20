@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/features/add_post/data/models/media_model.dart';
-import 'package:instagram_clone/features/add_post/presentation/screens/add_description_and_upload_post_screen.dart';
+import 'package:instagram_clone/features/posts/data/models/media_model.dart';
+import 'package:instagram_clone/features/posts/presentation/screens/add_description_and_upload_post_screen.dart';
 import '../../features/main_widget/main_widget.dart';
 import '../../features/profile/domain/entities/user_profile_entity.dart';
 import '../../features/profile/presentation/screens/edit_profile_screen.dart';

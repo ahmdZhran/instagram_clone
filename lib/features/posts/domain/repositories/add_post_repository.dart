@@ -1,4 +1,4 @@
-import 'package:instagram_clone/features/add_post/domain/entities/post_entity.dart';
+import 'package:instagram_clone/features/posts/domain/entities/post_entity.dart';
 
 abstract class AddPostRepository {
   Future<List<PostEntity>> fetchAllPosts();

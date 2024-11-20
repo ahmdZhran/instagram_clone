@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/features/add_post/data/models/media_model.dart';
+import 'package:instagram_clone/features/posts/data/models/media_model.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import 'package:transparent_image/transparent_image.dart';

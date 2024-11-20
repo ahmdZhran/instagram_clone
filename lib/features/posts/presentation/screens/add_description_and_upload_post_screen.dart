@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/core/router/routes.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:instagram_clone/core/utils/utils_messages.dart';
-import 'package:instagram_clone/features/add_post/presentation/cubit/posts_cubit.dart';
+import 'package:instagram_clone/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:instagram_clone/features/profile/presentation/cubits/profile_cubit/profile_cubit.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../../core/helper/extensions.dart';
