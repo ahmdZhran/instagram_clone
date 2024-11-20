@@ -9,6 +9,7 @@ import 'package:instagram_clone/features/posts/presentation/cubit/posts_cubit.da
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_chached_network_image.dart';
+import '../../../../core/utils/custom_short_messages_for_time_ago.dart';
 import '../../../../core/utils/custom_text_style.dart';
 import 'circle_profile_image_widget.dart';
 import 'post_loading_shimmer_widget.dart';
@@ -51,7 +52,7 @@ class _PostsSectionWidgetState extends State<PostsSectionWidget> {
               itemCount: posts!.length,
               itemBuilder: (context, index) {
                 final post = posts[index];
-                //TODO make the cusotm message here
+                timeago.setLocaleMessages('custom', CustomShortMessagesForTimeAgo());
                 final timeAgo =
                     timeago.format(post.timestamp, locale: 'custom');
                 return Padding(
@@ -90,8 +91,7 @@ class _PostsSectionWidgetState extends State<PostsSectionWidget> {
                                 horizontalTitleGap: 10,
                                 dense: true,
                                 leading: CircleProfileImageWidget(
-                                  userProfileImage: post.userProfileImage,
-                                ),
+                                    userProfileImage: post.userProfileImage,),
                                 title: Text(post.username,
                                     style: CustomTextStyle.pacifico13),
                                 subtitle: Text(timeAgo),
