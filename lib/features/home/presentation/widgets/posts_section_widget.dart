@@ -6,7 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:instagram_clone/features/posts/presentation/cubit/posts_cubit.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/custom_chached_network_image.dart';
 import '../../../../core/utils/custom_text_style.dart';
 import 'circle_profile_image_widget.dart';
 import 'post_loading_shimmer_widget.dart';
@@ -49,7 +51,7 @@ class _PostsSectionWidgetState extends State<PostsSectionWidget> {
               itemCount: posts!.length,
               itemBuilder: (context, index) {
                 final post = posts[index];
-                //TODO make the cusotm message here 
+                //TODO make the cusotm message here
                 final timeAgo =
                     timeago.format(post.timestamp, locale: 'custom');
                 return Padding(
@@ -82,11 +84,14 @@ class _PostsSectionWidgetState extends State<PostsSectionWidget> {
                             children: [
                               ListTile(
                                 contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 10),
+                                  horizontal: 10,
+                                  vertical: 10,
+                                ),
                                 horizontalTitleGap: 10,
                                 dense: true,
                                 leading: CircleProfileImageWidget(
-                                    userProfileImage: post.userProfileImage),
+                                  userProfileImage: post.userProfileImage,
+                                ),
                                 title: Text(post.username,
                                     style: CustomTextStyle.pacifico13),
                                 subtitle: Text(timeAgo),
@@ -99,9 +104,15 @@ class _PostsSectionWidgetState extends State<PostsSectionWidget> {
                                   height: 300.h,
                                   child: InstaImageViewer(
                                     imageUrl: post.imageUrl,
-                                    child: Image(
+                                    child: CustomCachedNetworkImage(
+                                      imageUrl: post.imageUrl,
                                       fit: BoxFit.cover,
-                                      image: NetworkImage(post.imageUrl),
+                                      placeholder: Center(
+                                        child: LoadingAnimationWidget
+                                            .threeRotatingDots(
+                                                color: AppColors.primaryColor,
+                                                size: 40),
+                                      ),
                                     ),
                                   ),
                                 ),
