@@ -4,21 +4,19 @@ class CustomCircularAvatar extends StatelessWidget {
   const CustomCircularAvatar({
     super.key,
     required this.widthOfContainer,
-    required this.heightOfImage,
-    required this.widthOfImage,
+    required this.size,
     required this.assetName,
     this.margin,
   });
   final double widthOfContainer;
-  final double heightOfImage;
-  final double widthOfImage;
+  final double size;
   final String assetName;
   final EdgeInsetsGeometry? margin;
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: margin,
-      width: widthOfContainer,
+      height: 80,
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
         boxShadow: [
@@ -32,10 +30,10 @@ class CustomCircularAvatar extends StatelessWidget {
       child: CircleAvatar(
           child: ClipOval(
         child: Image(
-          height: heightOfImage,
-          width: widthOfImage,
+          height: size,
+          width: size,
           fit: BoxFit.cover,
-          image: AssetImage(assetName),
+          image: NetworkImage(assetName),
         ),
       )),
     );
