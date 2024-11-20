@@ -101,7 +101,7 @@ class _AddDescriptionAndUploadPostScreenState
                         final postEntity = PostEntity(
                           id: DateTime.now().millisecondsSinceEpoch.toString(),
                           userId: FirebaseAuth.instance.currentUser!.uid,
-                          userName: _userProfileEntity!.username,
+                          username: _userProfileEntity!.username,
                           imageUrl: _imageBytes.toString(),
                           timestamp: DateTime.now(),
                           description: description ?? "",

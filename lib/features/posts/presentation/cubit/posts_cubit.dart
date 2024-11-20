@@ -34,14 +34,17 @@ class PostsCubit extends Cubit<PostsState> {
     }
   }
 
-  Future<void> fetchAllPosts() async {
-    try {
-      emit(PostsLoading());
-      final posts = await _addPostRepository.fetchAllPosts();
-      emit(PostsSuccess(posts));
-    } catch (error) {
+  void fetchPosts() {
+    emit(PostsLoading());
+    _addPostRepository.fetchAllPosts().then((stream) {
+      stream.listen((posts) {
+        emit(PostsSuccess(posts));
+      },onError: (error){
+        emit(PostsFailure(errMessage: error.toString()));
+      });
+    }).catchError((error){
       emit(PostsFailure(errMessage: error.toString()));
-    }
+    });
   }
 
   Future<void> deletePost(String postId) async {

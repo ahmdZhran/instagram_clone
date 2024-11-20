@@ -4,7 +4,7 @@ class PostEntity {
   final String id;
   final String userId;
   final String? description;
-  final String userName;
+  final String username;
   final String imageUrl;
   final String userProfileImage;
   final List likes;
@@ -14,7 +14,7 @@ class PostEntity {
     required this.id,
     required this.userId,
     required this.description,
-    required this.userName,
+    required this.username,
     required this.imageUrl,
     required this.timestamp,
     required this.likes,
@@ -26,7 +26,7 @@ class PostEntity {
       id: id,
       likes: likes,
       userId: userId,
-      userName: userName,
+      username: username,
       description: description,
       imageUrl: imageUrl ?? this.imageUrl,
       timestamp: timestamp,
@@ -36,7 +36,7 @@ class PostEntity {
 
   Map<String, dynamic> toJson() {
     return {
-      'user_name': userName,
+      'user_name': username,
       'id': id,
       'userId': userId,
       'likes': likes,
@@ -53,7 +53,7 @@ class PostEntity {
       likes: json['likes'],
       description: json['description'],
       userId: json['userId'],
-      userName: json['user_name'],
+      username: json['user_name'],
       imageUrl: json['imageUrl'],
       timestamp: json['timestamp'].toDate(),
       userProfileImage: json['user_profile_image'],
