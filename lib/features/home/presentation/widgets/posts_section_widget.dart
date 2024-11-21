@@ -31,7 +31,7 @@ class _PostsSectionWidgetState extends State<PostsSectionWidget> {
           } else if (state is PostsFailure) {
             return const Center(child: Text('Failed to load posts'));
           } else if (state is PostsSuccess) {
-            return PostsList(posts: state.posts ?? []);
+            return PostsListWidget(posts: state.posts ?? []);
           }
           return const SizedBox.shrink();
         },

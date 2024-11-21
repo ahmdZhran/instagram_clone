@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../domain/entities/post_entity.dart';
 import '../../domain/repositories/post_repository.dart';
 
-class AddPostRepositoryImpl implements AddPostRepository {
+class PostRepositoryImpl implements PostRepository {
   final CollectionReference postCollection =
       FirebaseFirestore.instance.collection("posts");
   @override

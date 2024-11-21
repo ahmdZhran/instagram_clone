@@ -6,8 +6,8 @@ final addPostDi = GetIt.instance;
 
 class AddPostDI {
   Future<void> init() async {
-    addPostDi.registerLazySingleton<AddPostRepository>(
-      () => AddPostRepositoryImpl(),
+    addPostDi.registerLazySingleton<PostRepository>(
+      () => PostRepositoryImpl(),
     );
   }
 }
