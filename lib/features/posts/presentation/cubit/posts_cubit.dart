@@ -39,10 +39,10 @@ class PostsCubit extends Cubit<PostsState> {
     _addPostRepository.fetchAllPosts().then((stream) {
       stream.listen((posts) {
         emit(PostsSuccess(posts));
-      },onError: (error){
+      }, onError: (error) {
         emit(PostsFailure(errMessage: error.toString()));
       });
-    }).catchError((error){
+    }).catchError((error) {
       emit(PostsFailure(errMessage: error.toString()));
     });
   }
