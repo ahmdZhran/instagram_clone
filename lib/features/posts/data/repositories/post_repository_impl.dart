@@ -5,6 +5,7 @@ import '../../domain/repositories/post_repository.dart';
 class PostRepositoryImpl implements PostRepository {
   final CollectionReference postCollection =
       FirebaseFirestore.instance.collection("posts");
+
   @override
   Future<void> createPost(PostEntity post) async {
     try {

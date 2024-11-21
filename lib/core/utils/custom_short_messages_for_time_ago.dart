@@ -18,7 +18,7 @@ class CustomShortMessagesForTimeAgo extends timeago.LookupMessages {
   @override
   String aboutAnHour(int minutes) => '1 hour';
   @override
-  String hours(int hours) => '$hours hour';
+  String hours(int hours) => '$hours hours';
   @override
   String aDay(int hours) => '1 day';
   @override
