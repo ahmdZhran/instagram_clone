@@ -10,7 +10,7 @@ part 'posts_state.dart';
 
 class PostsCubit extends Cubit<PostsState> {
   PostsCubit(this._addPostRepository) : super(PostsInitial());
-  final AddPostRepository _addPostRepository;
+  final PostRepository _addPostRepository;
   Future<void> createPost({
     required Uint8List image,
     required PostEntity post,
@@ -62,7 +62,7 @@ class PostsCubit extends Cubit<PostsState> {
     final isRegister = addPostDi.isRegistered<PostsCubit>(instanceName: _tag);
     if (!isRegister) {
       addPostDi.registerSingleton<PostsCubit>(
-        PostsCubit(addPostDi<AddPostRepository>()),
+        PostsCubit(addPostDi<PostRepository>()),
         instanceName: _tag,
       );
     }
