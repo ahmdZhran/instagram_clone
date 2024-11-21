@@ -9,8 +9,8 @@ import '../../domain/entities/post_entity.dart';
 part 'posts_state.dart';
 
 class PostsCubit extends Cubit<PostsState> {
-  PostsCubit(this._addPostRepository) : super(PostsInitial());
-  final PostRepository _addPostRepository;
+  PostsCubit(this._postRepository) : super(PostsInitial());
+  final PostRepository _postRepository;
   Future<void> createPost({
     required Uint8List image,
     required PostEntity post,
@@ -26,7 +26,7 @@ class PostsCubit extends Cubit<PostsState> {
 
       final postWithImage = post.copyWith(imageUrl: imageUrl);
 
-      await _addPostRepository.createPost(postWithImage);
+      await _postRepository.createPost(postWithImage);
 
       emit(PostsSuccess());
     } catch (error) {
@@ -36,7 +36,7 @@ class PostsCubit extends Cubit<PostsState> {
 
   void fetchPosts() {
     emit(PostsLoading());
-    _addPostRepository.fetchAllPosts().then((stream) {
+    _postRepository.fetchAllPosts().then((stream) {
       stream.listen((posts) {
         emit(PostsSuccess(posts));
       }, onError: (error) {
@@ -50,7 +50,7 @@ class PostsCubit extends Cubit<PostsState> {
   Future<void> deletePost(String postId) async {
     try {
       emit(PostsLoading());
-      await _addPostRepository.deletePost(postId);
+      await _postRepository.deletePost(postId);
       emit(PostsSuccess());
     } catch (error) {
       emit(PostsFailure(errMessage: error.toString()));
