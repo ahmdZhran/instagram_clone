@@ -4,6 +4,7 @@ import '../../domain/entities/user_profile_entity.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../models/user_model.dart';
+import '../models/user_post_model.dart';
 
 class ProfileRepository {
   final UserRemoteDataSource remoteDataSource;
@@ -53,5 +54,9 @@ class ProfileRepository {
     } else {
       throw Exception("No internet connection");
     }
+  }
+
+  Future<List<UserPostModel>> getUserPosts(String userId) async {
+    return await remoteDataSource.getUserPosts(userId);
   }
 }
