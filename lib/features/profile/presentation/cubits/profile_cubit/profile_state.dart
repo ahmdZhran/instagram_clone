@@ -28,3 +28,12 @@ class ProfileUpdateFailure extends ProfileState {
   final String errMessage;
   ProfileUpdateFailure({required this.errMessage});
 }
+
+class ProfilePostsLoading extends ProfileState {}
+
+class ProfilePostsSuccess extends ProfileState {}
+
+class ProfilePostsFailure extends ProfileState {
+  final String errMessage;
+  ProfilePostsFailure({required this.errMessage});
+}

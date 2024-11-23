@@ -32,7 +32,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(ProfileLoading());
       final userData = await _profileRepository.getProfileData(userId);
       userProfileData = userData;
-      _cachedUserProfile = userData; 
+      _cachedUserProfile = userData;
       emit(ProfileSuccess());
     } catch (error) {
       emit(ProfileFailure(errMessage: error.toString()));
@@ -62,6 +62,16 @@ class ProfileCubit extends Cubit<ProfileState> {
       return image;
     }
     return null;
+  }
+
+  Future<void> getUserPosts(String userId) async {
+    try {
+      emit(UserPostsLoading());
+      final posts = await _profileRepository.getUserPosts(userId);
+      emit(UserPostsSuccess(posts: posts));
+    } catch (error) {
+      emit(UserPostsFailure(errMessage: error.toString()));
+    }
   }
 
   static const String _tag = "profile_instance";
