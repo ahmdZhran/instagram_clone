@@ -27,15 +27,11 @@ class _UserPostsWidgetState extends State<UserPostsWidget> {
       bloc: _profileCubit,
       builder: (context, state) {
         if (state is UserPostsLoading) {
-          // Show a loading indicator while fetching posts
           return const Center(child: CircularProgressIndicator());
         } else if (state is UserPostsFailure) {
-          // Show an error message if fetching posts fails
           return Center(child: Text('Error: ${state.errMessage}'));
         } else if (state is UserPostsSuccess) {
-          // Display the posts in a grid view
           final List<UserPostModel> posts = state.posts;
-
           if (posts.isEmpty) {
             return const Center(child: Text('No posts available'));
           }
