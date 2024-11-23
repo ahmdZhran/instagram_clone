@@ -42,7 +42,7 @@ class PostEntity {
       'likes': likes,
       "description": description,
       "imageUrl": imageUrl,
-      "timestamp": timestamp.millisecondsSinceEpoch, 
+      "timestamp": timestamp.millisecondsSinceEpoch,
       "user_profile_image": userProfileImage,
     };
   }
