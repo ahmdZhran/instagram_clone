@@ -39,8 +39,8 @@ class PostsCubit extends HydratedCubit<PostsState> {
   }
 
   void fetchPosts() {
-    //TodO solve the issue when you add new post and then fetch posts
-    if (state is PostsSuccess) {
+    if (state is PostsSuccess &&
+        (state as PostsSuccess).posts?.isNotEmpty == true) {
       return;
     }
     emit(PostsLoading());
