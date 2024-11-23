@@ -29,11 +29,15 @@ class ProfileUpdateFailure extends ProfileState {
   ProfileUpdateFailure({required this.errMessage});
 }
 
-class ProfilePostsLoading extends ProfileState {}
+class UserPostsLoading extends ProfileState {}
 
-class ProfilePostsSuccess extends ProfileState {}
+class UserPostsSuccess extends ProfileState {
+  final List<UserPostModel> posts;
 
-class ProfilePostsFailure extends ProfileState {
+  UserPostsSuccess({required this.posts});
+}
+
+class UserPostsFailure extends ProfileState {
   final String errMessage;
-  ProfilePostsFailure({required this.errMessage});
+  UserPostsFailure({required this.errMessage});
 }
