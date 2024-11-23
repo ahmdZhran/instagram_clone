@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/features/profile/presentation/cubits/profile_cubit/profile_cubit.dart';
 
+import '../../../../core/utils/custom_chached_network_image.dart';
 import '../../data/models/user_post_model.dart';
 
 class UserPostsWidget extends StatefulWidget {
@@ -45,16 +46,10 @@ class _UserPostsWidgetState extends State<UserPostsWidget> {
             ),
             itemBuilder: (context, index) {
               final post = posts[index];
-
               return SizedBox(
-                child: Image.network(
-                  post.postImageUrl,
+                child: CustomCachedNetworkImage(
+                  imageUrl: post.postImageUrl,
                   fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return const Icon(
-                      Icons.broken_image,
-                    );
-                  },
                 ),
               );
             },
