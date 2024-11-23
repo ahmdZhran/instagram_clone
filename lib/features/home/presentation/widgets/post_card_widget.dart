@@ -45,7 +45,10 @@ class PostCard extends StatelessWidget {
                   _PostHeader(post: post, timeAgo: timeAgo),
                   _PostImage(imageUrl: post.imageUrl),
                   const Gap(10),
-                  _PostDescription(description: post.description.toString()),
+                  _PostDescription(
+                    description: post.description?.toString(),
+                    username: post.username,
+                  ),
                   const Gap(10),
                   const ReactIconsWidget(),
                 ],
@@ -127,9 +130,9 @@ class _PostImage extends StatelessWidget {
 }
 
 class _PostDescription extends StatelessWidget {
-  final String description;
-
-  const _PostDescription({required this.description});
+  final String? description;
+  final String username;
+  const _PostDescription({this.description, required this.username});
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +143,7 @@ class _PostDescription extends StatelessWidget {
         children: [
           Flexible(
             child: AutoSizeText(
-              description,
+              description != '' ? "$username: $description" : "",
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
             ),

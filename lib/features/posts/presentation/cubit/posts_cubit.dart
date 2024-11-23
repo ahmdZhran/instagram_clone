@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:instagram_clone/core/services/firebase_storage_service.dart';
 import 'package:instagram_clone/features/posts/post_di.dart';
 import 'package:instagram_clone/features/posts/domain/repositories/post_repository.dart';
@@ -8,7 +8,7 @@ import '../../domain/entities/post_entity.dart';
 
 part 'posts_state.dart';
 
-class PostsCubit extends Cubit<PostsState> {
+class PostsCubit extends HydratedCubit<PostsState> {
   PostsCubit(this._postRepository) : super(PostsInitial());
 
   bool hasMore = false;
@@ -39,6 +39,10 @@ class PostsCubit extends Cubit<PostsState> {
   }
 
   void fetchPosts() {
+    //TodO solve the issue when you add new post and then fetch posts
+    if (state is PostsSuccess) {
+      return;
+    }
     emit(PostsLoading());
     _postRepository.fetchAllPosts().then((stream) {
       stream.listen((posts) {
@@ -80,5 +84,27 @@ class PostsCubit extends Cubit<PostsState> {
       await cubit.close();
       addPostDi.unregister<PostsCubit>(instanceName: _tag);
     }
+  }
+
+  @override
+  PostsState? fromJson(Map<String, dynamic> json) {
+    try {
+      final posts = (json['posts'] as List)
+          .map((post) => PostEntity.fromJson(post))
+          .toList();
+      return PostsSuccess(posts);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  @override
+  Map<String, dynamic>? toJson(PostsState state) {
+    if (state is PostsSuccess) {
+      return {
+        'posts': state.posts?.map((post) => post.toJson()).toList(),
+      };
+    }
+    return null;
   }
 }
