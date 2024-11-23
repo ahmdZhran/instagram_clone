@@ -19,7 +19,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   ImagePickerService? _pickerImageService;
   UserProfileEntity? userProfileData;
   static UserProfileEntity? _cachedUserProfile;
-
+  int? postsCount;
   Uint8List? profileImage;
 
   Future<void> getUserData(String userId) async {
@@ -69,6 +69,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     try {
       emit(UserPostsLoading());
       final posts = await _profileRepository.getUserPosts(userId);
+      postsCount = posts.length;
       emit(UserPostsSuccess(posts: posts));
     } catch (error) {
       emit(UserPostsFailure(errMessage: error.toString()));

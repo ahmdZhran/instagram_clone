@@ -60,7 +60,9 @@ class _UserProfileHeaderWidgetState extends State<UserProfileHeaderWidget> {
                               const Icon(Icons.error),
                         ),
                       ),
-                      const UserProfileInformationWidget()
+                      UserProfileInformationWidget(
+                        postsCount: profileCubit.postsCount?.toInt() ?? 0,
+                      )
                     ],
                   ),
                   const Gap(40),
