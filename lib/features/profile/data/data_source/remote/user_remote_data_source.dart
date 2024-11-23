@@ -25,10 +25,10 @@ class UserRemoteDataSource {
     return UserModel.fromDocument(updatedDoc);
   }
 
-   Future<List<UserPostModel>> getUserPosts(String uid) async {
+  Future<List<UserPostModel>> getUserPosts(String uid) async {
     var querySnapshot = await _firebaseFirestore
         .collection('posts')
-        .where('userId', isEqualTo: uid) 
+        .where('userId', isEqualTo: uid)
         .get();
 
     List<UserPostModel> posts = querySnapshot.docs

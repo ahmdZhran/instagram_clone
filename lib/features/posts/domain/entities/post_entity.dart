@@ -42,31 +42,20 @@ class PostEntity {
       'likes': likes,
       "description": description,
       "imageUrl": imageUrl,
-      "timestamp": timestamp.millisecondsSinceEpoch,
+      "timestamp": Timestamp.fromDate(timestamp),
       "user_profile_image": userProfileImage,
     };
   }
 
   factory PostEntity.fromJson(Map<String, dynamic> json) {
-    final timestampField = json['timestamp'];
-    DateTime timestamp;
-
-    if (timestampField is Timestamp) {
-      timestamp = timestampField.toDate();
-    } else if (timestampField is int) {
-      timestamp = DateTime.fromMillisecondsSinceEpoch(timestampField);
-    } else {
-      throw Exception('Unexpected timestamp format: $timestampField');
-    }
-
     return PostEntity(
       id: json['id'],
-      likes: List.from(json['likes']),
+      likes: json['likes'],
       description: json['description'],
       userId: json['userId'],
       username: json['user_name'],
       imageUrl: json['imageUrl'],
-      timestamp: timestamp,
+      timestamp: json['timestamp'].toDate(),
       userProfileImage: json['user_profile_image'],
     );
   }

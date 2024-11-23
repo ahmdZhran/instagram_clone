@@ -13,9 +13,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final sharedPrefHelper = SharedPrefHelper();
   await sharedPrefHelper.init();
-   HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory: await getApplicationDocumentsDirectory(),
-  );
+
   Bloc.observer = MyBlocObserver();
   await Future.wait([
     InjectionContainer().init(),
