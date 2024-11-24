@@ -7,15 +7,14 @@ class ExploreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: SingleChildScrollView(
-          child: Padding(
+      body: Padding(
         padding: EdgeInsets.only(left: 10, right: 10, top: 30),
         child: Column(
           children: [
             SearchForUserWidget(),
           ],
         ),
-      )),
+      ),
     );
   }
 }
