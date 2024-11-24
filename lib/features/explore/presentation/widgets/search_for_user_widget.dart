@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:instagram_clone/core/utils/custom_chached_network_image.dart';
@@ -11,9 +10,7 @@ import '../../../../core/utils/app_colors.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 
 class SearchForUserWidget extends StatefulWidget {
-  const SearchForUserWidget({
-    super.key,
-  });
+  const SearchForUserWidget({super.key});
 
   @override
   State<SearchForUserWidget> createState() => _SearchForUserWidgetState();
