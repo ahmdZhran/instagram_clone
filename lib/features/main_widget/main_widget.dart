@@ -62,6 +62,7 @@ class _MainWidgetState extends State<MainWidget> {
         _onWillPop();
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Stack(
           children: [
             _getSelectedScreen(),
