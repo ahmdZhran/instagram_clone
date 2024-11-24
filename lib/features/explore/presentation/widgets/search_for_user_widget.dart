@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:instagram_clone/core/utils/app_strings.dart';
+import 'package:instagram_clone/core/utils/custom_chached_network_image.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../../core/helper/extensions.dart';
 import '../cubit/explore_cubit.dart';
@@ -38,14 +39,12 @@ class _SearchForUserWidgetState extends State<SearchForUserWidget> {
                     _exploreCubit.searchUsers(username!);
                   }
                 },
-                hintText: 'Search for user',
+                hintText: context.translate(AppStrings.searchForUser),
                 prefixIcon: const Icon(
                   Iconsax.search_normal,
                   color: AppColors.greyColor,
                 ),
-                controller: null,
               ),
-              const Gap(20),
               if (state is SearchUserLoading)
                 Center(
                   child: LoadingAnimationWidget.waveDots(
@@ -57,7 +56,11 @@ class _SearchForUserWidgetState extends State<SearchForUserWidget> {
                 if (username == null || username!.isEmpty)
                   const SizedBox.shrink()
                 else if (state.users.isEmpty)
-                  const Center(child: Text('No users found'))
+                  Center(
+                    child: Text(
+                      context.translate(AppStrings.noUsersFound),
+                    ),
+                  )
                 else
                   Expanded(
                     child: ListView.builder(
@@ -68,13 +71,12 @@ class _SearchForUserWidgetState extends State<SearchForUserWidget> {
                           contentPadding: const EdgeInsets.all(0),
                           horizontalTitleGap: 5,
                           leading: ClipOval(
-                            child: Image.network(
-                              userData.profileImage,
-                              fit: BoxFit.contain,
-                              width: 50.w,
-                              height: 50.h,
+                              child: CustomCachedNetworkImage(
+                            imageUrl: userData.profileImage,
+                            placeholder: const CircularProgressIndicator(
+                              color: AppColors.primaryColor,
                             ),
-                          ),
+                          )),
                           title: Text(userData.username),
                         );
                       },

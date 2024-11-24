@@ -13,7 +13,7 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.keyboardType,
     this.obscureText = false,
-    required this.controller,
+    this.controller,
     this.fillColor,
   });
   final String hintText;
