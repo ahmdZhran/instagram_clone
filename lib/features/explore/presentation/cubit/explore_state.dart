@@ -7,8 +7,7 @@ final class ExploreInitial extends ExploreState {}
 final class SearchUserLoading extends ExploreState {}
 
 final class SearchUserSuccess extends ExploreState {
-  
-  final List<QueryDocumentSnapshot<Map<String, dynamic>>> users;
+  final List<UserEntity> users;
 
   SearchUserSuccess(this.users);
 }

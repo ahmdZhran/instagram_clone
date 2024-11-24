@@ -63,19 +63,19 @@ class _SearchForUserWidgetState extends State<SearchForUserWidget> {
                     child: ListView.builder(
                       itemCount: state.users.length,
                       itemBuilder: (context, index) {
-                        var userData = state.users[index].data();
+                        var userData = state.users[index];
                         return ListTile(
                           contentPadding: const EdgeInsets.all(0),
                           horizontalTitleGap: 5,
                           leading: ClipOval(
                             child: Image.network(
-                              userData['profile_image'],
+                              userData.profileImage,
                               fit: BoxFit.contain,
                               width: 50.w,
                               height: 50.h,
                             ),
                           ),
-                          title: Text(userData['user_name']),
+                          title: Text(userData.username),
                         );
                       },
                     ),

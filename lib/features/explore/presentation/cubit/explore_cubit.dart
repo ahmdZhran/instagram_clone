@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/features/explore/data/explore_repository.dart';
+import 'package:instagram_clone/features/explore/domain/entities/user_entity.dart';
 import 'package:instagram_clone/features/explore/explore_di.dart';
 
 part 'explore_state.dart';
@@ -11,15 +12,11 @@ class ExploreCubit extends Cubit<ExploreState> {
   final ExploreRepository _exploreRepository;
 
   Future<void> searchUsers(String username) async {
-    //TOdO delete this after you display method
-    if (username.isEmpty) {
-      emit(ExploreInitial());
-      return;
-    }
+  
     emit(SearchUserLoading());
     try {
       final users = await _exploreRepository.searchUsers(username);
-      emit(SearchUserSuccess(users.docs));
+      emit(SearchUserSuccess(users));
     } catch (error) {
       emit(SearchUserFailure(errMessage: error.toString()));
     }
