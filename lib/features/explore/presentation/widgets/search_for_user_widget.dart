@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../../core/helper/extensions.dart';
 import '../cubit/explore_cubit.dart';
 import '../../../../core/utils/app_colors.dart';
@@ -20,6 +21,7 @@ class SearchForUserWidget extends StatefulWidget {
 class _SearchForUserWidgetState extends State<SearchForUserWidget> {
   final ExploreCubit _exploreCubit = ExploreCubit.getInstance();
   String? username;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ExploreCubit, ExploreState>(
@@ -31,8 +33,10 @@ class _SearchForUserWidgetState extends State<SearchForUserWidget> {
               CustomTextFormField(
                 fillColor: context.isDart ? null : AppColors.moreLightGrey,
                 onChanged: (value) {
-                  username = value;
-                  _exploreCubit.searchUsers(username!);
+                  username = value.trim();
+                  if (username != null && username!.isNotEmpty) {
+                    _exploreCubit.searchUsers(username!);
+                  }
                 },
                 hintText: 'Search for user',
                 prefixIcon: const Icon(
@@ -43,10 +47,17 @@ class _SearchForUserWidgetState extends State<SearchForUserWidget> {
               ),
               const Gap(20),
               if (state is SearchUserLoading)
-                const Center(child: CircularProgressIndicator())
+                Center(
+                  child: LoadingAnimationWidget.waveDots(
+                    color: AppColors.primaryColor,
+                    size: 40,
+                  ),
+                )
               else if (state is SearchUserSuccess)
-                if (state.users.isEmpty)
-                  const Center(child: Text('No users found')) 
+                if (username == null || username!.isEmpty)
+                  const SizedBox.shrink()
+                else if (state.users.isEmpty)
+                  const Center(child: Text('No users found'))
                 else
                   Expanded(
                     child: ListView.builder(
@@ -68,8 +79,16 @@ class _SearchForUserWidgetState extends State<SearchForUserWidget> {
                         );
                       },
                     ),
+                  )
+              else if (state is SearchUserFailure)
+                const Center(
+                  child: Text(
+                    "Something went wrong. Please try again!",
+                    style: TextStyle(color: Colors.red),
                   ),
-              const SizedBox.shrink(),
+                )
+              else
+                const SizedBox.shrink(),
             ],
           ),
         );
