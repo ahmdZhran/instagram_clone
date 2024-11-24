@@ -24,5 +24,8 @@
     "exit_confirmation":"تأكيد الخروج",
     "are_you_sure_you_want_to_exit_the_app?":"هل أنت متأكد أنك تريد الخروج من التطبيق",
     "cancel":"إلغاء",
-    "exit":"خروج"
+    "exit":"خروج",
+    "no_users_found":"لا يوجد مستخدم بهذا الاسم",
+    "search_for_user":"ابحث عن مستخدم"
+    
 }

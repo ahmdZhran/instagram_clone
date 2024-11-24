@@ -24,5 +24,7 @@
     "are_you_sure_you_want_to_exit_the_app":"Are you sure you want to exit the app?",
     "exit_confirmation":"Exit confirmation",
     "cancel":"Cancel",
-    "exit":"Exit"
+    "exit":"Exit",
+    "no_users_found":"No user Found",
+    "search_for_user":"Search for user"
 }

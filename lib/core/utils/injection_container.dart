@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:instagram_clone/features/explore/explore_di.dart';
 import 'package:instagram_clone/features/posts/post_di.dart';
 import '../../features/profile/profile_di.dart';
 
@@ -11,5 +12,6 @@ class InjectionContainer {
     AuthDI().init();
     ProfileDI().init();
     AddPostDI().init();
+    ExploreDI().init();
   }
 }

@@ -55,4 +55,8 @@ abstract class AppStrings {
   static const String addDescription = "add_description";
   static const String yourPostUploaded = "your_post_uploaded_successfully";
   static const String somethingWentWrong = "something_went_wrong";
+
+  // explore strings
+  static const String noUsersFound = "no_users_found";
+  static const String searchForUser = "search_for_user";
 }
