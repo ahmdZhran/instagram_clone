@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/features/posts/data/models/media_model.dart';
 import 'package:instagram_clone/features/posts/presentation/screens/add_description_and_upload_post_screen.dart';
+import 'package:instagram_clone/features/profile/presentation/screens/profile_screen.dart';
 import '../../features/main_widget/main_widget.dart';
 import '../../features/profile/domain/entities/user_profile_entity.dart';
 import '../../features/profile/presentation/screens/edit_profile_screen.dart';
@@ -33,6 +35,11 @@ class AppRouter {
       case Routes.home:
         return MaterialPageRoute(
           builder: (_) => const HomeScreen(),
+        );
+      case Routes.profileScreen:
+        final uid = settings.arguments as String?;
+        return MaterialPageRoute(
+          builder: (_) => ProfileScreen(uid: uid!),
         );
       case Routes.forgotPassword:
         return MaterialPageRoute(
