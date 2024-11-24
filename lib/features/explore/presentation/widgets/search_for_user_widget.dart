@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:instagram_clone/core/router/routes.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:instagram_clone/core/utils/custom_chached_network_image.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -64,17 +66,26 @@ class _SearchForUserWidgetState extends State<SearchForUserWidget> {
                       itemCount: state.users.length,
                       itemBuilder: (context, index) {
                         var userData = state.users[index];
-                        return ListTile(
-                          contentPadding: const EdgeInsets.all(0),
-                          horizontalTitleGap: 5,
-                          leading: ClipOval(
-                              child: CustomCachedNetworkImage(
-                            imageUrl: userData.profileImage,
-                            placeholder: const CircularProgressIndicator(
-                              color: AppColors.primaryColor,
-                            ),
-                          )),
-                          title: Text(userData.username),
+                        return GestureDetector(
+                          onTap: () {
+                            context.pushNamed(
+                              Routes.profileScreen,
+                              arguments: userData.uid,
+                            );
+                            debugPrint('USER UiD ${userData.uid}');
+                          },
+                          child: ListTile(
+                            contentPadding: const EdgeInsets.all(0),
+                            horizontalTitleGap: 5,
+                            leading: ClipOval(
+                                child: CustomCachedNetworkImage(
+                              imageUrl: userData.profileImage,
+                              placeholder: const CircularProgressIndicator(
+                                color: AppColors.primaryColor,
+                              ),
+                            )),
+                            title: Text(userData.username),
+                          ),
                         );
                       },
                     ),
