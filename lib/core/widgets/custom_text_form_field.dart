@@ -10,14 +10,18 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.fieldName,
     this.onChanged,
+    this.prefixIcon,
     this.keyboardType,
     this.obscureText = false,
     required this.controller,
+    this.fillColor,
   });
   final String hintText;
   final TextEditingController? controller;
   final String? fieldName;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
+  final Color? fillColor;
   final TextInputType? keyboardType;
   final void Function(String)? onChanged;
   final bool obscureText;
@@ -46,8 +50,9 @@ class CustomTextFormField extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             hintText: hintText,
-            fillColor: const Color(0x0ffafafa),
+            fillColor: fillColor ?? AppColors.darkGrey,
             filled: true,
+            prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
             hintStyle: CustomTextStyle.normalTextStyle.copyWith(
               color: AppColors.greyColor,
