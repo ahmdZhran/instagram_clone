@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:instagram_clone/features/explore/domain/entities/user_entity.dart';
+import 'package:instagram_clone/features/explore/domain/entities/serach_user_entity.dart';
 
 class ExploreRepository {
-  Future<List<UserEntity>> searchUsers(String username) async {
+  Future<List<SearchUserEntity>> searchUsers(String username) async {
     try {
       final querySnapshot = await FirebaseFirestore.instance
           .collection("users")
@@ -10,7 +10,7 @@ class ExploreRepository {
           .get();
 
       return querySnapshot.docs
-          .map((doc) => UserEntity.fromFirestore(doc.data()))
+          .map((doc) => SearchUserEntity.fromFirestore(doc.data()))
           .toList();
     } catch (error) {
       throw Exception("Failed to search users :$error");
