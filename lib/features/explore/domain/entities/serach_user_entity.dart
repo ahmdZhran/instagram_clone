@@ -1,16 +1,16 @@
-class UserEntity {
+class SearchUserEntity {
   final String username;
   final String profileImage;
   final String? uid;
 
-  UserEntity({
+  SearchUserEntity({
     required this.username,
     required this.profileImage,
     this.uid,
   });
 
-  factory UserEntity.fromFirestore(Map<String, dynamic> data) {
-    return UserEntity(
+  factory SearchUserEntity.fromFirestore(Map<String, dynamic> data) {
+    return SearchUserEntity(
       username: data['user_name'] ?? '',
       profileImage: data['profile_image'] ?? '',
       uid: data['uid'] ?? '',

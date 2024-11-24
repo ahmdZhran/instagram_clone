@@ -7,7 +7,7 @@ final class ExploreInitial extends ExploreState {}
 final class SearchUserLoading extends ExploreState {}
 
 final class SearchUserSuccess extends ExploreState {
-  final List<UserEntity> users;
+  final List<SearchUserEntity> users;
 
   SearchUserSuccess(this.users);
 }
