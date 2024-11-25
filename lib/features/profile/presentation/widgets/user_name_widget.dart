@@ -16,6 +16,8 @@ class UserNameWidget extends StatefulWidget {
 
 class _UserNameWidgetState extends State<UserNameWidget> {
   final profileCubit = ProfileCubit.getInstance();
+  
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileCubit, ProfileState>(
@@ -29,11 +31,11 @@ class _UserNameWidgetState extends State<UserNameWidget> {
               color: AppColors.greyColor,
             ),
           );
-        } else {
+        } else  {
           return Flexible(
             flex: 2,
             child: Text(
-              profileCubit.userProfileData?.username ?? "",
+              profileCubit.userProfileData?.username ?? "Unknown User",
               style: CustomTextStyle.pacifico25,
               overflow: TextOverflow.ellipsis,
             ),

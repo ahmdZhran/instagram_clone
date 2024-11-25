@@ -23,7 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     _nestedScrollController = ScrollController();
-    profileCubit.getUserData(widget.uid);
+    profileCubit.getUserData(userId: widget.uid);
     super.initState();
   }
 

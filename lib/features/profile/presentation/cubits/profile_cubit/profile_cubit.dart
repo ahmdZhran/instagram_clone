@@ -28,12 +28,12 @@ class ProfileCubit extends Cubit<ProfileState> {
   int? postsCount;
   Uint8List? profileImage;
 
-  Future<void> getUserData(String userId) async {
-    if (_cachedUserProfile != null) {
-      userProfileData = _cachedUserProfile;
-      emit(ProfileSuccess());
-      return;
-    }
+  Future<void> getUserData({required String userId}) async {
+    // if (_cachedUserProfile != null) {
+    //   userProfileData = _cachedUserProfile;
+    //   emit(ProfileSuccess());
+    //   return;
+    // }
 
     try {
       emit(ProfileLoading());
