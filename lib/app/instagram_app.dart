@@ -6,7 +6,7 @@ import '../core/theme/app_them.dart';
 import '../core/utils/app_strings.dart';
 import '../core/languages/app_localization_setup.dart';
 import '../core/router/routes.dart';
-import '../features/profile/presentation/cubits/settings/settings_cubit.dart';
+import '../features/profile/presentation/cubits/profile_cubit/profile_cubit.dart';
 
 class InstagramApp extends StatefulWidget {
   const InstagramApp({super.key, required this.appRouter});
@@ -17,15 +17,15 @@ class InstagramApp extends StatefulWidget {
 }
 
 class _InstagramAppState extends State<InstagramApp> {
-  final settingsCubit = SettingsCubit.getInstance()
+  final profileCubit = ProfileCubit.getInstance()
     ..loadTheme()
     ..loadLanguage();
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(360, 690),
-      child: BlocBuilder<SettingsCubit, SettingsState>(
-        bloc: settingsCubit,
+      child: BlocBuilder<ProfileCubit, ProfileState>(
+        bloc: profileCubit,
         builder: (context, state) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -35,8 +35,8 @@ class _InstagramAppState extends State<InstagramApp> {
             supportedLocales: AppLocalizationsSetup.supportedLocales,
             localeResolutionCallback:
                 AppLocalizationsSetup.localeResolutionCallback,
-            locale: Locale(settingsCubit.currentLangCode),
-            theme: settingsCubit.isDark
+            locale: Locale(profileCubit.currentLangCode),
+            theme: profileCubit.isDark
                 ? AppThemes.darkTheme
                 : AppThemes.lightTheme,
             onGenerateRoute: widget.appRouter.onGenerateRoute,

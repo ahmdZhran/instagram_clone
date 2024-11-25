@@ -1,17 +1,17 @@
-part of 'settings_cubit.dart';
+// part of 'settings_cubit.dart';
 
-sealed class SettingsState {}
+// sealed class SettingsState {}
 
-final class SettingsInitial extends SettingsState {}
+// final class SettingsInitial extends SettingsState {}
 
-class ThemeChanged extends SettingsState {
-  final bool isDark;
+// class ThemeChanged extends SettingsState {
+//   final bool isDark;
 
-  ThemeChanged({required this.isDark});
-}
+//   ThemeChanged({required this.isDark});
+// }
 
-class LanguageChanged extends SettingsState {
-  final Locale locale;
+// class LanguageChanged extends SettingsState {
+//   final Locale locale;
 
-  LanguageChanged({required this.locale});
-}
+//   LanguageChanged({required this.locale});
+// }

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/core/theme/app_them.dart';
 import 'package:instagram_clone/core/utils/app_assets.dart';
+import 'package:instagram_clone/features/profile/presentation/cubits/profile_cubit/profile_cubit.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/app_colors.dart';
-import '../cubits/settings/settings_cubit.dart';
 import 'user_name_widget.dart';
 
 class UserProfileAppBarWidget extends StatelessWidget {
@@ -12,7 +12,7 @@ class UserProfileAppBarWidget extends StatelessWidget {
   final String uid;
   @override
   Widget build(BuildContext context) {
-    final settingsCubit = SettingsCubit.getInstance();
+    final profileCubit = ProfileCubit.getInstance();
 
     return SliverAppBar(
       centerTitle: false,
@@ -39,23 +39,23 @@ class UserProfileAppBarWidget extends StatelessWidget {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          BlocBuilder<SettingsCubit, SettingsState>(
-                            bloc: settingsCubit,
+                          BlocBuilder<ProfileCubit, ProfileState>(
+                            bloc: profileCubit,
                             builder: (context, state) {
                               return SwitchListTile(
                                 inactiveThumbColor: AppColors.primaryColor,
                                 activeColor: AppColors.primaryColor,
                                 title: const Text(AppStrings.darkMode),
-                                value: settingsCubit.isDark,
+                                value: profileCubit.isDark,
                                 onChanged: (bool value) {
-                                  settingsCubit.changeTheme();
+                                  profileCubit.changeTheme();
                                 },
                                 secondary: const Icon(Icons.dark_mode),
                               );
                             },
                           ),
-                          BlocBuilder<SettingsCubit, SettingsState>(
-                            bloc: settingsCubit,
+                          BlocBuilder<ProfileCubit, ProfileState>(
+                            bloc: profileCubit,
                             builder: (context, state) {
                               return ListTile(
                                 leading: const Icon(Icons.language),
@@ -64,7 +64,7 @@ class UserProfileAppBarWidget extends StatelessWidget {
                                     height: 2,
                                     color: Colors.transparent,
                                   ),
-                                  value: settingsCubit.currentLangCode,
+                                  value: profileCubit.currentLangCode,
                                   icon: const Icon(Icons.arrow_drop_down),
                                   items: <String>[
                                     AppStrings.englishCode,
@@ -81,7 +81,7 @@ class UserProfileAppBarWidget extends StatelessWidget {
                                   }).toList(),
                                   onChanged: (String? newValue) {
                                     if (newValue != null) {
-                                      settingsCubit.changeLanguage(newValue);
+                                      profileCubit.changeLanguage(newValue);
                                     }
                                   },
                                 ),
