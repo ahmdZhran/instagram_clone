@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/core/utils/custom_text_style.dart';
+import 'package:instagram_clone/core/widgets/custom_button_widget.dart'; // Replace with the actual import path for CustomButton
 import '../cubits/profile_cubit/profile_cubit.dart';
 import 'selection_bloc_builder_theme_and_language.dart';
 import 'user_profile_information_widget.dart';
@@ -31,7 +32,7 @@ class _UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      expandedHeight: 190.h,
+      expandedHeight: 250.h,
       centerTitle: false,
       pinned: ModalRoute.of(context)!.isFirst,
       floating: ModalRoute.of(context)!.isFirst,
@@ -63,7 +64,6 @@ class _UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    const SizedBox(height: 16),
                     Row(
                       children: [
                         ClipOval(
@@ -85,9 +85,39 @@ class _UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                             ),
                           ),
                         ),
-                        const UserProfileInformationWidget(
-                          //TOdO pass the real value
-                          postsCount: 1,
+                        Column(
+                          children: [
+                            UserProfileInformationWidget(
+                              postsCount:
+                                  _profileCubit.postsCount?.toInt() ?? 0,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const Gap(20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CustomButton(
+                          width: 140.w,
+                          height: 30.h,
+                          color: AppColors.primaryColor,
+                          onPressed: () {},
+                          childOfCustomButton: const Text(
+                            "Edit Profile",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        CustomButton(
+                          width: 140.w,
+                          height: 30.h,
+                          color: AppColors.primaryColor,
+                          onPressed: () {},
+                          childOfCustomButton: const Text(
+                            "Follow",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ],
                     ),

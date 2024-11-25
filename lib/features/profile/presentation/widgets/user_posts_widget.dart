@@ -27,11 +27,12 @@ class _UserPostsWidgetState extends State<UserPostsWidget> {
     return BlocBuilder<ProfileCubit, ProfileState>(
       bloc: _profileCubit,
       builder: (context, state) {
-        if (state is UserPostsLoading) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (state is UserPostsFailure) {
-          return Center(child: Text('Error: ${state.errMessage}'));
-        } else if (state is UserPostsSuccess) {
+        // if (state is UserPostsLoading) {
+        //   return const Center(child: CircularProgressIndicator());
+        // } else if (state is UserPostsFailure) {
+        //   return Center(child: Text('Error: ${state.errMessage}'));
+        // }
+        if (state is UserPostsSuccess) {
           final List<UserPostModel> posts = state.posts;
           if (posts.isEmpty) {
             return const Center(child: Text('No posts available'));
@@ -48,7 +49,7 @@ class _UserPostsWidgetState extends State<UserPostsWidget> {
               final post = posts[index];
               return SizedBox(
                 child: CachedNetworkImage(
-                  imageUrl: post.postImageUrl,
+                  imageUrl: 'post.postImageUrl',
                   fit: BoxFit.cover,
                 ),
               );

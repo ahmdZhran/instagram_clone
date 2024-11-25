@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import '../cubits/profile_cubit/profile_cubit.dart';
+import '../widgets/user_posts_widget.dart';
 import '../widgets/user_profile_bar_delegate_widget.dart';
 import '../widgets/user_profile_mentioned_posts_widget.dart';
 import 'package:sliver_tools/sliver_tools.dart';
@@ -75,7 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: const TabBarView(
               children: [
                 //TOdO في معارضة هنا بين الحالات لو البروقايل نجح ف البوستات مش بتظهر والعكس
-                // UserPostsWidget(),
+                UserPostsWidget(),
                 UserProfileMentionedPostsWidget(),
               ],
             ),
