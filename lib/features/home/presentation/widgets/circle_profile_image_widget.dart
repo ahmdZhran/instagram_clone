@@ -1,6 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/custom_chached_network_image.dart';
 
 class CircleProfileImageWidget extends StatelessWidget {
   const CircleProfileImageWidget({
@@ -26,10 +27,13 @@ class CircleProfileImageWidget extends StatelessWidget {
           ],
         ),
         child: ClipOval(
-          child: CustomCachedNetworkImage(
+          child: CachedNetworkImage(
             imageUrl: userProfileImage,
-            placeholder: const CircularProgressIndicator(
-              color: AppColors.primaryColor,
+              placeholder: (context, url) => Center(
+              child: LoadingAnimationWidget.threeRotatingDots(
+                color: AppColors.primaryColor,
+                size: 40,
+              ),
             ),
           ),
         ));

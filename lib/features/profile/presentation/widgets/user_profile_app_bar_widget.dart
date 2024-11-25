@@ -1,103 +1,148 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/core/theme/app_them.dart';
-import 'package:instagram_clone/core/utils/app_assets.dart';
-import '../../../../core/utils/app_strings.dart';
-import '../../../../core/utils/app_colors.dart';
-import '../cubits/settings/settings_cubit.dart';
-import 'user_name_widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
+import 'package:instagram_clone/core/utils/app_colors.dart';
+import 'package:instagram_clone/core/utils/custom_text_style.dart';
+import 'package:instagram_clone/core/widgets/custom_button_widget.dart'; // Replace with the actual import path for CustomButton
+import '../cubits/profile_cubit/profile_cubit.dart';
+import 'selection_bloc_builder_theme_and_language.dart';
+import 'user_profile_information_widget.dart';
 
-class UserProfileAppBarWidget extends StatelessWidget {
+class UserProfileAppBarWidget extends StatefulWidget {
   const UserProfileAppBarWidget({super.key, required this.uid});
   final String uid;
+
+  @override
+  State<UserProfileAppBarWidget> createState() =>
+      _UserProfileAppBarWidgetState();
+}
+
+class _UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
+  final ProfileCubit _profileCubit = ProfileCubit.getInstance();
+
+  @override
+  void initState() {
+    _profileCubit.getUserData(userId: widget.uid);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final settingsCubit = SettingsCubit.getInstance();
-
     return SliverAppBar(
+      expandedHeight: 250.h,
       centerTitle: false,
       pinned: ModalRoute.of(context)!.isFirst,
       floating: ModalRoute.of(context)!.isFirst,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          UserNameWidget(uid: uid),
-          const Spacer(),
-          InkWell(
-              borderRadius: BorderRadius.circular(12),
-              onTap: () {
-                showModalBottomSheet(
-                  context: context,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20),
+      flexibleSpace: BlocBuilder<ProfileCubit, ProfileState>(
+        bloc: _profileCubit,
+        builder: (context, state) {
+          if (state is ProfileLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is ProfileSuccess) {
+            return FlexibleSpaceBar(
+              background: Padding(
+                padding: EdgeInsets.only(left: 10.w, right: 10.h, top: 40.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            _profileCubit.userProfileData?.username ?? "",
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                        ),
+                        const Spacer(),
+                        const SelectionBlocBuilderThemeAndLanguage()
+                      ],
                     ),
-                  ),
-                  builder: (BuildContext context) {
-                    return Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          BlocBuilder<SettingsCubit, SettingsState>(
-                            bloc: settingsCubit,
-                            builder: (context, state) {
-                              return SwitchListTile(
-                                inactiveThumbColor: AppColors.primaryColor,
-                                activeColor: AppColors.primaryColor,
-                                title: const Text(AppStrings.darkMode),
-                                value: settingsCubit.isDark,
-                                onChanged: (bool value) {
-                                  settingsCubit.changeTheme();
-                                },
-                                secondary: const Icon(Icons.dark_mode),
-                              );
-                            },
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        ClipOval(
+                          child: CircleAvatar(
+                            radius: 40.r,
+                            child: CachedNetworkImage(
+                              imageUrl: _profileCubit
+                                      .userProfileData?.profileImageUrl ??
+                                  "this is now image to shown",
+                              placeholder: (context, url) =>
+                                  const CircularProgressIndicator(
+                                color: AppColors.primaryColor,
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                              width: 100.w,
+                              height: 100.h,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                          BlocBuilder<SettingsCubit, SettingsState>(
-                            bloc: settingsCubit,
-                            builder: (context, state) {
-                              return ListTile(
-                                leading: const Icon(Icons.language),
-                                title: DropdownButton<String>(
-                                  underline: Container(
-                                    height: 2,
-                                    color: Colors.transparent,
-                                  ),
-                                  value: settingsCubit.currentLangCode,
-                                  icon: const Icon(Icons.arrow_drop_down),
-                                  items: <String>[
-                                    AppStrings.englishCode,
-                                    AppStrings.arabicCode
-                                  ].map<DropdownMenuItem<String>>(
-                                      (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(
-                                          value == AppStrings.englishCode
-                                              ? AppStrings.english
-                                              : AppStrings.arabic),
-                                    );
-                                  }).toList(),
-                                  onChanged: (String? newValue) {
-                                    if (newValue != null) {
-                                      settingsCubit.changeLanguage(newValue);
-                                    }
-                                  },
-                                ),
-                              );
-                            },
+                        ),
+                        Column(
+                          children: [
+                            UserProfileInformationWidget(
+                              postsCount:
+                                  _profileCubit.postsCount?.toInt() ?? 0,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const Gap(20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CustomButton(
+                          width: 140.w,
+                          height: 30.h,
+                          color: AppColors.primaryColor,
+                          onPressed: () {},
+                          childOfCustomButton: const Text(
+                            "Edit Profile",
+                            style: TextStyle(color: Colors.white),
                           ),
-                        ],
-                      ),
-                    );
-                  },
-                );
-              },
-              child: const ThemedSvgIcon(
-                assetName: AppAssets.settingsIcon,
-              )),
-        ],
+                        ),
+                        CustomButton(
+                          width: 140.w,
+                          height: 30.h,
+                          color: AppColors.primaryColor,
+                          onPressed: () {},
+                          childOfCustomButton: const Text(
+                            "Follow",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Gap(20),
+                    AutoSizeText(
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      _profileCubit.userProfileData?.name ?? "",
+                      style: CustomTextStyle.pacifico14,
+                    ),
+                    const Gap(10),
+                    AutoSizeText(
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      _profileCubit.userProfileData?.bio ?? "",
+                      style: CustomTextStyle.pacifico14,
+                    ),
+                    const Gap(10),
+                  ],
+                ),
+              ),
+            );
+          }
+          return const SizedBox.shrink();
+        },
       ),
     );
   }
