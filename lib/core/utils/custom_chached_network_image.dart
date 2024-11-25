@@ -46,9 +46,11 @@ class _CustomCachedNetworkImageState extends State<CustomCachedNetworkImage> {
     // Check if the image is in the cache and valid
     if (_cache.containsKey(widget.imageUrl) &&
         _expiryTimes[widget.imageUrl]?.isAfter(now) == true) {
-      setState(() {
-        _image = _cache[widget.imageUrl];
-      });
+      if (mounted) {
+        setState(() {
+          _image = _cache[widget.imageUrl];
+        });
+      }
       return;
     }
 
@@ -71,9 +73,11 @@ class _CustomCachedNetworkImageState extends State<CustomCachedNetworkImage> {
       _cache[widget.imageUrl] = fetchedImage;
       _expiryTimes[widget.imageUrl] = now.add(widget.cacheDuration);
 
-      setState(() {
-        _image = fetchedImage;
-      });
+      if (mounted) {
+        setState(() {
+          _image = fetchedImage;
+        });
+      }
     } catch (e) {
       debugPrint('Failed to load image: $e');
     }

@@ -1,7 +1,14 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/features/profile/presentation/cubits/profile_cubit/profile_cubit.dart';
-import 'selection_button_language_and_theme_widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
+import 'package:instagram_clone/core/utils/app_colors.dart';
+import 'package:instagram_clone/core/utils/custom_text_style.dart';
+import '../cubits/profile_cubit/profile_cubit.dart';
+import 'selection_bloc_builder_theme_and_language.dart';
+import 'user_profile_information_widget.dart';
 
 class UserProfileAppBarWidget extends StatefulWidget {
   const UserProfileAppBarWidget({super.key, required this.uid});
@@ -24,10 +31,11 @@ class _UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      expandedHeight: 190.h,
       centerTitle: false,
       pinned: ModalRoute.of(context)!.isFirst,
       floating: ModalRoute.of(context)!.isFirst,
-      title: BlocBuilder<ProfileCubit, ProfileState>(
+      flexibleSpace: BlocBuilder<ProfileCubit, ProfileState>(
         bloc: _profileCubit,
         builder: (context, state) {
           if (state is ProfileLoading) {
@@ -35,15 +43,72 @@ class _UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
               child: CircularProgressIndicator(),
             );
           } else if (state is ProfileSuccess) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(_profileCubit.userProfileData?.username ?? ""),
-                const Spacer(),
-                SelectionButtonLanguageAndThemeWidget(
-                  profileCubit: _profileCubit,
+            return FlexibleSpaceBar(
+              background: Padding(
+                padding: EdgeInsets.only(left: 10.w, right: 10.h, top: 40.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            _profileCubit.userProfileData?.username ?? "",
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                        ),
+                        const Spacer(),
+                        const SelectionBlocBuilderThemeAndLanguage()
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        ClipOval(
+                          child: CircleAvatar(
+                            radius: 40.r,
+                            child: CachedNetworkImage(
+                              imageUrl: _profileCubit
+                                      .userProfileData?.profileImageUrl ??
+                                  "this is now image to shown",
+                              placeholder: (context, url) =>
+                                  const CircularProgressIndicator(
+                                color: AppColors.primaryColor,
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                              width: 100.w,
+                              height: 100.h,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        const UserProfileInformationWidget(
+                          //TOdO pass the real value
+                          postsCount: 1,
+                        ),
+                      ],
+                    ),
+                    const Gap(20),
+                    AutoSizeText(
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      _profileCubit.userProfileData?.name ?? "",
+                      style: CustomTextStyle.pacifico14,
+                    ),
+                    const Gap(10),
+                    AutoSizeText(
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      _profileCubit.userProfileData?.bio ?? "",
+                      style: CustomTextStyle.pacifico14,
+                    ),
+                    const Gap(10),
+                  ],
                 ),
-              ],
+              ),
             );
           }
           return const SizedBox.shrink();

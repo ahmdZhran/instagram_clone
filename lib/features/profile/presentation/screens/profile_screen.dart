@@ -6,9 +6,7 @@ import '../cubits/profile_cubit/profile_cubit.dart';
 import '../widgets/user_profile_bar_delegate_widget.dart';
 import '../widgets/user_profile_mentioned_posts_widget.dart';
 import 'package:sliver_tools/sliver_tools.dart';
-import '../widgets/user_posts_widget.dart';
 import '../widgets/user_profile_app_bar_widget.dart';
-import '../widgets/user_profile_header.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key, required this.uid});
@@ -19,11 +17,11 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   late ScrollController _nestedScrollController;
-
+  final profileCubit = ProfileCubit.getInstance();
   @override
   void initState() {
     _nestedScrollController = ScrollController();
-    ProfileCubit.getInstance();
+    profileCubit.getUserData(userId: widget.uid);
     super.initState();
   }
 
@@ -76,7 +74,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             padding: EdgeInsets.only(top: 82.h),
             child: const TabBarView(
               children: [
-                UserPostsWidget(),
+                //TOdO في معارضة هنا بين الحالات لو البروقايل نجح ف البوستات مش بتظهر والعكس
+                // UserPostsWidget(),
                 UserProfileMentionedPostsWidget(),
               ],
             ),

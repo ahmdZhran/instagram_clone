@@ -1,26 +1,20 @@
 import 'dart:async';
 import 'dart:typed_data';
-import 'dart:ui';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../../core/helper/image_service.dart';
-import '../../../../../core/helper/shared_pref_helper.dart';
-import '../../../../../core/helper/shared_pref_keys.dart';
 import '../../../data/models/user_post_model.dart';
 import '../../../data/repositories/profile_repository.dart';
 import '../../../domain/entities/user_profile_entity.dart';
 import '../../../profile_di.dart';
+
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
-  ProfileCubit(this._profileRepository, this.sharedPrefHelper) : super(ProfileInitial()) {
+  ProfileCubit(this._profileRepository) : super(ProfileInitial()) {
     _pickerImageService = ImagePickerService();
   }
-  
-  final SharedPrefHelper sharedPrefHelper;
 
-  bool isDark = true;
-  String currentLangCode = 'en';
   final ProfileRepository _profileRepository;
   ImagePickerService? _pickerImageService;
   UserProfileEntity? userProfileData;
@@ -29,11 +23,11 @@ class ProfileCubit extends Cubit<ProfileState> {
   Uint8List? profileImage;
 
   Future<void> getUserData({required String userId}) async {
-    // if (_cachedUserProfile != null) {
-    //   userProfileData = _cachedUserProfile;
-    //   emit(ProfileSuccess());
-    //   return;
-    // }
+    if (_cachedUserProfile != null) {
+      userProfileData = _cachedUserProfile;
+      emit(ProfileSuccess());
+      return;
+    }
 
     try {
       emit(ProfileLoading());
@@ -82,39 +76,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-
-
-
-  void changeLanguage(String languageCode) async {
-    currentLangCode = languageCode;
-    await sharedPrefHelper.saveData(
-        key: SharedPrefKeys.languageKey, value: languageCode);
-    emit(LanguageChanged(locale: Locale(languageCode)));
-  }
-
-  void loadLanguage() async {
-    final String? languageCode =
-        sharedPrefHelper.getData(key: SharedPrefKeys.languageKey);
-    currentLangCode = languageCode ?? 'en';
-    emit(LanguageChanged(locale: Locale(currentLangCode)));
-  }
-
-  void changeTheme() async {
-    isDark = !isDark;
-    emit(ThemeChanged(isDark: isDark));
-    await sharedPrefHelper.saveData(
-        key: SharedPrefKeys.themeKey, value: isDark);
-  }
-
-  void loadTheme() {
-    final bool isDarkMode =
-        sharedPrefHelper.getData(key: SharedPrefKeys.themeKey) ?? true;
-    isDark = isDarkMode;
-    emit(ThemeChanged(isDark: isDark));
-  }
-
-
-
   static const String _tag = "profile_instance";
 
   static ProfileCubit getInstance() {
@@ -122,7 +83,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         profileDI.isRegistered<ProfileCubit>(instanceName: _tag);
     if (!isRegistered) {
       profileDI.registerSingleton<ProfileCubit>(
-        ProfileCubit(profileDI(),profileDI()),
+        ProfileCubit(profileDI()),
         instanceName: _tag,
       );
     }
