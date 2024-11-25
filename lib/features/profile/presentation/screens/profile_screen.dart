@@ -19,11 +19,11 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   late ScrollController _nestedScrollController;
-  final profileCubit = ProfileCubit.getInstance();
+
   @override
   void initState() {
     _nestedScrollController = ScrollController();
-    profileCubit.getUserData(userId: widget.uid);
+    ProfileCubit.getInstance();
     super.initState();
   }
 
@@ -44,7 +44,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     UserProfileAppBarWidget(uid: widget.uid),
                     const Gap(20),
-                    const UserProfileHeaderWidget(),
+                    // const UserProfileHeaderWidget(),
                     SliverPersistentHeader(
                       pinned: ModalRoute.of(context)!.isFirst,
                       delegate: const UserProfileBarDelegateWidget(
