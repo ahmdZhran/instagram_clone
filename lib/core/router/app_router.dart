@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/features/posts/data/models/media_model.dart';
 import 'package:instagram_clone/features/posts/presentation/screens/add_description_and_upload_post_screen.dart';
