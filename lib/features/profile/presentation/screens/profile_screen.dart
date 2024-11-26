@@ -7,7 +7,7 @@ import '../widgets/user_posts_widget.dart';
 import '../widgets/user_profile_bar_delegate_widget.dart';
 import '../widgets/user_profile_mentioned_posts_widget.dart';
 import 'package:sliver_tools/sliver_tools.dart';
-import '../widgets/user_profile_app_bar_widget.dart';
+import '../widgets/user_profile_sliver_app_bar_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key, required this.uid});
@@ -41,9 +41,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                 sliver: MultiSliver(
                   children: [
-                    UserProfileAppBarWidget(uid: widget.uid),
+                    UserProfileSliverAppBarWidget(uid: widget.uid),
                     const Gap(20),
-                    // const UserProfileHeaderWidget(),
                     SliverPersistentHeader(
                       pinned: ModalRoute.of(context)!.isFirst,
                       delegate: const UserProfileBarDelegateWidget(

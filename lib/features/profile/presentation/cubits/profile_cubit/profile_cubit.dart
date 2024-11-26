@@ -18,6 +18,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepository _profileRepository;
   ImagePickerService? _pickerImageService;
   UserProfileEntity? userProfileData;
+  List<UserPostModel>? posts;
   int? postsCount;
   Uint8List? profileImage;
 

@@ -11,16 +11,17 @@ import 'edit_and_share_buttons_widget.dart';
 import 'selection_bloc_builder_theme_and_language.dart';
 import 'user_profile_information_widget.dart';
 
-class UserProfileAppBarWidget extends StatefulWidget {
-  const UserProfileAppBarWidget({super.key, required this.uid});
+class UserProfileSliverAppBarWidget extends StatefulWidget {
+  const UserProfileSliverAppBarWidget({super.key, required this.uid});
   final String uid;
 
   @override
-  State<UserProfileAppBarWidget> createState() =>
-      _UserProfileAppBarWidgetState();
+  State<UserProfileSliverAppBarWidget> createState() =>
+      _UserProfileSliverAppBarWidgetState();
 }
 
-class _UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
+class _UserProfileSliverAppBarWidgetState
+    extends State<UserProfileSliverAppBarWidget> {
   final ProfileCubit _profileCubit = ProfileCubit.getInstance();
 
   @override
@@ -32,7 +33,7 @@ class _UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      expandedHeight: 250.h,
+      expandedHeight: 255.h,
       centerTitle: false,
       pinned: ModalRoute.of(context)!.isFirst,
       floating: ModalRoute.of(context)!.isFirst,
@@ -41,12 +42,11 @@ class _UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
         builder: (context, state) {
           if (state is ProfileLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is ProfileSuccess) {
+          } else {
             return FlexibleSpaceBar(
               background: _UserProfileContent(profileCubit: _profileCubit),
             );
           }
-          return const SizedBox.shrink();
         },
       ),
     );
@@ -113,8 +113,8 @@ class _ProfileImageAndInfo extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: profileCubit.userProfileData?.profileImageUrl ??
                   "No image available",
-              placeholder: (context, url) =>
-                  const CircularProgressIndicator(color: AppColors.primaryColor),
+              placeholder: (context, url) => const CircularProgressIndicator(
+                  color: AppColors.primaryColor),
               errorWidget: (context, url, error) => const Icon(Icons.error),
               width: 100.w,
               height: 100.h,
