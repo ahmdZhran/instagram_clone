@@ -9,23 +9,27 @@ class UserProfileInformationWidget extends StatelessWidget {
   final int postsCount;
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        UserProfileCountsInfoWidget(
-          onTap: () {},
-          count: postsCount.toString(),
-          title: context.translate(AppStrings.posts),
+        Row(
+          children: [
+            UserProfileCountsInfoWidget(
+              onTap: () {},
+              count: postsCount.toString(),
+              title: context.translate(AppStrings.posts),
+            ),
+            UserProfileCountsInfoWidget(
+              onTap: () {},
+              count: '0',
+              title: context.translate(AppStrings.followers),
+            ),
+            UserProfileCountsInfoWidget(
+              onTap: () {},
+              count: '0',
+              title: context.translate(AppStrings.following),
+            )
+          ],
         ),
-        UserProfileCountsInfoWidget(
-          onTap: () {},
-          count: '0',
-          title: context.translate(AppStrings.followers),
-        ),
-        UserProfileCountsInfoWidget(
-          onTap: () {},
-          count: '0',
-          title: context.translate(AppStrings.following),
-        )
       ],
     );
   }

@@ -1,9 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/features/profile/presentation/cubits/profile_cubit/profile_cubit.dart';
 
-import '../../../../core/utils/custom_chached_network_image.dart';
 import '../../data/models/user_post_model.dart';
 
 class UserPostsWidget extends StatefulWidget {
@@ -31,7 +31,8 @@ class _UserPostsWidgetState extends State<UserPostsWidget> {
           return const Center(child: CircularProgressIndicator());
         } else if (state is UserPostsFailure) {
           return Center(child: Text('Error: ${state.errMessage}'));
-        } else if (state is UserPostsSuccess) {
+        }
+        if (state is UserPostsSuccess) {
           final List<UserPostModel> posts = state.posts;
           if (posts.isEmpty) {
             return const Center(child: Text('No posts available'));
@@ -46,10 +47,18 @@ class _UserPostsWidgetState extends State<UserPostsWidget> {
             ),
             itemBuilder: (context, index) {
               final post = posts[index];
+
+              final imageUrl = post.postImageUrl;
+              print('Image URL for post $index: ${post.postImageUrl}');
               return SizedBox(
-                child: CustomCachedNetworkImage(
-                  imageUrl: post.postImageUrl,
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl.isNotEmpty
+                      ? imageUrl
+                      : 'https://via.placeholder.com/150',
                   fit: BoxFit.cover,
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               );
             },

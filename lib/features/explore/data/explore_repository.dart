@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:instagram_clone/features/explore/domain/entities/search_user_entity.dart';
+import 'package:instagram_clone/features/explore/domain/entities/serach_user_entity.dart';
 
 class ExploreRepository {
   Future<List<SearchUserEntity>> searchUsers(String username) async {
