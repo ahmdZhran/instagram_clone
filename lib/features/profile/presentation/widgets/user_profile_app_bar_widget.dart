@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/core/utils/custom_text_style.dart';
-import 'package:instagram_clone/core/widgets/custom_button_widget.dart'; // Replace with the actual import path for CustomButton
+import 'package:instagram_clone/core/widgets/custom_button_widget.dart';
+import '../../../../core/router/routes.dart';
 import '../cubits/profile_cubit/profile_cubit.dart';
 import 'selection_bloc_builder_theme_and_language.dart';
 import 'user_profile_information_widget.dart';
@@ -103,7 +105,12 @@ class _UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                           width: 140.w,
                           height: 30.h,
                           color: AppColors.primaryColor,
-                          onPressed: () {},
+                          onPressed: () {
+                            context.pushNamed(
+                              Routes.editProfileScreen,
+                              arguments: _profileCubit.userProfileData,
+                            );
+                          },
                           childOfCustomButton: const Text(
                             "Edit Profile",
                             style: TextStyle(color: Colors.white),
