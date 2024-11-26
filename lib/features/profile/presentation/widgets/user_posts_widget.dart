@@ -1,9 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/core/utils/app_colors.dart';
-import 'package:instagram_clone/features/profile/presentation/cubits/user_posts/user_posts_cubit.dart';
-import 'package:shimmer/shimmer.dart';
+import '../cubits/user_posts/user_posts_cubit.dart';
+import 'custom_shimmer_effect_widgets.dart';
 
 class UserPostsGridView extends StatefulWidget {
   const UserPostsGridView({super.key, required this.uid});
@@ -30,29 +29,7 @@ class _UserPostsGridViewState extends State<UserPostsGridView> {
       bloc: _userPostsCubit,
       builder: (context, state) {
         if (state is UserPostsLoading) {
-          return Center(
-              child: GridView.builder(
-            padding: const EdgeInsets.all(8),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 8,
-              mainAxisSpacing: 8,
-              childAspectRatio: 1,
-            ),
-            itemCount: 9,
-            itemBuilder: (context, index) {
-              return Shimmer.fromColors(
-                baseColor: AppColors.deepGrey,
-                highlightColor: AppColors.greyColor,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              );
-            },
-          ));
+          return const CustomGridViewWithShimmerEffectWidget();
         } else if (state is UserPostsFailure) {
           return const Text('the is something went wrong');
         } else if (state is UserPostsSuccess) {

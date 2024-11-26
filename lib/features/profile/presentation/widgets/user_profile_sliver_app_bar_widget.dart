@@ -6,8 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/core/utils/custom_text_style.dart';
-import 'package:instagram_clone/features/profile/presentation/widgets/custom_sketlonizer_loading_widget.dart';
 import '../cubits/profile_cubit/profile_cubit.dart';
+import 'custom_shimmer_effect_widgets.dart';
 import 'edit_and_share_buttons_widget.dart';
 import 'selection_bloc_builder_theme_and_language.dart';
 
@@ -44,7 +44,7 @@ class _UserProfileSliverAppBarWidgetState
             return const Center(
                 child: Padding(
               padding: EdgeInsets.only(top: 40),
-              child: CustomSketlonizerLoadingWidget(),
+              child: CustomShimmerLoadingWidget(),
             ));
           } else if (state is ProfileSuccess) {
             return FlexibleSpaceBar(
@@ -129,7 +129,7 @@ class _ProfileImageAndInfo extends StatelessWidget {
           ),
         ),
         const Gap(20),
-        //TOdO pass the count of posts from user posts cubit 
+        //TOdO pass the count of posts from user posts cubit
         // UserProfileInformationWidget(
         //   postsCount: profileCubit.postsCount?.toInt() ?? 0,
         // ),
