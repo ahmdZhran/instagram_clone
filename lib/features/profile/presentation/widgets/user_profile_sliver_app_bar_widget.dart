@@ -1,14 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/core/utils/custom_text_style.dart';
 import '../cubits/profile_cubit/profile_cubit.dart';
 import 'custom_shimmer_effect_widgets.dart';
 import 'edit_and_share_buttons_widget.dart';
+import 'profile_image_and_info.dart';
 import 'selection_bloc_builder_theme_and_language.dart';
 
 class UserProfileSliverAppBarWidget extends StatefulWidget {
@@ -71,7 +70,7 @@ class _UserProfileContent extends StatelessWidget {
         children: [
           _UserHeader(profileCubit: profileCubit),
           const Gap(16),
-          _ProfileImageAndInfo(profileCubit: profileCubit),
+          ProfileImageAndInfo(profileCubit: profileCubit),
           const Gap(20),
           EditAndShareButtonsWidget(profileCubit: profileCubit),
           const Gap(20),
@@ -99,40 +98,6 @@ class _UserHeader extends StatelessWidget {
         ),
         const Spacer(),
         const SelectionBlocBuilderThemeAndLanguage(),
-      ],
-    );
-  }
-}
-
-class _ProfileImageAndInfo extends StatelessWidget {
-  const _ProfileImageAndInfo({required this.profileCubit});
-  final ProfileCubit profileCubit;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        ClipOval(
-          child: CircleAvatar(
-            radius: 40.r,
-            child: CachedNetworkImage(
-              imageUrl: profileCubit.userProfileData?.profileImageUrl ??
-                  "No image available",
-              placeholder: (context, url) => const CircularProgressIndicator(
-                color: AppColors.primaryColor,
-              ),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-              width: 100.w,
-              height: 100.h,
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        const Gap(20),
-        //TOdO pass the count of posts from user posts cubit
-        // UserProfileInformationWidget(
-        //   postsCount: profileCubit.postsCount?.toInt() ?? 0,
-        // ),
       ],
     );
   }
