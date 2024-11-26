@@ -1,9 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:instagram_clone/core/router/routes.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
+import 'package:instagram_clone/core/utils/custom_chached_network_image.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../../core/helper/extensions.dart';
 import '../cubit/explore_cubit.dart';
@@ -77,13 +78,10 @@ class _SearchForUserWidgetState extends State<SearchForUserWidget> {
                             contentPadding: const EdgeInsets.all(0),
                             horizontalTitleGap: 5,
                             leading: ClipOval(
-                                child: CachedNetworkImage(
+                                child: CustomCachedNetworkImage(
                               imageUrl: userData.profileImage,
-                              placeholder: (context, url) => Center(
-                                child: LoadingAnimationWidget.threeRotatingDots(
-                                  color: AppColors.primaryColor,
-                                  size: 40,
-                                ),
+                              placeholder: const CircularProgressIndicator(
+                                color: AppColors.primaryColor,
                               ),
                             )),
                             title: Text(userData.username),
