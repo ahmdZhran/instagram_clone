@@ -4,12 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/core/utils/custom_text_style.dart';
-import 'package:instagram_clone/core/widgets/custom_button_widget.dart';
-import '../../../../core/router/routes.dart';
-import '../../../../core/utils/app_strings.dart';
 import '../cubits/profile_cubit/profile_cubit.dart';
 import 'edit_and_share_buttons_widget.dart';
 import 'selection_bloc_builder_theme_and_language.dart';
@@ -29,8 +25,8 @@ class _UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
 
   @override
   void initState() {
-    _profileCubit.getUserData(userId: widget.uid);
     super.initState();
+    _profileCubit.getUserData(userId: widget.uid);
   }
 
   @override
@@ -44,86 +40,120 @@ class _UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
         bloc: _profileCubit,
         builder: (context, state) {
           if (state is ProfileLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const Center(child: CircularProgressIndicator());
           } else if (state is ProfileSuccess) {
             return FlexibleSpaceBar(
-              background: Padding(
-                padding: EdgeInsets.only(left: 10.w, right: 10.h, top: 40.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            _profileCubit.userProfileData?.username ?? "",
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                        ),
-                        const Spacer(),
-                        const SelectionBlocBuilderThemeAndLanguage()
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      children: [
-                        ClipOval(
-                          child: CircleAvatar(
-                            radius: 40.r,
-                            child: CachedNetworkImage(
-                              imageUrl: _profileCubit
-                                      .userProfileData?.profileImageUrl ??
-                                  "this is now image to shown",
-                              placeholder: (context, url) =>
-                                  const CircularProgressIndicator(
-                                color: AppColors.primaryColor,
-                              ),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                              width: 100.w,
-                              height: 100.h,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Column(
-                          children: [
-                            UserProfileInformationWidget(
-                              postsCount:
-                                  _profileCubit.postsCount?.toInt() ?? 0,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const Gap(20),
-                    EditAndShareButtonsWidget(profileCubit: _profileCubit),
-                    const Gap(20),
-                    AutoSizeText(
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      _profileCubit.userProfileData?.name ?? "",
-                      style: CustomTextStyle.pacifico14,
-                    ),
-                    const Gap(10),
-                    AutoSizeText(
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      _profileCubit.userProfileData?.bio ?? "",
-                      style: CustomTextStyle.pacifico14,
-                    ),
-                    const Gap(10),
-                  ],
-                ),
-              ),
+              background: _UserProfileContent(profileCubit: _profileCubit),
             );
           }
           return const SizedBox.shrink();
         },
       ),
+    );
+  }
+}
+
+class _UserProfileContent extends StatelessWidget {
+  const _UserProfileContent({required this.profileCubit});
+  final ProfileCubit profileCubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 40.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _UserHeader(profileCubit: profileCubit),
+          const Gap(16),
+          _ProfileImageAndInfo(profileCubit: profileCubit),
+          const Gap(20),
+          EditAndShareButtonsWidget(profileCubit: profileCubit),
+          const Gap(20),
+          _UserDetails(profileCubit: profileCubit),
+        ],
+      ),
+    );
+  }
+}
+
+class _UserHeader extends StatelessWidget {
+  const _UserHeader({required this.profileCubit});
+  final ProfileCubit profileCubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Flexible(
+          child: Text(
+            profileCubit.userProfileData?.username ?? "",
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+        ),
+        const Spacer(),
+        const SelectionBlocBuilderThemeAndLanguage(),
+      ],
+    );
+  }
+}
+
+class _ProfileImageAndInfo extends StatelessWidget {
+  const _ProfileImageAndInfo({required this.profileCubit});
+  final ProfileCubit profileCubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        ClipOval(
+          child: CircleAvatar(
+            radius: 40.r,
+            child: CachedNetworkImage(
+              imageUrl: profileCubit.userProfileData?.profileImageUrl ??
+                  "No image available",
+              placeholder: (context, url) =>
+                  const CircularProgressIndicator(color: AppColors.primaryColor),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+              width: 100.w,
+              height: 100.h,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        const Gap(20),
+        UserProfileInformationWidget(
+          postsCount: profileCubit.postsCount?.toInt() ?? 0,
+        ),
+      ],
+    );
+  }
+}
+
+class _UserDetails extends StatelessWidget {
+  const _UserDetails({required this.profileCubit});
+  final ProfileCubit profileCubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AutoSizeText(
+          profileCubit.userProfileData?.name ?? "",
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: CustomTextStyle.pacifico14,
+        ),
+        const Gap(10),
+        AutoSizeText(
+          profileCubit.userProfileData?.bio ?? "",
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: CustomTextStyle.pacifico14,
+        ),
+      ],
     );
   }
 }
