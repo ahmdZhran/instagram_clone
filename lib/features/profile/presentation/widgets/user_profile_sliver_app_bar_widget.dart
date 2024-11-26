@@ -6,10 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/core/utils/custom_text_style.dart';
+import 'package:instagram_clone/features/profile/presentation/widgets/custom_sketlonizer_loading_widget.dart';
 import '../cubits/profile_cubit/profile_cubit.dart';
 import 'edit_and_share_buttons_widget.dart';
 import 'selection_bloc_builder_theme_and_language.dart';
-import 'user_profile_information_widget.dart';
 
 class UserProfileSliverAppBarWidget extends StatefulWidget {
   const UserProfileSliverAppBarWidget({super.key, required this.uid});
@@ -33,7 +33,7 @@ class _UserProfileSliverAppBarWidgetState
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      expandedHeight: 255.h,
+      expandedHeight: 260.h,
       centerTitle: false,
       pinned: ModalRoute.of(context)!.isFirst,
       floating: ModalRoute.of(context)!.isFirst,
@@ -41,12 +41,17 @@ class _UserProfileSliverAppBarWidgetState
         bloc: _profileCubit,
         builder: (context, state) {
           if (state is ProfileLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else {
+            return const Center(
+                child: Padding(
+              padding: EdgeInsets.only(top: 40),
+              child: CustomSketlonizerLoadingWidget(),
+            ));
+          } else if (state is ProfileSuccess) {
             return FlexibleSpaceBar(
               background: _UserProfileContent(profileCubit: _profileCubit),
             );
           }
+          return const SizedBox.shrink();
         },
       ),
     );
@@ -114,7 +119,8 @@ class _ProfileImageAndInfo extends StatelessWidget {
               imageUrl: profileCubit.userProfileData?.profileImageUrl ??
                   "No image available",
               placeholder: (context, url) => const CircularProgressIndicator(
-                  color: AppColors.primaryColor),
+                color: AppColors.primaryColor,
+              ),
               errorWidget: (context, url, error) => const Icon(Icons.error),
               width: 100.w,
               height: 100.h,
@@ -123,9 +129,10 @@ class _ProfileImageAndInfo extends StatelessWidget {
           ),
         ),
         const Gap(20),
-        UserProfileInformationWidget(
-          postsCount: profileCubit.postsCount?.toInt() ?? 0,
-        ),
+        //TOdO pass the count of posts from user posts cubit 
+        // UserProfileInformationWidget(
+        //   postsCount: profileCubit.postsCount?.toInt() ?? 0,
+        // ),
       ],
     );
   }

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/features/explore/data/explore_repository.dart';
 import 'package:instagram_clone/features/explore/domain/entities/serach_user_entity.dart';

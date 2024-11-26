@@ -1,6 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import '../cubits/profile_cubit/profile_cubit.dart';
 import '../widgets/user_posts_widget.dart';
@@ -71,12 +71,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ];
           },
           body: Padding(
-            padding: EdgeInsets.only(top: 82.h),
-            child: const TabBarView(
+            padding: const EdgeInsets.only(top: 110),
+            child: TabBarView(
               children: [
-                //TOdO في معارضة هنا بين الحالات لو البروقايل نجح ف البوستات مش بتظهر والعكس
-                UserPostsWidget(),
-                UserProfileMentionedPostsWidget(),
+                UserPostsGridView(
+                  uid: FirebaseAuth.instance.currentUser!.uid,
+                ),
+                const UserProfileMentionedPostsWidget(),
               ],
             ),
           )),

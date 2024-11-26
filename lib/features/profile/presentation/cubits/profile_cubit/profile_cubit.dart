@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../../core/helper/image_service.dart';
-import '../../../data/models/user_post_model.dart';
 import '../../../data/repositories/profile_repository.dart';
 import '../../../domain/entities/user_profile_entity.dart';
 import '../../../profile_di.dart';
@@ -18,12 +17,9 @@ class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepository _profileRepository;
   ImagePickerService? _pickerImageService;
   UserProfileEntity? userProfileData;
-  List<UserPostModel>? posts;
-  int? postsCount;
   Uint8List? profileImage;
 
   Future<void> getUserData({required String userId}) async {
-    
     try {
       emit(ProfileLoading());
       final userData = await _profileRepository.getProfileData(userId);
@@ -58,16 +54,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     return null;
   }
 
-  Future<void> getUserPosts(String userId) async {
-    try {
-      emit(UserPostsLoading());
-      final posts = await _profileRepository.getUserPosts(userId);
-      postsCount = posts.length;
-      emit(UserPostsSuccess(posts: posts));
-    } catch (error) {
-      emit(UserPostsFailure(errMessage: error.toString()));
-    }
-  }
 
   static const String _tag = "profile_instance";
 
