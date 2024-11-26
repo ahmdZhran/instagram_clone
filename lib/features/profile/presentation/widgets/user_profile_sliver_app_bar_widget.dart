@@ -10,7 +10,6 @@ import 'package:instagram_clone/features/profile/presentation/widgets/custom_ske
 import '../cubits/profile_cubit/profile_cubit.dart';
 import 'edit_and_share_buttons_widget.dart';
 import 'selection_bloc_builder_theme_and_language.dart';
-import 'user_profile_information_widget.dart';
 
 class UserProfileSliverAppBarWidget extends StatefulWidget {
   const UserProfileSliverAppBarWidget({super.key, required this.uid});
@@ -130,9 +129,10 @@ class _ProfileImageAndInfo extends StatelessWidget {
           ),
         ),
         const Gap(20),
-        UserProfileInformationWidget(
-          postsCount: profileCubit.postsCount?.toInt() ?? 0,
-        ),
+        //TOdO pass the count of posts from user posts cubit 
+        // UserProfileInformationWidget(
+        //   postsCount: profileCubit.postsCount?.toInt() ?? 0,
+        // ),
       ],
     );
   }

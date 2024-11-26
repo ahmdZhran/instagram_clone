@@ -29,18 +29,18 @@ class ProfileUpdateFailure extends ProfileState {
   ProfileUpdateFailure({required this.errMessage});
 }
 
-class UserPostsLoading extends ProfileState {}
+// class UserPostsLoading extends ProfileState {}
 
-class UserPostsSuccess extends ProfileState {
-  // final List<UserPostModel> posts;
+// class UserPostsSuccess extends ProfileState {
+//   // final List<UserPostModel> posts;
 
-  // UserPostsSuccess({required this.posts});
-}
+//   // UserPostsSuccess({required this.posts});
+// }
 
-class UserPostsFailure extends ProfileState {
-  final String errMessage;
-  UserPostsFailure({required this.errMessage});
-}
+// class UserPostsFailure extends ProfileState {
+//   final String errMessage;
+//   UserPostsFailure({required this.errMessage});
+// }
 
 
 

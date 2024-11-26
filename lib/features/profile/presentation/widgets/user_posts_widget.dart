@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../cubits/profile_cubit/profile_cubit.dart';
+import 'package:instagram_clone/core/utils/app_colors.dart';
+import 'package:instagram_clone/features/profile/presentation/cubits/user_posts/user_posts_cubit.dart';
+import 'package:shimmer/shimmer.dart';
 
 class UserPostsGridView extends StatefulWidget {
   const UserPostsGridView({super.key, required this.uid});
@@ -14,28 +15,52 @@ class UserPostsGridView extends StatefulWidget {
 }
 
 class _UserPostsGridViewState extends State<UserPostsGridView> {
-  late final ProfileCubit _profileCubit;
+  late final UserPostsCubit _userPostsCubit;
 
   @override
   void initState() {
     super.initState();
-    _profileCubit = ProfileCubit.getInstance();
-    _profileCubit.getUserPosts(widget.uid);
+    _userPostsCubit = UserPostsCubit.getInstance();
+    _userPostsCubit.getUserPosts(widget.uid);
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileCubit, ProfileState>(
-      bloc: _profileCubit,
+    return BlocBuilder<UserPostsCubit, UserPostsState>(
+      bloc: _userPostsCubit,
       builder: (context, state) {
-        if (state is UserPostsFailure) {
-          return const Center(child: Text('Something went wrong'));
-        } else {
-          final posts = _profileCubit.postsList ?? [];
+        if (state is UserPostsLoading) {
+          return Center(
+              child: GridView.builder(
+            padding: const EdgeInsets.all(8),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+              childAspectRatio: 1,
+            ),
+            itemCount: 9,
+            itemBuilder: (context, index) {
+              return Shimmer.fromColors(
+                baseColor: AppColors.deepGrey,
+                highlightColor: AppColors.greyColor,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              );
+            },
+          ));
+        } else if (state is UserPostsFailure) {
+          return const Text('the is something went wrong');
+        } else if (state is UserPostsSuccess) {
+          final posts = _userPostsCubit.postsList ?? [];
           return GridView.builder(
             padding: const EdgeInsets.all(8),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3, 
+              crossAxisCount: 3,
               crossAxisSpacing: 8,
               mainAxisSpacing: 8,
               childAspectRatio: 1,
@@ -54,7 +79,14 @@ class _UserPostsGridViewState extends State<UserPostsGridView> {
             },
           );
         }
+        return const SizedBox.shrink();
       },
     );
+  }
+
+  @override
+  void dispose() {
+    UserPostsCubit.deleteInstance();
+    super.dispose();
   }
 }
