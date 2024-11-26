@@ -11,6 +11,7 @@ import 'package:instagram_clone/core/widgets/custom_button_widget.dart';
 import '../../../../core/router/routes.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../cubits/profile_cubit/profile_cubit.dart';
+import 'edit_and_share_buttons_widget.dart';
 import 'selection_bloc_builder_theme_and_language.dart';
 import 'user_profile_information_widget.dart';
 
@@ -99,38 +100,7 @@ class _UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
                       ],
                     ),
                     const Gap(20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        CustomButton(
-                          width: 140.w,
-                          height: 30.h,
-                          color: AppColors.primaryColor,
-                          onPressed: () {
-                            context.pushNamed(
-                              Routes.editProfileScreen,
-                              arguments: _profileCubit.userProfileData,
-                            );
-                          },
-                          childOfCustomButton: Text(
-                            context.translate(AppStrings.editProfile),
-                            style: CustomTextStyle.pacifico14
-                                .copyWith(color: AppColors.lightThemeColor),
-                          ),
-                        ),
-                        CustomButton(
-                          width: 140.w,
-                          height: 30.h,
-                          color: AppColors.primaryColor,
-                          onPressed: () {},
-                          childOfCustomButton: Text(
-                            context.translate(AppStrings.shareProfile),
-                            style: CustomTextStyle.pacifico13
-                                .copyWith(color: AppColors.lightThemeColor),
-                          ),
-                        ),
-                      ],
-                    ),
+                    EditAndShareButtonsWidget(profileCubit: _profileCubit),
                     const Gap(20),
                     AutoSizeText(
                       maxLines: 1,
