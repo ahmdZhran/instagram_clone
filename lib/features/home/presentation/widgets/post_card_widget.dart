@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -9,6 +8,7 @@ import 'package:insta_image_viewer/insta_image_viewer.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/custom_chached_network_image.dart';
 import '../../../../core/utils/custom_short_messages_for_time_ago.dart';
 import '../../../../core/utils/custom_text_style.dart';
 import '../../../posts/domain/entities/post_entity.dart';
@@ -113,10 +113,10 @@ class _PostImage extends StatelessWidget {
         height: 300.h,
         child: InstaImageViewer(
           imageUrl: imageUrl,
-          child: CachedNetworkImage(
+          child: CustomCachedNetworkImage(
             imageUrl: imageUrl,
             fit: BoxFit.cover,
-            placeholder: (context, url) => Center(
+            placeholder: Center(
               child: LoadingAnimationWidget.threeRotatingDots(
                 color: AppColors.primaryColor,
                 size: 40,

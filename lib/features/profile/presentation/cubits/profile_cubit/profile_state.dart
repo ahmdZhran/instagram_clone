@@ -41,3 +41,16 @@ class UserPostsFailure extends ProfileState {
   final String errMessage;
   UserPostsFailure({required this.errMessage});
 }
+
+
+class ThemeChanged extends ProfileState {
+  final bool isDark;
+
+  ThemeChanged({required this.isDark});
+}
+
+class LanguageChanged extends ProfileState {
+  final Locale locale;
+
+  LanguageChanged({required this.locale});
+}

@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import '../cubits/profile_cubit/profile_cubit.dart';
-import '../widgets/user_posts_widget.dart';
 import '../widgets/user_profile_bar_delegate_widget.dart';
 import '../widgets/user_profile_mentioned_posts_widget.dart';
 import 'package:sliver_tools/sliver_tools.dart';
+import '../widgets/user_posts_widget.dart';
 import '../widgets/user_profile_app_bar_widget.dart';
+import '../widgets/user_profile_header.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key, required this.uid});
@@ -18,11 +19,11 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   late ScrollController _nestedScrollController;
-  final profileCubit = ProfileCubit.getInstance();
+
   @override
   void initState() {
     _nestedScrollController = ScrollController();
-    profileCubit.getUserData(userId: widget.uid);
+    ProfileCubit.getInstance();
     super.initState();
   }
 
@@ -75,7 +76,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             padding: EdgeInsets.only(top: 82.h),
             child: const TabBarView(
               children: [
-                //TOdO في معارضة هنا بين الحالات لو البروقايل نجح ف البوستات مش بتظهر والعكس
                 UserPostsWidget(),
                 UserProfileMentionedPostsWidget(),
               ],
@@ -87,7 +87,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void dispose() {
     _nestedScrollController.dispose();
-    ProfileCubit.deleteInstance();
     super.dispose();
   }
 }
