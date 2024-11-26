@@ -1,18 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/core/utils/custom_text_style.dart';
-import 'package:instagram_clone/features/profile/presentation/cubits/user_posts/user_posts_cubit.dart';
 import '../cubits/profile_cubit/profile_cubit.dart';
 import 'custom_shimmer_effect_widgets.dart';
 import 'edit_and_share_buttons_widget.dart';
 import 'profile_image_and_info.dart';
 import 'selection_bloc_builder_theme_and_language.dart';
-import 'user_profile_information_widget.dart';
 
 class UserProfileSliverAppBarWidget extends StatefulWidget {
   const UserProfileSliverAppBarWidget({super.key, required this.uid});
