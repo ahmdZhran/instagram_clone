@@ -3,15 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
-import '../cubits/profile_cubit/profile_cubit.dart';
+import '../cubits/settings/settings_cubit.dart';
 
-class ThemeAndLanguageBlocBuilderWidget extends StatelessWidget {
-  const ThemeAndLanguageBlocBuilderWidget({
+class SelectionBlocBuilderLanguageAndTheme extends StatelessWidget {
+  const SelectionBlocBuilderLanguageAndTheme({
     super.key,
-    required ProfileCubit profileCubit,
-  }) : _profileCubit = profileCubit;
+    required this.settingsCubit,
+  });
 
-  final ProfileCubit _profileCubit;
+  final SettingsCubit settingsCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -20,23 +20,23 @@ class ThemeAndLanguageBlocBuilderWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          BlocBuilder<ProfileCubit, ProfileState>(
-            bloc: _profileCubit,
+          BlocBuilder<SettingsCubit, SettingsState>(
+            bloc: settingsCubit,
             builder: (context, state) {
               return SwitchListTile(
                 inactiveThumbColor: AppColors.primaryColor,
                 activeColor: AppColors.primaryColor,
                 title: const Text(AppStrings.darkMode),
-                value: _profileCubit.isDark,
+                value: settingsCubit.isDark,
                 onChanged: (bool value) {
-                  _profileCubit.changeTheme();
+                  settingsCubit.changeTheme();
                 },
                 secondary: const Icon(Icons.dark_mode),
               );
             },
           ),
-          BlocBuilder<ProfileCubit, ProfileState>(
-            bloc: _profileCubit,
+          BlocBuilder<SettingsCubit, SettingsState>(
+            bloc: settingsCubit,
             builder: (context, state) {
               return ListTile(
                 leading: const Icon(Icons.language),
@@ -45,24 +45,20 @@ class ThemeAndLanguageBlocBuilderWidget extends StatelessWidget {
                     height: 2,
                     color: Colors.transparent,
                   ),
-                  value: _profileCubit.currentLangCode,
+                  value: settingsCubit.currentLangCode,
                   icon: const Icon(Icons.arrow_drop_down),
-                  items: <String>[
-                    AppStrings.englishCode,
-                    AppStrings.arabicCode
-                  ].map<DropdownMenuItem<String>>(
-                      (String value) {
+                  items: <String>[AppStrings.englishCode, AppStrings.arabicCode]
+                      .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
-                      child: Text(
-                          value == AppStrings.englishCode
-                              ? AppStrings.english
-                              : AppStrings.arabic),
+                      child: Text(value == AppStrings.englishCode
+                          ? AppStrings.english
+                          : AppStrings.arabic),
                     );
                   }).toList(),
                   onChanged: (String? newValue) {
                     if (newValue != null) {
-                      _profileCubit.changeLanguage(newValue);
+                      settingsCubit.changeLanguage(newValue);
                     }
                   },
                 ),

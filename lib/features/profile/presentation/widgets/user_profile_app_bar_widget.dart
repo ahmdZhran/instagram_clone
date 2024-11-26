@@ -1,10 +1,14 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:instagram_clone/features/profile/presentation/cubits/profile_cubit/profile_cubit.dart';
-import '../../../../core/utils/app_colors.dart';
-import 'selection_button_language_and_theme_widget.dart';
+import 'package:gap/gap.dart';
+import 'package:instagram_clone/core/utils/app_colors.dart';
+import 'package:instagram_clone/core/utils/custom_text_style.dart';
+import 'package:instagram_clone/core/widgets/custom_button_widget.dart'; // Replace with the actual import path for CustomButton
+import '../cubits/profile_cubit/profile_cubit.dart';
+import 'selection_bloc_builder_theme_and_language.dart';
 import 'user_profile_information_widget.dart';
 
 class UserProfileAppBarWidget extends StatefulWidget {
@@ -28,10 +32,11 @@ class _UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      expandedHeight: 250.h,
       centerTitle: false,
       pinned: ModalRoute.of(context)!.isFirst,
       floating: ModalRoute.of(context)!.isFirst,
-      title: BlocBuilder<ProfileCubit, ProfileState>(
+      flexibleSpace: BlocBuilder<ProfileCubit, ProfileState>(
         bloc: _profileCubit,
         builder: (context, state) {
           if (state is ProfileLoading) {
@@ -39,44 +44,100 @@ class _UserProfileAppBarWidgetState extends State<UserProfileAppBarWidget> {
               child: CircularProgressIndicator(),
             );
           } else if (state is ProfileSuccess) {
-            return SizedBox(
-              height: 00,
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(_profileCubit.userProfileData?.username ?? ""),
-                      const Spacer(),
-                      SelectionButtonLanguageAndThemeWidget(
-                        profileCubit: _profileCubit,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      ClipOval(
-                        child: CachedNetworkImage(
-                          imageUrl:
-                              _profileCubit.userProfileData!.profileImageUrl,
-                          width: 80.r,
-                          height: 80.r,
-                          fit: BoxFit.cover,
-                          placeholder: (context, url) =>
-                              const CircularProgressIndicator(
-                            color: AppColors.primaryColor,
+            return FlexibleSpaceBar(
+              background: Padding(
+                padding: EdgeInsets.only(left: 10.w, right: 10.h, top: 40.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            _profileCubit.userProfileData?.username ?? "",
+                            style: Theme.of(context).textTheme.titleLarge,
                           ),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
                         ),
-                      ),
-                      // UserProfileInformationWidget(
-                      //   postsCount: _profileCubit.postsCount?.toInt() ?? 0,
-                      // )
-                    ],
-                  ),
-                ],
+                        const Spacer(),
+                        const SelectionBlocBuilderThemeAndLanguage()
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        ClipOval(
+                          child: CircleAvatar(
+                            radius: 40.r,
+                            child: CachedNetworkImage(
+                              imageUrl: _profileCubit
+                                      .userProfileData?.profileImageUrl ??
+                                  "this is now image to shown",
+                              placeholder: (context, url) =>
+                                  const CircularProgressIndicator(
+                                color: AppColors.primaryColor,
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                              width: 100.w,
+                              height: 100.h,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            UserProfileInformationWidget(
+                              postsCount:
+                                  _profileCubit.postsCount?.toInt() ?? 0,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const Gap(20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CustomButton(
+                          width: 140.w,
+                          height: 30.h,
+                          color: AppColors.primaryColor,
+                          onPressed: () {},
+                          childOfCustomButton: const Text(
+                            "Edit Profile",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        CustomButton(
+                          width: 140.w,
+                          height: 30.h,
+                          color: AppColors.primaryColor,
+                          onPressed: () {},
+                          childOfCustomButton: const Text(
+                            "Follow",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Gap(20),
+                    AutoSizeText(
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      _profileCubit.userProfileData?.name ?? "",
+                      style: CustomTextStyle.pacifico14,
+                    ),
+                    const Gap(10),
+                    AutoSizeText(
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      _profileCubit.userProfileData?.bio ?? "",
+                      style: CustomTextStyle.pacifico14,
+                    ),
+                    const Gap(10),
+                  ],
+                ),
               ),
             );
           }

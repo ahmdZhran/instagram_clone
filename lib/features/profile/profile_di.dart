@@ -20,12 +20,10 @@ class ProfileDI {
         () => InternetConnectionChecker());
     profileDI.registerLazySingleton<UserLocalDataSource>(
         () => UserLocalDataSource(profileDI()));
-    profileDI.registerLazySingleton<ProfileRepository>(
-      () => ProfileRepository(
-        remoteDataSource: profileDI(),
-        connectionChecker: profileDI(),
-        localDataSource: profileDI(),
-      ),
-    );
+    profileDI.registerLazySingleton<ProfileRepository>(() => ProfileRepository(
+          remoteDataSource: profileDI(),
+          connectionChecker: profileDI(),
+          localDataSource: profileDI(),
+        ));
   }
 }
