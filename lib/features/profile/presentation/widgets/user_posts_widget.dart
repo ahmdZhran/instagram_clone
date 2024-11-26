@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubits/user_posts/user_posts_cubit.dart';
-import 'custom_grid_view_with_shimmer_effect.dart';
+import 'custom_shimmer_effect_widgets.dart';
 
 class UserPostsGridView extends StatefulWidget {
   const UserPostsGridView({super.key, required this.uid});
