@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -69,13 +70,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               )
             ];
           },
-          body: const Padding(
-            padding: EdgeInsets.only(top: 110),
+          body: Padding(
+            padding: const EdgeInsets.only(top: 110),
             child: TabBarView(
               children: [
-                Text('data'),
-                // UserPostsWidget(),
-                UserProfileMentionedPostsWidget(),
+                UserPostsGridView(
+                  uid: FirebaseAuth.instance.currentUser!.uid,
+                ),
+                const UserProfileMentionedPostsWidget(),
               ],
             ),
           )),

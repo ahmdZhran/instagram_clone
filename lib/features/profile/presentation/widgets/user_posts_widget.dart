@@ -1,25 +1,26 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/features/profile/presentation/cubits/profile_cubit/profile_cubit.dart';
-import '../../data/models/user_post_model.dart';
 
-class UserPostsWidget extends StatefulWidget {
-  const UserPostsWidget({super.key});
+import '../cubits/profile_cubit/profile_cubit.dart';
+
+class UserPostsGridView extends StatefulWidget {
+  const UserPostsGridView({super.key, required this.uid});
+
+  final String uid;
 
   @override
-  State<UserPostsWidget> createState() => _UserPostsWidgetState();
+  State<UserPostsGridView> createState() => _UserPostsGridViewState();
 }
 
-class _UserPostsWidgetState extends State<UserPostsWidget> {
-  final String userId = FirebaseAuth.instance.currentUser!.uid;
-  final ProfileCubit _profileCubit = ProfileCubit.getInstance();
+class _UserPostsGridViewState extends State<UserPostsGridView> {
+  late final ProfileCubit _profileCubit;
 
   @override
   void initState() {
-    _profileCubit.getUserPosts(userId);
     super.initState();
+    _profileCubit = ProfileCubit.getInstance();
+    _profileCubit.getUserPosts(widget.uid);
   }
 
   @override
@@ -27,47 +28,32 @@ class _UserPostsWidgetState extends State<UserPostsWidget> {
     return BlocBuilder<ProfileCubit, ProfileState>(
       bloc: _profileCubit,
       builder: (context, state) {
-        if (state is UserPostsLoading) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (state is UserPostsFailure) {
-          return Center(child: Text('Error: ${state.errMessage}'));
-        } else if (state is UserPostsSuccess) {
-          final List<UserPostModel> posts = state.posts;
-          if (posts.isEmpty) {
-            return const Center(child: Text('No posts available'));
-          }
-
+        if (state is UserPostsFailure) {
+          return const Center(child: Text('Something went wrong'));
+        } else {
+          final posts = _profileCubit.postsList ?? [];
           return GridView.builder(
-            itemCount: posts.length,
+            padding: const EdgeInsets.all(8),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 4,
-              mainAxisSpacing: 4,
+              crossAxisCount: 3, 
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+              childAspectRatio: 1,
             ),
+            itemCount: posts.length,
             itemBuilder: (context, index) {
               final post = posts[index];
-              final imageUrl = post.postImageUrl;
-
-              // Clear invalid URL from cache
-              final validImageUrl =
-                  Uri.tryParse(imageUrl)?.hasAbsolutePath == true
-                      ? imageUrl
-                      : 'https://via.placeholder.com/150';
-              return SizedBox(
-                child: CachedNetworkImage(
-                  imageUrl: validImageUrl,
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                  fit: BoxFit.cover,
-                ),
+              return CachedNetworkImage(
+                imageUrl: post.postImageUrl,
+                placeholder: (context, url) =>
+                    Container(color: Colors.grey[300]),
+                errorWidget: (context, url, error) =>
+                    const Icon(Icons.error, color: Colors.red),
+                fit: BoxFit.cover,
               );
             },
           );
         }
-
-        return const SizedBox.shrink();
       },
     );
   }
