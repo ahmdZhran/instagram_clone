@@ -69,16 +69,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               )
             ];
           },
-          body: Padding(
-            padding: const EdgeInsets.only(top: 110),
-            child: TabBarView(
-              children: [
-                UserPostsGridView(
-                  uid: widget.uid,
-                ),
-                const UserProfileMentionedPostsWidget(),
-              ],
-            ),
+          body: TabBarView(
+            children: [
+              UserPostsGridView(
+                uid: widget.uid,
+              ),
+              const UserProfileMentionedPostsWidget(),
+            ],
           )),
     ));
   }
