@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:instagram_clone/core/router/routes.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
@@ -71,22 +72,29 @@ class _SearchForUserWidgetState extends State<SearchForUserWidget> {
                               Routes.profileScreen,
                               arguments: userData.uid,
                             );
-                            debugPrint('USER UiD ${userData.uid}');
                           },
                           child: ListTile(
-                            contentPadding: const EdgeInsets.all(0),
-                            horizontalTitleGap: 5,
-                            leading: ClipOval(
+                            horizontalTitleGap: 0,
+                            contentPadding: EdgeInsets.zero,
+                            leading: CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.transparent,
+                              child: ClipOval(
                                 child: CachedNetworkImage(
-                              imageUrl: userData.profileImage,
-                              placeholder: (context, url) => Center(
-                                child: LoadingAnimationWidget.threeRotatingDots(
-                                  color: AppColors.primaryColor,
-                                  size: 40,
+                                  imageUrl: userData.profileImage,
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator(
+                                    color: AppColors.primaryColor,
+                                  ),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
+                                  fit: BoxFit.cover,
                                 ),
                               ),
-                            )),
-                            title: Text(userData.username),
+                            ),
+                            title: Text(
+                              userData.username,
+                            ),
                           ),
                         );
                       },
