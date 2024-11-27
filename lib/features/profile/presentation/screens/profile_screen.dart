@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -75,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: TabBarView(
               children: [
                 UserPostsGridView(
-                  uid: FirebaseAuth.instance.currentUser!.uid,
+                  uid: widget.uid,
                 ),
                 const UserProfileMentionedPostsWidget(),
               ],
