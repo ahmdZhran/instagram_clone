@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:instagram_clone/core/router/routes.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
@@ -73,26 +74,19 @@ class _SearchForUserWidgetState extends State<SearchForUserWidget> {
                             );
                           },
                           child: ListTile(
-                            horizontalTitleGap: 0,
-                            contentPadding: EdgeInsets.zero,
                             leading: CircleAvatar(
-                              radius: 30,
-                              backgroundColor: Colors.transparent,
-                              child: ClipOval(
-                                child: CachedNetworkImage(
-                                  imageUrl: userData.profileImage,
-                                  placeholder: (context, url) =>
-                                      const CircularProgressIndicator(
-                                    color: AppColors.primaryColor,
-                                  ),
-                                  errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
-                                  fit: BoxFit.cover,
-                                ),
+                              radius: 25.r,
+                              backgroundImage: CachedNetworkImageProvider(
+                                userData.profileImage,
                               ),
+                              backgroundColor: Colors.transparent,
                             ),
                             title: Text(
                               userData.username,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         );
