@@ -47,7 +47,6 @@ class _ProfileImageAndInfoState extends State<ProfileImageAndInfo> {
           ),
         ),
         const Gap(20),
-        //TOdO pass the count of posts from user posts cubit
         UserProfileInformationWidget(
           postsCount: _userPostsCubit.postsCount?.toInt() ?? 0,
         ),
