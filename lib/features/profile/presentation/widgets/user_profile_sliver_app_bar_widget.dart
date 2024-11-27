@@ -32,6 +32,7 @@ class _UserProfileSliverAppBarWidgetState
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      automaticallyImplyLeading: false,
       expandedHeight: 260.h,
       centerTitle: false,
       pinned: ModalRoute.of(context)!.isFirst,
