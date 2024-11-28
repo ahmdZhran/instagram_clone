@@ -26,6 +26,8 @@
     "cancel":"إلغاء",
     "exit":"خروج",
     "no_users_found":"لا يوجد مستخدم بهذا الاسم",
-    "search_for_user":"ابحث عن مستخدم"
+    "search_for_user":"ابحث عن مستخدم",
+    "follow":"متابعة",
+    "un_follow":"الغاء المتابعة"
     
 }

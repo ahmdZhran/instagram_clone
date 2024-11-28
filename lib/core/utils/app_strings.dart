@@ -1,3 +1,4 @@
+
 abstract class AppStrings {
   static const String appName = "Instagram";
   // main widgets
@@ -45,6 +46,8 @@ abstract class AppStrings {
   static const String english = "english";
   static const String arabic = "arabic";
   static const String changePhoto = "change_photo";
+  static const String follow = "follow";
+  static const String unFollow = "un_follow";
 
   // add post strings
   static const String addPost = "add_post";

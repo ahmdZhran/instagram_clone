@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,7 +49,10 @@ class _UserProfileSliverAppBarWidgetState
             ));
           } else if (state is ProfileSuccess) {
             return FlexibleSpaceBar(
-              background: _UserProfileContent(profileCubit: _profileCubit),
+              background: _UserProfileContent(
+                profileCubit: _profileCubit,
+                uid: widget.uid,
+              ),
             );
           }
           return const SizedBox.shrink();
@@ -59,9 +63,9 @@ class _UserProfileSliverAppBarWidgetState
 }
 
 class _UserProfileContent extends StatelessWidget {
-  const _UserProfileContent({required this.profileCubit});
+  const _UserProfileContent({required this.profileCubit, required this.uid});
   final ProfileCubit profileCubit;
-
+  final String uid;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -69,11 +73,14 @@ class _UserProfileContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _UserHeader(profileCubit: profileCubit),
+          _UserHeader(
+            profileCubit: profileCubit,
+            uid: uid,
+          ),
           const Gap(16),
           ProfileImageAndInfo(profileCubit: profileCubit),
           const Gap(20),
-          EditAndShareButtonsWidget(profileCubit: profileCubit),
+          EditAndShareButtonsWidget(profileCubit: profileCubit, uid: uid,),
           const Gap(20),
           _UserDetails(profileCubit: profileCubit),
         ],
@@ -83,9 +90,9 @@ class _UserProfileContent extends StatelessWidget {
 }
 
 class _UserHeader extends StatelessWidget {
-  const _UserHeader({required this.profileCubit});
+  const _UserHeader({required this.profileCubit, required this.uid});
   final ProfileCubit profileCubit;
-
+  final String uid;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -98,6 +105,7 @@ class _UserHeader extends StatelessWidget {
           ),
         ),
         const Spacer(),
+        if(uid == FirebaseAuth.instance.currentUser!.uid)
         const SelectionBlocBuilderThemeAndLanguage(),
       ],
     );
