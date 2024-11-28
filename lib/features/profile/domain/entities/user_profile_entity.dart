@@ -1,13 +1,11 @@
-
 class UserProfileEntity {
   final String uid;
   final String name;
   final String username;
   final String bio;
   final String profileImageUrl;
-  final String? followers;
-  final String? following;
-
+  final List<String>? followers;
+  final List<String>? following;
 
   UserProfileEntity({
     required this.name,
@@ -15,9 +13,7 @@ class UserProfileEntity {
     required this.username,
     required this.bio,
     required this.profileImageUrl,
-     this.followers,
-     this.following,
+    this.followers,
+    this.following,
   });
-
-
 }

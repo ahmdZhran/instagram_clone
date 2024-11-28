@@ -7,16 +7,17 @@ class UserModel {
   final String bio;
   final String profileImageUrl;
   final String name;
-  final String? following;
-  final String? followers;
+ final List<String>? followers;
+  final List<String>? following;
+
   UserModel({
     required this.name,
     required this.uid,
     required this.username,
     required this.bio,
     required this.profileImageUrl,
-    this.followers,
-    this.following
+     this.followers,
+     this.following
   });
 
   factory UserModel.fromDocument(DocumentSnapshot doc) {
@@ -26,19 +27,19 @@ class UserModel {
       username: doc['user_name'],
       bio: doc['bio'],
       profileImageUrl: doc['profile_image'],
-      followers: doc['followers'],
-      following: doc['following']
+      followers: List<String>.from(doc['followers'] ?? []),
+      following: List<String>.from(doc['following'] ?? []),
     );
   }
 
-  Map<String, dynamic> toJson() {
+ Map<String, dynamic> toJson() {
     return {
       'name': name,
       'user_name': username,
       'bio': bio,
       'profile_image': profileImageUrl,
       'followers': followers,
-      'following': following
+      'following': following,
     };
   }
 
@@ -49,11 +50,10 @@ class UserModel {
       username: json['user_name'],
       bio: json['bio'],
       profileImageUrl: json['profile_image'],
-      followers: json['followers'],
-      following: json['following']
+      followers: List<String>.from(json['followers'] ?? []),
+      following: List<String>.from(json['following'] ?? []),
     );
   }
-
   UserProfileEntity toEntity() {
     return UserProfileEntity(
       uid: uid,
@@ -62,7 +62,7 @@ class UserModel {
       profileImageUrl: profileImageUrl,
       name: name,
       followers: followers,
-      following: following
+      following: following,
     );
   }
 
@@ -74,7 +74,8 @@ class UserModel {
       bio: entity.bio,
       profileImageUrl: entity.profileImageUrl,
       followers: entity.followers,
-      following: entity.following
+      following: entity.following,
     );
   }
+
 }
