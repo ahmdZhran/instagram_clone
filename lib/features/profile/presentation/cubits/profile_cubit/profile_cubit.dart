@@ -60,9 +60,11 @@ class ProfileCubit extends Cubit<ProfileState> {
     try {
       await _profileRepository.followUser(currentUserId, targetUserId);
       userProfileData = userProfileData!.copyWith(
-        followers: List<String>.from(userProfileData!.followers)..add(currentUserId),
+        followers: List<String>.from(userProfileData!.followers)
+          ..add(currentUserId),
       );
-      emit(ProfileFollowUpdated(isFollowed: true, followersCount: userProfileData!.followers.length));
+      emit(ProfileFollowUpdated(
+          isFollowed: true, followersCount: userProfileData!.followers.length));
     } catch (error) {
       emit(ProfileFailure(errMessage: error.toString()));
     }
@@ -72,9 +74,12 @@ class ProfileCubit extends Cubit<ProfileState> {
     try {
       await _profileRepository.unFollowUser(currentUserId, targetUserId);
       userProfileData = userProfileData!.copyWith(
-        followers: List<String>.from(userProfileData!.followers)..remove(currentUserId),
+        followers: List<String>.from(userProfileData!.followers)
+          ..remove(currentUserId),
       );
-      emit(ProfileFollowUpdated(isFollowed: false, followersCount: userProfileData!.followers.length));
+      emit(ProfileFollowUpdated(
+          isFollowed: false,
+          followersCount: userProfileData!.followers.length));
     } catch (error) {
       emit(ProfileFailure(errMessage: error.toString()));
     }

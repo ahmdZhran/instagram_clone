@@ -18,55 +18,85 @@ class ProfileRepository {
   });
 
   Future<UserProfileEntity> getProfileData(String userId) async {
-    bool isConnected = await connectionChecker.hasConnection;
-    if (isConnected) {
-      final UserModel remoteData =
-          await remoteDataSource.getUserProfile(userId);
+    try {
+      bool isConnected = await connectionChecker.hasConnection;
+      if (isConnected) {
+        final UserModel remoteData =
+            await remoteDataSource.getUserProfile(userId);
 
-      localDataSource.cacheUserProfile(remoteData);
-      return remoteData.toEntity();
-    } else {
-      final UserModel? localData = localDataSource.getCachedUserProfile();
-      if (localData != null) {
-        return localData.toEntity();
+        localDataSource.cacheUserProfile(remoteData);
+        return remoteData.toEntity();
       } else {
-        throw Exception("no internet");
+        final UserModel? localData = localDataSource.getCachedUserProfile();
+        if (localData != null) {
+          return localData.toEntity();
+        } else {
+          throw Exception("No internet connection");
+        }
       }
+    } catch (error) {
+      print(
+          "Error fetching profile data from repository: $error"); // Log the error message
+      rethrow;
     }
   }
 
   Future<UserProfileEntity> updateProfileData(
       UserProfileEntity profileEntity) async {
-    bool isConnected = await connectionChecker.hasConnection;
-    if (isConnected) {
-      final userModel = UserModel(
-        name: profileEntity.name,
-        username: profileEntity.username,
-        bio: profileEntity.bio,
-        profileImageUrl: profileEntity.profileImageUrl,
-        uid: profileEntity.uid,
-        followers: profileEntity.followers,
-        following: profileEntity.following,
-      );
-      final updatedUser = await remoteDataSource.updateUserProfile(
-        profileEntity.uid,
-        userModel,
-      );
-      return updatedUser.toEntity();
-    } else {
-      throw Exception("No internet connection");
+    try {
+      bool isConnected = await connectionChecker.hasConnection;
+      if (isConnected) {
+        final userModel = UserModel(
+          name: profileEntity.name,
+          username: profileEntity.username,
+          bio: profileEntity.bio,
+          profileImageUrl: profileEntity.profileImageUrl,
+          uid: profileEntity.uid,
+          followers: profileEntity.followers,
+          following: profileEntity.following,
+        );
+        final updatedUser = await remoteDataSource.updateUserProfile(
+          profileEntity.uid,
+          userModel,
+        );
+        return updatedUser.toEntity();
+      } else {
+        throw Exception("No internet connection");
+      }
+    } catch (error) {
+      print(
+          "Error updating profile data in repository: $error"); // Log the error message
+      rethrow;
     }
   }
 
   Future<List<UserPostModel>> getUserPosts(String userId) async {
-    return await remoteDataSource.getUserPosts(userId);
+    try {
+      return await remoteDataSource.getUserPosts(userId);
+    } catch (error) {
+      print(
+          "Error fetching user posts in repository: $error"); // Log the error message
+      rethrow;
+    }
   }
 
   Future<void> followUser(String currentUserId, String targetUserId) async {
-    await remoteDataSource.followUser(currentUserId, targetUserId);
+    try {
+      await remoteDataSource.followUser(currentUserId, targetUserId);
+    } catch (error) {
+      print(
+          "Error following user in repository: $error"); // Log the error message
+      rethrow;
+    }
   }
 
   Future<void> unFollowUser(String currentUserId, String targetUserId) async {
-    await remoteDataSource.unFollowUser(currentUserId, targetUserId);
+    try {
+      await remoteDataSource.unFollowUser(currentUserId, targetUserId);
+    } catch (error) {
+      print(
+          "Error unfollowing user in repository: $error"); // Log the error message
+      rethrow;
+    }
   }
 }
