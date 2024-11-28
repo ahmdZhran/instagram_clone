@@ -47,7 +47,7 @@ class _UserProfileSliverAppBarWidgetState
               padding: EdgeInsets.only(top: 40),
               child: CustomShimmerLoadingWidget(),
             ));
-          } else if (state is ProfileSuccess) {
+          } else if (state is ProfileSuccess || state is ProfileFollowUpdated) {
             return FlexibleSpaceBar(
               background: _UserProfileContent(
                 profileCubit: _profileCubit,

@@ -54,6 +54,31 @@ class ProfileCubit extends Cubit<ProfileState> {
     return null;
   }
 
+  Future<void> followUser(String currentUserId, String targetUserId) async {
+    try {
+      await _profileRepository.followUser(currentUserId, targetUserId);
+      userProfileData = userProfileData!.copyWith(
+        followers: (userProfileData!.followers ?? 0) + 1,
+      );
+      emit(ProfileFollowUpdated(
+          isFollowed: true, followersCount: userProfileData!.followers ?? 0));
+    } catch (error) {
+      emit(ProfileFailure(errMessage: error.toString()));
+    }
+  }
+
+  Future<void> unFollowUser(String currentUserId, String targetUserId) async {
+    try {
+      await _profileRepository.unFollowUser(currentUserId, targetUserId);
+      userProfileData = userProfileData!.copyWith(
+        followers: (userProfileData!.followers ?? 0) - 1,
+      );
+      emit(ProfileFollowUpdated(
+          isFollowed: false, followersCount: userProfileData!.followers ?? 0));
+    } catch (error) {
+      emit(ProfileFailure(errMessage: error.toString()));
+    }
+  }
 
   static const String _tag = "profile_instance";
 

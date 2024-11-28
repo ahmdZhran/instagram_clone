@@ -48,6 +48,8 @@ class _ProfileImageAndInfoState extends State<ProfileImageAndInfo> {
         const Gap(20),
         UserProfileInformationWidget(
           postsCount: _userPostsCubit.postsCount?.toInt() ?? 0,
+            followingCount: widget.profileCubit.userProfileData?.following?.toInt() ?? 0,
+           followersCount: widget.profileCubit.userProfileData?.followers?.toInt() ?? 0,
         ),
       ],
     );

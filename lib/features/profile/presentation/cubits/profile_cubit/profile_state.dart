@@ -29,7 +29,8 @@ class ProfileUpdateFailure extends ProfileState {
   ProfileUpdateFailure({required this.errMessage});
 }
 
-final class ProfileFollowUpdated extends ProfileState {
+
+class ProfileFollowUpdated extends ProfileState {
   final bool isFollowed;
   final int followersCount;
 

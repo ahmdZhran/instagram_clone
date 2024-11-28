@@ -59,4 +59,12 @@ class ProfileRepository {
   Future<List<UserPostModel>> getUserPosts(String userId) async {
     return await remoteDataSource.getUserPosts(userId);
   }
+Future<void> followUser(String currentUserId, String targetUserId) async {
+    await remoteDataSource.followUser(currentUserId, targetUserId);
+  }
+
+  Future<void> unFollowUser(String currentUserId, String targetUserId) async {
+    await remoteDataSource.unFollowUser(currentUserId, targetUserId);
+  }
+
 }
