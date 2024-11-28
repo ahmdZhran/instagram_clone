@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
@@ -12,16 +13,18 @@ import '../cubits/profile_cubit/profile_cubit.dart';
 class EditAndShareButtonsWidget extends StatelessWidget {
   const EditAndShareButtonsWidget({
     super.key,
-    required ProfileCubit profileCubit,
+    required ProfileCubit profileCubit, required this.uid,
   }) : _profileCubit = profileCubit;
-
+  final String uid;
   final ProfileCubit _profileCubit;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return     uid == FirebaseAuth.instance.currentUser!.uid ?
+    Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
+    
         CustomButton(
           width: 140.w,
           height: 30.h,
@@ -50,6 +53,16 @@ class EditAndShareButtonsWidget extends StatelessWidget {
           ),
         ),
       ],
-    );
+    ) :  CustomButton(
+          width: 140.w,
+          height: 30.h,
+          color: AppColors.primaryColor,
+          onPressed: () {},
+          childOfCustomButton: Text(
+            context.translate(AppStrings.fllow),
+            style: CustomTextStyle.pacifico13
+                .copyWith(color: AppColors.lightThemeColor),
+          ),
+        );
   }
 }

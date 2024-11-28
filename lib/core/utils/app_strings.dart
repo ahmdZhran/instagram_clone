@@ -45,6 +45,7 @@ abstract class AppStrings {
   static const String english = "english";
   static const String arabic = "arabic";
   static const String changePhoto = "change_photo";
+  static const String follow = "follow";
 
   // add post strings
   static const String addPost = "add_post";
@@ -59,4 +60,5 @@ abstract class AppStrings {
   // explore strings
   static const String noUsersFound = "no_users_found";
   static const String searchForUser = "search_for_user";
+
 }

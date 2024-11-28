@@ -26,5 +26,6 @@
     "cancel":"Cancel",
     "exit":"Exit",
     "no_users_found":"No user Found",
-    "search_for_user":"Search for user"
+    "search_for_user":"Search for user",
+    "follow":"Follow"
 }
