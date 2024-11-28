@@ -18,7 +18,6 @@ class EditAndShareButtonsWidget extends StatefulWidget {
   }) : _profileCubit = profileCubit;
   final String uid;
   final ProfileCubit _profileCubit;
-
   @override
   State<EditAndShareButtonsWidget> createState() =>
       _EditAndShareButtonsWidgetState();
@@ -26,6 +25,7 @@ class EditAndShareButtonsWidget extends StatefulWidget {
 
 class _EditAndShareButtonsWidgetState extends State<EditAndShareButtonsWidget> {
   bool isTapped = false;
+  int followerCount = 0;
   @override
   Widget build(BuildContext context) {
     return widget.uid == FirebaseAuth.instance.currentUser!.uid
@@ -65,11 +65,7 @@ class _EditAndShareButtonsWidgetState extends State<EditAndShareButtonsWidget> {
             width: double.infinity,
             height: 30.h,
             color: AppColors.primaryColor,
-            onPressed: () {
-              setState(() {
-                isTapped = !isTapped;
-              });
-            },
+            onPressed: () {},
             childOfCustomButton: Text(
               isTapped
                   ? context.translate(AppStrings.unFollow)

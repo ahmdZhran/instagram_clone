@@ -80,7 +80,10 @@ class _UserProfileContent extends StatelessWidget {
           const Gap(16),
           ProfileImageAndInfo(profileCubit: profileCubit),
           const Gap(20),
-          EditAndShareButtonsWidget(profileCubit: profileCubit, uid: uid,),
+          EditAndShareButtonsWidget(
+            profileCubit: profileCubit,
+            uid: uid,
+          ),
           const Gap(20),
           _UserDetails(profileCubit: profileCubit),
         ],
@@ -105,8 +108,8 @@ class _UserHeader extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        if(uid == FirebaseAuth.instance.currentUser!.uid)
-        const SelectionBlocBuilderThemeAndLanguage(),
+        if (uid == FirebaseAuth.instance.currentUser!.uid)
+          const SelectionBlocBuilderThemeAndLanguage(),
       ],
     );
   }

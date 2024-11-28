@@ -4,9 +4,18 @@ import '../../../../core/utils/app_strings.dart';
 
 import 'user_profile_counts_info_widget.dart';
 
-class UserProfileInformationWidget extends StatelessWidget {
-  const UserProfileInformationWidget({super.key, required this.postsCount});
+class UserProfileInformationWidget extends StatefulWidget {
+  const UserProfileInformationWidget(
+      {super.key, required this.postsCount});
   final int postsCount;
+
+  @override
+  State<UserProfileInformationWidget> createState() =>
+      _UserProfileInformationWidgetState();
+}
+
+class _UserProfileInformationWidgetState
+    extends State<UserProfileInformationWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -15,7 +24,7 @@ class UserProfileInformationWidget extends StatelessWidget {
           children: [
             UserProfileCountsInfoWidget(
               onTap: () {},
-              count: postsCount.toString(),
+              count: widget.postsCount.toString(),
               title: context.translate(AppStrings.posts),
             ),
             UserProfileCountsInfoWidget(
