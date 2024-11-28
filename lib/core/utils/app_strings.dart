@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AppStrings {
   static const String appName = "Instagram";
