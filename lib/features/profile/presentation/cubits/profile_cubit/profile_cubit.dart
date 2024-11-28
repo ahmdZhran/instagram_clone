@@ -10,11 +10,13 @@ import '../../../profile_di.dart';
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
-  ProfileCubit(this._profileRepository) : super(ProfileInitial()) {
+  ProfileCubit(this._profileRepository, this.userId) : super(ProfileInitial()) {
     _pickerImageService = ImagePickerService();
+    getUserData(userId: userId);
   }
 
   final ProfileRepository _profileRepository;
+  final String userId;
   ImagePickerService? _pickerImageService;
   UserProfileEntity? userProfileData;
   Uint8List? profileImage;
@@ -58,10 +60,9 @@ class ProfileCubit extends Cubit<ProfileState> {
     try {
       await _profileRepository.followUser(currentUserId, targetUserId);
       userProfileData = userProfileData!.copyWith(
-        followers: (userProfileData!.followers ?? 0) + 1,
+        followers: List<String>.from(userProfileData!.followers)..add(currentUserId),
       );
-      emit(ProfileFollowUpdated(
-          isFollowed: true, followersCount: userProfileData!.followers ?? 0));
+      emit(ProfileFollowUpdated(isFollowed: true, followersCount: userProfileData!.followers.length));
     } catch (error) {
       emit(ProfileFailure(errMessage: error.toString()));
     }
@@ -71,10 +72,9 @@ class ProfileCubit extends Cubit<ProfileState> {
     try {
       await _profileRepository.unFollowUser(currentUserId, targetUserId);
       userProfileData = userProfileData!.copyWith(
-        followers: (userProfileData!.followers ?? 0) - 1,
+        followers: List<String>.from(userProfileData!.followers)..remove(currentUserId),
       );
-      emit(ProfileFollowUpdated(
-          isFollowed: false, followersCount: userProfileData!.followers ?? 0));
+      emit(ProfileFollowUpdated(isFollowed: false, followersCount: userProfileData!.followers.length));
     } catch (error) {
       emit(ProfileFailure(errMessage: error.toString()));
     }
@@ -82,12 +82,12 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   static const String _tag = "profile_instance";
 
-  static ProfileCubit getInstance() {
+  static ProfileCubit getInstance(String userId) {
     final isRegistered =
         profileDI.isRegistered<ProfileCubit>(instanceName: _tag);
     if (!isRegistered) {
       profileDI.registerSingleton<ProfileCubit>(
-        ProfileCubit(profileDI()),
+        ProfileCubit(profileDI(), userId),
         instanceName: _tag,
       );
     }

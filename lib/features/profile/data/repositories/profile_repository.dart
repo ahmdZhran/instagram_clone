@@ -45,6 +45,8 @@ class ProfileRepository {
         bio: profileEntity.bio,
         profileImageUrl: profileEntity.profileImageUrl,
         uid: profileEntity.uid,
+        followers: profileEntity.followers,
+        following: profileEntity.following,
       );
       final updatedUser = await remoteDataSource.updateUserProfile(
         profileEntity.uid,
@@ -59,12 +61,12 @@ class ProfileRepository {
   Future<List<UserPostModel>> getUserPosts(String userId) async {
     return await remoteDataSource.getUserPosts(userId);
   }
-Future<void> followUser(String currentUserId, String targetUserId) async {
+
+  Future<void> followUser(String currentUserId, String targetUserId) async {
     await remoteDataSource.followUser(currentUserId, targetUserId);
   }
 
   Future<void> unFollowUser(String currentUserId, String targetUserId) async {
     await remoteDataSource.unFollowUser(currentUserId, targetUserId);
   }
-
 }

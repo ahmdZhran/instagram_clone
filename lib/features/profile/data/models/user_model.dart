@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../../domain/entities/user_profile_entity.dart';
 
 class UserModel {
@@ -7,12 +8,17 @@ class UserModel {
   final String bio;
   final String profileImageUrl;
   final String name;
+  final List<String> followers;
+  final List<String> following;
+
   UserModel({
     required this.name,
     required this.uid,
     required this.username,
     required this.bio,
     required this.profileImageUrl,
+    required this.followers,
+    required this.following,
   });
 
   factory UserModel.fromDocument(DocumentSnapshot doc) {
@@ -22,6 +28,8 @@ class UserModel {
       username: doc['user_name'],
       bio: doc['bio'],
       profileImageUrl: doc['profile_image'],
+      followers: List<String>.from(doc['followers'] ?? []),
+      following: List<String>.from(doc['following'] ?? []),
     );
   }
 
@@ -31,6 +39,8 @@ class UserModel {
       'user_name': username,
       'bio': bio,
       'profile_image': profileImageUrl,
+      'followers': followers,
+      'following': following,
     };
   }
 
@@ -41,6 +51,8 @@ class UserModel {
       username: json['user_name'],
       bio: json['bio'],
       profileImageUrl: json['profile_image'],
+      followers: List<String>.from(json['followers'] ?? []),
+      following: List<String>.from(json['following'] ?? []),
     );
   }
 
@@ -51,6 +63,8 @@ class UserModel {
       bio: bio,
       profileImageUrl: profileImageUrl,
       name: name,
+      followers: followers,
+      following: following,
     );
   }
 
@@ -61,6 +75,9 @@ class UserModel {
       username: entity.username,
       bio: entity.bio,
       profileImageUrl: entity.profileImageUrl,
+      followers: entity.followers,
+      following: entity.following,
     );
   }
 }
+

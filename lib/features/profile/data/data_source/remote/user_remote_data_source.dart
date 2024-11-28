@@ -38,7 +38,6 @@ class UserRemoteDataSource {
     return posts;
   }
 
-  //TODO understand this and search on what is this FieldValue.arrayUnion
   Future<void> followUser(String currentUserId, String targetUserId) async {
     // Update the current user's following list
     await _firebaseFirestore.collection("users").doc(currentUserId).update({
