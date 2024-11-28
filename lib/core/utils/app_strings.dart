@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 abstract class AppStrings {
   static const String appName = "Instagram";
   // main widgets
@@ -60,5 +62,4 @@ abstract class AppStrings {
   // explore strings
   static const String noUsersFound = "no_users_found";
   static const String searchForUser = "search_for_user";
-
 }

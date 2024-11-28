@@ -43,6 +43,8 @@ class AuthRepository {
         name: name,
         bio: bio,
         profileImage: imageUrl,
+        followings: [],
+        followers: [],
       );
 
       await firestore.collection('users').doc(userCredential.user!.uid).set(
