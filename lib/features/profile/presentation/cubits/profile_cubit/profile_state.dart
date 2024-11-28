@@ -30,6 +30,9 @@ class ProfileUpdateFailure extends ProfileState {
 }
 
 
+class ProfileFollowUpdated extends ProfileState {
+  final bool isFollowed;
+  final int followersCount;
 
-
-
+  ProfileFollowUpdated({required this.isFollowed, required this.followersCount});
+}

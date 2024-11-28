@@ -18,13 +18,13 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   late ScrollController _nestedScrollController;
-  final profileCubit = ProfileCubit.getInstance();
+  late ProfileCubit profileCubit;
 
   @override
   void initState() {
     super.initState();
     _nestedScrollController = ScrollController();
-    profileCubit.getUserData(userId: widget.uid);
+    profileCubit = ProfileCubit.getInstance(widget.uid);
   }
 
   @override

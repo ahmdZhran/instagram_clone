@@ -6,7 +6,7 @@ class UserDataEntity {
   final String? name;
   final String? bio;
   final String? profileImage;
-  final List<String> followings;
+  final List<String> following;
   final List<String> followers;
 
   UserDataEntity({
@@ -17,7 +17,7 @@ class UserDataEntity {
     this.name,
     this.bio,
     this.profileImage,
-    this.followings = const [],
+    this.following = const [],
     this.followers = const [],
   });
 
@@ -30,7 +30,7 @@ class UserDataEntity {
       'user_name': username,
       'bio': bio,
       'profile_image': profileImage,
-      'followings': followings,
+      'following': following,
       'followers': followers,
     };
   }
@@ -44,7 +44,7 @@ class UserDataEntity {
       name: json['name'],
       bio: json['bio'],
       profileImage: json['profileImage'],
-      followings: List<String>.from(json['followings'] ?? []),
+      following: List<String>.from(json['following'] ?? []),
       followers: List<String>.from(json['followers'] ?? []),
     );
   }

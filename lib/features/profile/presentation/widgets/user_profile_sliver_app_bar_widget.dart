@@ -22,12 +22,12 @@ class UserProfileSliverAppBarWidget extends StatefulWidget {
 
 class _UserProfileSliverAppBarWidgetState
     extends State<UserProfileSliverAppBarWidget> {
-  final ProfileCubit _profileCubit = ProfileCubit.getInstance();
+  late ProfileCubit _profileCubit;
 
   @override
   void initState() {
     super.initState();
-    _profileCubit.getUserData(userId: widget.uid);
+    _profileCubit = ProfileCubit.getInstance(widget.uid);
   }
 
   @override
@@ -47,7 +47,7 @@ class _UserProfileSliverAppBarWidgetState
               padding: EdgeInsets.only(top: 40),
               child: CustomShimmerLoadingWidget(),
             ));
-          } else if (state is ProfileSuccess) {
+          } else if (state is ProfileSuccess || state is ProfileFollowUpdated) {
             return FlexibleSpaceBar(
               background: _UserProfileContent(
                 profileCubit: _profileCubit,
@@ -80,7 +80,10 @@ class _UserProfileContent extends StatelessWidget {
           const Gap(16),
           ProfileImageAndInfo(profileCubit: profileCubit),
           const Gap(20),
-          EditAndShareButtonsWidget(profileCubit: profileCubit, uid: uid,),
+          EditAndShareButtonsWidget(
+            profileCubit: profileCubit,
+            uid: uid,
+          ),
           const Gap(20),
           _UserDetails(profileCubit: profileCubit),
         ],
@@ -105,8 +108,8 @@ class _UserHeader extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        if(uid == FirebaseAuth.instance.currentUser!.uid)
-        const SelectionBlocBuilderThemeAndLanguage(),
+        if (uid == FirebaseAuth.instance.currentUser!.uid)
+          const SelectionBlocBuilderThemeAndLanguage(),
       ],
     );
   }

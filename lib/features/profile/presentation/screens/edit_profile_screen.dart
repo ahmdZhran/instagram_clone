@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,7 +34,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
-    profileCubit = ProfileCubit.getInstance();
+    profileCubit = ProfileCubit.getInstance(FirebaseAuth.instance.currentUser!.uid);
   }
 
   @override
@@ -187,6 +188,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         bio: bio ?? widget.userProfileData.bio,
         profileImageUrl: profileImageUrl,
         uid: widget.userProfileData.uid,
+        //TOdO don't send this when you are updating the profile
+        followers: [],
+        following: [],
       );
       profileCubit.updatedUserData(updatedProfile);
     } catch (e) {

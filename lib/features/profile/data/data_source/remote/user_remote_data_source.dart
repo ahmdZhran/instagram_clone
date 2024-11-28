@@ -37,4 +37,28 @@ class UserRemoteDataSource {
 
     return posts;
   }
+
+  Future<void> followUser(String currentUserId, String targetUserId) async {
+    // Update the current user's following list
+    await _firebaseFirestore.collection("users").doc(currentUserId).update({
+      'following': FieldValue.arrayUnion([targetUserId])
+    });
+
+    // Update the target user's followers list
+    await _firebaseFirestore.collection("users").doc(targetUserId).update({
+      'followers': FieldValue.arrayUnion([currentUserId])
+    });
+  }
+
+  Future<void> unFollowUser(String currentUserId, String targetUserId) async {
+    // Update the current user's following list
+    await _firebaseFirestore.collection("users").doc(currentUserId).update({
+      'following': FieldValue.arrayRemove([targetUserId])
+    });
+
+    // Update the target user's followers list
+    await _firebaseFirestore.collection("users").doc(targetUserId).update({
+      'followers': FieldValue.arrayRemove([currentUserId])
+    });
+  }
 }

@@ -43,7 +43,7 @@ class AuthRepository {
         name: name,
         bio: bio,
         profileImage: imageUrl,
-        followings: [],
+        following: [],
         followers: [],
       );
 

@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-
 import '../../../../core/utils/app_colors.dart';
 import '../cubits/profile_cubit/profile_cubit.dart';
 import '../cubits/user_posts/user_posts_cubit.dart';
@@ -48,6 +47,8 @@ class _ProfileImageAndInfoState extends State<ProfileImageAndInfo> {
         const Gap(20),
         UserProfileInformationWidget(
           postsCount: _userPostsCubit.postsCount?.toInt() ?? 0,
+          followersCount: widget.profileCubit.userProfileData?.followers.length ?? 0,
+          followingCount: widget.profileCubit.userProfileData?.following.length ?? 0,
         ),
       ],
     );

@@ -5,8 +5,14 @@ import '../../../../core/utils/app_strings.dart';
 import 'user_profile_counts_info_widget.dart';
 
 class UserProfileInformationWidget extends StatelessWidget {
-  const UserProfileInformationWidget({super.key, required this.postsCount});
+  const UserProfileInformationWidget(
+      {super.key,
+      required this.postsCount,
+      required this.followersCount,
+      required this.followingCount});
   final int postsCount;
+  final int followersCount;
+  final int followingCount;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,12 +26,12 @@ class UserProfileInformationWidget extends StatelessWidget {
             ),
             UserProfileCountsInfoWidget(
               onTap: () {},
-              count: '0',
+              count: followersCount.toString(),
               title: context.translate(AppStrings.followers),
             ),
             UserProfileCountsInfoWidget(
               onTap: () {},
-              count: '0',
+              count: followingCount.toString(),
               title: context.translate(AppStrings.following),
             )
           ],
