@@ -35,6 +35,8 @@ class _UserPostsGridViewState extends State<UserPostsGridView> {
         } else if (state is UserPostsSuccess) {
           final posts = _userPostsCubit.postsList ?? [];
           return GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
             padding: const EdgeInsets.all(8),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,

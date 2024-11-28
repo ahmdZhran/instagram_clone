@@ -11,6 +11,7 @@ import '../widgets/user_profile_sliver_app_bar_widget.dart';
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key, required this.uid});
   final String uid;
+
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
@@ -18,19 +19,20 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   late ScrollController _nestedScrollController;
   final profileCubit = ProfileCubit.getInstance();
+
   @override
   void initState() {
+    super.initState();
     _nestedScrollController = ScrollController();
     profileCubit.getUserData(userId: widget.uid);
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: DefaultTabController(
-      length: 2,
-      child: NestedScrollView(
+      body: DefaultTabController(
+        length: 2,
+        child: NestedScrollView(
           dragStartBehavior: DragStartBehavior.start,
           controller: _nestedScrollController,
           headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -42,42 +44,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     UserProfileSliverAppBarWidget(uid: widget.uid),
                     const Gap(20),
-                    SliverPersistentHeader(
-                      pinned: ModalRoute.of(context)!.isFirst,
-                      delegate: const UserProfileBarDelegateWidget(
+                    const SliverPersistentHeader(
+                      pinned: true,
+                      delegate: UserProfileBarDelegateWidget(
                         TabBar(
+                          physics: NeverScrollableScrollPhysics(),
                           dividerColor: Colors.transparent,
                           indicatorSize: TabBarIndicatorSize.tab,
                           padding: EdgeInsets.zero,
                           labelPadding: EdgeInsets.zero,
                           indicatorWeight: 1,
                           tabs: [
-                            Tab(
-                              icon: Icon(
-                                Icons.grid_on,
-                              ),
-                            ),
-                            Tab(
-                              icon: Icon(Icons.person_outline),
-                            ),
+                            Tab(icon: Icon(Icons.grid_on)),
+                            Tab(icon: Icon(Icons.person_outline)),
                           ],
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
-              )
+              ),
             ];
           },
           body: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
             children: [
-              UserPostsGridView(
-                uid: widget.uid,
-              ),
+              UserPostsGridView(uid: widget.uid),
               const UserProfileMentionedPostsWidget(),
             ],
-          )),
-    ));
+          ),
+        ),
+      ),
+    );
   }
 
   @override
