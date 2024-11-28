@@ -6,6 +6,8 @@ class UserDataEntity {
   final String? name;
   final String? bio;
   final String? profileImage;
+  final List <String>? followers;
+  final List <String>? following;
 
   UserDataEntity({
     required this.uid,
@@ -15,6 +17,8 @@ class UserDataEntity {
     this.name,
     this.bio,
     this.profileImage,
+    this.followers,
+    this.following,
   });
 
   Map<String, dynamic> toJson() {
@@ -26,6 +30,8 @@ class UserDataEntity {
       'user_name': username,
       'bio': bio,
       'profile_image': profileImage,
+      'followers':followers,
+      'following':following
     };
   }
 
@@ -38,6 +44,8 @@ class UserDataEntity {
       name: json['name'],
       bio: json['bio'],
       profileImage: json['profileImage'],
+      followers: json['followers'],
+      following: json['following'],
     );
   }
 }
