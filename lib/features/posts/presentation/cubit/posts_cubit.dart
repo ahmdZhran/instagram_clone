@@ -11,7 +11,6 @@ part 'posts_state.dart';
 class PostsCubit extends Cubit<PostsState> {
   PostsCubit(this._postRepository) : super(PostsInitial());
 
-  bool hasMore = false;
 
   final PostRepository _postRepository;
 
