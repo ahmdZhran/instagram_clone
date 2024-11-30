@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_assets.dart';
+import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:instagram_clone/core/widgets/custom_text_form_field.dart';
 import '../../../../core/theme/app_them.dart';
@@ -69,9 +70,21 @@ class ReactIconsWidget extends StatelessWidget {
                       width: 40,
                       height: 4,
                       decoration: BoxDecoration(
-                        color: Colors.grey[400],
+                        color: AppColors.greyColor,
                         borderRadius: BorderRadius.circular(2),
                       ),
+                    ),
+                    const ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: AssetImage("assets/images/airen.jpg"),
+                      ),
+                      title: Text('User name'),
+                      subtitle: Text('This is owner comment '),
+                    ),
+                    const Divider(
+                      color: AppColors.greyColor,
+                      endIndent: 20,
+                      indent: 20,
                     ),
                     Expanded(
                       child: ListView.builder(
