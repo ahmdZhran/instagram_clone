@@ -3,7 +3,7 @@ import 'package:instagram_clone/features/home/domain/repositories/home_Repositor
 import 'package:instagram_clone/features/posts/domain/entities/post_entity.dart';
 
 class HomeRepositoryImpl extends HomeRepository {
-   final CollectionReference postCollection =
+  final CollectionReference postCollection =
       FirebaseFirestore.instance.collection("posts");
 
   @override
@@ -22,5 +22,4 @@ class HomeRepositoryImpl extends HomeRepository {
       throw Exception("Error fetching posts: $error");
     }
   }
-
 }
