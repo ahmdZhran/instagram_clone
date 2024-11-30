@@ -37,18 +37,18 @@ class PostsCubit extends Cubit<PostsState> {
     }
   }
 
-  void fetchPosts() {
-    emit(PostsLoading());
-    _postRepository.fetchAllPosts().then((stream) {
-      stream.listen((posts) {
-        emit(PostsSuccess(posts));
-      }, onError: (error) {
-        emit(PostsFailure(errMessage: error.toString()));
-      });
-    }).catchError((error) {
-      emit(PostsFailure(errMessage: error.toString()));
-    });
-  }
+  // void fetchPosts() {
+  //   emit(PostsLoading());
+  //   _postRepository.fetchAllPosts().then((stream) {
+  //     stream.listen((posts) {
+  //       emit(PostsSuccess(posts));
+  //     }, onError: (error) {
+  //       emit(PostsFailure(errMessage: error.toString()));
+  //     });
+  //   }).catchError((error) {
+  //     emit(PostsFailure(errMessage: error.toString()));
+  //   });
+  // }
 
   Future<void> deletePost(String postId) async {
     try {
