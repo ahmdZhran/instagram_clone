@@ -102,9 +102,7 @@ class ReactIconsWidget extends StatelessWidget {
                           const Gap(8),
                           IconButton(
                             icon: const Icon(Icons.send),
-                            onPressed: () {
-                              // Handle sending the comment
-                            },
+                            onPressed: () {},
                           ),
                         ],
                       ),
