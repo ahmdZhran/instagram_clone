@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/features/home/presentation/cubits/cubit/home_cubit.dart';
-import '../../../../features/posts/presentation/cubit/posts_cubit.dart';
 import 'post_loading_shimmer_widget.dart';
 import 'posts_list_widget.dart';
 
