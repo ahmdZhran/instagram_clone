@@ -42,9 +42,7 @@ class _EditAndShareButtonsWidgetState extends State<EditAndShareButtonsWidget> {
       bloc: widget._profileCubit,
       listener: (context, state) {
         if (state is ProfileFollowUpdated) {
-          setState(() {
-            isTapped = state.isFollowed;
-          });
+          isTapped = state.isFollowed;
         }
       },
       child: widget.uid == FirebaseAuth.instance.currentUser!.uid
