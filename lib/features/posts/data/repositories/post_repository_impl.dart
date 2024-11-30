@@ -19,6 +19,4 @@ class PostRepositoryImpl implements PostRepository {
   Future<void> deletePost(String postId) async {
     await postCollection.doc(postId).delete();
   }
-
-
 }
