@@ -1,4 +1,3 @@
-
 abstract class AppStrings {
   static const String appName = "Instagram";
   // main widgets
@@ -25,6 +24,10 @@ abstract class AppStrings {
   static const String weSentVerifyEmail = "We've sent a verification email.";
   static const String cancel = "cancel";
   static const String back = "Back";
+
+  // Home Strings
+  static const String addYourComment = "add_your_comment";
+
   // Reset Password View
   static const String resetPassword = 'Reset Password';
   static const String pleaseEnterYourEmail =
