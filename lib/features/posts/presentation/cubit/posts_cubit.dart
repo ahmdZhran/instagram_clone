@@ -1,8 +1,8 @@
 import 'dart:typed_data';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/core/services/firebase_storage_service.dart';
-import 'package:instagram_clone/features/posts/post_di.dart';
-import 'package:instagram_clone/features/posts/domain/repositories/post_repository.dart';
+import '../../../../core/services/firebase_storage_service.dart';
+import '../../post_di.dart';
+import '../../domain/repositories/post_repository.dart';
 
 import '../../domain/entities/post_entity.dart';
 
