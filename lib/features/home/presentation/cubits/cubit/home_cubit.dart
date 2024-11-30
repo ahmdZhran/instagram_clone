@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/features/home/domain/repositories/home_Repository.dart';
+import 'package:instagram_clone/features/home/home_di.dart';
 
 import '../../../../posts/domain/entities/post_entity.dart';
 
@@ -20,5 +21,28 @@ class HomeCubit extends Cubit<HomeState> {
     }).catchError((error) {
       emit(HomePostsFailure(errMessage: error.toString()));
     });
+  }
+
+
+
+    static const String _tag = "posts";
+  static HomeCubit getInstance() {
+    final isRegister = homeDI.isRegistered<HomeCubit>(instanceName: _tag);
+    if (!isRegister) {
+      homeDI.registerSingleton<HomeCubit>(
+        HomeCubit(homeDI<HomeRepository>()),
+        instanceName: _tag,
+      );
+    }
+    return homeDI.get<HomeCubit>(instanceName: _tag);
+  }
+
+  static Future<void> deleteInstance() async {
+    final isRegister = homeDI.isRegistered<HomeCubit>(instanceName: _tag);
+    if (isRegister) {
+      final cubit = homeDI<HomeCubit>(instanceName: _tag);
+      await cubit.close();
+      homeDI.unregister<HomeCubit>(instanceName: _tag);
+    }
   }
 }
