@@ -7,7 +7,7 @@ class PostEntity {
   final String username;
   final String imageUrl;
   final String userProfileImage;
-  final List likes;
+  final List<String> likes;
   final DateTime timestamp;
 
   PostEntity({
@@ -50,7 +50,7 @@ class PostEntity {
   factory PostEntity.fromJson(Map<String, dynamic> json) {
     return PostEntity(
       id: json['id'],
-      likes: json['likes'],
+      likes: json['likes']??[],
       description: json['description'],
       userId: json['userId'],
       username: json['user_name'],
