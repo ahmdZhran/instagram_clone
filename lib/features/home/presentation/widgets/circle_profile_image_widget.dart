@@ -4,10 +4,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../../core/utils/app_colors.dart';
 
 class CircleProfileImageWidget extends StatelessWidget {
-  const CircleProfileImageWidget({
-    super.key,
-    required this.userProfileImage,
-  });
+  const CircleProfileImageWidget({super.key, required this.userProfileImage});
 
   final String userProfileImage;
 
@@ -29,8 +26,8 @@ class CircleProfileImageWidget extends StatelessWidget {
         child: ClipOval(
           child: CachedNetworkImage(
             imageUrl: userProfileImage,
-              placeholder: (context, url) => Center(
-              child: LoadingAnimationWidget.threeRotatingDots(
+            placeholder: (context, url) => Center(
+              child: LoadingAnimationWidget.beat(
                 color: AppColors.primaryColor,
                 size: 40,
               ),
