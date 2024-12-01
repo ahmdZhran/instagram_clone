@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:instagram_clone/features/home/domain/repositories/home_Repository.dart';
 import 'package:instagram_clone/features/posts/domain/entities/post_entity.dart';
 
-class HomeRepositoryImpl extends HomeRepository {
+class HomeRepositoryImpl implements HomeRepository {
   final CollectionReference postCollection =
       FirebaseFirestore.instance.collection("posts");
 
@@ -22,4 +22,12 @@ class HomeRepositoryImpl extends HomeRepository {
       throw Exception("Error fetching posts: $error");
     }
   }
+  
+  @override
+  Future<void> toggleLikedPost(String postID, String userID) {
+    // TODO: implement toggleLikedPost
+    throw UnimplementedError();
+  }
+    
+
 }
