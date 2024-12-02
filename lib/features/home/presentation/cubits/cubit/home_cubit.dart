@@ -39,15 +39,10 @@ class HomeCubit extends Cubit<HomeState> {
         }
         return post;
       }).toList();
-
-      // Optimistically update UI
       emit(HomePostsSuccess(updatedPosts));
-
-      // Perform backend operation
       try {
         await _homeRepository.toggleLikedPost(postId, userId);
       } catch (error) {
-        // Rollback if there's an error
         emit(HomePostsSuccess(currentState.posts));
         emit(HomePostsFailure(errMessage: "Failed to toggle like: $error"));
       }
