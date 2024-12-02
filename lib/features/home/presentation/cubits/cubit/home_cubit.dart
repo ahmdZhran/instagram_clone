@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/features/home/domain/repositories/home_Repository.dart';
 import 'package:instagram_clone/features/home/home_di.dart';
@@ -21,6 +23,15 @@ class HomeCubit extends Cubit<HomeState> {
     }).catchError((error) {
       emit(HomePostsFailure(errMessage: error.toString()));
     });
+  }
+
+  Future<void> toggleLikedPost(String postId, String userId) async {
+    try {
+      await _homeRepository.toggleLikedPost(postId, userId);
+      fetchPosts();
+    } catch (error) {
+      emit(HomePostsFailure(errMessage: "Failed to toggle like $error"));
+    }
   }
 
   static const String _tag = "posts";
