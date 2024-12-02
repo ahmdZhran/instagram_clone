@@ -12,6 +12,7 @@ import '../explore/presentation/screens/explore_screen.dart';
 import '../home/presentation/screens/home_screen.dart';
 import '../profile/presentation/screens/profile_screen.dart';
 import 'bottom_nav_bar_item_widget.dart';
+import 'circle_profile_image_main_widget.dart';
 
 class MainWidget extends StatefulWidget {
   const MainWidget({super.key});
@@ -123,11 +124,7 @@ class _MainWidgetState extends State<MainWidget> {
                                       width: 2.0,
                                     ),
                                   ),
-                                  child: const CircleAvatar(
-                                    radius: 15,
-                                    backgroundImage:
-                                        AssetImage("assets/images/airen.jpg"),
-                                  ),
+                                  child: const CircleProfileImageMainWidget(),
                                 ),
                               ),
                             ),
