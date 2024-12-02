@@ -26,11 +26,31 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> toggleLikedPost(String postId, String userId) async {
-    try {
-      await _homeRepository.toggleLikedPost(postId, userId);
-      fetchPosts();
-    } catch (error) {
-      emit(HomePostsFailure(errMessage: "Failed to toggle like $error"));
+    if (state is HomePostsSuccess) {
+      final currentState = state as HomePostsSuccess;
+      final updatedPosts = currentState.posts!.map((post) {
+        if (post.id == postId) {
+          final isLiked = post.likes.contains(userId);
+          final updatedLikes = isLiked
+              ? post.likes.where((id) => id != userId).toList()
+              : [...post.likes, userId];
+
+          return post.copyWith(likes: updatedLikes);
+        }
+        return post;
+      }).toList();
+
+      // Optimistically update UI
+      emit(HomePostsSuccess(updatedPosts));
+
+      // Perform backend operation
+      try {
+        await _homeRepository.toggleLikedPost(postId, userId);
+      } catch (error) {
+        // Rollback if there's an error
+        emit(HomePostsSuccess(currentState.posts));
+        emit(HomePostsFailure(errMessage: "Failed to toggle like: $error"));
+      }
     }
   }
 

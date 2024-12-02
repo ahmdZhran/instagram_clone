@@ -76,11 +76,12 @@ class AppThemes {
 class ThemedSvgIcon extends StatelessWidget {
   final String assetName;
   final double size;
-
+  final ColorFilter? colorFilter;
   const ThemedSvgIcon({
     super.key,
     required this.assetName,
-    this.size = 24.0, 
+    this.colorFilter,
+    this.size = 24.0,
   });
 
   @override
@@ -90,7 +91,7 @@ class ThemedSvgIcon extends StatelessWidget {
 
     return SvgPicture.asset(
       assetName,
-      colorFilter: ColorFilter.mode(iconColor, BlendMode.srcIn),
+      colorFilter: colorFilter ?? ColorFilter.mode(iconColor, BlendMode.srcIn),
       width: size,
       height: size,
     );

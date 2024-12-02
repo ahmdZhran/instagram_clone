@@ -21,10 +21,10 @@ class PostEntity {
     required this.userProfileImage,
   });
 
-  PostEntity copyWith({String? imageUrl}) {
+  PostEntity copyWith({String? imageUrl, List<String>? likes}) {
     return PostEntity(
       id: id,
-      likes: likes,
+      likes: likes ?? this.likes,
       userId: userId,
       username: username,
       description: description,

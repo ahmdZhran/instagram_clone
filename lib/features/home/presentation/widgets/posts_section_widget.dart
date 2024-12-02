@@ -15,12 +15,6 @@ class _PostsSectionWidgetState extends State<PostsSectionWidget> {
   final HomeCubit _homeCubit = HomeCubit.getInstance();
 
   @override
-  void initState() {
-    super.initState();
-    _homeCubit.fetchPosts();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: BlocBuilder<HomeCubit, HomeState>(
@@ -37,11 +31,5 @@ class _PostsSectionWidgetState extends State<PostsSectionWidget> {
         },
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    HomeCubit.deleteInstance();
-    super.dispose();
   }
 }

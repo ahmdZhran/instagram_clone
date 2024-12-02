@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_assets.dart';
@@ -6,38 +7,74 @@ import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:instagram_clone/core/widgets/custom_text_form_field.dart';
 import '../../../../core/theme/app_them.dart';
+import '../cubits/cubit/home_cubit.dart';
 
-class ReactIconsWidget extends StatelessWidget {
-  const ReactIconsWidget({super.key});
+class ReactIconsWidget extends StatefulWidget {
+  final String postId;
+  final String userId;
+
+  const ReactIconsWidget({
+    super.key,
+    required this.postId,
+    required this.userId,
+  });
 
   @override
+  State<ReactIconsWidget> createState() => _ReactIconsWidgetState();
+}
+
+class _ReactIconsWidgetState extends State<ReactIconsWidget> {
+  final HomeCubit _homeCubit = HomeCubit.getInstance();
+  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
-        children: [
-          const ThemedSvgIcon(
-            assetName: AppAssets.heartIcon,
-          ),
-          const Gap(6),
-          const Text('203'),
-          const Gap(10),
-          InkWell(
-            onTap: () => _showCommentsBottomSheet(context),
-            child: const ThemedSvgIcon(
-              assetName: AppAssets.commentIcon,
+    return BlocBuilder<HomeCubit, HomeState>(
+      bloc: _homeCubit,
+      builder: (context, state) {
+        if (state is HomePostsSuccess) {
+          final post =
+              state.posts?.firstWhere((post) => post.id == widget.postId);
+          final isLiked = post?.likes.contains(widget.userId) ?? 0;
+
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                InkWell(
+                  onTap: () {
+                    _homeCubit.toggleLikedPost(widget.postId, widget.userId);
+                  },
+                  child: ThemedSvgIcon(
+                    assetName: AppAssets.heartIcon,
+                    colorFilter: ColorFilter.mode(
+                        isLiked as bool
+                            ? AppColors.redColor
+                            : AppColors.greyColor,
+                        BlendMode.srcIn),
+                  ),
+                ),
+                const Gap(6),
+                Text(post?.likes.length.toString() ?? "0"),
+                const Gap(10),
+                InkWell(
+                  onTap: () => _showCommentsBottomSheet(context),
+                  child: const ThemedSvgIcon(
+                    assetName: AppAssets.commentIcon,
+                  ),
+                ),
+                const Gap(6),
+                const Text('203'),
+                const Gap(10),
+                const ThemedSvgIcon(
+                  assetName: AppAssets.shareIcon,
+                ),
+                const Gap(6),
+                const Text('1k'),
+              ],
             ),
-          ),
-          const Gap(6),
-          const Text('203'),
-          const Gap(10),
-          const ThemedSvgIcon(
-            assetName: AppAssets.shareIcon,
-          ),
-          const Gap(6),
-          const Text('1k'),
-        ],
-      ),
+          );
+        }
+        return const Center(child: CircularProgressIndicator());
+      },
     );
   }
 

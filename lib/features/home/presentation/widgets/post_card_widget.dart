@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -50,7 +51,10 @@ class PostCard extends StatelessWidget {
                     username: post.username,
                   ),
                   const Gap(10),
-                  const ReactIconsWidget(),
+                  ReactIconsWidget(
+                    postId: post.id,
+                    userId: FirebaseAuth.instance.currentUser!.uid,
+                  ),
                 ],
               ),
             ),
