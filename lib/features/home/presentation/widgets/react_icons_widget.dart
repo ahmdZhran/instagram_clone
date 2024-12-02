@@ -43,14 +43,15 @@ class _ReactIconsWidgetState extends State<ReactIconsWidget> {
                   onTap: () {
                     _homeCubit.toggleLikedPost(widget.postId, widget.userId);
                   },
-                  child: ThemedSvgIcon(
-                    assetName: AppAssets.heartIcon,
-                    colorFilter: ColorFilter.mode(
-                        isLiked as bool
-                            ? AppColors.redColor
-                            : AppColors.greyColor,
-                        BlendMode.srcIn),
-                  ),
+                  child: isLiked as bool
+                      ? const ThemedSvgIcon(
+                          assetName: AppAssets.heartActiveIcon,
+                          colorFilter: ColorFilter.mode(
+                              AppColors.redColor, BlendMode.srcIn),
+                        )
+                      : const ThemedSvgIcon(
+                          assetName: AppAssets.heartIcon,
+                        ),
                 ),
                 const Gap(6),
                 Text(post?.likes.length.toString() ?? "0"),

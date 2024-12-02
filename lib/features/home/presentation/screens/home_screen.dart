@@ -40,7 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    HomeCubit.deleteInstance();
+    //TODO need to think of it 
+    // HomeCubit.deleteInstance();
     super.dispose();
   }
 }
