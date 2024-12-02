@@ -22,12 +22,28 @@ class HomeRepositoryImpl implements HomeRepository {
       throw Exception("Error fetching posts: $error");
     }
   }
-  
-  @override
-  Future<void> toggleLikedPost(String postID, String userID) {
-    // TODO: implement toggleLikedPost
-    throw UnimplementedError();
-  }
-    
 
+  @override
+  Future<void> toggleLikedPost(String postID, String userID) async {
+    try {
+      final postDoc = await postCollection.doc(postID).get();
+      if (postDoc.exists) {
+        final post =
+            PostEntity.fromJson(postDoc.data() as Map<String, dynamic>);
+        final hasLiked = post.likes.contains(userID);
+        if (hasLiked) {
+          post.likes.remove(userID);
+        } else {
+          post.likes.add(userID);
+        }
+        await postCollection.doc(postID).update({
+          'likes': post.likes,
+        });
+      } else {
+        throw Exception("Post not found");
+      }
+    } catch (error) {
+      throw Exception("Error toggling like: $error");
+    }
+  }
 }
