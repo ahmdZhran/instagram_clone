@@ -12,6 +12,7 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this._homeRepository) : super(HomeInitial());
 
   final HomeRepository _homeRepository;
+  Timer? _likeTimer; // Declare a timer
   void fetchPosts() {
     emit(HomePostsLoading());
     _homeRepository.fetchAllPosts().then((stream) {
@@ -26,8 +27,6 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> toggleLikedPost(String postId, String userId) async {
-    //TodO Need a review
-
     if (state is HomePostsSuccess) {
       final currentState = state as HomePostsSuccess;
       final updatedPosts = currentState.posts!.map((post) {
@@ -42,11 +41,27 @@ class HomeCubit extends Cubit<HomeState> {
         return post;
       }).toList();
       emit(HomePostsSuccess(updatedPosts));
-      try {
-        await _homeRepository.toggleLikedPost(postId, userId);
-      } catch (error) {
-        emit(HomePostsSuccess(currentState.posts));
-        emit(HomePostsFailure(errMessage: "Failed to toggle like: $error"));
+
+      // Cancel the previous timer if it exists
+      _likeTimer?.cancel();
+
+      if (!updatedPosts
+          .firstWhere((post) => post.id == postId)
+          .likes
+          .contains(userId)) {
+        // If the post is now liked, start a timer
+        _likeTimer = Timer(const Duration(seconds: 2), () async {
+          // This will be executed after 2 seconds
+          try {
+            await _homeRepository.toggleLikedPost(postId, userId);
+          } catch (error) {
+            emit(HomePostsSuccess(currentState.posts));
+            emit(HomePostsFailure(errMessage: "Failed to toggle like: $error"));
+          }
+        });
+      } else {
+        // If the post is unliked, cancel the timer
+        _likeTimer?.cancel();
       }
     }
   }
