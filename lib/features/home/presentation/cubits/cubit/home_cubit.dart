@@ -27,6 +27,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> toggleLikedPost(String postId, String userId) async {
     //TodO Need a review
+
     if (state is HomePostsSuccess) {
       final currentState = state as HomePostsSuccess;
       final updatedPosts = currentState.posts!.map((post) {
@@ -41,6 +42,7 @@ class HomeCubit extends Cubit<HomeState> {
         return post;
       }).toList();
       emit(HomePostsSuccess(updatedPosts));
+      await Future.delayed(const Duration(seconds: 2));
       try {
         await _homeRepository.toggleLikedPost(postId, userId);
       } catch (error) {

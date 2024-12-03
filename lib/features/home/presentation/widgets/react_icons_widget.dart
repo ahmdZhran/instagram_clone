@@ -31,9 +31,9 @@ class _ReactIconsWidgetState extends State<ReactIconsWidget> {
       bloc: _homeCubit,
       builder: (context, state) {
         if (state is HomePostsSuccess) {
-          final post =
-              state.posts?.firstWhere((post) => post.id == widget.postId);
-          final isLiked = post?.likes.contains(widget.userId) ?? 0;
+          final postsMap = {for (var post in state.posts!) post.id: post};
+          final post = postsMap[widget.postId];
+          final isLiked = post?.likes.contains(widget.userId) ?? false;
 
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -43,7 +43,7 @@ class _ReactIconsWidgetState extends State<ReactIconsWidget> {
                   onTap: () {
                     _homeCubit.toggleLikedPost(widget.postId, widget.userId);
                   },
-                  child: isLiked as bool
+                  child: isLiked
                       ? const ThemedSvgIcon(
                           assetName: AppAssets.heartActiveIcon,
                           colorFilter: ColorFilter.mode(
