@@ -42,7 +42,6 @@ class HomeCubit extends Cubit<HomeState> {
         return post;
       }).toList();
       emit(HomePostsSuccess(updatedPosts));
-      await Future.delayed(const Duration(seconds: 2));
       try {
         await _homeRepository.toggleLikedPost(postId, userId);
       } catch (error) {
