@@ -45,7 +45,6 @@ class HomeCubit extends Cubit<HomeState> {
       try {
         await _homeRepository.toggleLikedPost(postId, userId);
       } catch (error) {
-        emit(HomePostsSuccess(currentState.posts));
         emit(HomePostsFailure(errMessage: "Failed to toggle like: $error"));
       }
     }
