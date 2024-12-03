@@ -26,30 +26,31 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> toggleLikedPost(String postId, String userId) async {
-    //TodO Need a review
-
-    if (state is HomePostsSuccess) {
-      final currentState = state as HomePostsSuccess;
-      final updatedPosts = currentState.posts!.map((post) {
-        if (post.id == postId) {
-          final isLiked = post.likes.contains(userId);
-          final updatedLikes = isLiked
-              ? post.likes.where((id) => id != userId).toList()
-              : [...post.likes, userId];
-
-          return post.copyWith(likes: updatedLikes);
-        }
-        return post;
-      }).toList();
-      emit(HomePostsSuccess(updatedPosts));
-      await Future.delayed(const Duration(seconds: 2));
-      try {
-        await _homeRepository.toggleLikedPost(postId, userId);
-      } catch (error) {
-        emit(HomePostsSuccess(currentState.posts));
-        emit(HomePostsFailure(errMessage: "Failed to toggle like: $error"));
-      }
+    final currentState = state as HomePostsSuccess;
+    List<PostEntity> updatedPosts =
+        _updatedPostLike(currentState, postId, userId);
+    emit(HomePostsSuccess(updatedPosts));
+    try {
+      await _homeRepository.toggleLikedPost(postId, userId);
+    } catch (error) {
+      emit(HomePostsFailure(errMessage: "Failed to toggle like: $error"));
     }
+  }
+
+  List<PostEntity> _updatedPostLike(
+      HomePostsSuccess currentState, String postId, String userId) {
+    final updatedPosts = currentState.posts!.map((post) {
+      if (post.id == postId) {
+        final isLiked = post.likes.contains(userId);
+        final updatedLikes = isLiked
+            ? post.likes.where((id) => id != userId).toList()
+            : [...post.likes, userId];
+
+        return post.copyWith(likes: updatedLikes);
+      }
+      return post;
+    }).toList();
+    return updatedPosts;
   }
 
   static const String _tag = "posts";
