@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_assets.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
-import 'package:instagram_clone/core/utils/app_strings.dart';
-import 'package:instagram_clone/core/widgets/custom_text_form_field.dart';
 import '../../../../core/theme/app_them.dart';
 import '../cubits/cubit/home_cubit.dart';
+import 'comments_bottom_sheet_widget.dart';
 
 class ReactIconsWidget extends StatefulWidget {
   final String postId;
@@ -25,6 +23,7 @@ class ReactIconsWidget extends StatefulWidget {
 
 class _ReactIconsWidgetState extends State<ReactIconsWidget> {
   final HomeCubit _homeCubit = HomeCubit.getInstance();
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
@@ -81,85 +80,19 @@ class _ReactIconsWidgetState extends State<ReactIconsWidget> {
 
   void _showCommentsBottomSheet(BuildContext context) {
     showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
       backgroundColor: Colors.transparent,
+      isDismissible: true,
+      isScrollControlled: true,
+      context: context,
       builder: (context) {
         return Padding(
           padding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
           child: DraggableScrollableSheet(
-            initialChildSize: 0.5,
-            minChildSize: 0.3,
-            maxChildSize: 0.9,
             builder: (context, scrollController) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(20),
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 8),
-                      width: 40,
-                      height: 4,
-                      decoration: BoxDecoration(
-                        color: AppColors.greyColor,
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                    ),
-                    const ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: AssetImage("assets/images/airen.jpg"),
-                      ),
-                      title: Text('User name'),
-                      subtitle: Text('This is owner comment '),
-                    ),
-                    const Divider(
-                      color: AppColors.greyColor,
-                      endIndent: 20,
-                      indent: 20,
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        controller: scrollController,
-                        itemCount: 20,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            leading: const CircleAvatar(
-                              backgroundImage:
-                                  AssetImage("assets/images/airen.jpg"),
-                            ),
-                            title: Text('User $index'),
-                            subtitle: Text('This is comment $index'),
-                          );
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: CustomTextFormField(
-                              hintText:
-                                  context.translate(AppStrings.addYourComment),
-                            ),
-                          ),
-                          const Gap(8),
-                          IconButton(
-                            icon: const Icon(Icons.send),
-                            onPressed: () {},
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+              return CommentsBottomSheetWidget(
+                scrollController: scrollController,
               );
             },
           ),

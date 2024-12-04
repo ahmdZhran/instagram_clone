@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 import '../data_source/local/user_local_data_source.dart';
 import '../data_source/remote/user_remote_data_source.dart';
 import '../../domain/entities/user_profile_entity.dart';
@@ -35,8 +37,8 @@ class ProfileRepository {
         }
       }
     } catch (error) {
-      print(
-          "Error fetching profile data from repository: $error"); // Log the error message
+      debugPrint(
+          "Error fetching profile data from repository: $error"); 
       rethrow;
     }
   }
@@ -64,8 +66,8 @@ class ProfileRepository {
         throw Exception("No internet connection");
       }
     } catch (error) {
-      print(
-          "Error updating profile data in repository: $error"); // Log the error message
+      debugPrint(
+          "Error updating profile data in repository: $error");
       rethrow;
     }
   }
@@ -74,8 +76,8 @@ class ProfileRepository {
     try {
       return await remoteDataSource.getUserPosts(userId);
     } catch (error) {
-      print(
-          "Error fetching user posts in repository: $error"); // Log the error message
+      debugPrint(
+          "Error fetching user posts in repository: $error");
       rethrow;
     }
   }
@@ -84,8 +86,8 @@ class ProfileRepository {
     try {
       await remoteDataSource.followUser(currentUserId, targetUserId);
     } catch (error) {
-      print(
-          "Error following user in repository: $error"); // Log the error message
+      debugPrint(
+          "Error following user in repository: $error");
       rethrow;
     }
   }
@@ -94,8 +96,8 @@ class ProfileRepository {
     try {
       await remoteDataSource.unFollowUser(currentUserId, targetUserId);
     } catch (error) {
-      print(
-          "Error unfollowing user in repository: $error"); // Log the error message
+      debugPrint(
+          "Error unfollowing user in repository: $error"); 
       rethrow;
     }
   }
