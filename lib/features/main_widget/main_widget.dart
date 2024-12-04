@@ -114,18 +114,7 @@ class _MainWidgetState extends State<MainWidget> {
                               child: AnimatedScale(
                                 duration: const Duration(milliseconds: 200),
                                 scale: index == 4 ? 1.2 : 1,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: index == 4
-                                          ? context.color.mainColor
-                                          : Colors.transparent,
-                                      width: 2.0,
-                                    ),
-                                  ),
-                                  child: const CircleProfileImageMainWidget(),
-                                ),
+                                child: CircleProfileImageMainWidget(index: index),
                               ),
                             ),
                           ],
@@ -142,3 +131,4 @@ class _MainWidgetState extends State<MainWidget> {
     );
   }
 }
+
