@@ -52,6 +52,9 @@ class PostCard extends StatelessWidget {
                   ),
                   const Gap(10),
                   ReactIconsWidget(
+                    username: post.username,
+                    profileImage: post.userProfileImage,
+                    description: post.description ?? "",
                     postId: post.id,
                     userId: FirebaseAuth.instance.currentUser!.uid,
                   ),

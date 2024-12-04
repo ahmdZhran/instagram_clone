@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.only(left: 10, right: 10, bottom: 80),
         child: CustomScrollView(
           clipBehavior: Clip.none,
           physics: BouncingScrollPhysics(),
@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    //TODO need to think of it 
+    //TODO need to think of it
     // HomeCubit.deleteInstance();
     super.dispose();
   }

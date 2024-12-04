@@ -7,10 +7,15 @@ import 'package:instagram_clone/core/utils/app_strings.dart';
 
 class CommentsBottomSheetWidget extends StatelessWidget {
   final ScrollController scrollController;
-
+  final String username;
+  final String profileImage;
+  final String description;
   const CommentsBottomSheetWidget({
     super.key,
     required this.scrollController,
+    required this.username,
+    required this.profileImage,
+    required this.description,
   });
 
   @override
@@ -33,12 +38,12 @@ class CommentsBottomSheetWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(2),
             ),
           ),
-          const ListTile(
+          ListTile(
             leading: CircleAvatar(
-              backgroundImage: AssetImage("assets/images/airen.jpg"),
+              backgroundImage: NetworkImage(profileImage),
             ),
-            title: Text('User name'),
-            subtitle: Text('This is owner comment'),
+            title: Text(username),
+            subtitle: Text(description),
           ),
           const Divider(
             color: AppColors.greyColor,

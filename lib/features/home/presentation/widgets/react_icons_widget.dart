@@ -10,11 +10,16 @@ import 'comments_bottom_sheet_widget.dart';
 class ReactIconsWidget extends StatefulWidget {
   final String postId;
   final String userId;
-
+  final String username;
+  final String profileImage;
+  final String description;
   const ReactIconsWidget({
     super.key,
     required this.postId,
     required this.userId,
+    required this.username,
+    required this.profileImage,
+    required this.description,
   });
 
   @override
@@ -92,7 +97,10 @@ class _ReactIconsWidgetState extends State<ReactIconsWidget> {
           child: DraggableScrollableSheet(
             builder: (context, scrollController) {
               return CommentsBottomSheetWidget(
+                description: widget.description,
+                profileImage: widget.profileImage,
                 scrollController: scrollController,
+                username: widget.username,
               );
             },
           ),
