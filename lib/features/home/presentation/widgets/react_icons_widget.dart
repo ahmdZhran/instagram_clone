@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_assets.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
-import 'package:instagram_clone/core/utils/app_strings.dart';
-import 'package:instagram_clone/core/widgets/custom_text_form_field.dart';
 import '../../../../core/theme/app_them.dart';
 import '../cubits/cubit/home_cubit.dart';
 import 'comments_bottom_sheet_widget.dart';
