@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../../core/helper/image_service.dart';
+import '../../../../../core/models/user_profile_manager.dart';
 import '../../../data/repositories/profile_repository.dart';
 import '../../../domain/entities/user_profile_entity.dart';
 import '../../../profile_di.dart';
@@ -26,6 +27,8 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(ProfileLoading());
       final userData = await _profileRepository.getProfileData(userId);
       userProfileData = userData;
+
+      UserProfileManager().updateUserProfile(userData);
       emit(ProfileSuccess());
     } catch (error) {
       emit(ProfileFailure(errMessage: error.toString()));
