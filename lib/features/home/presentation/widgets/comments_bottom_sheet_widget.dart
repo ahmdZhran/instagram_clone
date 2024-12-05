@@ -1,11 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/core/helper/extensions.dart';
-import 'package:instagram_clone/core/widgets/custom_text_form_field.dart';
-import 'package:instagram_clone/core/utils/app_colors.dart';
-import 'package:instagram_clone/core/utils/app_strings.dart';
+import '../../../../core/helper/extensions.dart';
+import '../../../../core/models/user_profile_manager.dart';
+import '../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../core/utils/app_colors.dart';
+import '../../../../core/utils/app_strings.dart';
+import '../../../profile/domain/entities/user_profile_entity.dart';
 
-class CommentsBottomSheetWidget extends StatelessWidget {
+class CommentsBottomSheetWidget extends StatefulWidget {
   final ScrollController scrollController;
   final String username;
   final String profileImage;
@@ -17,6 +20,27 @@ class CommentsBottomSheetWidget extends StatelessWidget {
     required this.profileImage,
     required this.description,
   });
+
+  @override
+  State<CommentsBottomSheetWidget> createState() =>
+      _CommentsBottomSheetWidgetState();
+}
+
+class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
+  UserProfileEntity? _userProfile;
+//TODO implement this 
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _fetchUserProfile();
+  // }
+
+  // Future<void> _fetchUserProfile() async {
+  //   final userProfile = await UserProfileManager().();
+  //   setState(() {
+  //     _userProfile = userProfile;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +64,10 @@ class CommentsBottomSheetWidget extends StatelessWidget {
           ),
           ListTile(
             leading: CircleAvatar(
-              backgroundImage: NetworkImage(profileImage),
+              backgroundImage: CachedNetworkImageProvider(widget.profileImage),
             ),
-            title: Text(username),
-            subtitle: Text(description),
+            title: Text(widget.username),
+            subtitle: Text(widget.description),
           ),
           const Divider(
             color: AppColors.greyColor,
@@ -52,7 +76,7 @@ class CommentsBottomSheetWidget extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              controller: scrollController,
+              controller: widget.scrollController,
               itemCount: 20,
               itemBuilder: (context, index) {
                 return ListTile(
@@ -69,6 +93,14 @@ class CommentsBottomSheetWidget extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
+                CircleAvatar(
+                  backgroundImage: _userProfile?.profileImageUrl != null
+                      ? CachedNetworkImageProvider(
+                          _userProfile!.profileImageUrl,
+                        )
+                      : const AssetImage('assets/images/placeholder.jpg'),
+                ),
+                const Gap(5),
                 Expanded(
                   child: CustomTextFormField(
                     hintText: context.translate(AppStrings.addYourComment),

@@ -46,10 +46,10 @@ class _AddDescriptionAndUploadPostScreenState
   }
 
   Future<void> fetchUserData() async {
-    final user = FirebaseAuth.instance.currentUser!.uid;
+    final userId = FirebaseAuth.instance.currentUser!.uid;
     final profileCubit =
-        ProfileCubit.getInstance(FirebaseAuth.instance.currentUser!.uid);
-    await profileCubit.getUserData(userId: user);
+        ProfileCubit.getInstance(userId);
+    await profileCubit.getUserData(userId: userId);
     _userProfileEntity = profileCubit.userProfileData;
   }
 
