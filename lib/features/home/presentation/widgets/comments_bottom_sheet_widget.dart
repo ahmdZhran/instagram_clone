@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
@@ -40,7 +41,7 @@ class CommentsBottomSheetWidget extends StatelessWidget {
           ),
           ListTile(
             leading: CircleAvatar(
-              backgroundImage: NetworkImage(profileImage),
+              backgroundImage: CachedNetworkImageProvider(profileImage),
             ),
             title: Text(username),
             subtitle: Text(description),
