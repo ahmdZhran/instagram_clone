@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import '../../../../core/helper/extensions.dart';
-import '../../../../core/models/user_profile_manager.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
