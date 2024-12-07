@@ -13,6 +13,7 @@ class UserProfileManager {
 
   void updateUserProfile(UserProfileEntity profile) {
     userProfile = profile;
+    
   }
 
   void clearProfile() {
