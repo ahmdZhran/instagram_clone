@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import '../../../../core/helper/extensions.dart';
+import '../../../../core/models/user_profile_manager.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
@@ -27,19 +28,18 @@ class CommentsBottomSheetWidget extends StatefulWidget {
 
 class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
   UserProfileEntity? _userProfile;
-//TODO implement this 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _fetchUserProfile();
-  // }
+//TODO implement this
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserProfile();
+  }
 
-  // Future<void> _fetchUserProfile() async {
-  //   final userProfile = await UserProfileManager().();
-  //   setState(() {
-  //     _userProfile = userProfile;
-  //   });
-  // }
+  void _fetchUserProfile() {
+    setState(() {
+      _userProfile = UserProfileManager().userProfile;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,12 +93,9 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
             child: Row(
               children: [
                 CircleAvatar(
-                  backgroundImage: _userProfile?.profileImageUrl != null
-                      ? CachedNetworkImageProvider(
-                          _userProfile!.profileImageUrl,
-                        )
-                      : const AssetImage('assets/images/placeholder.jpg'),
-                ),
+                    backgroundImage: CachedNetworkImageProvider(
+                  _userProfile!.profileImageUrl,
+                )),
                 const Gap(5),
                 Expanded(
                   child: CustomTextFormField(
