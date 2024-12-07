@@ -93,9 +93,14 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
             child: Row(
               children: [
                 CircleAvatar(
-                    backgroundImage: CachedNetworkImageProvider(
-                  _userProfile!.profileImageUrl,
-                )),
+                  backgroundImage: _userProfile?.profileImageUrl != null
+                      ? CachedNetworkImageProvider(
+                          _userProfile!.profileImageUrl,
+                        )
+                      : const AssetImage(
+                          'assets/images/place_holder.png',
+                        ),
+                ),
                 const Gap(5),
                 Expanded(
                   child: CustomTextFormField(
