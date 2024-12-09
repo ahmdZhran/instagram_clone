@@ -111,7 +111,6 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
                 IconButton(
                   icon: const Icon(Icons.send),
                   onPressed: () {
-                    // TodO send comment to firebase firestore 
                   },
                 ),
               ],
