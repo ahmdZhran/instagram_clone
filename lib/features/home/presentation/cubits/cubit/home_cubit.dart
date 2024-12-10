@@ -51,7 +51,8 @@ class HomeCubit extends Cubit<HomeState> {
     }).toList();
     return updatedPosts;
   }
- Future<void> addComment(String postId, CommentEntity comment) async {
+
+  Future<void> addComment(String postId, CommentEntity comment) async {
     emit(AddCommentLoading());
     try {
       await _homeRepository.addComment(postId, comment);
@@ -60,6 +61,7 @@ class HomeCubit extends Cubit<HomeState> {
       emit(AddCommentFailure(errMessage: error.toString()));
     }
   }
+
   static const String _tag = "posts";
   static HomeCubit getInstance() {
     final isRegister = homeDI.isRegistered<HomeCubit>(instanceName: _tag);
