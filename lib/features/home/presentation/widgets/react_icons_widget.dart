@@ -101,6 +101,7 @@ class _ReactIconsWidgetState extends State<ReactIconsWidget> {
                 profileImage: widget.profileImage,
                 scrollController: scrollController,
                 username: widget.username,
+                postId: widget.postId,
               );
             },
           ),

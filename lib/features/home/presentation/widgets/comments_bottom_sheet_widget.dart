@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import '../../../../core/helper/extensions.dart';
@@ -12,6 +13,7 @@ class CommentsBottomSheetWidget extends StatefulWidget {
   final ScrollController scrollController;
   final String username;
   final String profileImage;
+  final String postId;
   final String description;
   const CommentsBottomSheetWidget({
     super.key,
@@ -19,6 +21,7 @@ class CommentsBottomSheetWidget extends StatefulWidget {
     required this.username,
     required this.profileImage,
     required this.description,
+    required this.postId,
   });
 
   @override
@@ -28,6 +31,8 @@ class CommentsBottomSheetWidget extends StatefulWidget {
 
 class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
   UserProfileEntity? _userProfile;
+
+  TextEditingController? commentController = TextEditingController();
 //TODO implement this
   @override
   void initState() {
@@ -104,13 +109,30 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
                 const Gap(5),
                 Expanded(
                   child: CustomTextFormField(
+                    controller: commentController,
                     hintText: context.translate(AppStrings.addYourComment),
                   ),
                 ),
                 const Gap(8),
                 IconButton(
                   icon: const Icon(Icons.send),
-                  onPressed: () {
+                  onPressed: () async {
+                    String commentId =
+                        DateTime.now().millisecondsSinceEpoch.toString();
+                    await FirebaseFirestore.instance
+                        .collection("posts")
+                        .doc(widget.postId)
+                        .collection("comments")
+                        .doc(commentId)
+                        .set({
+                      "profilePic": _userProfile!.profileImageUrl,
+                      "username": _userProfile!.username,
+                      "commentOfPost": commentController!.text.trim(),
+                      "date_of_comment": DateTime.now(),
+                      "uid": _userProfile!.uid,
+                      "commentId": commentId,
+                    });
+                    commentController!.clear();
                   },
                 ),
               ],
