@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:instagram_clone/features/home/domain/entities/comment_enitity/comment_entity.dart';
 import 'package:instagram_clone/features/home/domain/repositories/home_Repository.dart';
 import 'package:instagram_clone/features/posts/domain/entities/post_entity.dart';
 
@@ -44,6 +45,19 @@ class HomeRepositoryImpl implements HomeRepository {
       }
     } catch (error) {
       throw Exception("Error toggling like: $error");
+    }
+  }
+
+  @override
+  Future<void> addComment(String postId, CommentEntity commentEntity) async {
+    try {
+      await postCollection
+          .doc(postId)
+          .collection("comments")
+          .doc(commentEntity.commentId)
+          .set(commentEntity.toMap());
+    } catch (error) {
+      throw Exception("Error adding comment: $error");
     }
   }
 }
