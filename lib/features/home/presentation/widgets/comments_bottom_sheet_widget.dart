@@ -154,7 +154,6 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
                               dateOfComment: DateTime.now(),
                               uid: _userProfile!.uid),
                         );
-
                         commentController!.clear();
                       },
                     );
