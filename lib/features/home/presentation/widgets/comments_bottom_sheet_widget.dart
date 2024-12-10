@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:instagram_clone/features/home/domain/entities/comment_entity/comment_entity.dart';
+import 'package:instagram_clone/features/home/presentation/cubits/cubit/home_cubit.dart';
 import '../../../../core/helper/extensions.dart';
 import '../../../../core/models/user_profile_manager.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
@@ -33,6 +35,7 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
   UserProfileEntity? _userProfile;
 
   TextEditingController? commentController = TextEditingController();
+  final HomeCubit _homeCubit = HomeCubit.getInstance();
 //TODO implement this
   @override
   void initState() {
@@ -78,20 +81,36 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
             endIndent: 20,
             indent: 20,
           ),
-          Expanded(
-            child: ListView.builder(
-              controller: widget.scrollController,
-              itemCount: 20,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: const CircleAvatar(
-                    backgroundImage: AssetImage("assets/images/airen.jpg"),
-                  ),
-                  title: Text('User $index'),
-                  subtitle: Text('This is comment $index'),
+          BlocConsumer<HomeCubit, HomeState>(
+            bloc: _homeCubit,
+            listener: (context, state) {
+              if (state is AddCommentSuccess) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Comment added successfully!")),
                 );
-              },
-            ),
+              } else if (state is AddCommentFailure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Error: ${state.errMessage}")),
+                );
+              }
+            },
+            builder: (context, state) {
+              return Expanded(
+                child: ListView.builder(
+                  controller: widget.scrollController,
+                  itemCount: 20,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: const CircleAvatar(
+                        backgroundImage: AssetImage("assets/images/airen.jpg"),
+                      ),
+                      title: Text('User $index'),
+                      subtitle: Text('This is comment $index'),
+                    );
+                  },
+                ),
+              );
+            },
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -114,25 +133,31 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
                   ),
                 ),
                 const Gap(8),
-                IconButton(
-                  icon: const Icon(Icons.send),
-                  onPressed: () async {
-                    String commentId =
-                        DateTime.now().millisecondsSinceEpoch.toString();
-                    await FirebaseFirestore.instance
-                        .collection("posts")
-                        .doc(widget.postId)
-                        .collection("comments")
-                        .doc(commentId)
-                        .set({
-                      "profilePic": _userProfile!.profileImageUrl,
-                      "username": _userProfile!.username,
-                      "commentOfPost": commentController!.text.trim(),
-                      "date_of_comment": DateTime.now(),
-                      "uid": _userProfile!.uid,
-                      "commentId": commentId,
-                    });
-                    commentController!.clear();
+                BlocBuilder<HomeCubit, HomeState>(
+                  bloc: _homeCubit,
+                  builder: (context, state) {
+                    final isLoading = state is AddCommentLoading;
+                    return IconButton(
+                      icon: isLoading
+                          ? const CircularProgressIndicator(strokeWidth: 2)
+                          : const Icon(Icons.send),
+                      onPressed: () async {
+                        String commentId =
+                            DateTime.now().millisecondsSinceEpoch.toString();
+                        _homeCubit.addComment(
+                          widget.postId,
+                          CommentEntity(
+                              commentId: commentId,
+                              profilePic: _userProfile!.profileImageUrl,
+                              username: _userProfile!.username,
+                              commentText: commentController!.text.trim(),
+                              dateOfComment: DateTime.now(),
+                              uid: _userProfile!.uid),
+                        );
+
+                        commentController!.clear();
+                      },
+                    );
                   },
                 ),
               ],

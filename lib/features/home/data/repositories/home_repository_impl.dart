@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:instagram_clone/features/home/domain/entities/comment_enitity/comment_entity.dart';
-import 'package:instagram_clone/features/home/domain/repositories/home_Repository.dart';
-import 'package:instagram_clone/features/posts/domain/entities/post_entity.dart';
+import '../../domain/repositories/home_Repository.dart';
+import '../../../posts/domain/entities/post_entity.dart';
+
+import '../../domain/entities/comment_entity/comment_entity.dart';
 
 class HomeRepositoryImpl implements HomeRepository {
   final CollectionReference postCollection =
