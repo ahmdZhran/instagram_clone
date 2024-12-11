@@ -139,7 +139,10 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
                     final isLoading = state is AddCommentLoading;
                     return IconButton(
                       icon: isLoading
-                          ? const CircularProgressIndicator(strokeWidth: 2)
+                          ? const CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: AppColors.primaryColor,
+                            )
                           : const Icon(Icons.send),
                       onPressed: () async {
                         String commentId =
