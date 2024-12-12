@@ -64,6 +64,23 @@ class HomeRepositoryImpl implements HomeRepository {
       throw Exception("Error adding comment: $error");
     }
   }
-  
- 
+
+  @override
+  Future<Stream<List<CommentEntity>>> fetchComments(String postId) async {
+    try {
+      return FirebaseFirestore.instance
+          .collection("posts")
+          .doc(postId)
+          .collection("comments")
+          .orderBy("dateOfComment")
+          .snapshots()
+          .map((snapshot) {
+        return snapshot.docs.map((doc) {
+          return CommentEntity.fromJson(doc.data());
+        }).toList();
+      });
+    } catch (error) {
+      throw Exception("Error fetching comments: $error");
+    }
+  }
 }

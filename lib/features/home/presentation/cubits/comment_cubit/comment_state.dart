@@ -6,7 +6,11 @@ final class CommentInitial extends CommentState {}
 
 final class AddCommentLoading extends CommentState {}
 
-final class AddCommentSuccess extends CommentState {}
+final class AddCommentSuccess extends CommentState {
+  final CommentEntity comment;
+
+  AddCommentSuccess({required this.comment});
+}
 
 final class AddCommentFailure extends CommentState {
   final String errMessage;

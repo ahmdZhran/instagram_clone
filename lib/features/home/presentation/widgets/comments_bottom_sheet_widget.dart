@@ -17,6 +17,7 @@ class CommentsBottomSheetWidget extends StatefulWidget {
   final String profileImage;
   final String postId;
   final String description;
+
   const CommentsBottomSheetWidget({
     super.key,
     required this.scrollController,
@@ -33,15 +34,15 @@ class CommentsBottomSheetWidget extends StatefulWidget {
 
 class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
   UserProfileEntity? _userProfile;
-
-  TextEditingController? commentController = TextEditingController();
+  final TextEditingController commentController = TextEditingController();
   final CommentCubit _commentCubit = CommentCubit.getInstance();
+  List<CommentEntity> _comments = [];
 
-//TODO implement this
   @override
   void initState() {
     super.initState();
     _fetchUserProfile();
+    _commentCubit.fetchComments(widget.postId);
   }
 
   void _fetchUserProfile() {
@@ -82,55 +83,60 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
             endIndent: 20,
             indent: 20,
           ),
-          BlocConsumer<CommentCubit, CommentState>(
-            bloc: _commentCubit..fetchComments(),
-            listener: (context, state) {
-              if (state is AddCommentSuccess) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Comment added successfully!")),
-                );
-              } else if (state is AddCommentFailure) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Error: ${state.errMessage}")),
-                );
-              }
-            },
-            builder: (context, state) {
-              return BlocBuilder<CommentCubit, CommentState>(
-                bloc: _commentCubit,
-                builder: (context, state) {
-                  if (state is FetchCommentLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (state is FetchCommentFailure) {
-                    return Center(
-                      child: Text(state.errMessage),
-                    );
-                  } else if (state is FetchCommentSuccess) {
-                    final comments = state.comments;
-                    debugPrint(comments.first.commentText);
-                    return Expanded(
-                      child: ListView.builder(
-                        controller: widget.scrollController,
-                        itemCount: comments.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            leading: CircleAvatar(
-                              backgroundImage:
-                                  AssetImage(comments.first.profilePic),
-                            ),
-                            title: Text(comments.first.username),
-                            subtitle: Text(comments.first.commentText),
-                          );
-                        },
-                      ),
-                    );
-                  }
-                  return const SizedBox.shrink();
-                },
-              );
-            },
+          Expanded(
+            child: BlocConsumer<CommentCubit, CommentState>(
+              bloc: _commentCubit,
+              listener: (context, state) {
+                if (state is AddCommentSuccess) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Comment added successfully!"),
+                    ),
+                  );
+                  setState(() {
+                    _comments.add(state.comment);
+                  });
+                  _commentCubit
+                      .fetchComments(widget.postId); // Fetch in background
+                } else if (state is AddCommentFailure) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Error: ${state.errMessage}")),
+                  );
+                } else if (state is FetchCommentSuccess) {
+                  setState(() {
+                    _comments = state.comments;
+                  });
+                }
+              },
+              builder: (context, state) {
+                if (state is FetchCommentLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is FetchCommentFailure) {
+                  return Center(
+                    child: Text(state.errMessage),
+                  );
+                } else if (_comments.isNotEmpty) {
+                  return ListView.builder(
+                    controller: widget.scrollController,
+                    itemCount: _comments.length,
+                    itemBuilder: (context, index) {
+                      final comment = _comments[index];
+                      return ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage:
+                              CachedNetworkImageProvider(comment.profilePic),
+                        ),
+                        title: Text(comment.username),
+                        subtitle: Text(comment.commentText),
+                      );
+                    },
+                  );
+                }
+                return const Center(child: Text("No comments yet."));
+              },
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -143,7 +149,7 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
                         )
                       : const AssetImage(
                           'assets/images/place_holder.png',
-                        ),
+                        ) as ImageProvider,
                 ),
                 const Gap(5),
                 Expanded(
@@ -165,19 +171,22 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
                             )
                           : const Icon(Icons.send),
                       onPressed: () async {
+                        if (commentController.text.trim().isEmpty) return;
+
                         String commentId =
                             DateTime.now().millisecondsSinceEpoch.toString();
                         _commentCubit.addComment(
                           widget.postId,
                           CommentEntity(
-                              commentId: commentId,
-                              profilePic: _userProfile!.profileImageUrl,
-                              username: _userProfile!.username,
-                              commentText: commentController!.text.trim(),
-                              dateOfComment: DateTime.now(),
-                              uid: _userProfile!.uid),
+                            commentId: commentId,
+                            profilePic: _userProfile!.profileImageUrl,
+                            username: _userProfile!.username,
+                            commentText: commentController.text.trim(),
+                            dateOfComment: DateTime.now(),
+                            uid: _userProfile!.uid,
+                          ),
                         );
-                        commentController!.clear();
+                        commentController.clear();
                       },
                     );
                   },
