@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/repositories/home_Repository.dart';
 import '../../../home_di.dart';
 import '../../../../posts/domain/entities/post_entity.dart';
-import '../../../domain/entities/comment_entity/comment_entity.dart';
 
 part 'home_state.dart';
 
@@ -52,17 +51,8 @@ class HomeCubit extends Cubit<HomeState> {
     return updatedPosts;
   }
 
-  Future<void> addComment(String postId, CommentEntity comment) async {
-    emit(AddCommentLoading());
-    try {
-      await _homeRepository.addComment(postId, comment);
-      emit(AddCommentSuccess());
-    } catch (error) {
-      emit(AddCommentFailure(errMessage: error.toString()));
-    }
-  }
 
-  static const String _tag = "posts";
+  static const String _tag = "home_instance";
   static HomeCubit getInstance() {
     final isRegister = homeDI.isRegistered<HomeCubit>(instanceName: _tag);
     if (!isRegister) {

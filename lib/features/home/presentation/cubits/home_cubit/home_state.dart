@@ -18,12 +18,12 @@ final class HomePostsFailure extends HomeState {
   HomePostsFailure({required this.errMessage});
 }
 
-final class AddCommentLoading extends HomeState {}
+// final class AddCommentLoading extends HomeState {}
 
-final class AddCommentSuccess extends HomeState {}
+// final class AddCommentSuccess extends HomeState {}
 
-final class AddCommentFailure extends HomeState {
-  final String errMessage;
+// final class AddCommentFailure extends HomeState {
+//   final String errMessage;
 
-  AddCommentFailure({required this.errMessage});
-}
+//   AddCommentFailure({required this.errMessage});
+// }
