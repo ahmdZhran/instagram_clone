@@ -62,7 +62,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  static const String _tag = "posts";
+  static const String _tag = "home_instance";
   static HomeCubit getInstance() {
     final isRegister = homeDI.isRegistered<HomeCubit>(instanceName: _tag);
     if (!isRegister) {
