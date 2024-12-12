@@ -12,7 +12,7 @@ import '../../domain/entities/comment_entity/comment_entity.dart';
 import '../cubits/comment_cubit/comment_cubit.dart';
 import 'comments_bottom_sheet_widget.dart';
 
-class AddCommentBlocBuilderWidget extends StatelessWidget {
+class AddCommentBlocBuilderWidget extends StatefulWidget {
   const AddCommentBlocBuilderWidget({
     super.key,
     required UserProfileEntity? userProfile,
@@ -28,30 +28,56 @@ class AddCommentBlocBuilderWidget extends StatelessWidget {
   final CommentsBottomSheetWidget widget;
 
   @override
+  State<AddCommentBlocBuilderWidget> createState() =>
+      _AddCommentBlocBuilderWidgetState();
+}
+
+class _AddCommentBlocBuilderWidgetState
+    extends State<AddCommentBlocBuilderWidget> {
+  bool isTextNotEmpty = false;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.commentController.addListener(_updateButtonState);
+  }
+
+  @override
+  void dispose() {
+    widget.commentController.removeListener(_updateButtonState);
+    super.dispose();
+  }
+
+  void _updateButtonState() {
+    setState(() {
+      isTextNotEmpty = widget.commentController.text.trim().isNotEmpty;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
           CircleAvatar(
-            backgroundImage: _userProfile?.profileImageUrl != null
+            backgroundImage: widget._userProfile?.profileImageUrl != null
                 ? CachedNetworkImageProvider(
-                    _userProfile!.profileImageUrl,
+                    widget._userProfile!.profileImageUrl,
                   )
                 : const AssetImage(
                     'assets/images/place_holder.png',
                   ) as ImageProvider,
           ),
-          const Gap(5),
+          const Gap(8),
           Expanded(
             child: CustomTextFormField(
-              controller: commentController,
+              controller: widget.commentController,
               hintText: context.translate(AppStrings.addYourComment),
             ),
           ),
-          const Gap(8),
           BlocBuilder<CommentCubit, CommentState>(
-            bloc: _commentCubit,
+            bloc: widget._commentCubit,
             builder: (context, state) {
               final isLoading = state is AddCommentLoading;
               return IconButton(
@@ -60,27 +86,33 @@ class AddCommentBlocBuilderWidget extends StatelessWidget {
                         strokeWidth: 2,
                         color: AppColors.primaryColor,
                       )
-                    : const Icon(
+                    : Icon(
                         Icons.send,
-                        color: AppColors.primaryColor,
+                        color: isTextNotEmpty
+                            ? AppColors.primaryColor
+                            : AppColors.moreDarkBlueColor,
                       ),
-                onPressed: () async {
-                  if (commentController.text.trim().isEmpty) return;
-                  String commentId =
-                      DateTime.now().millisecondsSinceEpoch.toString();
-                  _commentCubit.addComment(
-                    widget.postId,
-                    CommentEntity(
-                      commentId: commentId,
-                      profilePic: _userProfile!.profileImageUrl,
-                      username: _userProfile.username,
-                      commentText: commentController.text.trim(),
-                      dateOfComment: DateTime.now(),
-                      uid: _userProfile.uid,
-                    ),
-                  );
-                  commentController.clear();
-                },
+                onPressed: isTextNotEmpty && !isLoading
+                    ? () async {
+                        if (widget.commentController.text.trim().isEmpty) {
+                          return;
+                        }
+                        String commentId =
+                            DateTime.now().millisecondsSinceEpoch.toString();
+                        widget._commentCubit.addComment(
+                          widget.widget.postId,
+                          CommentEntity(
+                            commentId: commentId,
+                            profilePic: widget._userProfile!.profileImageUrl,
+                            username: widget._userProfile!.username,
+                            commentText: widget.commentController.text.trim(),
+                            dateOfComment: DateTime.now(),
+                            uid: widget._userProfile!.uid,
+                          ),
+                        );
+                        widget.commentController.clear();
+                      }
+                    : null,
               );
             },
           ),
