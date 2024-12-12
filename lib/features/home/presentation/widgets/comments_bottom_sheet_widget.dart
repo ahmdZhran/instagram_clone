@@ -83,7 +83,7 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
             indent: 20,
           ),
           BlocConsumer<CommentCubit, CommentState>(
-            bloc: _commentCubit,
+            bloc: _commentCubit..fetchComments(),
             listener: (context, state) {
               if (state is AddCommentSuccess) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -96,20 +96,39 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
               }
             },
             builder: (context, state) {
-              return Expanded(
-                child: ListView.builder(
-                  controller: widget.scrollController,
-                  itemCount: 20,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: const CircleAvatar(
-                        backgroundImage: AssetImage("assets/images/airen.jpg"),
-                      ),
-                      title: Text('User $index'),
-                      subtitle: Text('This is comment $index'),
+              return BlocBuilder<CommentCubit, CommentState>(
+                bloc: _commentCubit,
+                builder: (context, state) {
+                  if (state is FetchCommentLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
                     );
-                  },
-                ),
+                  } else if (state is FetchCommentFailure) {
+                    return Center(
+                      child: Text(state.errMessage),
+                    );
+                  } else if (state is FetchCommentSuccess) {
+                    final comments = state.comments;
+                    debugPrint(comments.first.commentText);
+                    return Expanded(
+                      child: ListView.builder(
+                        controller: widget.scrollController,
+                        itemCount: comments.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage:
+                                  AssetImage(comments.first.profilePic),
+                            ),
+                            title: Text(comments.first.username),
+                            subtitle: Text(comments.first.commentText),
+                          );
+                        },
+                      ),
+                    );
+                  }
+                  return const SizedBox.shrink();
+                },
               );
             },
           ),

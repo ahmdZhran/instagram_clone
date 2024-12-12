@@ -22,18 +22,6 @@ class CommentCubit extends Cubit<CommentState> {
     }
   }
 
-  void fetchComments() {
-    emit(FetchCommentLoading());
-    _homeRepository.fetchComments().then((stream) {
-      stream.listen((comments) {
-        emit(FetchCommentSuccess(comments: comments));
-      }, onError: (error) {
-        emit(FetchCommentFailure(errMessage: error.toString()));
-      });
-    }).catchError((onError) {
-      emit(FetchCommentFailure(errMessage: onError.toString()));
-    });
-  }
 
   static const String _tag = "comment_instance";
   static CommentCubit getInstance() {

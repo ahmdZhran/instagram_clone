@@ -64,21 +64,6 @@ class HomeRepositoryImpl implements HomeRepository {
       throw Exception("Error adding comment: $error");
     }
   }
-
-  @override
-  Future<Stream<List<CommentEntity>>> fetchComments() async {
-    try {
-      return commentCollection
-          .orderBy('date_of_comment')
-          .snapshots()
-          .map((snapshot) {
-        return snapshot.docs
-            .map((doc) =>
-                CommentEntity.fromJson(doc.data() as Map<String, dynamic>))
-            .toList();
-      });
-    } catch (error) {
-      throw Exception("Error fetching posts: $error");
-    }
-  }
+  
+ 
 }
