@@ -123,10 +123,11 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
             ),
           ),
           AddCommentBlocBuilderWidget(
-              userProfile: _userProfile,
-              commentController: commentController,
-              commentCubit: _commentCubit,
-              widget: widget),
+            userProfile: _userProfile,
+            commentController: commentController,
+            commentCubit: _commentCubit,
+            widget: widget,
+          ),
         ],
       ),
     );
