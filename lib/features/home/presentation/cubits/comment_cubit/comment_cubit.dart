@@ -3,15 +3,13 @@ import 'package:instagram_clone/features/home/domain/repositories/home_Repositor
 
 import '../../../domain/entities/comment_entity/comment_entity.dart';
 import '../../../home_di.dart';
-import '../home_cubit/home_cubit.dart';
-
 part 'comment_state.dart';
 
 class CommentCubit extends Cubit<CommentState> {
   CommentCubit(this._homeRepository) : super(CommentInitial());
 
   final HomeRepository _homeRepository;
-  
+
   Future<void> addComment(String postId, CommentEntity comment) async {
     emit(AddCommentLoading());
     try {
@@ -22,14 +20,12 @@ class CommentCubit extends Cubit<CommentState> {
     }
   }
 
-
-
-  static const String _tag = "home_instance";
+  static const String _tag = "comment_instance";
   static CommentCubit getInstance() {
     final isRegister = homeDI.isRegistered<CommentCubit>(instanceName: _tag);
     if (!isRegister) {
-      homeDI.registerSingleton<HomeCubit>(
-        HomeCubit(homeDI<HomeRepository>()),
+      homeDI.registerSingleton<CommentCubit>(
+        CommentCubit(homeDI<HomeRepository>()),
         instanceName: _tag,
       );
     }

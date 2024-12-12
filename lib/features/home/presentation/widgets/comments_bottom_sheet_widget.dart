@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/features/home/domain/entities/comment_entity/comment_entity.dart';
-import 'package:instagram_clone/features/home/presentation/cubits/home_cubit/home_cubit.dart';
+import '../../domain/entities/comment_entity/comment_entity.dart';
+import '../cubits/comment_cubit/comment_cubit.dart';
 import '../../../../core/helper/extensions.dart';
 import '../../../../core/models/user_profile_manager.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
@@ -35,7 +35,8 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
   UserProfileEntity? _userProfile;
 
   TextEditingController? commentController = TextEditingController();
-  final HomeCubit _homeCubit = HomeCubit.getInstance();
+  final CommentCubit _commentCubit = CommentCubit.getInstance();
+
 //TODO implement this
   @override
   void initState() {
@@ -81,8 +82,8 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
             endIndent: 20,
             indent: 20,
           ),
-          BlocConsumer<HomeCubit, HomeState>(
-            bloc: _homeCubit,
+          BlocConsumer<CommentCubit, CommentState>(
+            bloc: _commentCubit,
             listener: (context, state) {
               if (state is AddCommentSuccess) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -133,8 +134,8 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
                   ),
                 ),
                 const Gap(8),
-                BlocBuilder<HomeCubit, HomeState>(
-                  bloc: _homeCubit,
+                BlocBuilder<CommentCubit, CommentState>(
+                  bloc: _commentCubit,
                   builder: (context, state) {
                     final isLoading = state is AddCommentLoading;
                     return IconButton(
@@ -147,7 +148,7 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
                       onPressed: () async {
                         String commentId =
                             DateTime.now().millisecondsSinceEpoch.toString();
-                        _homeCubit.addComment(
+                        _commentCubit.addComment(
                           widget.postId,
                           CommentEntity(
                               commentId: commentId,
