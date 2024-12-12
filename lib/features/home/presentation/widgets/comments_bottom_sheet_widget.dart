@@ -1,15 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import '../../domain/entities/comment_entity/comment_entity.dart';
 import '../cubits/comment_cubit/comment_cubit.dart';
-import '../../../../core/helper/extensions.dart';
 import '../../../../core/models/user_profile_manager.dart';
-import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/app_strings.dart';
 import '../../../profile/domain/entities/user_profile_entity.dart';
+import 'add_comment_bloc_builder_widget.dart';
 
 class CommentsBottomSheetWidget extends StatefulWidget {
   final ScrollController scrollController;
@@ -17,6 +14,7 @@ class CommentsBottomSheetWidget extends StatefulWidget {
   final String profileImage;
   final String postId;
   final String description;
+
   const CommentsBottomSheetWidget({
     super.key,
     required this.scrollController,
@@ -33,15 +31,15 @@ class CommentsBottomSheetWidget extends StatefulWidget {
 
 class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
   UserProfileEntity? _userProfile;
-
-  TextEditingController? commentController = TextEditingController();
+  final TextEditingController commentController = TextEditingController();
   final CommentCubit _commentCubit = CommentCubit.getInstance();
+  List<CommentEntity> _comments = [];
 
-//TODO implement this
   @override
   void initState() {
     super.initState();
     _fetchUserProfile();
+    _commentCubit.fetchComments(widget.postId);
   }
 
   void _fetchUserProfile() {
@@ -82,92 +80,62 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
             endIndent: 20,
             indent: 20,
           ),
-          BlocConsumer<CommentCubit, CommentState>(
-            bloc: _commentCubit,
-            listener: (context, state) {
-              if (state is AddCommentSuccess) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Comment added successfully!")),
-                );
-              } else if (state is AddCommentFailure) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Error: ${state.errMessage}")),
-                );
-              }
-            },
-            builder: (context, state) {
-              return Expanded(
-                child: ListView.builder(
-                  controller: widget.scrollController,
-                  itemCount: 20,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: const CircleAvatar(
-                        backgroundImage: AssetImage("assets/images/airen.jpg"),
-                      ),
-                      title: Text('User $index'),
-                      subtitle: Text('This is comment $index'),
-                    );
-                  },
-                ),
-              );
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                CircleAvatar(
-                  backgroundImage: _userProfile?.profileImageUrl != null
-                      ? CachedNetworkImageProvider(
-                          _userProfile!.profileImageUrl,
-                        )
-                      : const AssetImage(
-                          'assets/images/place_holder.png',
+          Expanded(
+            child: BlocConsumer<CommentCubit, CommentState>(
+              bloc: _commentCubit,
+              listener: (context, state) {
+                if (state is AddCommentFailure) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Error: ${state.errMessage}")),
+                  );
+                } else if (state is FetchCommentSuccess) {
+                  _comments = state.comments;
+                }
+              },
+              builder: (context, state) {
+                if (state is FetchCommentLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state is FetchCommentFailure) {
+                  return Center(
+                    child: Text(state.errMessage),
+                  );
+                } else if (_comments.isNotEmpty) {
+                  return ListView.builder(
+                    controller: widget.scrollController,
+                    itemCount: _comments.length,
+                    itemBuilder: (context, index) {
+                      final comment = _comments[index];
+                      return ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage:
+                              CachedNetworkImageProvider(comment.profilePic),
                         ),
-                ),
-                const Gap(5),
-                Expanded(
-                  child: CustomTextFormField(
-                    controller: commentController,
-                    hintText: context.translate(AppStrings.addYourComment),
-                  ),
-                ),
-                const Gap(8),
-                BlocBuilder<CommentCubit, CommentState>(
-                  bloc: _commentCubit,
-                  builder: (context, state) {
-                    final isLoading = state is AddCommentLoading;
-                    return IconButton(
-                      icon: isLoading
-                          ? const CircularProgressIndicator(
-                              strokeWidth: 2,
-                              color: AppColors.primaryColor,
-                            )
-                          : const Icon(Icons.send),
-                      onPressed: () async {
-                        String commentId =
-                            DateTime.now().millisecondsSinceEpoch.toString();
-                        _commentCubit.addComment(
-                          widget.postId,
-                          CommentEntity(
-                              commentId: commentId,
-                              profilePic: _userProfile!.profileImageUrl,
-                              username: _userProfile!.username,
-                              commentText: commentController!.text.trim(),
-                              dateOfComment: DateTime.now(),
-                              uid: _userProfile!.uid),
-                        );
-                        commentController!.clear();
-                      },
-                    );
-                  },
-                ),
-              ],
+                        title: Text(comment.username),
+                        subtitle: Text(comment.commentText),
+                      );
+                    },
+                  );
+                }
+                return const Center(child: Text("No comments yet."));
+              },
             ),
+          ),
+          AddCommentBlocBuilderWidget(
+            userProfile: _userProfile,
+            commentController: commentController,
+            commentCubit: _commentCubit,
+            widget: widget,
           ),
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    CommentCubit.deleteInstance();
+    super.dispose();
   }
 }

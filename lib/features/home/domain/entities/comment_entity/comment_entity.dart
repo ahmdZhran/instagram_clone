@@ -15,7 +15,7 @@ class CommentEntity {
     required this.uid,
   });
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'commentId': commentId,
       'profilePic': profilePic,
@@ -26,7 +26,7 @@ class CommentEntity {
     };
   }
 
-  factory CommentEntity.fromMap(Map<String, dynamic> map) {
+  factory CommentEntity.fromJson(Map<String, dynamic> map) {
     return CommentEntity(
       commentId: map['commentId'],
       profilePic: map['profilePic'],

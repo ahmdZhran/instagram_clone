@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 abstract class AppColors {
   static const blackColor = Color(0xff000000);
   static const primaryColor = Color.fromARGB(255, 22, 95, 164);
+  static const moreDarkBlueColor = Color.fromARGB(255, 13, 52, 88);
   static const darkBlueColor = Color.fromARGB(255, 10, 59, 105);
   static const greyColor = Color(0xff999999);
   static const Color deepGrey = Color.fromARGB(255, 44, 44, 46);
