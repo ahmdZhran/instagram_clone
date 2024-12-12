@@ -95,9 +95,7 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
                     SnackBar(content: Text("Error: ${state.errMessage}")),
                   );
                 } else if (state is FetchCommentSuccess) {
-                  setState(() {
-                    _comments = state.comments;
-                  });
+                  _comments = state.comments;
                 }
               },
               builder: (context, state) {
