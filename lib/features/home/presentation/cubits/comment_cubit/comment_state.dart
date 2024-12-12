@@ -13,3 +13,17 @@ final class AddCommentFailure extends CommentState {
 
   AddCommentFailure({required this.errMessage});
 }
+
+final class FetchCommentLoading extends CommentState {}
+
+final class FetchCommentSuccess extends CommentState {
+  final List<CommentEntity> comments;
+
+  FetchCommentSuccess({required this.comments});
+}
+
+final class FetchCommentFailure extends CommentState {
+  final String errMessage;
+
+  FetchCommentFailure({required this.errMessage});
+}

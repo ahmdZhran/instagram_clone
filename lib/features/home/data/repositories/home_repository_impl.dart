@@ -8,6 +8,9 @@ class HomeRepositoryImpl implements HomeRepository {
   final CollectionReference postCollection =
       FirebaseFirestore.instance.collection("posts");
 
+  final CollectionReference commentCollection =
+      FirebaseFirestore.instance.collection("comments");
+
   @override
   Future<Stream<List<PostEntity>>> fetchAllPosts() async {
     try {
@@ -56,9 +59,26 @@ class HomeRepositoryImpl implements HomeRepository {
           .doc(postId)
           .collection("comments")
           .doc(commentEntity.commentId)
-          .set(commentEntity.toMap());
+          .set(commentEntity.toJson());
     } catch (error) {
       throw Exception("Error adding comment: $error");
+    }
+  }
+
+  @override
+  Future<Stream<List<CommentEntity>>> fetchComments() async {
+    try {
+      return commentCollection
+          .orderBy('date_of_comment')
+          .snapshots()
+          .map((snapshot) {
+        return snapshot.docs
+            .map((doc) =>
+                CommentEntity.fromJson(doc.data() as Map<String, dynamic>))
+            .toList();
+      });
+    } catch (error) {
+      throw Exception("Error fetching posts: $error");
     }
   }
 }

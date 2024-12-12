@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/features/home/domain/repositories/home_Repository.dart';
 
@@ -18,6 +20,19 @@ class CommentCubit extends Cubit<CommentState> {
     } catch (error) {
       emit(AddCommentFailure(errMessage: error.toString()));
     }
+  }
+
+  void fetchComments() {
+    emit(FetchCommentLoading());
+    _homeRepository.fetchComments().then((stream) {
+      stream.listen((comments) {
+        emit(FetchCommentSuccess(comments: comments));
+      }, onError: (error) {
+        emit(FetchCommentFailure(errMessage: error.toString()));
+      });
+    }).catchError((onError) {
+      emit(FetchCommentFailure(errMessage: onError.toString()));
+    });
   }
 
   static const String _tag = "comment_instance";
