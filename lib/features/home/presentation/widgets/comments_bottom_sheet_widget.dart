@@ -96,8 +96,7 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
                   setState(() {
                     _comments.add(state.comment);
                   });
-                  _commentCubit
-                      .fetchComments(widget.postId); // Fetch in background
+                  _commentCubit.fetchComments(widget.postId);
                 } else if (state is AddCommentFailure) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text("Error: ${state.errMessage}")),
