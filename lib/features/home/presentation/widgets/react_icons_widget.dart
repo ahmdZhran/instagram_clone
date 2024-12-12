@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/utils/app_assets.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 import '../../../../core/theme/app_them.dart';
-import '../cubits/cubit/home_cubit.dart';
+import '../cubits/home_cubit/home_cubit.dart';
 import 'comments_bottom_sheet_widget.dart';
 
 class ReactIconsWidget extends StatefulWidget {
