@@ -84,13 +84,7 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
             child: BlocConsumer<CommentCubit, CommentState>(
               bloc: _commentCubit,
               listener: (context, state) {
-                if (state is AddCommentSuccess) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Comment added successfully!"),
-                    ),
-                  );
-                } else if (state is AddCommentFailure) {
+                if (state is AddCommentFailure) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text("Error: ${state.errMessage}")),
                   );
