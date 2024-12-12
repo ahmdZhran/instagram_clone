@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/features/home/domain/entities/comment_entity/comment_entity.dart';
-import 'package:instagram_clone/features/home/presentation/cubits/cubit/home_cubit.dart';
+import 'package:instagram_clone/features/home/presentation/cubits/home_cubit/home_cubit.dart';
 import '../../../../core/helper/extensions.dart';
 import '../../../../core/models/user_profile_manager.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';

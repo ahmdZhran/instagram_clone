@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../cubits/cubit/home_cubit.dart';
+import '../cubits/home_cubit/home_cubit.dart';
 import '../widgets/custom_sliver_app_bar_widget.dart';
 import '../widgets/posts_section_widget.dart';
 import '../widgets/story_section_widget.dart';
