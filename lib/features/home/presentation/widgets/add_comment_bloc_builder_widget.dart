@@ -60,7 +60,10 @@ class AddCommentBlocBuilderWidget extends StatelessWidget {
                         strokeWidth: 2,
                         color: AppColors.primaryColor,
                       )
-                    : const Icon(Icons.send),
+                    : const Icon(
+                        Icons.send,
+                        color: AppColors.primaryColor,
+                      ),
                 onPressed: () async {
                   if (commentController.text.trim().isEmpty) return;
                   String commentId =
