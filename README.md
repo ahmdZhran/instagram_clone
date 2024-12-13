@@ -1,6 +1,6 @@
 <div align="center">
 
-   ![instagram-application-logo_23-2151544094](https://github.com/user-attachments/assets/2de80d7c-a58b-4ec9-ba2d-d58fbb8585eb)
+   <img src="https://github.com/user-attachments/assets/2de80d7c-a58b-4ec9-ba2d-d58fbb8585eb" alt="Instagram Logo" width="300" height="300" />
    
 <h1>Instagram Clone</h1>
   
