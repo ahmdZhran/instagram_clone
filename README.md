@@ -1,16 +1,23 @@
-# instagram_clone
+<div align="center">
 
-A new Flutter project.
+   ![instagram-application-logo_23-2151544094](https://github.com/user-attachments/assets/2de80d7c-a58b-4ec9-ba2d-d58fbb8585eb)
+   
+<h1>Instagram Clone</h1>
+  
+<!-- Badges -->
+<p>
+  <a href="https://github.com/ahmdZhran/instagram_clone/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/ahmdZhran/instagram_clone" alt="contributors" />
+  </a>
+  <a href="https://github.com/ahmdZhran/instagram_clone/commits/main">
+    <img src="https://img.shields.io/github/last-commit/ahmdZhran/instagram_clone" alt="last update" />
+  </a>
+  <a href="https://github.com/ahmdZhran/instagram_clone/network/members">
+    <img src="https://img.shields.io/github/forks/ahmdZhran/instagram_clone" alt="forks" />
+  </a>
+  <a href="https://github.com/ahmdZhran/instagram_clone/stargazers">
+    <img src="https://img.shields.io/github/stars/ahmdZhran/instagram_clone" alt="stars" />
+  </a>
 
-## Getting Started
+</p>
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
