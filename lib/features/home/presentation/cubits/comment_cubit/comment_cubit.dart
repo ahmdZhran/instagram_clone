@@ -26,14 +26,9 @@ class CommentCubit extends Cubit<CommentState> {
     emit(FetchCommentLoading());
     try {
       final commentsStream = await _homeRepository.fetchComments(postId);
-      commentsStream.listen(
-        (comments) {
-          emit(FetchCommentSuccess(comments: comments));
-        },
-        onError: (error) {
-          emit(FetchCommentFailure(errMessage: error.toString()));
-        },
-      );
+      await for (final comments in commentsStream) {
+        emit(FetchCommentSuccess(comments: comments));
+      }
     } catch (error) {
       emit(FetchCommentFailure(errMessage: error.toString()));
     }

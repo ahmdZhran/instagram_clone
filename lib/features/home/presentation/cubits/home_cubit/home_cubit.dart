@@ -10,17 +10,17 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this._homeRepository) : super(HomeInitial());
 
   final HomeRepository _homeRepository;
-  void fetchPosts() {
+
+  Future<void> fetchPosts() async {
     emit(HomePostsLoading());
-    _homeRepository.fetchAllPosts().then((stream) {
-      stream.listen((posts) {
+    try {
+      final stream = await _homeRepository.fetchAllPosts();
+      await for (final posts in stream) {
         emit(HomePostsSuccess(posts));
-      }, onError: (error) {
-        emit(HomePostsFailure(errMessage: error.toString()));
-      });
-    }).catchError((error) {
+      }
+    } catch (error) {
       emit(HomePostsFailure(errMessage: error.toString()));
-    });
+    }
   }
 
   Future<void> toggleLikedPost(String postId, String userId) async {
@@ -50,7 +50,6 @@ class HomeCubit extends Cubit<HomeState> {
     }).toList();
     return updatedPosts;
   }
-
 
   static const String _tag = "home_instance";
   static HomeCubit getInstance() {
