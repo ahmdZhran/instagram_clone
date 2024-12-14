@@ -11,7 +11,7 @@ class CommentCubit extends Cubit<CommentState> {
   CommentCubit(this._homeRepository) : super(CommentInitial());
 
   final HomeRepository _homeRepository;
-
+  StreamSubscription? _commentsSubscription;
   Future<void> addComment(String postId, CommentEntity comment) async {
     emit(AddCommentLoading());
     try {
@@ -26,9 +26,11 @@ class CommentCubit extends Cubit<CommentState> {
     emit(FetchCommentLoading());
     try {
       final commentsStream = await _homeRepository.fetchComments(postId);
-      await for (final comments in commentsStream) {
+      _commentsSubscription = commentsStream.listen((comments) {
         emit(FetchCommentSuccess(comments: comments));
-      }
+      }, onError: (error) {
+        emit(FetchCommentFailure(errMessage: error.toString()));
+      });
     } catch (error) {
       emit(FetchCommentFailure(errMessage: error.toString()));
     }
@@ -53,5 +55,11 @@ class CommentCubit extends Cubit<CommentState> {
       await cubit.close();
       homeDI.unregister<CommentCubit>(instanceName: _tag);
     }
+  }
+
+  @override
+  Future<void> close() {
+    _commentsSubscription?.cancel();
+    return super.close();
   }
 }
