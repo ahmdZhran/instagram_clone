@@ -12,6 +12,7 @@ class CommentCubit extends Cubit<CommentState> {
 
   final HomeRepository _homeRepository;
   StreamSubscription? _commentsSubscription;
+
   Future<void> addComment(String postId, CommentEntity comment) async {
     emit(AddCommentLoading());
     try {
