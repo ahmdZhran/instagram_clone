@@ -2,9 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:instagram_clone/core/utils/custom_text_style.dart';
+import 'package:readmore/readmore.dart';
 import '../../domain/entities/comment_entity/comment_entity.dart';
 import '../cubits/comment_cubit/comment_cubit.dart';
 import '../../../../core/models/user_profile_manager.dart';
@@ -138,7 +140,30 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
                                   comment.profilePic),
                             ),
                             title: Text(comment.username),
-                            subtitle: Text(comment.commentText),
+                            subtitle: Row(
+                              children: [
+                                Expanded(
+                                  child: ReadMoreText(
+                                    comment.commentText,
+                                    trimLines: 2,
+                                    colorClickableText: AppColors.primaryColor,
+                                    trimMode: TrimMode.Line,
+                                    trimCollapsedText:
+                                        context.translate(AppStrings.readMore),
+                                    trimExpandedText:
+                                        context.translate(AppStrings.showLess),
+                                  ),
+                                ),
+                                const Gap(5),
+                                Text(
+                                  comment.dateOfComment.toReadableDate(),
+                                  style: const TextStyle(
+                                    color: AppColors.greyColor,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
