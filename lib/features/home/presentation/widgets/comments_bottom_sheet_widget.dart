@@ -1,6 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/core/helper/extensions.dart';
+import 'package:instagram_clone/core/utils/app_strings.dart';
+import 'package:instagram_clone/core/utils/custom_text_style.dart';
 import '../../domain/entities/comment_entity/comment_entity.dart';
 import '../cubits/comment_cubit/comment_cubit.dart';
 import '../../../../core/models/user_profile_manager.dart';
@@ -34,6 +38,7 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
   final TextEditingController commentController = TextEditingController();
   final CommentCubit _commentCubit = CommentCubit.getInstance();
   List<CommentEntity> _comments = [];
+  List<bool> _isPressed = [];
 
   @override
   void initState() {
@@ -90,6 +95,15 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
                   );
                 } else if (state is FetchCommentSuccess) {
                   _comments = state.comments;
+                  _isPressed = List<bool>.filled(_comments.length, false);
+                } else if (state is DeleteCommentSuccess) {
+                  _comments.removeWhere(
+                      (comment) => comment.commentId == state.commentId);
+                  setState(() {});
+                } else if (state is DeleteCommentFailure) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Error: ${state.errMessage}")),
+                  );
                 }
               },
               builder: (context, state) {
@@ -107,13 +121,26 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
                     itemCount: _comments.length,
                     itemBuilder: (context, index) {
                       final comment = _comments[index];
-                      return ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage:
-                              CachedNetworkImageProvider(comment.profilePic),
+                      return InkWell(
+                        onLongPress: () {
+                          if (FirebaseAuth.instance.currentUser?.uid ==
+                              comment.uid) {
+                            _showCommentActions(context, comment);
+                          }
+                        },
+                        child: Container(
+                          color: _isPressed[index]
+                              ? AppColors.greyColor.withOpacity(0.3)
+                              : Colors.transparent,
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: CachedNetworkImageProvider(
+                                  comment.profilePic),
+                            ),
+                            title: Text(comment.username),
+                            subtitle: Text(comment.commentText),
+                          ),
                         ),
-                        title: Text(comment.username),
-                        subtitle: Text(comment.commentText),
                       );
                     },
                   );
@@ -137,5 +164,75 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
   void dispose() {
     CommentCubit.deleteInstance();
     super.dispose();
+  }
+
+  void _showCommentActions(BuildContext context, CommentEntity comment) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return Wrap(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.edit, color: AppColors.primaryColor),
+              title: Text(context.translate(AppStrings.edit)),
+              onTap: () {
+                context.pop();
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.delete, color: Colors.red),
+              title: Text(context.translate(AppStrings.delete)),
+              onTap: () async {
+                context.pop();
+                final confirm = await _confirmDelete(context);
+                if (confirm == true) {
+                  _commentCubit.deleteComment(widget.postId, comment.commentId);
+                }
+              },
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.cancel, color: AppColors.greyColor),
+              title: Text(context.translate(AppStrings.cancel)),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<bool?> _confirmDelete(BuildContext context) {
+    return showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            context.translate(AppStrings.deleteComment),
+            style: CustomTextStyle.pacifico14,
+          ),
+          content: Text(context.translate(AppStrings.areYourSureToDeleteCo)),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: Text(context.translate(AppStrings.cancel)),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: Text(
+                context.translate(AppStrings.delete),
+                style: CustomTextStyle.pacifico14
+                    .copyWith(color: AppColors.redColor),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

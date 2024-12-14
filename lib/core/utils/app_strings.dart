@@ -65,4 +65,10 @@ abstract class AppStrings {
   // explore strings
   static const String noUsersFound = "no_users_found";
   static const String searchForUser = "search_for_user";
+
+  // comment sheet ui
+  static const String edit = "edit";
+  static const String delete = "delete";
+  static const String deleteComment = "delete_comment";
+  static const String areYourSureToDeleteCo = "are_you_sure_to_delete";
 }

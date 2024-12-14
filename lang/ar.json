@@ -29,6 +29,10 @@
     "search_for_user":"ابحث عن مستخدم",
     "follow":"متابعة",
     "un_follow":"الغاء المتابعة",
-    "add_your_comment":"....أضف تعليقك"
+    "add_your_comment":"....أضف تعليقك",
+    "edit":"تعديل",
+    "delete":"حذف",
+    "delete_comment":"حذف التعليق",
+    "are_you_sure_to_delete":"هل انت متأكد من حذف هذا التعليق"
     
 }
