@@ -83,4 +83,18 @@ class HomeRepositoryImpl implements HomeRepository {
       throw Exception("Error fetching comments: $error");
     }
   }
+
+  @override
+  Future<void> deleteComment(String postId, String commentId) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection("posts")
+          .doc(postId)
+          .collection("comments")
+          .doc(commentId)
+          .delete();
+    } catch (error) {
+      throw Exception("Error deleting comment: $error");
+    }
+  }
 }
