@@ -10,14 +10,16 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this._homeRepository) : super(HomeInitial());
 
   final HomeRepository _homeRepository;
-
+  StreamSubscription? _streamSubscription;
   Future<void> fetchPosts() async {
     emit(HomePostsLoading());
     try {
-      final stream = await _homeRepository.fetchAllPosts();
-      await for (final posts in stream) {
+      final postsStream = await _homeRepository.fetchAllPosts();
+      _streamSubscription = postsStream.listen((posts) {
         emit(HomePostsSuccess(posts));
-      }
+      }, onError: (error) {
+        emit(HomePostsFailure(errMessage: error));
+      });
     } catch (error) {
       emit(HomePostsFailure(errMessage: error.toString()));
     }
@@ -70,5 +72,11 @@ class HomeCubit extends Cubit<HomeState> {
       await cubit.close();
       homeDI.unregister<HomeCubit>(instanceName: _tag);
     }
+  }
+
+  @override
+  Future<void> close() {
+    _streamSubscription!.cancel();
+    return super.close();
   }
 }
