@@ -31,3 +31,17 @@ final class FetchCommentFailure extends CommentState {
 
   FetchCommentFailure({required this.errMessage});
 }
+
+class DeleteCommentLoading extends CommentState {}
+
+class DeleteCommentSuccess extends CommentState {
+  final String commentId;
+
+  DeleteCommentSuccess({required this.commentId});
+}
+
+class DeleteCommentFailure extends CommentState {
+  final String errMessage;
+
+  DeleteCommentFailure({required this.errMessage});
+}

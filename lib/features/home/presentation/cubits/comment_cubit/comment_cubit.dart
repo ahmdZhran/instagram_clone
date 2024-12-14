@@ -37,6 +37,8 @@ class CommentCubit extends Cubit<CommentState> {
     }
   }
 
+
+
   static const String _tag = "comment_instance";
   static CommentCubit getInstance() {
     final isRegister = homeDI.isRegistered<CommentCubit>(instanceName: _tag);
