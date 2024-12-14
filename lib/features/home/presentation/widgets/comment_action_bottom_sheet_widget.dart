@@ -20,7 +20,7 @@ class CommentActionsBottomSheetWidget extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.edit, color: AppColors.primaryColor),
           title: Text(context.translate(AppStrings.edit)),
-          onTap: () => Navigator.pop(context),
+          onTap: () => context.pop(),
         ),
         ListTile(
           leading: const Icon(Icons.delete, color: Colors.red),
@@ -37,7 +37,7 @@ class CommentActionsBottomSheetWidget extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.cancel, color: AppColors.greyColor),
           title: Text(context.translate(AppStrings.cancel)),
-          onTap: () => Navigator.pop(context),
+          onTap: () => context.pop(),
         ),
       ],
     );

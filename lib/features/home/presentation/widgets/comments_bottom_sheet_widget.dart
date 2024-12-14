@@ -60,7 +60,7 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
       child: Column(
         children: [
           const DragHandle(),
-          _Header(
+          Header(
               username: widget.username,
               profileImage: widget.profileImage,
               description: widget.description),
@@ -126,13 +126,14 @@ class DragHandle extends StatelessWidget {
   }
 }
 
-class _Header extends StatelessWidget {
+class Header extends StatelessWidget {
   final String username;
   final String profileImage;
   final String description;
 
-  const _Header(
-      {required this.username,
+  const Header(
+      {super.key,
+      required this.username,
       required this.profileImage,
       required this.description});
 
