@@ -92,11 +92,19 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(
+            20,
+          ),
+        ),
+      ),
       builder: (context) => CommentActionsBottomSheetWidget(
-          comment: comment,
-          onDelete: () =>
-              _commentCubit.deleteComment(widget.postId, comment.commentId)),
+        comment: comment,
+        onDelete: () => _commentCubit.deleteComment(
+          widget.postId,
+          comment.commentId,
+        ),
+      ),
     );
   }
 }
