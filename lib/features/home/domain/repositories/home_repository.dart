@@ -6,4 +6,5 @@ abstract class HomeRepository {
   Future<void> toggleLikedPost(String postID, String userID);
   Future<void> addComment(String postId, CommentEntity commentEntity);
   Future<Stream<List<CommentEntity>>> fetchComments(String postId);
+  Future<void> deleteComment(String postId, String commentId);
 }

@@ -60,3 +60,18 @@ extension ExtensionsHelper on BuildContext {
     );
   }
 }
+
+extension DateTimeExtensions on DateTime {
+  String toReadableDate() {
+    final now = DateTime.now();
+    final difference = now.difference(this);
+
+    if (difference.inDays > 1) {
+      return "$day/$month/$year"; 
+    } else if (difference.inDays == 1) {
+      return "Yesterday";
+    } else {
+      return "Today";
+    }
+  }
+}

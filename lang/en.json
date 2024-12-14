@@ -29,5 +29,11 @@
     "search_for_user":"Search for user",
     "follow":"Follow",
     "un_follow":"Un Follow",
-    "add_your_comment":"Add your comment..."
+    "add_your_comment":"Add your comment...",
+    "edit":"Edit",
+    "delete":"Delete",
+    "delete_comment":"Delete comment",
+    "are_you_sure_to_delete":"Are you sure to delete this comment",
+    "read_more":"Read more",
+    "show_less":"Show less"
 }

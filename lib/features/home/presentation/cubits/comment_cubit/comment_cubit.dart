@@ -12,6 +12,7 @@ class CommentCubit extends Cubit<CommentState> {
 
   final HomeRepository _homeRepository;
   StreamSubscription? _commentsSubscription;
+
   Future<void> addComment(String postId, CommentEntity comment) async {
     emit(AddCommentLoading());
     try {
@@ -33,6 +34,16 @@ class CommentCubit extends Cubit<CommentState> {
       });
     } catch (error) {
       emit(FetchCommentFailure(errMessage: error.toString()));
+    }
+  }
+
+  Future<void> deleteComment(String postId, String commentId) async {
+    emit(DeleteCommentLoading());
+    try {
+      await _homeRepository.deleteComment(postId, commentId);
+      emit(DeleteCommentSuccess(commentId: commentId));
+    } catch (error) {
+      emit(DeleteCommentFailure(errMessage: error.toString()));
     }
   }
 

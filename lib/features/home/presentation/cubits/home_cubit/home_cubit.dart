@@ -11,6 +11,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   final HomeRepository _homeRepository;
   StreamSubscription? _streamSubscription;
+
   Future<void> fetchPosts() async {
     emit(HomePostsLoading());
     try {
