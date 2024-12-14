@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:readmore/readmore.dart';
 
 import '../../../../core/utils/app_colors.dart';
@@ -13,11 +14,12 @@ class CommentItem extends StatelessWidget {
   final bool isPressed;
   final Function(BuildContext, CommentEntity) onLongPress;
 
-  const CommentItem(
-      {super.key,
-      required this.comment,
-      required this.isPressed,
-      required this.onLongPress});
+  const CommentItem({
+    super.key,
+    required this.comment,
+    required this.isPressed,
+    required this.onLongPress,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,19 @@ class CommentItem extends StatelessWidget {
             : Colors.transparent,
         child: ListTile(
           leading: CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(comment.profilePic)),
+            backgroundColor: Colors.transparent,
+            child: CachedNetworkImage(
+              imageUrl: comment.profilePic,
+              placeholder: (context, url) => LoadingAnimationWidget.beat(
+                color: AppColors.primaryColor,
+                size: 20,
+              ),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+              imageBuilder: (context, imageProvider) => CircleAvatar(
+                backgroundImage: imageProvider,
+              ),
+            ),
+          ),
           title: Text(comment.username),
           subtitle: Row(
             children: [
