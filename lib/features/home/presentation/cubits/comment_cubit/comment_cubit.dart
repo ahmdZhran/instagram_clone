@@ -37,7 +37,15 @@ class CommentCubit extends Cubit<CommentState> {
     }
   }
 
-
+  Future<void> deleteComment(String postId, String commentId) async {
+    emit(DeleteCommentLoading());
+    try {
+      await _homeRepository.deleteComment(postId, commentId);
+      emit(DeleteCommentSuccess(commentId: commentId));
+    } catch (error) {
+      emit(DeleteCommentFailure(errMessage: error.toString()));
+    }
+  }
 
   static const String _tag = "comment_instance";
   static CommentCubit getInstance() {
