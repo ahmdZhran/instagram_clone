@@ -67,7 +67,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ];
           },
           body: Padding(
-            padding: const EdgeInsets.only(top: 50.0),
+            padding: const EdgeInsets.only(top: 140.0),
             child: TabBarView(
               physics: const NeverScrollableScrollPhysics(),
               children: [
