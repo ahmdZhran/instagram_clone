@@ -34,7 +34,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
-    profileCubit = ProfileCubit.getInstance(FirebaseAuth.instance.currentUser!.uid);
+    profileCubit =
+        ProfileCubit.getInstance(FirebaseAuth.instance.currentUser!.uid);
   }
 
   @override
@@ -86,7 +87,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       alignment: Alignment.topCenter,
                       child: CircleAvatar(
                         radius: 50,
-                        backgroundColor: Colors.grey[200], // Placeholder color
+                        backgroundColor: Colors.grey[200],
                         child: profileImage != null
                             ? ClipOval(
                                 child: Image.memory(
@@ -188,11 +189,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         bio: bio ?? widget.userProfileData.bio,
         profileImageUrl: profileImageUrl,
         uid: widget.userProfileData.uid,
-        //TOdO don't send this when you are updating the profile
         followers: [],
         following: [],
       );
-      profileCubit.updatedUserData(updatedProfile);
+      await profileCubit.updatedUserData(updatedProfile);
+      profileCubit.getUserData(userId: widget.userProfileData.uid);
     } catch (e) {
       if (mounted) {
         UtilsMessages.showToastErrorBottom(context,
