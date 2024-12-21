@@ -22,7 +22,11 @@ class ProfileImageUpdated extends ProfileState {
 
 class ProfileUpdateLoading extends ProfileState {}
 
-class ProfileUpdateSuccess extends ProfileState {}
+class ProfileUpdateSuccess extends ProfileState {
+  final UserProfileEntity updatedProfile;
+
+  ProfileUpdateSuccess(this.updatedProfile);
+}
 
 class ProfileUpdateFailure extends ProfileState {
   final String errMessage;

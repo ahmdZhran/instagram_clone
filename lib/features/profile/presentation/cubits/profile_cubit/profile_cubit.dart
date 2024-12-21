@@ -43,7 +43,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       userProfileData = updatedProfile;
 
-      emit(ProfileUpdateSuccess());
+      emit(ProfileUpdateSuccess(updatedProfile));
     } catch (error) {
       emit(ProfileUpdateFailure(errMessage: error.toString()));
     }
