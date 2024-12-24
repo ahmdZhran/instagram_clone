@@ -17,6 +17,7 @@ Future<void> main() async {
     InjectionContainer().init(),
     Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform),
   ]);
+  
   runApp(
     InstagramApp(
       appRouter: AppRouter(),
