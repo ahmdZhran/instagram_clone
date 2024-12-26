@@ -4,16 +4,13 @@ import 'package:http/http.dart' as http;
 import 'package:googleapis_auth/auth_io.dart' as auth;
 
 class NotificationService {
-
-
-
   static Future<String> getAccessToken() async {
     final serviceAccountJson = {
       "type": "service_account",
       "project_id": "instagram-clone-a6ff7",
-      "private_key_id": "f96168de3e6ac35bf623a9fe9af53cec95545e92",
+      "private_key_id": "26f44c880cce299cead0a0446706c7f83082a063",
       "private_key":
-          "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQD3ttrZAQh/1N0R\n4FBxvzP8dAnbm6pygiaRM+3cJ4H4Nfnk9f7VEVDB1NPZ8LIWUg1K9mzWKSadPnBM\nFKYkksSJLhdXaXUUDZkftgTrOJycX4NwRUIrxQZvr7YETsl6Tinlmg8nzPd2HkkN\nXvZA8sgWAMWjcQi8G03WjSMcnT+qek4Mxp0yDuMqRLhjqePGlmVg21EESrItADqr\nrhlI2aYPx0mABSF+rXjL+tc9gytAaBYmtZGMvv9zFhBqnzS/9goTdCiYrEs4vkts\nSqNFUQnaCrSWV2pKkXnIAGMl+vGvKZW2jfG/OH+ekdCOfGU2Mi5GTaZ2ZF98m2bG\nOTH/0LeVAgMBAAECggEAA94yaJ+1gZl8ojd9yhORkj2VnHzqb8NMgDPutjiqX4p9\njm+w56Qk6KyUFPEcjBtX4yBvQ/YnM4ldY4gRrWcv88cTzOTz/mN/9+4gVt6ZbhpS\nXmxrw2yI1Ib1MU1cTrFDF4y3nogld7iyrKdw8kQC5SUPRlAQ3Nm9oL4ExaucP43a\n0K3/NmpkAMUcn9rGBaoAp7TvR5pBlqiuVntv7qI3DB09cqYh+I5m5GeolFGnBKRu\nynKzjctzW4vX4HaT1RNHalIozN6zWbuCXPlb7AvTbyhqFCJpX990Ixs86b8RWEZp\njtr1Ucorc/Wm+cDtumrr4FBZ5Q4V3JfThoQaNfPYOQKBgQD/TCy/sKZdrbjkdq3Q\nTjQcnmnioDq5gYlSQnWJokoB18mVTVd9n6m0X/qXSFyP5TIyyHc6oly92+T27xI9\nl62Q44xfcVdRyhX9JNhzWzE+yGC2g2hzaANxDqdyFVXHEqLMQDYGcI4Vx9ny658P\nXi0JNgAEXUYOusx0XtHhekA+SwKBgQD4ZVauidioDVyde2UCLtRyBpcK28GfYgQV\ne59bmVlaQUIw+T7pvpEp8/OpiDBHZQVU43UKkz4ce9+w1n8Ml2k0k2jsQKPNy6tz\nWVxIPui4ekUeH9G8G+KWLRQ5sxbNDFOg88vIw7PxOlcRpuQizq9ZSfNbCJzV1zvS\nTCVBqj21nwKBgGEBSseTkcNqrSRyS90oufhd4RHxnB68r7cH9a1UcxZ8LeaDOslL\nD6qwBYHSRwmOJyLQtS0cYGzrzvZdJOsuZQ72x3HEmU9EoFJN28kJT47xiH4RNHEV\nhqlAzjM1FCDOXfmKNH0B65svEwuQqCGowSgM0rjV0Dbsl59oIAuy7hI9AoGBAIzz\nzHVsqXHrayO+MrpDYrB1xt4Vh9DuqMycAvjSkx6hK3No7GdtiShaU2lfa64HyDe8\nft0KYtN9A5lwjlXR0ZRRFdgCcjFEorzo93HTqPGOCIyol7Z7yF9Zo0F+u7CNjyMl\nVP1O+Fwps+DDaG/MAzrSuPJud7js0vhp1zZk6XGXAoGBAKm8IvEgsPX0aFNmtZwI\nFQXHeUgXlFD+Y2dN930ZM71AJA7HqpLtPU7VM9U+BZvCAWpfXvS8Zbp9D4A8IAxC\nh3+N78kxzNglTTyNot2UJ7QyM3N8CoNEfIgrqOUbKreYiCvQBNeu9gFKyPsuOu9A\nKaS6bAyh8lrNc4LLQo0IBnOE\n-----END PRIVATE KEY-----\n",
+          "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDGtKXOiQmUCWuX\n5+ftBvZcaOF0JlerH+eg0DNcmT+BcEgf1d28sYBoFqdO4h0tBe9lABOWJNmN4fcf\n49pWGLyFZUpxnYmSbjytLqj1wmNXMPKW8sJZTqnBicnnolAWBtm4FrDj+jdaIUHB\nSwZSHt/F5bt3WiLj0Cb0T9xr9XDCAQXiYpbPp++tdluanPlv+Xl0hvztE3ZWrpU6\nkr8QhHQGFOnVTnMisKl18DqV5yFAAWk41bwEILg8lR3otAC5MjnIDCRJNFmJUHAR\njiZuLlrK/xS9VC5sOYkHARKGSjQyactTdKeFUgPOb0seIRAceyE86YEBsPtyIwb5\nRi6gop3xAgMBAAECggEAE1jqRoeBDV8T8PLhegqaIQIMxquHkHfPLLEs+RSKUor5\nWNEw8YMacLgY8wUw6E36QtwsrAs7PBV/A4XC3+xxaa8kvhaD20Q8x/OBu8khNU+E\npVYufnXacUfeZv1+vQBOgV5DO7Vkn5PapEyO6V7MdMdDNzIpcMNXEaV3fbMElz0I\nk/ddm1seTgacJnUVup8Gm8Uh0qTGszGpTtBXnKHZNYWqBAykvdPB5XIwkBkO9CQQ\n8+bU5WNHdD6vcMuVMnx/mXqxRMOY4Ntk9eE8/TbiVboOWm6e8aboWoxyfVTB2wE0\nsV38/kdZi/TOWNGiuUvL3IUGz6gYNnoSsryJ4Jou6QKBgQDm095B0OgwaWd7gwv3\nyz0UJyxJcR02DxR30aZnn2vnwjMpgLOnHzjPcJYZ26LNY7Bz24UNDa6gpPSy9hP8\ncxIm74dtxrmwZZyd7MCWiF8eaC3vYh71p70Kzg+xQnmB9/vnedlXMvTAPfsQCEea\nkIjR41bt5kW3QtElER2wf8jyKQKBgQDcYAO4Q5aIvompEnT7N1+JpHtMbJuQnOEJ\n+oGuEsOnZTXQDF2BKLFoTrHmvr7JY6ZKl5c1pB7xeVJZoKCWs/ivG4Y7hMlMAvrh\n/AjoSQb2mIJ7EITGvYWN9zJrlEXLSWLLXrJsKHyxj7pPc05G6CcUTFAcQl9mzdiQ\nCbzcVy2WiQKBgQDKkPnGVne9LHL08D8LeV8jlXEHDm4tJ7S1pdVbsIr4evN9I4YF\nTqADY3FGRfosNqT+N5Ier3glYD2h49QMQkuWwbPewXvpcnKsIL2uHQUkYRaWskwr\nFsYOemFJFOYfCaoWLFdwb7ZcEsiF/E4iNV7smo6J/gAGYGu8FLYyUyHcaQKBgDsv\najBVrpshGRWYSGSjtXvg+eBHluwaxfGJHsTiczuE2hP7Di2/AQ5zfCHtfo3VvnZw\nCgM1Bb5yh+RcWGTBBvv4V2+qtOk+L6T7rGS+ICmgQgLNJ+u8QJ8lEZyE4M288tSN\npTuZEAwb/ryRyicO+FfiOu2sAbU5eX0NsHQ40ZyJAoGBAMXsNwrXo3BeNzJjTfkW\nwt7jo9gSU51dY36+IN0+U6bHIZjZCtFgYw0pYqpsTzKkZJ1UcxVmhfsP1s5nBj+D\nM/jklOS39xY3Mc+PA3HB6dIGnW4gO1jtIwjYyPvRIh4/pAYKXjCbLgcf9eGLIsca\neObo23/5BXhMHymizWqgI8Ul\n-----END PRIVATE KEY-----\n",
       "client_email":
           "notifications@instagram-clone-a6ff7.iam.gserviceaccount.com",
       "client_id": "109360859327612620727",
@@ -25,6 +22,7 @@ class NotificationService {
           "https://www.googleapis.com/robot/v1/metadata/x509/notifications%40instagram-clone-a6ff7.iam.gserviceaccount.com",
       "universe_domain": "googleapis.com"
     };
+
     List<String> scopes = [
       "https://www.googleapis.com/auth/userinfo.email",
       "https://www.googleapis.com/auth/firebase.database",
