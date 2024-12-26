@@ -4,12 +4,9 @@ import 'package:http/http.dart' as http;
 import 'package:googleapis_auth/auth_io.dart' as auth;
 
 class NotificationService {
-
-
-
   static Future<String> getAccessToken() async {
     final serviceAccountJson = {
-    // Add your serivce account json here 
+    // ADD your service account json here
     };
     List<String> scopes = [
       "https://www.googleapis.com/auth/userinfo.email",
