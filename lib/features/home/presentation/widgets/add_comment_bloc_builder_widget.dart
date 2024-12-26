@@ -115,7 +115,7 @@ class _AddCommentBlocBuilderWidgetState
                         await NotificationService.sendNotification(
                             '//Your device token here',
                             'someone add comment',
-                            'Kareman: I miss you babay❤');
+                            'someone add comment on your post ');
                         print('notification send successssssssssssssssssss');
                       }
                     : null,
