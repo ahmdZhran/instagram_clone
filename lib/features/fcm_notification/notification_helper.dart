@@ -47,13 +47,13 @@ class NotificationService {
       String deviceToken, String title, String body) async {
     final String accessToken = await getAccessToken();
     String endpointFCM =
-        'https://fcm.googleapis.com/v1/projects/instagram clone/messages:send';
+        'https://fcm.googleapis.com/v1/projects/instagram-clone-a6ff7/messages:send';
     final Map<String, dynamic> message = {
       "message": {
         "token": deviceToken,
         "notification": {"title": title, "body": body},
         "data": {
-          "route": "serviceScreen",
+          "route": "home",
         }
       }
     };
