@@ -7,7 +7,15 @@ class FCMService {
       FirebaseMessaging messaging = FirebaseMessaging.instance;
 
       // Request permissions if needed
-      await messaging.requestPermission();
+      await messaging.requestPermission(
+        alert: true,
+        announcement: false,
+        badge: true,
+        carPlay: false,
+        criticalAlert: false,
+        provisional: false,
+        sound: true,
+      );
 
       // Retrieve the FCM token
       String? token = await messaging.getToken();
