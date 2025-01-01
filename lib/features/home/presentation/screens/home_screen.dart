@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../../core/helper/secure_storage_helper.dart';
+import '../../../fcm_notification/fcm_services.dart';
 import '../cubits/home_cubit/home_cubit.dart';
 import '../widgets/custom_sliver_app_bar_widget.dart';
 import '../widgets/posts_section_widget.dart';
@@ -18,6 +20,25 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     _homeCubit.fetchPosts();
     super.initState();
+
+    Future.microtask(() async {
+      await _saveDeviceToken();
+    });
+  }
+
+  Future<void> _saveDeviceToken() async {
+    try {
+      String? deviceToken = await FCMService.getDeviceToken();
+      if (deviceToken != null) {
+        final secureStorage = SecureStorageHelper();
+        await secureStorage.save('device_token', deviceToken);
+        debugPrint("FCM Device Token saved successfully: $deviceToken");
+      } else {
+        debugPrint("FCM Device Token is null!");
+      }
+    } catch (error) {
+      debugPrint("Error saving FCM Device Token: $error");
+    }
   }
 
   @override
