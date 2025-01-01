@@ -43,6 +43,7 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.1.6
   flutter_dotenv: ^5.2.1
+  flutter_launcher_icons: ^0.14.2
   flutter_localizations:
     sdk: flutter
   flutter_native_splash: ^2.4.1
@@ -77,6 +78,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   very_good_analysis: ^6.0.0
+
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -120,3 +123,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/ic_launcher.png"
+  min_sdk_version: 23
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/images/ic_launcher.png"
