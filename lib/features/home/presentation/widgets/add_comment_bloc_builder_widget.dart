@@ -113,10 +113,12 @@ class _AddCommentBlocBuilderWidgetState
                         );
                         widget.commentController.clear();
                         await NotificationService.sendNotification(
-                            '//Your device token here',
+                            'c3NDEUpCSpysS7wrzJQapt:APA91bGCbyKct3RGetPgWRbgek_lSsOn-w1ehrWieutXU6az-HSs59HDZ5fCvV1nsn7sc6A3qe0XlTDd2ZygbQxkHyiXbf38nwasy9AS4d7PScI37SZt8vI',
                             'someone add comment',
                             'someone add comment on your post ');
-                        print('notification send successssssssssssssssssss');
+                        print(
+                          'notification send successssssssssssssssssss',
+                        );
                       }
                     : null,
               );

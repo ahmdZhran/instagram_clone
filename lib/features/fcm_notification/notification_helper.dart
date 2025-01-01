@@ -9,7 +9,7 @@ class NotificationService {
     final serviceAccountJson = {
       "type": "service_account",
       "project_id": "instagram-clone-a6ff7",
-      "private_key_id": "26f44c880cce299cead0a0446706c7f83082a063",
+      "private_key_id": "9782f2cfd4175e082828b186aba60c756b7b1c0f",
       "private_key": dotenv.env['GOOGLE_CLOUD_PRIVATE_KEY'],
       "client_email":
           "notifications@instagram-clone-a6ff7.iam.gserviceaccount.com",
