@@ -79,6 +79,10 @@ dev_dependencies:
     sdk: flutter
   very_good_analysis: ^6.0.0
 
+flutter_launcher_icons:
+  android: true
+  image_path: "assets/images/instagram_icon.png"
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
