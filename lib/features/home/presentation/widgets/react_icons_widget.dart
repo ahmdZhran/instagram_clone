@@ -13,6 +13,7 @@ class ReactIconsWidget extends StatefulWidget {
   final String username;
   final String profileImage;
   final String description;
+  final String deviceToken;
   const ReactIconsWidget({
     super.key,
     required this.postId,
@@ -20,6 +21,7 @@ class ReactIconsWidget extends StatefulWidget {
     required this.username,
     required this.profileImage,
     required this.description,
+    required this.deviceToken
   });
 
   @override
@@ -101,7 +103,7 @@ class _ReactIconsWidgetState extends State<ReactIconsWidget> {
                 profileImage: widget.profileImage,
                 scrollController: scrollController,
                 username: widget.username,
-                postId: widget.postId,
+                postId: widget.postId, deviceToken: widget.deviceToken,
               );
             },
           ),

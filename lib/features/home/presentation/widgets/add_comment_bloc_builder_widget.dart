@@ -21,6 +21,7 @@ class AddCommentBlocBuilderWidget extends StatefulWidget {
     required this.commentController,
     required CommentCubit commentCubit,
     required this.widget,
+    required this.deviceToken,
   })  : _userProfile = userProfile,
         _commentCubit = commentCubit;
 
@@ -28,6 +29,7 @@ class AddCommentBlocBuilderWidget extends StatefulWidget {
   final TextEditingController commentController;
   final CommentCubit _commentCubit;
   final CommentsBottomSheetWidget widget;
+  final String deviceToken;
 
   @override
   State<AddCommentBlocBuilderWidget> createState() =>
@@ -38,14 +40,20 @@ class _AddCommentBlocBuilderWidgetState
     extends State<AddCommentBlocBuilderWidget> {
   bool isTextNotEmpty = false;
   String? _deviceToken;
+
   @override
   void initState() {
     super.initState();
     widget.commentController.addListener(_updateButtonState);
+    _deviceToken = widget.deviceToken;
+    fetchDeviceToken();
   }
 
   Future<void> fetchDeviceToken() async {
-    _deviceToken = await TokenDeviceManager().getToken();
+    final token = await TokenDeviceManager().getToken();
+    setState(() {
+      _deviceToken = token;
+    });
   }
 
   @override
@@ -118,7 +126,7 @@ class _AddCommentBlocBuilderWidgetState
                         );
                         widget.commentController.clear();
                         await NotificationService.sendNotification(
-                            "cBS-RTsMR_qkOllcSPcdyN:APA91bHcBS8Q5aHduKSIAGD-kZLp6ZvKoN0je2aKbzk5Jnkq1YTFym8kduIiX-vIOugt23HvQ4u35KZ0Ij6BCJuIooDILsFdBv_Nt4_JVqKLn4xurntWzoo",
+                            _deviceToken ?? "",
                             'someone add comment',
                             'someone add comment on your post ');
                         print(
