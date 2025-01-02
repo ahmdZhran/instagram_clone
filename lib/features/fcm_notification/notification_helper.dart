@@ -43,32 +43,36 @@ class NotificationService {
 
   static Future<void> sendNotification(
       String deviceToken, String title, String body) async {
-    final String accessToken = await getAccessToken();
-    String endpointFCM =
-        'https://fcm.googleapis.com/v1/projects/instagram-clone-a6ff7/messages:send';
-    final Map<String, dynamic> message = {
-      "message": {
-        "token": deviceToken,
-        "notification": {"title": title, "body": body},
-        "data": {
-          "route": "home",
+    try {
+      final String accessToken = await getAccessToken();
+      const String endpointFCM =
+          'https://fcm.googleapis.com/v1/projects/instagram-clone-a6ff7/messages:send';
+
+      final Map<String, dynamic> message = {
+        "message": {
+          "token": deviceToken,
+          "notification": {"title": title, "body": body},
+          "data": {"route": "home"},
         }
+      };
+
+      final http.Response response = await http.post(
+        Uri.parse(endpointFCM),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $accessToken',
+        },
+        body: jsonEncode(message),
+      );
+
+      if (response.statusCode == 200) {
+        debugPrint('Notification sent successfully: ${response.body}');
+      } else {
+        debugPrint(
+            'Failed to send notification. Status code: ${response.statusCode}, Response: ${response.body}');
       }
-    };
-
-    final http.Response response = await http.post(
-      Uri.parse(endpointFCM),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $accessToken'
-      },
-      body: jsonEncode(message),
-    );
-
-    if (response.statusCode == 200) {
-      debugPrint('Notification sent successfully');
-    } else {
-      debugPrint('Failed to send notification');
+    } catch (e) {
+      debugPrint('Error sending notification: $e');
     }
   }
 }
