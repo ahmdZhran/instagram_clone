@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/core/router/routes.dart';
+import 'package:instagram_clone/core/services/token_device_manager.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:instagram_clone/core/utils/utils_messages.dart';
 import 'package:instagram_clone/features/posts/presentation/cubit/posts_cubit.dart';
@@ -38,17 +39,22 @@ class _AddDescriptionAndUploadPostScreenState
   final PostsCubit _postsCubit = PostsCubit.getInstance();
   final AudioPlayer _audioPlayer = AudioPlayer();
   UserProfileEntity? _userProfileEntity;
+  String? _deviceToken;
   @override
   void initState() {
     super.initState();
     loadSelectedMedia();
     fetchUserData();
+    fetchDeviceToken();
+  }
+
+  Future<void> fetchDeviceToken() async {
+    _deviceToken = await TokenDeviceManager().getToken();
   }
 
   Future<void> fetchUserData() async {
     final userId = FirebaseAuth.instance.currentUser!.uid;
-    final profileCubit =
-        ProfileCubit.getInstance(userId);
+    final profileCubit = ProfileCubit.getInstance(userId);
     await profileCubit.getUserData(userId: userId);
     _userProfileEntity = profileCubit.userProfileData;
   }
@@ -99,6 +105,7 @@ class _AddDescriptionAndUploadPostScreenState
                       description: description ?? "",
                       onPost: () async {
                         final postEntity = PostEntity(
+                          deviceToken: _deviceToken,
                           id: DateTime.now().millisecondsSinceEpoch.toString(),
                           userId: FirebaseAuth.instance.currentUser!.uid,
                           username: _userProfileEntity!.username,
