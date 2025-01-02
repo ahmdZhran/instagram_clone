@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
 
+import '../../../../core/services/token_device_manager.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
@@ -36,11 +37,15 @@ class AddCommentBlocBuilderWidget extends StatefulWidget {
 class _AddCommentBlocBuilderWidgetState
     extends State<AddCommentBlocBuilderWidget> {
   bool isTextNotEmpty = false;
-
+  String? _deviceToken;
   @override
   void initState() {
     super.initState();
     widget.commentController.addListener(_updateButtonState);
+  }
+
+  Future<void> fetchDeviceToken() async {
+    _deviceToken = await TokenDeviceManager().getToken();
   }
 
   @override
@@ -113,7 +118,7 @@ class _AddCommentBlocBuilderWidgetState
                         );
                         widget.commentController.clear();
                         await NotificationService.sendNotification(
-                            'c-a8BXtNS9CxSIAUn5P_8D:APA91bEnwDU48tfu9Pn-794_hkFv5l2I0Eyv6aQsNByeCq2zPIIRfYv4TuSIzAqbtxBLKWaL4lp3NC-NsvsjWcWB4gAgWRWeIaT8GYbxDny6roWaUOGKhgA',
+                            "YOUR DEVICE TOKEN",
                             'someone add comment',
                             'someone add comment on your post ');
                         print(
