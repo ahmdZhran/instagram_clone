@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
@@ -6,18 +9,8 @@ class FCMService {
     try {
       FirebaseMessaging messaging = FirebaseMessaging.instance;
 
-      // Request permissions if needed
-      await messaging.requestPermission(
-        alert: true,
-        announcement: false,
-        badge: true,
-        carPlay: false,
-        criticalAlert: false,
-        provisional: false,
-        sound: true,
-      );
+      await messaging.requestPermission();
 
-      // Retrieve the FCM token
       String? token = await messaging.getToken();
       if (token != null) {
         debugPrint("FCM Token: $token");
@@ -27,5 +20,10 @@ class FCMService {
       debugPrint("Error getting FCM token: $e");
       return null;
     }
+  }
+
+  static Future<void> handleBackgroundMessage(RemoteMessage message) async {
+    await Firebase.initializeApp();
+    log(message.notification?.title ?? 'message is Null');
   }
 }
