@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/helper/secure_storage_helper.dart';
 
-import '../../features/fcm_notification/fcm_services.dart';
+import 'fcm_notification_services/fcm_services.dart';
 
 class TokenDeviceManager {
   static final TokenDeviceManager _instance = TokenDeviceManager._internal();
