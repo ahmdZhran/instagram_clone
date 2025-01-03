@@ -1,7 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorageHelper {
-  // Singleton pattern for a single instance of SecureStorageHelper
   static final SecureStorageHelper _instance = SecureStorageHelper._internal();
   factory SecureStorageHelper() => _instance;
   SecureStorageHelper._internal();

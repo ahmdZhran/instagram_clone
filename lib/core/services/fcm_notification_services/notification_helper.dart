@@ -5,6 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:googleapis_auth/auth_io.dart' as auth;
 
 class NotificationService {
+
+
+  
   static Future<String> getAccessToken() async {
     final serviceAccountJson = {
       "type": "service_account",
@@ -52,7 +55,7 @@ class NotificationService {
         "message": {
           "token": deviceToken,
           "notification": {"title": title, "body": body},
-          "data": {"route": "home"},
+          "data": {"route": "profileScreen"},
         }
       };
 
@@ -75,4 +78,8 @@ class NotificationService {
       debugPrint('Error sending notification: $e');
     }
   }
+
+
+
+
 }

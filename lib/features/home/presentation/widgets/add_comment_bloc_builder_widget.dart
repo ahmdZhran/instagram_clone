@@ -6,7 +6,7 @@ import 'package:instagram_clone/core/helper/extensions.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
-import '../../../fcm_notification/notification_helper.dart';
+import '../../../../core/services/fcm_notification_services/notification_helper.dart';
 import '../../../profile/domain/entities/user_profile_entity.dart';
 import '../../domain/entities/comment_entity/comment_entity.dart';
 import '../cubits/comment_cubit/comment_cubit.dart';
