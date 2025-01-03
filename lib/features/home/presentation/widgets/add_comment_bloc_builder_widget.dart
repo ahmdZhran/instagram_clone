@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
-
-import '../../../../core/services/token_device_manager.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
@@ -118,9 +116,10 @@ class _AddCommentBlocBuilderWidgetState
                         );
                         widget.commentController.clear();
                         await NotificationService.sendNotification(
-                            _deviceToken ?? "",
-                            'someone add comment',
-                            'someone add comment on your post ');
+                          _deviceToken ?? "",
+                          "Post Comments",
+                          "Click to know who commented on your post",
+                        );
                       }
                     : null,
               );
