@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
-
-import '../../../../core/services/token_device_manager.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
@@ -21,6 +19,7 @@ class AddCommentBlocBuilderWidget extends StatefulWidget {
     required this.commentController,
     required CommentCubit commentCubit,
     required this.widget,
+    required this.deviceToken,
   })  : _userProfile = userProfile,
         _commentCubit = commentCubit;
 
@@ -28,6 +27,7 @@ class AddCommentBlocBuilderWidget extends StatefulWidget {
   final TextEditingController commentController;
   final CommentCubit _commentCubit;
   final CommentsBottomSheetWidget widget;
+  final String deviceToken;
 
   @override
   State<AddCommentBlocBuilderWidget> createState() =>
@@ -38,14 +38,12 @@ class _AddCommentBlocBuilderWidgetState
     extends State<AddCommentBlocBuilderWidget> {
   bool isTextNotEmpty = false;
   String? _deviceToken;
+
   @override
   void initState() {
     super.initState();
     widget.commentController.addListener(_updateButtonState);
-  }
-
-  Future<void> fetchDeviceToken() async {
-    _deviceToken = await TokenDeviceManager().getToken();
+    _deviceToken = widget.deviceToken;
   }
 
   @override
@@ -118,11 +116,9 @@ class _AddCommentBlocBuilderWidgetState
                         );
                         widget.commentController.clear();
                         await NotificationService.sendNotification(
-                            "YOUR DEVICE TOKEN",
-                            'someone add comment',
-                            'someone add comment on your post ');
-                        print(
-                          'notification send successssssssssssssssssss',
+                          _deviceToken ?? "",
+                          "Post Comments",
+                          "Click to know who commented on your post",
                         );
                       }
                     : null,

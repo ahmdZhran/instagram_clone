@@ -15,7 +15,7 @@ class CommentsBottomSheetWidget extends StatefulWidget {
   final String profileImage;
   final String postId;
   final String description;
-
+  final String deviceToken;
   const CommentsBottomSheetWidget({
     super.key,
     required this.scrollController,
@@ -23,6 +23,7 @@ class CommentsBottomSheetWidget extends StatefulWidget {
     required this.profileImage,
     required this.postId,
     required this.description,
+    required this.deviceToken,
   });
 
   @override
@@ -76,6 +77,7 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
             commentController: commentController,
             commentCubit: _commentCubit,
             widget: widget,
+            deviceToken: widget.deviceToken,
           ),
         ],
       ),
@@ -130,7 +132,6 @@ class Header extends StatelessWidget {
   final String username;
   final String profileImage;
   final String description;
-
 
   const Header(
       {super.key,
