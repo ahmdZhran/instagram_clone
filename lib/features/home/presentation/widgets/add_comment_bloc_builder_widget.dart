@@ -46,14 +46,6 @@ class _AddCommentBlocBuilderWidgetState
     super.initState();
     widget.commentController.addListener(_updateButtonState);
     _deviceToken = widget.deviceToken;
-    fetchDeviceToken();
-  }
-
-  Future<void> fetchDeviceToken() async {
-    final token = await TokenDeviceManager().getToken();
-    setState(() {
-      _deviceToken = token;
-    });
   }
 
   @override
@@ -129,9 +121,6 @@ class _AddCommentBlocBuilderWidgetState
                             _deviceToken ?? "",
                             'someone add comment',
                             'someone add comment on your post ');
-                        print(
-                          'notification send successssssssssssssssssss',
-                        );
                       }
                     : null,
               );

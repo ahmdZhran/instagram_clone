@@ -51,13 +51,13 @@ class PostCard extends StatelessWidget {
                   ),
                   const Gap(10),
                   ReactIconsWidget(
-                    deviceToken: post.deviceToken ?? "device token",
+                    deviceToken:
+                        post.deviceToken ?? "device token doesn't exist",
                     username: post.username,
                     profileImage: post.userProfileImage,
                     description: post.description ?? "",
                     postId: post.id,
                     userId: post.userId,
-                    
                   ),
                 ],
               ),

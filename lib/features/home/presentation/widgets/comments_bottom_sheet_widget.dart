@@ -76,7 +76,8 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
             userProfile: _userProfile,
             commentController: commentController,
             commentCubit: _commentCubit,
-            widget: widget, deviceToken: '',
+            widget: widget,
+            deviceToken: widget.deviceToken,
           ),
         ],
       ),
@@ -131,7 +132,6 @@ class Header extends StatelessWidget {
   final String username;
   final String profileImage;
   final String description;
-
 
   const Header(
       {super.key,
