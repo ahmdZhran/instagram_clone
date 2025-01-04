@@ -83,29 +83,32 @@ class CommentActionsBottomSheetWidget extends StatelessWidget {
     return showDialog<String>(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          title: Text(context.translate(AppStrings.editComment),
-              style: CustomTextStyle.pacifico14),
-          content: CustomTextFormField(
-            hintText: context.translate(AppStrings.enterYourUpdatedComment),
+        return SizedBox(
+          height: 20,
+          child: AlertDialog(
+            title: Text(context.translate(AppStrings.editComment),
+                style: CustomTextStyle.pacifico14),
+            content: CustomTextFormField(
+              hintText: context.translate(AppStrings.enterYourUpdatedComment),
 
-            controller: controller,
-            // maxLines: 3,
-            // decoration: InputDecoration(
-            //     hintText:
-            //         context.translate(AppStrings.enterYourUpdatedComment)),
+              controller: controller,
+              // maxLines: 3,
+              // decoration: InputDecoration(
+              //     hintText:
+              //         context.translate(AppStrings.enterYourUpdatedComment)),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => context.pop(),
+                child:  Text(context.translate(AppStrings.cancel)),
+              ),
+              TextButton(
+                //TOdO refactor this pop method from extension to make it accept params
+                onPressed: () => Navigator.pop(context, controller.text),
+                child:  Text(context.translate(AppStrings.save)),
+              ),
+            ],
           ),
-          actions: [
-            TextButton(
-              onPressed: () => context.pop(),
-              child: const Text("Cancel"),
-            ),
-            TextButton(
-              //TOdO refactor this pop method from extension to make it accept params
-              onPressed: () => Navigator.pop(context, controller.text),
-              child: const Text("Save"),
-            ),
-          ],
         );
       },
     );

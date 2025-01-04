@@ -75,4 +75,5 @@ abstract class AppStrings {
   static const String showLess = "show_less";
   static const String editComment = "edit_comment";
   static const String enterYourUpdatedComment = "enter_your_updated_comment";
+  static const String save = "save";
 }
