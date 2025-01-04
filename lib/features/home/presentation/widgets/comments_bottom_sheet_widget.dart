@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/features/home/presentation/cubits/home_cubit/home_cubit.dart';
 import '../../domain/entities/comment_entity/comment_entity.dart';
 import '../cubits/comment_cubit/comment_cubit.dart';
 import '../../../../core/models/user_profile_manager.dart';
@@ -34,7 +35,7 @@ class CommentsBottomSheetWidget extends StatefulWidget {
 class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
   UserProfileEntity? _userProfile;
   final TextEditingController commentController = TextEditingController();
-  final CommentCubit _commentCubit = CommentCubit.getInstance();
+  final HomeCubit _commentCubit = HomeCubit.getInstance();
   final List<CommentEntity> _comments = [];
   final List<bool> _isPressed = [];
 

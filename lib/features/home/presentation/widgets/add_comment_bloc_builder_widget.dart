@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
+import 'package:instagram_clone/features/home/presentation/cubits/home_cubit/home_cubit.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
@@ -17,7 +18,7 @@ class AddCommentBlocBuilderWidget extends StatefulWidget {
     super.key,
     required UserProfileEntity? userProfile,
     required this.commentController,
-    required CommentCubit commentCubit,
+    required HomeCubit commentCubit,
     required this.widget,
     required this.deviceToken,
   })  : _userProfile = userProfile,
@@ -25,7 +26,7 @@ class AddCommentBlocBuilderWidget extends StatefulWidget {
 
   final UserProfileEntity? _userProfile;
   final TextEditingController commentController;
-  final CommentCubit _commentCubit;
+  final HomeCubit _commentCubit;
   final CommentsBottomSheetWidget widget;
   final String deviceToken;
 
@@ -80,7 +81,7 @@ class _AddCommentBlocBuilderWidgetState
               hintText: context.translate(AppStrings.addYourComment),
             ),
           ),
-          BlocBuilder<CommentCubit, CommentState>(
+          BlocBuilder<HomeCubit, HomeState>(
             bloc: widget._commentCubit,
             builder: (context, state) {
               final isLoading = state is AddCommentLoading;
