@@ -7,7 +7,7 @@ import 'package:googleapis_auth/auth_io.dart' as auth;
 class NotificationService {
 
 
-  
+
   static Future<String> getAccessToken() async {
     final serviceAccountJson = {
       "type": "service_account",
@@ -55,7 +55,7 @@ class NotificationService {
         "message": {
           "token": deviceToken,
           "notification": {"title": title, "body": body},
-          "data": {"route": "profileScreen"},
+          "data": {"screen": "notification"},
         }
       };
 
