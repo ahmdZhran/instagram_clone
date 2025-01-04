@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/core/helper/extensions.dart';
+import 'package:instagram_clone/core/utils/app_strings.dart';
 
 import '../../domain/entities/comment_entity/comment_entity.dart';
 import '../cubits/comment_cubit/comment_cubit.dart';
@@ -63,7 +65,11 @@ class CommentsListWidget extends StatelessWidget {
               ),
             );
           }
-          return const Center(child: Text("No comments yet."));
+          return Center(
+            child: Text(
+              context.translate(AppStrings.beTheFirstToComment),
+            ),
+          );
         },
       ),
     );

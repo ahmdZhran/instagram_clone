@@ -76,4 +76,5 @@ abstract class AppStrings {
   static const String editComment = "edit_comment";
   static const String enterYourUpdatedComment = "enter_your_updated_comment";
   static const String save = "save";
+  static const String beTheFirstToComment = "be_the_first_to_comment_on_this_post";
 }
