@@ -38,6 +38,13 @@ class CommentsListWidget extends StatelessWidget {
           } else if (state is DeleteCommentSuccess) {
             comments
                 .removeWhere((comment) => comment.commentId == state.commentId);
+          } else if (state is EditCommentSuccess) {
+            final index = comments
+                .indexWhere((comment) => comment.commentId == state.commentId);
+            if (index != -1) {
+              comments[index] =
+                  comments[index].copyWith(commentText: state.updatedComment);
+            }
           }
         },
         builder: (context, state) {
@@ -50,9 +57,10 @@ class CommentsListWidget extends StatelessWidget {
               controller: scrollController,
               itemCount: comments.length,
               itemBuilder: (context, index) => CommentItem(
-                  comment: comments[index],
-                  isPressed: isPressed[index],
-                  onLongPress: onLongPress),
+                comment: comments[index],
+                isPressed: isPressed[index],
+                onLongPress: onLongPress,
+              ),
             );
           }
           return const Center(child: Text("No comments yet."));

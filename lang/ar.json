@@ -35,6 +35,9 @@
     "delete_comment":"حذف التعليق",
     "are_you_sure_to_delete":"هل انت متأكد من حذف هذا التعليق",
     "read_more":"اقرأ المزيد",
-    "show_less":"عرض أقل"
+    "show_less":"عرض أقل",
+    "edit_comment":"تعديل التعليق",
+    "enter_your_updated_comment":"أدخل تعليقك المحدث",
+    "save":"حفظ"
     
 }

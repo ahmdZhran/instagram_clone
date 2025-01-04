@@ -97,4 +97,21 @@ class HomeRepositoryImpl implements HomeRepository {
       throw Exception("Error deleting comment: $error");
     }
   }
+
+  @override
+  Future<void> editComment(
+      String postId, String commentId, String updatedComment) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection("posts")
+          .doc(postId)
+          .collection("comments")
+          .doc(commentId)
+          .update({
+        'comment': updatedComment,
+      });
+    } catch (error) {
+      throw Exception("Error editing comment: $error");
+    }
+  }
 }

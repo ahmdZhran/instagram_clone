@@ -68,6 +68,17 @@ class CommentCubit extends Cubit<CommentState> {
     }
   }
 
+  Future<void> editComment(
+      String postId, String commentId, String updatedComment) async {
+    try {
+      await _homeRepository.editComment(postId, commentId, updatedComment);
+      emit(EditCommentSuccess(
+          commentId: commentId, updatedComment: updatedComment));
+    } catch (error) {
+      emit(EditCommentFailure(errMessage: error.toString()));
+    }
+  }
+
   @override
   Future<void> close() {
     _commentsSubscription?.cancel();
