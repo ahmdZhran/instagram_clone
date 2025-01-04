@@ -106,6 +106,11 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
           widget.postId,
           comment.commentId,
         ),
+        onEdit: (updatedComment) => _commentCubit.editComment(
+          widget.postId,
+          comment.commentId,
+          updatedComment,
+        ),
       ),
     );
   }

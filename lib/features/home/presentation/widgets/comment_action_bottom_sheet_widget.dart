@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
 
@@ -9,9 +10,13 @@ import '../../domain/entities/comment_entity/comment_entity.dart';
 class CommentActionsBottomSheetWidget extends StatelessWidget {
   final CommentEntity comment;
   final VoidCallback onDelete;
-
-  const CommentActionsBottomSheetWidget(
-      {super.key, required this.comment, required this.onDelete});
+  final Function(String) onEdit;
+  const CommentActionsBottomSheetWidget({
+    super.key,
+    required this.comment,
+    required this.onDelete,
+    required this.onEdit,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,13 @@ class CommentActionsBottomSheetWidget extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.edit, color: AppColors.primaryColor),
           title: Text(context.translate(AppStrings.edit)),
-          onTap: () => context.pop(),
+          onTap: () {
+            _showEditDialog(context, comment.commentText).then((value) {
+              if (value != null) {
+                onEdit(value);
+              }
+            });
+          },
         ),
         ListTile(
           leading: const Icon(Icons.delete, color: Colors.red),
@@ -62,6 +73,36 @@ class CommentActionsBottomSheetWidget extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Future<String?> _showEditDialog(BuildContext context, String initialText) {
+    final TextEditingController controller =
+        TextEditingController(text: initialText);
+
+    return showDialog<String>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Edit Comment"),
+          content: TextField(
+            controller: controller,
+            maxLines: 3,
+            decoration:
+                const InputDecoration(hintText: "Enter your updated comment"),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, controller.text),
+              child: const Text("Save"),
+            ),
+          ],
+        );
+      },
     );
   }
 }

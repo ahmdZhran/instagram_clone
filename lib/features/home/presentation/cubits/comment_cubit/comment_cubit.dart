@@ -70,7 +70,6 @@ class CommentCubit extends Cubit<CommentState> {
 
   Future<void> editComment(
       String postId, String commentId, String updatedComment) async {
-    emit(EditCommentLoading());
     try {
       await _homeRepository.editComment(postId, commentId, updatedComment);
       emit(EditCommentSuccess(

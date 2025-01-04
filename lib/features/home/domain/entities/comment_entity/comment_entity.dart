@@ -36,4 +36,22 @@ class CommentEntity {
       uid: map['uid'],
     );
   }
+
+  CommentEntity copyWith({
+    String? commentId,
+    String? profilePic,
+    String? username,
+    String? commentText,
+    DateTime? dateOfComment,
+    String? uid,
+  }) {
+    return CommentEntity(
+      commentId: commentId ?? this.commentId,
+      profilePic: profilePic ?? this.profilePic,
+      username: username ?? this.username,
+      commentText: commentText ?? this.commentText,
+      dateOfComment: dateOfComment ?? this.dateOfComment,
+      uid: uid ?? this.uid,
+    );
+  }
 }
