@@ -7,6 +7,7 @@ import '../core/utils/app_strings.dart';
 import '../core/languages/app_localization_setup.dart';
 import '../core/router/routes.dart';
 import '../features/profile/presentation/cubits/settings/settings_cubit.dart';
+import '../main.dart';
 
 class InstagramApp extends StatefulWidget {
   const InstagramApp({super.key, required this.appRouter});
@@ -20,6 +21,7 @@ class _InstagramAppState extends State<InstagramApp> {
   final settingsCubit = SettingsCubit.getInstance()
     ..loadTheme()
     ..loadLanguage();
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -28,6 +30,7 @@ class _InstagramAppState extends State<InstagramApp> {
         bloc: settingsCubit,
         builder: (context, state) {
           return MaterialApp(
+            navigatorKey: navigatorKey,
             debugShowCheckedModeBanner: false,
             title: AppStrings.appName,
             localizationsDelegates:

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:instagram_clone/core/services/token_device_manager.dart';
 import 'core/router/app_router.dart';
+import 'core/services/fcm_notification_services/fcm_services.dart';
 import 'my_bloc_observer.dart';
 import 'app/instagram_app.dart';
 import 'core/helper/shared_pref_helper.dart';
@@ -23,7 +24,7 @@ Future<void> main() async {
     TokenDeviceManager().initializeToken(),
     dotenv.load(fileName: ".env"),
   ]);
-
+FCMService.configure();
   runApp(
     InstagramApp(
       appRouter: AppRouter(),
@@ -31,3 +32,4 @@ Future<void> main() async {
   );
 }
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
