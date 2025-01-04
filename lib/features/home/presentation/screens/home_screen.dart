@@ -13,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final HomeCubit _homeCubit = HomeCubit.getInstance();
+
   @override
   void initState() {
     _homeCubit.fetchPosts();

@@ -31,7 +31,7 @@ class ReactIconsWidget extends StatefulWidget {
 
 class _ReactIconsWidgetState extends State<ReactIconsWidget> {
   final HomeCubit _homeCubit = HomeCubit.getInstance();
-  final HomeCubit _commentCubit = HomeCubit.getInstance();
+  final CommentCubit _commentCubit = CommentCubit.getInstance();
   List<CommentEntity> comments = [];
 
   @override
@@ -79,7 +79,7 @@ class _ReactIconsWidgetState extends State<ReactIconsWidget> {
                   ),
                 ),
                 const Gap(6),
-                BlocBuilder<HomeCubit, HomeState>(
+                BlocBuilder<CommentCubit, CommentState>(
                   bloc: _commentCubit,
                   builder: (context, commentState) {
                     if (commentState is FetchCommentSuccess) {
