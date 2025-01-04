@@ -55,7 +55,9 @@ class CommentsListWidget extends StatelessWidget {
           } else if (state is FetchCommentFailure) {
             return Center(child: Text(state.errMessage));
           } else if (comments.isNotEmpty) {
+
             return ListView.builder(
+              
               controller: scrollController,
               itemCount: comments.length,
               itemBuilder: (context, index) => CommentItem(
