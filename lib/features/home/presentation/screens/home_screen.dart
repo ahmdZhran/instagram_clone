@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../cubits/comment_cubit/comment_cubit.dart';
 import '../cubits/home_cubit/home_cubit.dart';
 import '../widgets/custom_sliver_app_bar_widget.dart';
 import '../widgets/posts_section_widget.dart';
@@ -16,7 +15,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final HomeCubit _homeCubit = HomeCubit.getInstance();
   @override
   void initState() {
-    CommentCubit.getInstance();
     _homeCubit.fetchPosts();
     super.initState();
   }

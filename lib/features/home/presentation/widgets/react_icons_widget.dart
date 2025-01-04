@@ -41,12 +41,6 @@ class _ReactIconsWidgetState extends State<ReactIconsWidget> {
   }
 
   @override
-  void dispose() {
-    CommentCubit.deleteInstance();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
       bloc: _homeCubit,

@@ -1,65 +1,65 @@
-part of 'comment_cubit.dart';
+// part of 'comment_cubit.dart';
 
-sealed class CommentState {}
+// sealed class CommentState {}
 
-final class CommentInitial extends CommentState {}
+// final class CommentInitial extends CommentState {}
 
-final class AddCommentLoading extends CommentState {}
+// final class AddCommentLoading extends CommentState {}
 
-final class AddCommentSuccess extends CommentState {
-  final CommentEntity comment;
+// final class AddCommentSuccess extends CommentState {
+//   final CommentEntity comment;
 
-  AddCommentSuccess({required this.comment});
-}
+//   AddCommentSuccess({required this.comment});
+// }
 
-final class AddCommentFailure extends CommentState {
-  final String errMessage;
+// final class AddCommentFailure extends CommentState {
+//   final String errMessage;
 
-  AddCommentFailure({required this.errMessage});
-}
+//   AddCommentFailure({required this.errMessage});
+// }
 
-final class FetchCommentLoading extends CommentState {}
+// final class FetchCommentLoading extends CommentState {}
 
-final class FetchCommentSuccess extends CommentState {
-  final List<CommentEntity> comments;
+// final class FetchCommentSuccess extends CommentState {
+//   final List<CommentEntity> comments;
 
-  FetchCommentSuccess({required this.comments});
-}
+//   FetchCommentSuccess({required this.comments});
+// }
 
-final class FetchCommentFailure extends CommentState {
-  final String errMessage;
+// final class FetchCommentFailure extends CommentState {
+//   final String errMessage;
 
-  FetchCommentFailure({required this.errMessage});
-}
+//   FetchCommentFailure({required this.errMessage});
+// }
 
-class DeleteCommentLoading extends CommentState {}
+// class DeleteCommentLoading extends CommentState {}
 
-class DeleteCommentSuccess extends CommentState {
-  final String commentId;
+// class DeleteCommentSuccess extends CommentState {
+//   final String commentId;
 
-  DeleteCommentSuccess({required this.commentId});
-}
+//   DeleteCommentSuccess({required this.commentId});
+// }
 
-class DeleteCommentFailure extends CommentState {
-  final String errMessage;
+// class DeleteCommentFailure extends CommentState {
+//   final String errMessage;
 
-  DeleteCommentFailure({required this.errMessage});
-}
+//   DeleteCommentFailure({required this.errMessage});
+// }
 
-class EditCommentLoading extends CommentState {}
+// class EditCommentLoading extends CommentState {}
 
-class EditCommentSuccess extends CommentState {
-  final String commentId;
-  final String updatedComment;
+// class EditCommentSuccess extends CommentState {
+//   final String commentId;
+//   final String updatedComment;
 
-  EditCommentSuccess({
-    required this.commentId,
-    required this.updatedComment,
-  });
-}
+//   EditCommentSuccess({
+//     required this.commentId,
+//     required this.updatedComment,
+//   });
+// }
 
-class EditCommentFailure extends CommentState {
-  final String errMessage;
+// class EditCommentFailure extends CommentState {
+//   final String errMessage;
 
-  EditCommentFailure({required this.errMessage});
-}
+//   EditCommentFailure({required this.errMessage});
+// }
