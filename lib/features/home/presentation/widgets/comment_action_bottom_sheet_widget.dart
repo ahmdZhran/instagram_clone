@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
+import 'package:instagram_clone/core/widgets/custom_text_form_field.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
@@ -84,19 +84,24 @@ class CommentActionsBottomSheetWidget extends StatelessWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text("Edit Comment"),
-          content: TextField(
+          title: Text(context.translate(AppStrings.editComment),
+              style: CustomTextStyle.pacifico14),
+          content: CustomTextFormField(
+            hintText: context.translate(AppStrings.enterYourUpdatedComment),
+
             controller: controller,
-            maxLines: 3,
-            decoration:
-                const InputDecoration(hintText: "Enter your updated comment"),
+            // maxLines: 3,
+            // decoration: InputDecoration(
+            //     hintText:
+            //         context.translate(AppStrings.enterYourUpdatedComment)),
           ),
           actions: [
             TextButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => context.pop(),
               child: const Text("Cancel"),
             ),
             TextButton(
+              //TOdO refactor this pop method from extension to make it accept params
               onPressed: () => Navigator.pop(context, controller.text),
               child: const Text("Save"),
             ),

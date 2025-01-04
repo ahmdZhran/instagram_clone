@@ -73,4 +73,6 @@ abstract class AppStrings {
   static const String areYourSureToDeleteCo = "are_you_sure_to_delete";
   static const String readMore = "read_more";
   static const String showLess = "show_less";
+  static const String editComment = "edit_comment";
+  static const String enterYourUpdatedComment = "enter_your_updated_comment";
 }

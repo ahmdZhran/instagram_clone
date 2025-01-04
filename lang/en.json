@@ -35,5 +35,7 @@
     "delete_comment":"Delete comment",
     "are_you_sure_to_delete":"Are you sure to delete this comment",
     "read_more":"Read more",
-    "show_less":"Show less"
+    "show_less":"Show less",
+    "edit_comment":"Edit comment",
+    "enter_your_updated_comment":"Enter your updated comment"
 }
