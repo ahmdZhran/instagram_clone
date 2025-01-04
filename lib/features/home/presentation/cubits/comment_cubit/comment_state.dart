@@ -45,3 +45,21 @@ class DeleteCommentFailure extends CommentState {
 
   DeleteCommentFailure({required this.errMessage});
 }
+
+class EditCommentLoading extends CommentState {}
+
+class EditCommentSuccess extends CommentState {
+  final String commentId;
+  final String updatedComment;
+
+  EditCommentSuccess({
+    required this.commentId,
+    required this.updatedComment,
+  });
+}
+
+class EditCommentFailure extends CommentState {
+  final String errMessage;
+
+  EditCommentFailure({required this.errMessage});
+}
