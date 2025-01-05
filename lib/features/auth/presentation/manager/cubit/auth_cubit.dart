@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../auth_di.dart';
 import '../../../../../core/helper/image_service.dart';
-import '../../../../../core/utils/internet_checker.dart';
 import '../../../data/repositories/auth_repository.dart';
 part 'auth_state.dart';
 
@@ -53,7 +52,6 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> logIn() async {
-    await InternetChecker.checkInternetConnection();
     emit(LogInLoading());
     final result = await _authRepository.logInWithEmailAndPassword(
       email: emailAddressController.text.trim(),
