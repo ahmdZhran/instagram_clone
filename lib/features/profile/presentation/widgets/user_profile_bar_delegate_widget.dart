@@ -11,7 +11,6 @@ class UserProfileBarDelegateWidget extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    //TODO see what is the problem in rebuild this color when we toggle between theme it doesn't change
     return ColoredBox(
       color:
           context.isDart ? AppColors.darkThemColor : AppColors.lightThemeColor,
