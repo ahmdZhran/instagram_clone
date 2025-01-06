@@ -10,19 +10,18 @@ import 'comments_bottom_sheet_widget.dart';
 
 class ReactIconsWidget extends StatefulWidget {
   final String postId;
-  final String userId;
   final String username;
   final String profileImage;
   final String description;
   final String deviceToken;
-  const ReactIconsWidget(
-      {super.key,
-      required this.postId,
-      required this.userId,
-      required this.username,
-      required this.profileImage,
-      required this.description,
-      required this.deviceToken});
+  const ReactIconsWidget({
+    super.key,
+    required this.postId,
+    required this.username,
+    required this.profileImage,
+    required this.description,
+    required this.deviceToken,
+  });
 
   @override
   State<ReactIconsWidget> createState() => _ReactIconsWidgetState();
@@ -30,7 +29,7 @@ class ReactIconsWidget extends StatefulWidget {
 
 class _ReactIconsWidgetState extends State<ReactIconsWidget> {
   final HomeCubit _homeCubit = HomeCubit.getInstance();
-
+  final currentUserId = FirebaseAuth.instance.currentUser!.uid;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
@@ -39,14 +38,14 @@ class _ReactIconsWidgetState extends State<ReactIconsWidget> {
         if (state is HomePostsSuccess) {
           final postsMap = {for (var post in state.posts!) post.id: post};
           final post = postsMap[widget.postId];
-          final isLiked = post?.likes.contains(widget.userId) ?? false;
+          final isLiked = post?.likes.contains(currentUserId) ?? false;
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               children: [
                 InkWell(
                   onTap: () {
-                    _homeCubit.toggleLikedPost(widget.postId, widget.userId);
+                    _homeCubit.toggleLikedPost(widget.postId, currentUserId);
                   },
                   child: isLiked
                       ? const ThemedSvgIcon(
@@ -61,7 +60,7 @@ class _ReactIconsWidgetState extends State<ReactIconsWidget> {
                         ),
                 ),
                 const Gap(6),
-                Text(post?.likes.length.toString() ?? "0"),
+                Text((post?.likes.length ?? 0).toString()),
                 const Gap(10),
                 InkWell(
                   onTap: () => _showCommentsBottomSheet(context),
