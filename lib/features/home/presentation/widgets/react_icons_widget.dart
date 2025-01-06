@@ -3,10 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/utils/app_assets.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
-import 'package:instagram_clone/features/home/domain/entities/comment_entity/comment_entity.dart';
 import '../../../../core/theme/app_them.dart';
 import '../cubits/home_cubit/home_cubit.dart';
-import '../cubits/comment_cubit/comment_cubit.dart';
 import 'comments_bottom_sheet_widget.dart';
 
 class ReactIconsWidget extends StatefulWidget {
@@ -31,14 +29,8 @@ class ReactIconsWidget extends StatefulWidget {
 
 class _ReactIconsWidgetState extends State<ReactIconsWidget> {
   final HomeCubit _homeCubit = HomeCubit.getInstance();
-  final CommentCubit _commentCubit = CommentCubit.getInstance();
-  List<CommentEntity> comments = [];
 
-  @override
-  void initState() {
-    super.initState();
-    _commentCubit.fetchComments(widget.postId);
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -78,8 +70,7 @@ class _ReactIconsWidgetState extends State<ReactIconsWidget> {
                     assetName: AppAssets.commentIcon,
                   ),
                 ),
-                const Gap(6),
-                const Gap(10),
+                const Gap(15),
                 const ThemedSvgIcon(
                   assetName: AppAssets.shareIcon,
                 ),
