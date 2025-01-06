@@ -84,7 +84,7 @@ class _AddDescriptionAndUploadPostScreenState
         if (state is PostsSuccess) {
           _audioPlayer.play(AssetSource('post_uploaded.mp3'));
           Future.delayed(const Duration(seconds: 1), () {
-              context.pushReplacementNamed(Routes.mainWidget);
+            context.pushReplacementNamed(Routes.mainWidget);
           });
         } else if (state is PostsFailure) {
           UtilsMessages.showToastErrorBottom(context,
@@ -141,9 +141,7 @@ class _AddDescriptionAndUploadPostScreenState
                         ),
                       ),
                       onChanged: (value) {
-                        setState(() {
-                          description = value;
-                        });
+                        description = value;
                       },
                     ),
                     leading: Image(
