@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../domain/repositories/home_Repository.dart';
 import '../../../posts/domain/entities/post_entity.dart';
 
+import '../../domain/entities/comment_entity/comment_entity.dart';
 
 class HomeRepositoryImpl implements HomeRepository {
   final CollectionReference postCollection =
@@ -51,6 +52,66 @@ class HomeRepositoryImpl implements HomeRepository {
     }
   }
 
+  @override
+  Future<void> addComment(String postId, CommentEntity commentEntity) async {
+    try {
+      await postCollection
+          .doc(postId)
+          .collection("comments")
+          .doc(commentEntity.commentId)
+          .set(commentEntity.toJson());
+    } catch (error) {
+      throw Exception("Error adding comment: $error");
+    }
+  }
 
+  @override
+  Future<Stream<List<CommentEntity>>> fetchComments(String postId) async {
+    try {
+      return FirebaseFirestore.instance
+          .collection("posts")
+          .doc(postId)
+          .collection("comments")
+          .orderBy("dateOfComment")
+          .snapshots()
+          .map((snapshot) {
+        return snapshot.docs.map((doc) {
+          return CommentEntity.fromJson(doc.data());
+        }).toList();
+      });
+    } catch (error) {
+      throw Exception("Error fetching comments: $error");
+    }
+  }
 
+  @override
+  Future<void> deleteComment(String postId, String commentId) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection("posts")
+          .doc(postId)
+          .collection("comments")
+          .doc(commentId)
+          .delete();
+    } catch (error) {
+      throw Exception("Error deleting comment: $error");
+    }
+  }
+
+  @override
+  Future<void> editComment(
+      String postId, String commentId, String updatedComment) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection("posts")
+          .doc(postId)
+          .collection("comments")
+          .doc(commentId)
+          .update({
+        'comment': updatedComment,
+      });
+    } catch (error) {
+      throw Exception("Error editing comment: $error");
+    }
+  }
 }

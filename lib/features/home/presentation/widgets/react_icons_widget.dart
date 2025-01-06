@@ -31,6 +31,8 @@ class ReactIconsWidget extends StatefulWidget {
 class _ReactIconsWidgetState extends State<ReactIconsWidget> {
   final HomeCubit _homeCubit = HomeCubit.getInstance();
 
+  final currentUserId = FirebaseAuth.instance.currentUser!.uid;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
@@ -39,14 +41,14 @@ class _ReactIconsWidgetState extends State<ReactIconsWidget> {
         if (state is HomePostsSuccess) {
           final postsMap = {for (var post in state.posts!) post.id: post};
           final post = postsMap[widget.postId];
-          final isLiked = post?.likes.contains(widget.userId) ?? false;
+          final isLiked = post?.likes.contains(currentUserId) ?? false;
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               children: [
                 InkWell(
                   onTap: () {
-                    _homeCubit.toggleLikedPost(widget.postId, widget.userId);
+                    _homeCubit.toggleLikedPost(widget.postId, currentUserId);
                   },
                   child: isLiked
                       ? const ThemedSvgIcon(
