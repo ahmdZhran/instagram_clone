@@ -61,7 +61,7 @@ class _ReactIconsWidgetState extends State<ReactIconsWidget> {
                         ),
                 ),
                 const Gap(6),
-                Text(post?.likes.length.toString() ?? "0"),
+                Text((post?.likes.length ?? 0).toString()),
                 const Gap(10),
                 InkWell(
                   onTap: () => _showCommentsBottomSheet(context),

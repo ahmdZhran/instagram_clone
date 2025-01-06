@@ -19,7 +19,7 @@ class HomeCubit extends Cubit<HomeState> {
       _streamSubscription = postsStream.listen((posts) {
         emit(HomePostsSuccess(posts));
       }, onError: (error) {
-        emit(HomePostsFailure(errMessage: error));
+        emit(HomePostsFailure(errMessage: error.toString()));
       });
     } catch (error) {
       emit(HomePostsFailure(errMessage: error.toString()));
@@ -34,6 +34,8 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       await _homeRepository.toggleLikedPost(postId, userId);
     } catch (error) {
+      // Revert the state if the operation fails
+      emit(currentState);
       emit(HomePostsFailure(errMessage: "Failed to toggle like: $error"));
     }
   }
@@ -77,7 +79,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   @override
   Future<void> close() {
-    _streamSubscription!.cancel();
+    _streamSubscription?.cancel();
     return super.close();
   }
 }
