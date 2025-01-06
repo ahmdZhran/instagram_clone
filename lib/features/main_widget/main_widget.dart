@@ -56,7 +56,7 @@ class _MainWidgetState extends State<MainWidget> {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
-      onPopInvoked: (didPop) {
+      onPopInvokedWithResult: (didPop, result) {
         if (didPop) {
           return;
         }
@@ -79,7 +79,7 @@ class _MainWidgetState extends State<MainWidget> {
                       child: Container(
                         padding: AppResponsiveSpacerHelper.customPadding,
                         decoration: BoxDecoration(
-                          color: AppColors.greyColor.withOpacity(0.3),
+                          color: AppColors.greyColor.withValues(alpha:  0.3),
                           borderRadius: BorderRadius.circular(50.r),
                         ),
                         child: Row(

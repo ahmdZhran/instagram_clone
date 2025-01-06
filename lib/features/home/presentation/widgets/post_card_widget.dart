@@ -76,8 +76,8 @@ BoxDecoration _postCardGradient() {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        AppColors.greyColor.withOpacity(0.5),
-        AppColors.greyColor.withOpacity(0.3),
+        AppColors.greyColor.withValues(alpha: 0.5),
+        AppColors.greyColor.withValues(alpha: 0.3),
       ],
     ),
   );

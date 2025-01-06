@@ -29,7 +29,7 @@ class MediaItem extends StatelessWidget {
           ),
           Positioned.fill(
             child: Container(
-              color: Colors.black.withOpacity(0.15),
+              color: Colors.black.withValues(alpha:  0.15),
               child: media.assetEntity.type == AssetType.video
                   ? const Align(
                       alignment: Alignment.bottomRight,
@@ -47,7 +47,7 @@ class MediaItem extends StatelessWidget {
           if (isSelected)
             Positioned.fill(
               child: Container(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha:  0.1),
                 child: const Center(
                   child: Icon(
                     Icons.check_circle_rounded,

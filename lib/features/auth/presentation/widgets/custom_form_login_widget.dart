@@ -53,7 +53,7 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
         builder: (context, state) {
           return PopScope(
             canPop: false,
-            onPopInvoked: (didPop) {
+            onPopInvokedWithResult: (didPop, result) {
               if (didPop) {
                 return;
               }
