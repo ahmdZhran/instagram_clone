@@ -35,11 +35,16 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        FirebaseAuth.instance.currentUser == null
-            ? context.pushReplacementNamed(Routes.logIn)
-            : FirebaseAuth.instance.currentUser!.emailVerified == true
-                ? context.pushReplacementNamed(Routes.mainWidget)
-                : context.pushReplacementNamed(Routes.logIn);
+        if (!mounted) return;
+        final user = FirebaseAuth.instance.currentUser;
+
+        if (user == null) {
+          context.pushReplacementNamed(Routes.logIn);
+        } else if (user.emailVerified) {
+          context.pushReplacementNamed(Routes.mainWidget);
+        } else {
+          context.pushReplacementNamed(Routes.logIn);
+        }
       },
     );
   }

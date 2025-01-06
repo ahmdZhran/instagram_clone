@@ -141,9 +141,7 @@ class _AddDescriptionAndUploadPostScreenState
                         ),
                       ),
                       onChanged: (value) {
-                        setState(() {
-                          description = value;
-                        });
+                        description = value;
                       },
                     ),
                     leading: Image(

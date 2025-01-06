@@ -14,8 +14,8 @@ class PostsLoadingShimmerWidget extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(25.0),
         child: Shimmer.fromColors(
-          baseColor: AppColors.greyColor.withOpacity(0.5),
-          highlightColor: AppColors.greyColor.withOpacity(0.2),
+          baseColor: AppColors.greyColor.withValues(alpha:  0.5),
+          highlightColor: AppColors.greyColor.withValues(alpha:  0.2),
           child: Container(
             width: double.infinity,
             height: 420.0.h,

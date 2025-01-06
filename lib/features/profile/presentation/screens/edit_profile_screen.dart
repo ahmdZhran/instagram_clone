@@ -50,7 +50,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               Icons.check,
               color: isNotEmpty
                   ? AppColors.primaryColor
-                  : AppColors.primaryColor.withOpacity(.4),
+                  : AppColors.primaryColor.withValues(alpha:  0.4),
             ),
           ),
         ],

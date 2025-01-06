@@ -27,7 +27,7 @@ class CommentItem extends StatelessWidget {
       onLongPress: () => onLongPress(context, comment),
       child: Container(
         color: isPressed
-            ? AppColors.greyColor.withOpacity(0.3)
+            ? AppColors.greyColor.withValues(alpha:  0.3)
             : Colors.transparent,
         child: ListTile(
           leading: CircleAvatar(

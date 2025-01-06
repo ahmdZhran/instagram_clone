@@ -43,11 +43,11 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
       builder: (context, state) {
         return PopScope(
           canPop: false,
-          onPopInvoked: (didPop) {
+          onPopInvokedWithResult: (didPop, result) {
             if (didPop) {
               return;
             }
-            _showExitConfirmationDialog(context);
+            context.showExitConfirmationDialog();
           },
           child: Form(
             key: _signUpFormKey,
@@ -145,32 +145,5 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
         );
       },
     );
-  }
-
-  void _showExitConfirmationDialog(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Exit Confirmation'),
-            content:
-                const Text('Are you sure you want to back to login screen?'),
-            actions: <Widget>[
-              TextButton(
-                child: const Text(AppStrings.cancel),
-                onPressed: () {
-                  context.pop();
-                },
-              ),
-              TextButton(
-                child: const Text(AppStrings.back),
-                onPressed: () {
-                  context.pop();
-                  context.pop();
-                },
-              ),
-            ],
-          );
-        });
   }
 }
