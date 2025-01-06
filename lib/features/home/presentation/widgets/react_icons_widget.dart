@@ -79,21 +79,11 @@ class _ReactIconsWidgetState extends State<ReactIconsWidget> {
                   ),
                 ),
                 const Gap(6),
-                BlocBuilder<CommentCubit, CommentState>(
-                  bloc: _commentCubit,
-                  builder: (context, commentState) {
-                    if (commentState is FetchCommentSuccess) {
-                      comments = commentState.comments;
-                    }
-                    return Text(comments.length.toString());
-                  },
-                ),
                 const Gap(10),
                 const ThemedSvgIcon(
                   assetName: AppAssets.shareIcon,
                 ),
                 const Gap(6),
-                const Text('1k'),
               ],
             ),
           );
