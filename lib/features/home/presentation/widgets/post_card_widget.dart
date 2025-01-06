@@ -57,7 +57,6 @@ class PostCard extends StatelessWidget {
                     profileImage: post.userProfileImage,
                     description: post.description ?? "",
                     postId: post.id,
-                    userId: post.userId,
                   ),
                 ],
               ),

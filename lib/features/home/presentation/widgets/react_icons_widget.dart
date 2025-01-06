@@ -10,19 +10,18 @@ import 'comments_bottom_sheet_widget.dart';
 
 class ReactIconsWidget extends StatefulWidget {
   final String postId;
-  final String userId;
   final String username;
   final String profileImage;
   final String description;
   final String deviceToken;
-  const ReactIconsWidget(
-      {super.key,
-      required this.postId,
-      required this.userId,
-      required this.username,
-      required this.profileImage,
-      required this.description,
-      required this.deviceToken});
+  const ReactIconsWidget({
+    super.key,
+    required this.postId,
+    required this.username,
+    required this.profileImage,
+    required this.description,
+    required this.deviceToken,
+  });
 
   @override
   State<ReactIconsWidget> createState() => _ReactIconsWidgetState();
@@ -30,9 +29,7 @@ class ReactIconsWidget extends StatefulWidget {
 
 class _ReactIconsWidgetState extends State<ReactIconsWidget> {
   final HomeCubit _homeCubit = HomeCubit.getInstance();
-
   final currentUserId = FirebaseAuth.instance.currentUser!.uid;
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
