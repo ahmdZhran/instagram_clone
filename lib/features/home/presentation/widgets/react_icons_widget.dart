@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -29,8 +30,6 @@ class ReactIconsWidget extends StatefulWidget {
 
 class _ReactIconsWidgetState extends State<ReactIconsWidget> {
   final HomeCubit _homeCubit = HomeCubit.getInstance();
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +103,7 @@ class _ReactIconsWidgetState extends State<ReactIconsWidget> {
                 username: widget.username,
                 postId: widget.postId,
                 deviceToken: widget.deviceToken,
+                uid: FirebaseAuth.instance.currentUser!.uid,
               );
             },
           ),

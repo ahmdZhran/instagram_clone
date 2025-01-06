@@ -16,6 +16,7 @@ class CommentsBottomSheetWidget extends StatefulWidget {
   final String postId;
   final String description;
   final String deviceToken;
+  final String uid;
   const CommentsBottomSheetWidget({
     super.key,
     required this.scrollController,
@@ -24,6 +25,7 @@ class CommentsBottomSheetWidget extends StatefulWidget {
     required this.postId,
     required this.description,
     required this.deviceToken,
+    required this.uid,
   });
 
   @override
@@ -67,11 +69,12 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
               description: widget.description),
           const Divider(color: AppColors.greyColor, endIndent: 20, indent: 20),
           CommentsListWidget(
-              scrollController: widget.scrollController,
-              commentCubit: _commentCubit,
-              comments: _comments,
-              isPressed: _isPressed,
-              onLongPress: _showCommentActions),
+            scrollController: widget.scrollController,
+            commentCubit: _commentCubit,
+            comments: _comments,
+            isPressed: _isPressed,
+            onLongPress: _showCommentActions,
+          ),
           AddCommentBlocBuilderWidget(
             userProfile: _userProfile,
             commentController: commentController,
@@ -92,28 +95,30 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
   }
 
   void _showCommentActions(BuildContext context, CommentEntity comment) {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(
-            20,
-          ),
-        ),
-      ),
-      builder: (context) => CommentActionsBottomSheetWidget(
-        comment: comment,
-        onDelete: () => _commentCubit.deleteComment(
-          widget.postId,
-          comment.commentId,
-        ),
-        onEdit: (updatedComment) => _commentCubit.editComment(
-          widget.postId,
-          comment.commentId,
-          updatedComment,
-        ),
-      ),
-    );
+    widget.uid == comment.uid
+        ? showModalBottomSheet(
+            context: context,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(
+                  20,
+                ),
+              ),
+            ),
+            builder: (context) => CommentActionsBottomSheetWidget(
+              comment: comment,
+              onDelete: () => _commentCubit.deleteComment(
+                widget.postId,
+                comment.commentId,
+              ),
+              onEdit: (updatedComment) => _commentCubit.editComment(
+                widget.postId,
+                comment.commentId,
+                updatedComment,
+              ),
+            ),
+          )
+        : const SizedBox.shrink();
   }
 }
 
