@@ -108,7 +108,7 @@ class HomeRepositoryImpl implements HomeRepository {
           .collection("comments")
           .doc(commentId)
           .update({
-        'comment': updatedComment,
+        'commentText': updatedComment,
       });
     } catch (error) {
       throw Exception("Error editing comment: $error");
