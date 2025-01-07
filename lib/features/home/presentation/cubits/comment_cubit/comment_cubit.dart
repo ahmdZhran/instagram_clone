@@ -47,6 +47,17 @@ class CommentCubit extends Cubit<CommentState> {
     }
   }
 
+  Future<void> editComment(
+      String postId, String commentId, String updatedComment) async {
+    try {
+      await _homeRepository.editComment(postId, commentId, updatedComment);
+      emit(EditCommentSuccess(
+          commentId: commentId, updatedComment: updatedComment));
+    } catch (error) {
+      emit(EditCommentFailure(errMessage: error.toString()));
+    }
+  }
+
   static const String _tag = "comment_instance";
   static CommentCubit getInstance() {
     final isRegister = homeDI.isRegistered<CommentCubit>(instanceName: _tag);
@@ -65,17 +76,6 @@ class CommentCubit extends Cubit<CommentState> {
       final cubit = homeDI<CommentCubit>(instanceName: _tag);
       await cubit.close();
       homeDI.unregister<CommentCubit>(instanceName: _tag);
-    }
-  }
-
-  Future<void> editComment(
-      String postId, String commentId, String updatedComment) async {
-    try {
-      await _homeRepository.editComment(postId, commentId, updatedComment);
-      emit(EditCommentSuccess(
-          commentId: commentId, updatedComment: updatedComment));
-    } catch (error) {
-      emit(EditCommentFailure(errMessage: error.toString()));
     }
   }
 
