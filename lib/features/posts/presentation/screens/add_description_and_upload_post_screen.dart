@@ -44,7 +44,7 @@ class _AddDescriptionAndUploadPostScreenState
   void initState() {
     super.initState();
     loadSelectedMedia();
-    fetchUserData();
+     fetchUserData();
     fetchDeviceToken().then((value) {
       debugPrint('Device token: $_deviceToken');
     });

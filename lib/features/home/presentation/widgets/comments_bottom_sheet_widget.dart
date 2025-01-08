@@ -89,8 +89,7 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
 
   @override
   void dispose() {
-    //! solve this issue
-    // CommentCubit.deleteInstance();
+    CommentCubit.deleteInstance();
     super.dispose();
   }
 
