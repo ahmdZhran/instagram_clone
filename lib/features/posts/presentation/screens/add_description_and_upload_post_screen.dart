@@ -8,7 +8,7 @@ import '../../../../core/services/token_device_manager.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/utils_messages.dart';
 import '../cubit/posts_cubit.dart';
-import '../../../profile/presentation/cubits/profile_cubit/profile_cubit.dart';
+import '../../../../core/cubits/profile_cubit/profile_cubit.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../../core/helper/extensions.dart';
 import '../../../../core/utils/app_colors.dart';

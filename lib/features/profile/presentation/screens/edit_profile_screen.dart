@@ -8,7 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/utils/utils_messages.dart';
 import '../../../../core/services/firebase_storage_service.dart';
-import '../cubits/profile_cubit/profile_cubit.dart';
+import '../../../../core/cubits/profile_cubit/profile_cubit.dart';
 import '../../../../core/helper/extensions.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';

@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/utils/custom_text_style.dart';
-import '../cubits/profile_cubit/profile_cubit.dart';
+import '../../../../core/cubits/profile_cubit/profile_cubit.dart';
 import 'custom_shimmer_effect_widgets.dart';
 import 'edit_and_share_buttons_widget.dart';
 import 'profile_image_and_info.dart';

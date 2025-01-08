@@ -8,7 +8,7 @@ import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/custom_text_style.dart';
 import '../../../../core/widgets/custom_button_widget.dart';
-import '../cubits/profile_cubit/profile_cubit.dart';
+import '../../../../core/cubits/profile_cubit/profile_cubit.dart';
 
 class EditAndShareButtonsWidget extends StatefulWidget {
   const EditAndShareButtonsWidget({

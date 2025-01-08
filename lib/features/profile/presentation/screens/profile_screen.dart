@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import '../cubits/profile_cubit/profile_cubit.dart';
+import '../../../../core/cubits/profile_cubit/profile_cubit.dart';
 import '../widgets/user_posts_widget.dart';
 import '../widgets/user_profile_bar_delegate_widget.dart';
 import '../widgets/user_profile_mentioned_posts_widget.dart';
