@@ -103,7 +103,7 @@ class _UserHeader extends StatelessWidget {
       children: [
         Flexible(
           child: Text(
-            profileCubit.userProfileData?.username ?? "",
+            profileCubit.getUserProfileData.username,
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
@@ -125,14 +125,14 @@ class _UserDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AutoSizeText(
-          profileCubit.userProfileData?.name ?? "",
+          profileCubit.getUserProfileData.name,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: CustomTextStyle.pacifico14,
         ),
         const Gap(10),
         AutoSizeText(
-          profileCubit.userProfileData?.bio ?? "",
+          profileCubit.getUserProfileData.bio,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: CustomTextStyle.pacifico14,

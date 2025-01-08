@@ -22,6 +22,9 @@ class ProfileCubit extends Cubit<ProfileState> {
   UserProfileEntity? userProfileData;
   Uint8List? profileImage;
 
+  UserProfileEntity get getUserProfileData => userProfileData!;
+  Uint8List get getProfileImage => profileImage!;
+
   Future<void> getUserData({required String userId}) async {
     try {
       emit(ProfileLoading());
