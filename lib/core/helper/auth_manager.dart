@@ -7,7 +7,7 @@ class AuthManager {
 
   String? userId;
 
-  void initialize() {
+  void initializeUserId() {
     userId = FirebaseAuth.instance.currentUser!.uid;
   }
 }

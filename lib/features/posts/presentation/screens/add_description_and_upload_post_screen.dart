@@ -3,6 +3,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/core/helper/auth_manager.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
 import '../../../../core/router/routes.dart';
 import '../../../../core/services/token_device_manager.dart';
@@ -49,7 +50,7 @@ class _AddDescriptionAndUploadPostScreenState
     _postsCubit = PostsCubit.getInstance();
     _audioPlayer = AudioPlayer();
     _profileCubit =
-        ProfileCubit.getInstance(FirebaseAuth.instance.currentUser!.uid);
+        ProfileCubit.getInstance(AuthManager().userId!);
 
     _fetchInitialData();
   }
