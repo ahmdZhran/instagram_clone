@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 
+import '../../../../core/utils/app_colors.dart';
 import '../../domain/entities/comment_entity/comment_entity.dart';
 import '../cubits/comment_cubit/comment_cubit.dart';
 import 'comment_item_widget.dart';
@@ -51,7 +52,10 @@ class CommentsListWidget extends StatelessWidget {
         },
         builder: (context, state) {
           if (state is FetchCommentLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+                child: CircularProgressIndicator(
+              color: AppColors.primaryColor,
+            ));
           } else if (state is FetchCommentFailure) {
             return Center(child: Text(state.errMessage));
           } else if (comments.isNotEmpty) {
