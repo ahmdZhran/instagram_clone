@@ -16,19 +16,16 @@ Future<void> main() async {
   final sharedPrefHelper = SharedPrefHelper();
   await sharedPrefHelper.init();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
   Bloc.observer = MyBlocObserver();
-  
   await Future.wait([
     InjectionContainer().init(),
     TokenDeviceManager().initializeToken(),
     dotenv.load(fileName: ".env"),
   ]);
-FCMService.configure();
+
+  FCMService.configure();
   runApp(
-    InstagramApp(
-      appRouter: AppRouter(),
-    ),
+    InstagramApp(appRouter: AppRouter()),
   );
 }
 

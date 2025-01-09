@@ -1,7 +1,7 @@
 import 'dart:ui';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:instagram_clone/core/helper/auth_manager.dart';
 import '../../core/helper/extensions.dart';
 import '../notifications/notifications_screen.dart';
 import '../../core/utils/app_assets.dart';
@@ -23,7 +23,7 @@ class MainWidget extends StatefulWidget {
 
 class _MainWidgetState extends State<MainWidget> {
   int index = 0;
-  final String? uid = FirebaseAuth.instance.currentUser?.uid;
+  final String? uid = AuthManager().userId;
 
   Widget _getSelectedScreen() {
     switch (index) {

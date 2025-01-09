@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:instagram_clone/core/helper/auth_manager.dart';
 import 'package:instagram_clone/core/utils/app_assets.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 import '../../../../core/theme/app_them.dart';
@@ -29,7 +29,7 @@ class ReactIconsWidget extends StatefulWidget {
 
 class _ReactIconsWidgetState extends State<ReactIconsWidget> {
   final HomeCubit _homeCubit = HomeCubit.getInstance();
-  final currentUserId = FirebaseAuth.instance.currentUser!.uid;
+  final currentUserId = AuthManager().userId!;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
@@ -102,7 +102,7 @@ class _ReactIconsWidgetState extends State<ReactIconsWidget> {
                 username: widget.username,
                 postId: widget.postId,
                 deviceToken: widget.deviceToken,
-                uid: FirebaseAuth.instance.currentUser!.uid,
+                uid: AuthManager().userId!,
               );
             },
           ),
