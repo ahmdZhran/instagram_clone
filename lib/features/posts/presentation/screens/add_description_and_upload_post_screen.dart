@@ -3,18 +3,17 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/core/helper/extensions.dart';
 import '../../../../core/router/routes.dart';
 import '../../../../core/services/token_device_manager.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/utils_messages.dart';
+import '../../../profile/domain/entities/user_profile_entity.dart';
 import '../cubit/posts_cubit.dart';
-import '../../../profile/presentation/cubits/profile_cubit/profile_cubit.dart';
+import '../../../../core/cubits/profile_cubit/profile_cubit.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import '../../../../core/helper/extensions.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_text_style.dart';
-import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
-import '../../../profile/domain/entities/user_profile_entity.dart';
 import '../../data/models/media_model.dart';
 import '../../domain/entities/post_entity.dart';
 import '../widgets/upload_user_post_widget.dart';
@@ -34,38 +33,49 @@ class AddDescriptionAndUploadPostScreen extends StatefulWidget {
 
 class _AddDescriptionAndUploadPostScreenState
     extends State<AddDescriptionAndUploadPostScreen> {
-  Uint8List? _imageBytes;
-  String? description;
-  final PostsCubit _postsCubit = PostsCubit.getInstance();
-  final AudioPlayer _audioPlayer = AudioPlayer();
+  late final PostsCubit _postsCubit;
+  late final AudioPlayer _audioPlayer;
+  late final ProfileCubit _profileCubit;
+
+  final ValueNotifier<Uint8List?> _imageBytesNotifier = ValueNotifier(null);
+  final ValueNotifier<String?> _descriptionNotifier = ValueNotifier(null);
+
   UserProfileEntity? _userProfileEntity;
   String? _deviceToken;
+
   @override
   void initState() {
     super.initState();
-    loadSelectedMedia();
-     fetchUserData();
-    fetchDeviceToken().then((value) {
-      debugPrint('Device token: $_deviceToken');
-    });
+    _postsCubit = PostsCubit.getInstance();
+    _audioPlayer = AudioPlayer();
+    _profileCubit =
+        ProfileCubit.getInstance(FirebaseAuth.instance.currentUser!.uid);
+
+    _fetchInitialData();
   }
 
-  Future<void> fetchDeviceToken() async {
+  Future<void> _fetchInitialData() async {
+    await Future.wait([
+      _fetchUserData(),
+      _fetchDeviceToken(),
+      _loadSelectedMedia(),
+    ]);
+  }
+
+  Future<void> _fetchDeviceToken() async {
     _deviceToken = await TokenDeviceManager().getToken();
   }
 
-  Future<void> fetchUserData() async {
+  Future<void> _fetchUserData() async {
     final userId = FirebaseAuth.instance.currentUser!.uid;
-    final profileCubit = ProfileCubit.getInstance(userId);
-    await profileCubit.getUserData(userId: userId);
-    _userProfileEntity = profileCubit.userProfileData;
+    await _profileCubit.getUserData(userId: userId);
+    _userProfileEntity = _profileCubit.getUserProfileData;
   }
 
-  Future<void> loadSelectedMedia() async {
+  Future<void> _loadSelectedMedia() async {
     final file = await widget.selectedMedias?[0].assetEntity.file;
     if (file != null) {
-      _imageBytes = await file.readAsBytes();
-      setState(() {});
+      _imageBytesNotifier.value = await file.readAsBytes();
     }
   }
 
@@ -73,6 +83,8 @@ class _AddDescriptionAndUploadPostScreenState
   void dispose() {
     _audioPlayer.dispose();
     ProfileCubit.deleteInstance();
+    _imageBytesNotifier.dispose();
+    _descriptionNotifier.dispose();
     super.dispose();
   }
 
@@ -101,55 +113,73 @@ class _AddDescriptionAndUploadPostScreenState
                   style: CustomTextStyle.pacifico13,
                 ),
                 actions: [
-                  if (_imageBytes != null)
-                    UploadUserPostWidget(
-                      image: _imageBytes!,
-                      description: description ?? "",
-                      onPost: () async {
-                        final postEntity = PostEntity(
-                          deviceToken: _deviceToken,
-                          id: DateTime.now().millisecondsSinceEpoch.toString(),
-                          userId: FirebaseAuth.instance.currentUser!.uid,
-                          username: _userProfileEntity!.username,
-                          imageUrl: _imageBytes.toString(),
-                          timestamp: DateTime.now(),
-                          description: description ?? "",
-                          likes: [],
-                          userProfileImage: _userProfileEntity!.profileImageUrl,
+                  ValueListenableBuilder<Uint8List?>(
+                    valueListenable: _imageBytesNotifier,
+                    builder: (context, imageBytes, child) {
+                      if (imageBytes != null) {
+                        return UploadUserPostWidget(
+                          image: imageBytes,
+                          description: _descriptionNotifier.value ?? "",
+                          onPost: () async {
+                            final postEntity = PostEntity(
+                              deviceToken: _deviceToken,
+                              id: DateTime.now()
+                                  .millisecondsSinceEpoch
+                                  .toString(),
+                              userId: FirebaseAuth.instance.currentUser!.uid,
+                              username: _userProfileEntity!.username,
+                              imageUrl: imageBytes.toString(),
+                              timestamp: DateTime.now(),
+                              description: _descriptionNotifier.value ?? "",
+                              likes: [],
+                              userProfileImage:
+                                  _userProfileEntity!.profileImageUrl,
+                            );
+                            await _postsCubit.createPost(
+                              image: imageBytes,
+                              post: postEntity,
+                              folderName:
+                                  'post_images/${FirebaseAuth.instance.currentUser!.uid}',
+                            );
+                          },
                         );
-                        await _postsCubit.createPost(
-                          image: _imageBytes!,
-                          post: postEntity,
-                          folderName:
-                              'post_images/${FirebaseAuth.instance.currentUser!.uid}',
-                        );
-                      },
-                    )
-                  else
-                    const Text('Error loading image'),
+                      }
+                      return const SizedBox();
+                    },
+                  ),
                 ],
               ),
               body: ListView.builder(
                 itemCount: 1,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    title: TextField(
-                      cursorColor: AppColors.primaryColor,
-                      decoration: InputDecoration(
-                        hintText: context.translate(
-                          AppStrings.addDescription,
+                  return ValueListenableBuilder<String?>(
+                    valueListenable: _descriptionNotifier,
+                    builder: (context, description, child) {
+                      return ListTile(
+                        title: TextField(
+                          cursorColor: AppColors.primaryColor,
+                          decoration: InputDecoration(
+                            hintText:
+                                context.translate(AppStrings.addDescription),
+                          ),
+                          onChanged: (value) {
+                            _descriptionNotifier.value = value;
+                          },
                         ),
-                      ),
-                      onChanged: (value) {
-                        description = value;
-                      },
-                    ),
-                    leading: Image(
-                      width: 50,
-                      image: AssetEntityImageProvider(
-                        widget.selectedMedias![index].assetEntity,
-                      ),
-                    ),
+                        leading: ValueListenableBuilder<Uint8List?>(
+                          valueListenable: _imageBytesNotifier,
+                          builder: (context, imageBytes, child) {
+                            if (imageBytes != null) {
+                              return Image(
+                                width: 50,
+                                image: MemoryImage(imageBytes),
+                              );
+                            }
+                            return const SizedBox();
+                          },
+                        ),
+                      );
+                    },
                   );
                 },
               ),

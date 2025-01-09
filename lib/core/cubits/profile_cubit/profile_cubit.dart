@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../../../core/helper/image_service.dart';
-import '../../../../../core/models/user_profile_manager.dart';
-import '../../../data/repositories/profile_repository.dart';
-import '../../../domain/entities/user_profile_entity.dart';
-import '../../../profile_di.dart';
+import '../../helper/image_service.dart';
+import '../../models/user_profile_manager.dart';
+import '../../../features/profile/data/repositories/profile_repository.dart';
+import '../../../features/profile/domain/entities/user_profile_entity.dart';
+import '../../../features/profile/profile_di.dart';
 
 part 'profile_state.dart';
 
@@ -21,6 +21,9 @@ class ProfileCubit extends Cubit<ProfileState> {
   ImagePickerService? _pickerImageService;
   UserProfileEntity? userProfileData;
   Uint8List? profileImage;
+
+  UserProfileEntity get getUserProfileData => userProfileData!;
+  Uint8List get getProfileImage => profileImage!;
 
   Future<void> getUserData({required String userId}) async {
     try {
