@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:instagram_clone/core/helper/auth_manager.dart';
 import 'package:instagram_clone/core/utils/custom_text_style.dart';
 import '../../../../core/cubits/profile_cubit/profile_cubit.dart';
 import 'custom_shimmer_effect_widgets.dart';
@@ -108,7 +108,7 @@ class _UserHeader extends StatelessWidget {
           ),
         ),
         const Spacer(),
-        if (uid == FirebaseAuth.instance.currentUser!.uid)
+        if (uid == AuthManager().userId)
           const SelectionBlocBuilderThemeAndLanguage(),
       ],
     );
