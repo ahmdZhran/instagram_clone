@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import '../../../../core/helper/auth_manager.dart';
 import '../../../../core/utils/app_assets.dart';
 import '../../../../core/utils/utils_messages.dart';
 import 'package:lottie/lottie.dart';
@@ -41,7 +42,7 @@ class _CustomFormLogInWidgetState extends State<CustomFormLogInWidget> {
                   )
                 : UtilsMessages.showToastErrorBottom(context,
                     message: AppStrings.pleaseVerifyEmail);
-
+            AuthManager().initializeUserId();
             AuthCubit.deleteInstance();
           } else if (state is LogInFailure) {
             UtilsMessages.showToastErrorBottom(
