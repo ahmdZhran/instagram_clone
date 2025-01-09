@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/core/helper/auth_manager.dart';
@@ -68,7 +67,7 @@ class _AddDescriptionAndUploadPostScreenState
   }
 
   Future<void> _fetchUserData() async {
-    final userId = FirebaseAuth.instance.currentUser!.uid;
+    final userId = AuthManager().userId!;
     await _profileCubit.getUserData(userId: userId);
     _userProfileEntity = _profileCubit.getUserProfileData;
   }
@@ -127,7 +126,7 @@ class _AddDescriptionAndUploadPostScreenState
                               id: DateTime.now()
                                   .millisecondsSinceEpoch
                                   .toString(),
-                              userId: FirebaseAuth.instance.currentUser!.uid,
+                              userId: AuthManager().userId!,
                               username: _userProfileEntity!.username,
                               imageUrl: imageBytes.toString(),
                               timestamp: DateTime.now(),
@@ -140,7 +139,7 @@ class _AddDescriptionAndUploadPostScreenState
                               image: imageBytes,
                               post: postEntity,
                               folderName:
-                                  'post_images/${FirebaseAuth.instance.currentUser!.uid}',
+                                  'post_images/${AuthManager().userId!}',
                             );
                           },
                         );
