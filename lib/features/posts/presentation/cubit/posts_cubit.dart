@@ -1,10 +1,10 @@
 import 'dart:typed_data';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/features/posts/data/models/post_model.dart';
 import '../../../../core/services/firebase_storage_service.dart';
+import '../../data/repositories/post_repository_impl.dart';
 import '../../post_di.dart';
-import '../../domain/repositories/post_repository.dart';
 
-import '../../domain/entities/post_entity.dart';
 
 part 'posts_state.dart';
 
@@ -12,11 +12,11 @@ class PostsCubit extends Cubit<PostsState> {
   PostsCubit(this._postRepository) : super(PostsInitial());
 
 
-  final PostRepository _postRepository;
+  final PostRepositoryImpl _postRepository;
 
   Future<void> createPost({
     required Uint8List image,
-    required PostEntity post,
+    required PostModel post,
     required String folderName,
   }) async {
     emit(PostsLoading());
@@ -53,7 +53,7 @@ class PostsCubit extends Cubit<PostsState> {
     final isRegister = addPostDi.isRegistered<PostsCubit>(instanceName: _tag);
     if (!isRegister) {
       addPostDi.registerSingleton<PostsCubit>(
-        PostsCubit(addPostDi<PostRepository>()),
+        PostsCubit(addPostDi<PostRepositoryImpl>()),
         instanceName: _tag,
       );
     }

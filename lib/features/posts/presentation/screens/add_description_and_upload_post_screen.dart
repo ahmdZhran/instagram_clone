@@ -9,13 +9,13 @@ import '../../../../core/services/token_device_manager.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/utils_messages.dart';
 import '../../../profile/domain/entities/user_profile_entity.dart';
+import '../../data/models/post_model.dart';
 import '../cubit/posts_cubit.dart';
 import '../../../../core/cubits/profile_cubit/profile_cubit.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_text_style.dart';
 import '../../data/models/media_model.dart';
-import '../../domain/entities/post_entity.dart';
 import '../widgets/upload_user_post_widget.dart';
 
 class AddDescriptionAndUploadPostScreen extends StatefulWidget {
@@ -121,7 +121,7 @@ class _AddDescriptionAndUploadPostScreenState
                           image: imageBytes,
                           description: _descriptionNotifier.value ?? "",
                           onPost: () async {
-                            final postEntity = PostEntity(
+                            final postEntity = PostModel(
                               deviceToken: _deviceToken,
                               id: DateTime.now()
                                   .millisecondsSinceEpoch
