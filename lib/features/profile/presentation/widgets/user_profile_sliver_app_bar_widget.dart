@@ -27,7 +27,7 @@ class _UserProfileSliverAppBarWidgetState
   @override
   void initState() {
     super.initState();
-    _profileCubit = ProfileCubit.getInstance(widget.uid);
+    _profileCubit = ProfileCubit.getInstance();
   }
 
   @override

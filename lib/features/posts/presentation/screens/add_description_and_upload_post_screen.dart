@@ -49,7 +49,7 @@ class _AddDescriptionAndUploadPostScreenState
     _postsCubit = PostsCubit.getInstance();
     _audioPlayer = AudioPlayer();
     _profileCubit =
-        ProfileCubit.getInstance(FirebaseAuth.instance.currentUser!.uid);
+        ProfileCubit.getInstance();
 
     _fetchInitialData();
   }

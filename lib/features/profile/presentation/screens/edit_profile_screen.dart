@@ -35,7 +35,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void initState() {
     super.initState();
     profileCubit =
-        ProfileCubit.getInstance(FirebaseAuth.instance.currentUser!.uid);
+        ProfileCubit.getInstance();
   }
 
   @override

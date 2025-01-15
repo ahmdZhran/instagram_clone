@@ -11,13 +11,11 @@ import '../../../features/profile/profile_di.dart';
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
-  ProfileCubit(this._profileRepository, this.userId) : super(ProfileInitial()) {
+  ProfileCubit(this._profileRepository) : super(ProfileInitial()) {
     _pickerImageService = ImagePickerService();
-    getUserData(userId: userId);
   }
 
   final ProfileRepository _profileRepository;
-  final String userId;
   ImagePickerService? _pickerImageService;
   UserProfileEntity? userProfileData;
   Uint8List? profileImage;
@@ -93,12 +91,12 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   static const String _tag = "profile_instance";
 
-  static ProfileCubit getInstance(String userId) {
+  static ProfileCubit getInstance() {
     final isRegistered =
         profileDI.isRegistered<ProfileCubit>(instanceName: _tag);
     if (!isRegistered) {
       profileDI.registerSingleton<ProfileCubit>(
-        ProfileCubit(profileDI(), userId),
+        ProfileCubit(profileDI()),
         instanceName: _tag,
       );
     }
