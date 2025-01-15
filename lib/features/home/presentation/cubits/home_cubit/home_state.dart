@@ -7,7 +7,7 @@ final class HomeInitial extends HomeState {}
 final class HomePostsLoading extends HomeState {}
 
 final class HomePostsSuccess extends HomeState {
-  final List<PostEntity>? posts;
+  final List<PostModel>? posts;
 
   HomePostsSuccess([this.posts]);
 }

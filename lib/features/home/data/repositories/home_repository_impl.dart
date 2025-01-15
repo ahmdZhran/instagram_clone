@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../../posts/data/models/post_model.dart';
 import '../../domain/repositories/home_Repository.dart';
-import '../../../posts/domain/entities/post_entity.dart';
-
 import '../../domain/entities/comment_entity/comment_entity.dart';
 
 class HomeRepositoryImpl implements HomeRepository {
@@ -12,7 +11,7 @@ class HomeRepositoryImpl implements HomeRepository {
       FirebaseFirestore.instance.collection("comments");
 
   @override
-  Future<Stream<List<PostEntity>>> fetchAllPosts() async {
+  Future<Stream<List<PostModel>>> fetchAllPosts() async {
     try {
       return postCollection
           .orderBy('timestamp', descending: true)
@@ -20,7 +19,7 @@ class HomeRepositoryImpl implements HomeRepository {
           .map((snapshot) {
         return snapshot.docs
             .map((doc) =>
-                PostEntity.fromJson(doc.data() as Map<String, dynamic>))
+                PostModel.fromJson(doc.data() as Map<String, dynamic>))
             .toList();
       });
     } catch (error) {
@@ -34,7 +33,7 @@ class HomeRepositoryImpl implements HomeRepository {
       final postDoc = await postCollection.doc(postID).get();
       if (postDoc.exists) {
         final post =
-            PostEntity.fromJson(postDoc.data() as Map<String, dynamic>);
+            PostModel.fromJson(postDoc.data() as Map<String, dynamic>);
         final hasLiked = post.likes.contains(userID);
         if (hasLiked) {
           post.likes.remove(userID);

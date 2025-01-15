@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/features/posts/data/models/post_model.dart';
 import '../../../domain/repositories/home_Repository.dart';
 import '../../../home_di.dart';
-import '../../../../posts/domain/entities/post_entity.dart';
 
 part 'home_state.dart';
 
@@ -28,7 +28,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> toggleLikedPost(String postId, String userId) async {
     final currentState = state as HomePostsSuccess;
-    List<PostEntity> updatedPosts =
+    List<PostModel> updatedPosts =
         _updatedPostLike(currentState, postId, userId);
     emit(HomePostsSuccess(updatedPosts));
     try {
@@ -38,7 +38,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  List<PostEntity> _updatedPostLike(
+  List<PostModel> _updatedPostLike(
       HomePostsSuccess currentState, String postId, String userId) {
     final updatedPosts = currentState.posts!.map((post) {
       if (post.id == postId) {

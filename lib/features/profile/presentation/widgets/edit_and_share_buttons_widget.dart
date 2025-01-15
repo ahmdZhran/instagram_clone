@@ -1,7 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:instagram_clone/core/helper/auth_manager.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
 import '../../../../core/router/routes.dart';
 import '../../../../core/utils/app_colors.dart';
@@ -32,7 +32,7 @@ class _EditAndShareButtonsWidgetState extends State<EditAndShareButtonsWidget> {
     super.initState();
     isTapped = widget._profileCubit.userProfileData?.followers
             .toString()
-            .contains(AuthManager().userId!) ??
+            .contains(FirebaseAuth.instance.currentUser!.uid) ??
         false;
   }
 
@@ -47,7 +47,7 @@ class _EditAndShareButtonsWidgetState extends State<EditAndShareButtonsWidget> {
           });
         }
       },
-      child: widget.uid == AuthManager().userId
+      child: widget.uid == FirebaseAuth.instance.currentUser!.uid
           ? Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -87,10 +87,10 @@ class _EditAndShareButtonsWidgetState extends State<EditAndShareButtonsWidget> {
               onPressed: () {
                 if (isTapped) {
                   widget._profileCubit
-                      .unFollowUser(AuthManager().userId!, widget.uid);
+                      .unFollowUser(FirebaseAuth.instance.currentUser!.uid, widget.uid);
                 } else {
                   widget._profileCubit
-                      .followUser(AuthManager().userId!, widget.uid);
+                      .followUser(FirebaseAuth.instance.currentUser!.uid, widget.uid);
                 }
               },
               childOfCustomButton: Text(

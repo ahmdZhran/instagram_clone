@@ -1,11 +1,11 @@
 import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone/core/helper/auth_manager.dart';
 import 'package:instagram_clone/core/utils/utils_messages.dart';
 import '../../../../core/services/firebase_storage_service.dart';
 import '../../../../core/cubits/profile_cubit/profile_cubit.dart';
@@ -35,7 +35,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void initState() {
     super.initState();
     profileCubit =
-        ProfileCubit.getInstance(AuthManager().userId!);
+        ProfileCubit.getInstance(FirebaseAuth.instance.currentUser!.uid);
   }
 
   @override

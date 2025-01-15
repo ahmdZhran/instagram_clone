@@ -9,7 +9,7 @@ final class PostsLoading extends PostsState {}
 final class PostsUploading extends PostsState {}
 
 final class PostsSuccess extends PostsState {
-  final List<PostEntity>? posts;
+  final List<PostModel>? posts;
 
   PostsSuccess( [this.posts]);
 }

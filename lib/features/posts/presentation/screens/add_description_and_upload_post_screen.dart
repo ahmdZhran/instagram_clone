@@ -1,21 +1,21 @@
 import 'dart:typed_data';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/core/helper/auth_manager.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
 import '../../../../core/router/routes.dart';
 import '../../../../core/services/token_device_manager.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/utils_messages.dart';
 import '../../../profile/domain/entities/user_profile_entity.dart';
+import '../../data/models/post_model.dart';
 import '../cubit/posts_cubit.dart';
 import '../../../../core/cubits/profile_cubit/profile_cubit.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_text_style.dart';
 import '../../data/models/media_model.dart';
-import '../../domain/entities/post_entity.dart';
 import '../widgets/upload_user_post_widget.dart';
 
 class AddDescriptionAndUploadPostScreen extends StatefulWidget {
@@ -49,7 +49,7 @@ class _AddDescriptionAndUploadPostScreenState
     _postsCubit = PostsCubit.getInstance();
     _audioPlayer = AudioPlayer();
     _profileCubit =
-        ProfileCubit.getInstance(AuthManager().userId!);
+        ProfileCubit.getInstance(FirebaseAuth.instance.currentUser!.uid);
 
     _fetchInitialData();
   }
@@ -67,7 +67,7 @@ class _AddDescriptionAndUploadPostScreenState
   }
 
   Future<void> _fetchUserData() async {
-    final userId = AuthManager().userId!;
+    final userId = FirebaseAuth.instance.currentUser!.uid;
     await _profileCubit.getUserData(userId: userId);
     _userProfileEntity = _profileCubit.getUserProfileData;
   }
@@ -121,12 +121,12 @@ class _AddDescriptionAndUploadPostScreenState
                           image: imageBytes,
                           description: _descriptionNotifier.value ?? "",
                           onPost: () async {
-                            final postEntity = PostEntity(
+                            final postEntity = PostModel(
                               deviceToken: _deviceToken,
                               id: DateTime.now()
                                   .millisecondsSinceEpoch
                                   .toString(),
-                              userId: AuthManager().userId!,
+                              userId: FirebaseAuth.instance.currentUser!.uid,
                               username: _userProfileEntity!.username,
                               imageUrl: imageBytes.toString(),
                               timestamp: DateTime.now(),
@@ -139,7 +139,7 @@ class _AddDescriptionAndUploadPostScreenState
                               image: imageBytes,
                               post: postEntity,
                               folderName:
-                                  'post_images/${AuthManager().userId!}',
+                                  'post_images/${FirebaseAuth.instance.currentUser!.uid}',
                             );
                           },
                         );

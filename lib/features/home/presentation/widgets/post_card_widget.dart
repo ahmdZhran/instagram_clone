@@ -6,19 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
+import 'package:instagram_clone/features/posts/data/models/post_model.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/custom_short_messages_for_time_ago.dart';
 import '../../../../core/utils/custom_text_style.dart';
-import '../../../posts/domain/entities/post_entity.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import 'circle_profile_image_widget.dart';
 import 'react_icons_widget.dart';
 
 class PostCard extends StatelessWidget {
-  final PostEntity post;
+  final PostModel post;
 
   const PostCard({required this.post, super.key});
 
@@ -83,7 +83,7 @@ BoxDecoration _postCardGradient() {
 }
 
 class _PostHeader extends StatelessWidget {
-  final PostEntity post;
+  final PostModel post;
   final String timeAgo;
 
   const _PostHeader({

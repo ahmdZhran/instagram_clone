@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/features/posts/data/models/post_model.dart';
 
-import '../../../posts/domain/entities/post_entity.dart';
 import 'post_card_widget.dart';
 
 class PostsListWidget extends StatelessWidget {
-  final List<PostEntity> posts;
+  final List<PostModel> posts;
 
   const PostsListWidget({required this.posts, super.key});
 
