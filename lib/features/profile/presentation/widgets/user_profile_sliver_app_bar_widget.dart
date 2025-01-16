@@ -24,11 +24,13 @@ class _UserProfileSliverAppBarWidgetState
     extends State<UserProfileSliverAppBarWidget> {
   late ProfileCubit _profileCubit;
 
-  @override
+   @override
   void initState() {
     super.initState();
-    _profileCubit = ProfileCubit.getInstance(widget.uid);
+    _profileCubit = context.read<ProfileCubit>();
+    _profileCubit.getUserData(userId: widget.uid);
   }
+
 
   @override
   Widget build(BuildContext context) {
