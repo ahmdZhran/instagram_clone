@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/features/profile/data/models/user_model.dart';
 import '../../domain/entities/comment_entity/comment_entity.dart';
 import '../cubits/comment_cubit/comment_cubit.dart';
 import '../../../../core/models/user_profile_manager.dart';
 import '../../../../core/utils/app_colors.dart';
-import '../../../profile/domain/entities/user_profile_entity.dart';
 import 'add_comment_bloc_builder_widget.dart';
 import 'comment_action_bottom_sheet_widget.dart';
 import 'comment_list_widget.dart';
@@ -34,7 +34,7 @@ class CommentsBottomSheetWidget extends StatefulWidget {
 }
 
 class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
-  UserProfileEntity? _userProfile;
+  UserModel? _userProfile;
   final TextEditingController commentController = TextEditingController();
   final CommentCubit _commentCubit = CommentCubit.getInstance();
   final List<CommentEntity> _comments = [];

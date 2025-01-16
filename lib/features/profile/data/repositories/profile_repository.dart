@@ -2,7 +2,6 @@ import 'package:flutter/widgets.dart';
 
 import '../data_source/local/user_local_data_source.dart';
 import '../data_source/remote/user_remote_data_source.dart';
-import '../../domain/entities/user_profile_entity.dart';
 
 import '../models/user_model.dart';
 import '../models/user_post_model.dart';

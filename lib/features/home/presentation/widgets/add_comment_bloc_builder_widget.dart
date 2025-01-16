@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
+import 'package:instagram_clone/features/profile/data/models/user_model.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../core/services/fcm_notification_services/notification_helper.dart';
-import '../../../profile/domain/entities/user_profile_entity.dart';
 import '../../domain/entities/comment_entity/comment_entity.dart';
 import '../cubits/comment_cubit/comment_cubit.dart';
 import 'comments_bottom_sheet_widget.dart';
@@ -15,7 +15,7 @@ import 'comments_bottom_sheet_widget.dart';
 class AddCommentBlocBuilderWidget extends StatefulWidget {
   const AddCommentBlocBuilderWidget({
     super.key,
-    required UserProfileEntity? userProfile,
+    required UserModel? userProfile,
     required this.commentController,
     required CommentCubit commentCubit,
     required this.widget,
@@ -23,7 +23,7 @@ class AddCommentBlocBuilderWidget extends StatefulWidget {
   })  : _userProfile = userProfile,
         _commentCubit = commentCubit;
 
-  final UserProfileEntity? _userProfile;
+  final UserModel? _userProfile;
   final TextEditingController commentController;
   final CommentCubit _commentCubit;
   final CommentsBottomSheetWidget widget;

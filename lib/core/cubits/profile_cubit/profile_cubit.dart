@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:instagram_clone/features/profile/data/models/user_model.dart';
 import '../../helper/image_service.dart';
 import '../../models/user_profile_manager.dart';
 import '../../../features/profile/data/repositories/profile_repository.dart';
-import '../../../features/profile/domain/entities/user_profile_entity.dart';
 import '../../../features/profile/profile_di.dart';
 
 part 'profile_state.dart';
@@ -17,10 +17,10 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   final ProfileRepository _profileRepository;
   ImagePickerService? _pickerImageService;
-  UserProfileEntity? userProfileData;
+  UserModel? userProfileData;
   Uint8List? profileImage;
 
-  UserProfileEntity get getUserProfileData => userProfileData!;
+  UserModel get getUserProfileData => userProfileData!;
   Uint8List get getProfileImage => profileImage!;
 
   Future<void> getUserData({required String userId}) async {
@@ -36,7 +36,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  Future<void> updatedUserData(UserProfileEntity profileEntity) async {
+  Future<void> updatedUserData(UserModel profileEntity) async {
     try {
       emit(ProfileUpdateLoading());
       final updatedProfile =
