@@ -1,7 +1,10 @@
 import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:instagram_clone/features/profile/profile_di.dart';
+import '../../core/cubits/profile_cubit/profile_cubit.dart';
 import '../../core/helper/extensions.dart';
 import '../notifications/notifications_screen.dart';
 import '../../core/utils/app_assets.dart';
@@ -36,7 +39,10 @@ class _MainWidgetState extends State<MainWidget> {
       case 3:
         return const NotificationsScreen();
       case 4:
-        return ProfileScreen(uid: uid!);
+        return BlocProvider(
+          create: (context) => ProfileCubit(profileDI())..getUserData(userId: uid!),
+          child: ProfileScreen(uid: uid!),
+        );
       default:
         return const HomeScreen();
     }

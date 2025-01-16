@@ -42,8 +42,8 @@ class UserPostsCubit extends Cubit<UserPostsState> {
     final isRegistered =
         profileDI.isRegistered<UserPostsCubit>(instanceName: _tag);
     if (isRegistered) {
-      final cubit = profileDI<UserPostsCubit>(instanceName: _tag);
-      await cubit.close();
+      profileDI<UserPostsCubit>(instanceName: _tag);
+      // await cubit.close();
       profileDI.unregister<UserPostsCubit>(instanceName: _tag);
     }
   }
