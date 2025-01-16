@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import '../../../../core/cubits/profile_cubit/profile_cubit.dart';
 import '../widgets/user_posts_widget.dart';
@@ -19,12 +18,12 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   late ScrollController _nestedScrollController;
-
+  final ProfileCubit _profileCubit = ProfileCubit.getInstance();
   @override
   void initState() {
     super.initState();
     _nestedScrollController = ScrollController();
-    context.read<ProfileCubit>().getUserData(userId: widget.uid);
+    _profileCubit.getUserData(userId: widget.uid);
   }
 
   @override
