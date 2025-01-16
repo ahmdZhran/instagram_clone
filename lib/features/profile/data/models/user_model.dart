@@ -56,28 +56,28 @@ class UserModel {
     );
   }
 
-  UserProfileEntity toEntity() {
-    return UserProfileEntity(
-      uid: uid,
-      username: username,
-      bio: bio,
-      profileImageUrl: profileImageUrl,
-      name: name,
-      followers: followers,
-      following: following,
-    );
-  }
+  // UserProfileEntity toEntity() {
+  //   return UserProfileEntity(
+  //     uid: uid,
+  //     username: username,
+  //     bio: bio,
+  //     profileImageUrl: profileImageUrl,
+  //     name: name,
+  //     followers: followers,
+  //     following: following,
+  //   );
+  // }
 
-  factory UserModel.fromEntity(UserProfileEntity entity) {
-    return UserModel(
-      name: entity.name,
-      uid: entity.uid,
-      username: entity.username,
-      bio: entity.bio,
-      profileImageUrl: entity.profileImageUrl,
-      followers: entity.followers,
-      following: entity.following,
-    );
-  }
+  // factory UserModel.fromEntity(UserProfileEntity entity) {
+  //   return UserModel(
+  //     name: entity.name,
+  //     uid: entity.uid,
+  //     username: entity.username,
+  //     bio: entity.bio,
+  //     profileImageUrl: entity.profileImageUrl,
+  //     followers: entity.followers,
+  //     following: entity.following,
+  //   );
+  // }
 }
 

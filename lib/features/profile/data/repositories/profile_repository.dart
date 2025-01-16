@@ -16,11 +16,11 @@ class ProfileRepository {
     required this.localDataSource,
   });
 
-  Future<UserProfileEntity> getProfileData(String userId) async {
+  Future<UserModel> getProfileData(String userId) async {
     try {
       final UserModel remoteData = await remoteDataSource.getUserProfile(userId);
       localDataSource.cacheUserProfile(remoteData);
-      return remoteData.toEntity();
+      return remoteData;
     } catch (error) {
       debugPrint(
           "Error fetching profile data from repository: $error");
@@ -28,8 +28,8 @@ class ProfileRepository {
     }
   }
 
-  Future<UserProfileEntity> updateProfileData(
-      UserProfileEntity profileEntity) async {
+  Future<UserModel> updateProfileData(
+      UserModel profileEntity) async {
     try {
       final userModel = UserModel(
         name: profileEntity.name,
@@ -44,7 +44,7 @@ class ProfileRepository {
         profileEntity.uid,
         userModel,
       );
-      return updatedUser.toEntity();
+      return updatedUser;
     } catch (error) {
       debugPrint(
           "Error updating profile data in repository: $error");
