@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../features/profile/data/models/user_model.dart';
 import '../../features/posts/data/models/media_model.dart';
 import '../../features/posts/presentation/screens/add_description_and_upload_post_screen.dart';
 import '../../features/profile/presentation/screens/profile_screen.dart';
 import '../../features/main_widget/main_widget.dart';
-import '../../features/profile/domain/entities/user_profile_entity.dart';
 import '../../features/profile/presentation/screens/edit_profile_screen.dart';
 import '../../features/auth/presentation/screens/forget_password_screen.dart';
 import '../../features/auth/presentation/screens/login_screen.dart';
@@ -45,7 +45,7 @@ class AppRouter {
           builder: (_) => const ForgotPasswordScreen(),
         );
       case Routes.editProfileScreen:
-        final userProfileData = settings.arguments as UserProfileEntity;
+        final userProfileData = settings.arguments as UserModel;
         return MaterialPageRoute(
           builder: (_) => EditProfileScreen(
             userProfileData: userProfileData,

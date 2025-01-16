@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../domain/entities/user_profile_entity.dart';
-
 class UserModel {
   final String uid;
   final String username;
@@ -56,28 +54,47 @@ class UserModel {
     );
   }
 
-  UserProfileEntity toEntity() {
-    return UserProfileEntity(
-      uid: uid,
-      username: username,
-      bio: bio,
-      profileImageUrl: profileImageUrl,
-      name: name,
-      followers: followers,
-      following: following,
-    );
-  }
-
-  factory UserModel.fromEntity(UserProfileEntity entity) {
+  UserModel copyWith({
+    String? name,
+    String? uid,
+    String? username,
+    String? bio,
+    String? profileImageUrl,
+    List<String>? followers,
+    List<String>? following,
+  }) {
     return UserModel(
-      name: entity.name,
-      uid: entity.uid,
-      username: entity.username,
-      bio: entity.bio,
-      profileImageUrl: entity.profileImageUrl,
-      followers: entity.followers,
-      following: entity.following,
+      name: name ?? this.name,
+      uid: uid ?? this.uid,
+      username: username ?? this.username,
+      bio: bio ?? this.bio,
+      profileImageUrl: profileImageUrl ?? this.profileImageUrl,
+      followers: followers ?? this.followers,
+      following: following ?? this.following,
     );
   }
-}
 
+  // UserProfileEntity toEntity() {
+  //   return UserProfileEntity(
+  //     uid: uid,
+  //     username: username,
+  //     bio: bio,
+  //     profileImageUrl: profileImageUrl,
+  //     name: name,
+  //     followers: followers,
+  //     following: following,
+  //   );
+  // }
+
+  // factory UserModel.fromEntity(UserProfileEntity entity) {
+  //   return UserModel(
+  //     name: entity.name,
+  //     uid: entity.uid,
+  //     username: entity.username,
+  //     bio: entity.bio,
+  //     profileImageUrl: entity.profileImageUrl,
+  //     followers: entity.followers,
+  //     following: entity.following,
+  //   );
+  // }
+}

@@ -1,9 +1,10 @@
-import '../../features/profile/domain/entities/user_profile_entity.dart';
+import 'package:instagram_clone/features/profile/data/models/user_model.dart';
+
 
 class UserProfileManager {
   static final UserProfileManager _instance = UserProfileManager._internal();
 
-  UserProfileEntity? userProfile;
+  UserModel? userProfile;
 
   UserProfileManager._internal();
 
@@ -11,7 +12,7 @@ class UserProfileManager {
     return _instance;
   }
 
-  void updateUserProfile(UserProfileEntity profile) {
+  void updateUserProfile(UserModel profile) {
     userProfile = profile;
     
   }

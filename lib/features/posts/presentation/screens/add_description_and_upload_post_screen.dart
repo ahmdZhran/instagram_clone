@@ -4,11 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
+import 'package:instagram_clone/features/profile/data/models/user_model.dart';
 import '../../../../core/router/routes.dart';
 import '../../../../core/services/token_device_manager.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/utils_messages.dart';
-import '../../../profile/domain/entities/user_profile_entity.dart';
 import '../../data/models/post_model.dart';
 import '../cubit/posts_cubit.dart';
 import '../../../../core/cubits/profile_cubit/profile_cubit.dart';
@@ -40,7 +40,7 @@ class _AddDescriptionAndUploadPostScreenState
   final ValueNotifier<Uint8List?> _imageBytesNotifier = ValueNotifier(null);
   final ValueNotifier<String?> _descriptionNotifier = ValueNotifier(null);
 
-  UserProfileEntity? _userProfileEntity;
+  UserModel? _userProfileEntity;
   String? _deviceToken;
 
   @override

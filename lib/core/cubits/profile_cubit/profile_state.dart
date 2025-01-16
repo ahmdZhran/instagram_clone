@@ -23,7 +23,7 @@ class ProfileImageUpdated extends ProfileState {
 class ProfileUpdateLoading extends ProfileState {}
 
 class ProfileUpdateSuccess extends ProfileState {
-  final UserProfileEntity updatedProfile;
+  final UserModel updatedProfile;
 
   ProfileUpdateSuccess(this.updatedProfile);
 }

@@ -6,18 +6,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/utils/utils_messages.dart';
+import 'package:instagram_clone/features/profile/data/models/user_model.dart';
 import '../../../../core/services/firebase_storage_service.dart';
 import '../../../../core/cubits/profile_cubit/profile_cubit.dart';
 import '../../../../core/helper/extensions.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/custom_text_style.dart';
-import '../../domain/entities/user_profile_entity.dart';
 import '../../../../core/widgets/custom_out_line_text_form_field.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key, required this.userProfileData});
-  final UserProfileEntity userProfileData;
+  const EditProfileScreen({super.key, required UserModel userProfileData}) : _userModelData = userProfileData;
+  final UserModel _userModelData;
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -98,7 +98,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               )
                             : CachedNetworkImage(
                                 imageUrl:
-                                    widget.userProfileData.profileImageUrl,
+                                    widget._userModelData.profileImageUrl,
                                 placeholder: (context, url) =>
                                     const CircularProgressIndicator(),
                                 errorWidget: (context, url, error) =>
@@ -131,7 +131,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                     ),
                     CustomOutlineTextFormFieldWidget(
-                      hintText: widget.userProfileData.name,
+                      hintText: widget._userModelData.name,
                       onChanged: (value) {
                         setState(() {
                           name = value;
@@ -140,7 +140,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     const Gap(20),
                     CustomOutlineTextFormFieldWidget(
-                      hintText: widget.userProfileData.username,
+                      hintText: widget._userModelData.username,
                       onChanged: (value) {
                         setState(() {
                           username = value;
@@ -149,7 +149,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     const Gap(20),
                     CustomOutlineTextFormFieldWidget(
-                      hintText: widget.userProfileData.bio,
+                      hintText: widget._userModelData.bio,
                       onChanged: (value) {
                         setState(() {
                           bio = value;
@@ -175,24 +175,24 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   Future<void> _saveProfileChanges() async {
     try {
-      String? profileImageUrl = widget.userProfileData.profileImageUrl;
+      String? profileImageUrl = widget._userModelData.profileImageUrl;
 
       if (profileImage != null) {
         profileImageUrl =
             await FirebaseStorageService.uploadImagesToFireStorage(
-                profileImage!, widget.userProfileData.uid, "profileImages");
+                profileImage!, widget._userModelData.uid, "profileImages");
       }
-      final updatedProfile = UserProfileEntity(
-        name: name ?? widget.userProfileData.name,
-        username: username ?? widget.userProfileData.username,
-        bio: bio ?? widget.userProfileData.bio,
+      final updatedProfile = UserModel(
+        name: name ?? widget._userModelData.name,
+        username: username ?? widget._userModelData.username,
+        bio: bio ?? widget._userModelData.bio,
         profileImageUrl: profileImageUrl,
-        uid: widget.userProfileData.uid,
+        uid: widget._userModelData.uid,
         followers: [],
         following: [],
       );
       await profileCubit.updatedUserData(updatedProfile);
-      profileCubit.getUserData(userId: widget.userProfileData.uid);
+      profileCubit.getUserData(userId: widget._userModelData.uid);
     } catch (e) {
       if (mounted) {
         UtilsMessages.showToastErrorBottom(context,
