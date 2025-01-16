@@ -24,13 +24,12 @@ class _UserProfileSliverAppBarWidgetState
     extends State<UserProfileSliverAppBarWidget> {
   late ProfileCubit _profileCubit;
 
-   @override
+  @override
   void initState() {
     super.initState();
     _profileCubit = context.read<ProfileCubit>();
     _profileCubit.getUserData(userId: widget.uid);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -70,25 +69,27 @@ class _UserProfileContent extends StatelessWidget {
   final String uid;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 40.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _UserHeader(
-            profileCubit: profileCubit,
-            uid: uid,
-          ),
-          const Gap(16),
-          ProfileImageAndInfo(profileCubit: profileCubit),
-          const Gap(20),
-          EditAndShareButtonsWidget(
-            profileCubit: profileCubit,
-            uid: uid,
-          ),
-          const Gap(20),
-          _UserDetails(profileCubit: profileCubit),
-        ],
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 40.h),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _UserHeader(
+              profileCubit: profileCubit,
+              uid: uid,
+            ),
+            const Gap(16),
+            ProfileImageAndInfo(profileCubit: profileCubit),
+            const Gap(20),
+            EditAndShareButtonsWidget(
+              profileCubit: profileCubit,
+              uid: uid,
+            ),
+            const Gap(20),
+            _UserDetails(profileCubit: profileCubit),
+          ],
+        ),
       ),
     );
   }
