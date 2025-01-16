@@ -15,7 +15,7 @@ import 'comments_bottom_sheet_widget.dart';
 class AddCommentBlocBuilderWidget extends StatefulWidget {
   const AddCommentBlocBuilderWidget({
     super.key,
-    required UserModel? userProfile,
+    required UserProfileDataModel? userProfile,
     required this.commentController,
     required CommentCubit commentCubit,
     required this.widget,
@@ -23,7 +23,7 @@ class AddCommentBlocBuilderWidget extends StatefulWidget {
   })  : _userProfile = userProfile,
         _commentCubit = commentCubit;
 
-  final UserModel? _userProfile;
+  final UserProfileDataModel? _userProfile;
   final TextEditingController commentController;
   final CommentCubit _commentCubit;
   final CommentsBottomSheetWidget widget;

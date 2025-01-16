@@ -23,7 +23,7 @@ class ProfileImageUpdated extends ProfileState {
 class ProfileUpdateLoading extends ProfileState {}
 
 class ProfileUpdateSuccess extends ProfileState {
-  final UserModel updatedProfile;
+  final UserProfileDataModel updatedProfile;
 
   ProfileUpdateSuccess(this.updatedProfile);
 }
@@ -33,10 +33,10 @@ class ProfileUpdateFailure extends ProfileState {
   ProfileUpdateFailure({required this.errMessage});
 }
 
-
 class ProfileFollowUpdated extends ProfileState {
   final bool isFollowed;
   final int followersCount;
 
-  ProfileFollowUpdated({required this.isFollowed, required this.followersCount});
+  ProfileFollowUpdated(
+      {required this.isFollowed, required this.followersCount});
 }

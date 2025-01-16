@@ -1,10 +1,11 @@
-import 'package:instagram_clone/features/profile/data/models/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../features/profile/data/models/user_model.dart';
 
 class UserProfileManager {
   static final UserProfileManager _instance = UserProfileManager._internal();
 
-  UserModel? userProfile;
+  UserProfileDataModel? userProfile;
 
   UserProfileManager._internal();
 
@@ -12,9 +13,11 @@ class UserProfileManager {
     return _instance;
   }
 
-  void updateUserProfile(UserModel profile) {
-    userProfile = profile;
-    
+  void updateUserProfileIfCurrentUser(
+      UserProfileDataModel profile, String userId) {
+    if (FirebaseAuth.instance.currentUser!.uid == userId) {
+      userProfile = profile;
+    }
   }
 
   void clearProfile() {

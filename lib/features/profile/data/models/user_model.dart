@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class UserModel {
+class UserProfileDataModel {
   final String uid;
   final String username;
   final String bio;
@@ -9,7 +9,7 @@ class UserModel {
   final List<String> followers;
   final List<String> following;
 
-  UserModel({
+  UserProfileDataModel({
     required this.name,
     required this.uid,
     required this.username,
@@ -19,8 +19,8 @@ class UserModel {
     required this.following,
   });
 
-  factory UserModel.fromDocument(DocumentSnapshot doc) {
-    return UserModel(
+  factory UserProfileDataModel.fromDocument(DocumentSnapshot doc) {
+    return UserProfileDataModel(
       name: doc['name'],
       uid: doc['uid'],
       username: doc['user_name'],
@@ -42,8 +42,8 @@ class UserModel {
     };
   }
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
+  factory UserProfileDataModel.fromJson(Map<String, dynamic> json) {
+    return UserProfileDataModel(
       name: json['name'],
       uid: json['uid'],
       username: json['user_name'],
@@ -54,7 +54,7 @@ class UserModel {
     );
   }
 
-  UserModel copyWith({
+  UserProfileDataModel copyWith({
     String? name,
     String? uid,
     String? username,
@@ -63,7 +63,7 @@ class UserModel {
     List<String>? followers,
     List<String>? following,
   }) {
-    return UserModel(
+    return UserProfileDataModel(
       name: name ?? this.name,
       uid: uid ?? this.uid,
       username: username ?? this.username,

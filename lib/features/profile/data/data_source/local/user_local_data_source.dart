@@ -9,21 +9,19 @@ class UserLocalDataSource {
 
   UserLocalDataSource(this._sharedPrefHelper);
 
-  Future<void> cacheUserProfile(UserModel user) async {
+  Future<void> cacheUserProfile(UserProfileDataModel user) async {
     final jsonString = json.encode(user.toJson());
     await _sharedPrefHelper.saveData(
         key: SharedPrefKeys.cachedUserProfile, value: jsonString);
   }
 
-  UserModel? getCachedUserProfile() {
+  UserProfileDataModel? getCachedUserProfile() {
     final jsonString =
         _sharedPrefHelper.getData(key: SharedPrefKeys.cachedUserProfile);
 
     if (jsonString != null) {
-      return UserModel.fromJson(jsonDecode(jsonString));
+      return UserProfileDataModel.fromJson(jsonDecode(jsonString));
     }
     return null;
   }
-
-  
 }

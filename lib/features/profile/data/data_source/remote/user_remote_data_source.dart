@@ -8,13 +8,13 @@ class UserRemoteDataSource {
 
   UserRemoteDataSource(this._firebaseFirestore);
 
-  Future<UserModel> getUserProfile(String userId) async {
+  Future<UserProfileDataModel> getUserProfile(String userId) async {
     var doc = await _firebaseFirestore.collection("users").doc(userId).get();
-    return UserModel.fromDocument(doc);
+    return UserProfileDataModel.fromDocument(doc);
   }
 
-  Future<UserModel> updateUserProfile(
-      String userId, UserModel userModel) async {
+  Future<UserProfileDataModel> updateUserProfile(
+      String userId, UserProfileDataModel userModel) async {
     await _firebaseFirestore
         .collection("users")
         .doc(userId)
@@ -22,7 +22,7 @@ class UserRemoteDataSource {
 
     var updatedDoc =
         await _firebaseFirestore.collection("users").doc(userId).get();
-    return UserModel.fromDocument(updatedDoc);
+    return UserProfileDataModel.fromDocument(updatedDoc);
   }
 
   Future<List<UserPostModel>> getUserPosts(String uid) async {
