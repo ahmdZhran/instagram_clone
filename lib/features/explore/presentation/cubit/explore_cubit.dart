@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/features/explore/data/explore_repository.dart';
-import 'package:instagram_clone/features/explore/domain/entities/serach_user_entity.dart';
-import 'package:instagram_clone/features/explore/explore_di.dart';
+import '../../data/models/search_user_model.dart';
+import '../../data/repositories/explore_repository.dart';
+import '../../explore_di.dart';
 
 part 'explore_state.dart';
 
