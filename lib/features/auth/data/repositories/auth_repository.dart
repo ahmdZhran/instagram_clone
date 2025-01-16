@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import '../../../../core/errors/firebase_auth_errors_handler.dart';
 import '../../../../core/services/firebase_storage_service.dart';
-import '../../domain/entities/user_data_entity.dart';
+import '../models/user_data_model.dart';
 
 class AuthRepository {
   final FirebaseAuth auth;
@@ -19,7 +19,7 @@ class AuthRepository {
     required this.firebaseStorageService,
   });
 
-  Future<Either<String, UserDataEntity?>> createUserWithEmailAndPassword({
+  Future<Either<String, UserDataModel?>> createUserWithEmailAndPassword({
     required String email,
     required String password,
     required String username,
@@ -35,7 +35,7 @@ class AuthRepository {
       String imageUrl = await FirebaseStorageService.uploadImagesToFireStorage(
           profileImage!, userCredential.user!.uid, "profileImages");
 
-      UserDataEntity userEntity = UserDataEntity(
+      UserDataModel userEntity = UserDataModel(
         uid: userCredential.user!.uid,
         email: email,
         password: password,
@@ -57,7 +57,7 @@ class AuthRepository {
     }
   }
 
-  Future<Either<String, UserDataEntity?>> logInWithEmailAndPassword({
+  Future<Either<String, UserDataModel?>> logInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
@@ -67,7 +67,7 @@ class AuthRepository {
         password: password,
       );
 
-      UserDataEntity userData = UserDataEntity(
+      UserDataModel userData = UserDataModel(
         uid: userCredential.user!.uid,
         email: email,
         password: password,

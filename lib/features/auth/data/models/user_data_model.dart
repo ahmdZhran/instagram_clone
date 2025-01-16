@@ -1,4 +1,4 @@
-class UserDataEntity {
+class UserDataModel {
   final String uid;
   final String email;
   final String? password;
@@ -9,7 +9,7 @@ class UserDataEntity {
   final List<String> following;
   final List<String> followers;
 
-  UserDataEntity({
+  UserDataModel({
     required this.uid,
     required this.email,
     this.password,
@@ -35,8 +35,8 @@ class UserDataEntity {
     };
   }
 
-  factory UserDataEntity.fromJson(Map<String, dynamic> json) {
-    return UserDataEntity(
+  factory UserDataModel.fromJson(Map<String, dynamic> json) {
+    return UserDataModel(
       uid: json['uid'],
       email: json['email'],
       password: json['password'],
