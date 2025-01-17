@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
+import 'package:instagram_clone/features/home/presentation/cubits/home_cubit/home_cubit.dart';
 import 'package:instagram_clone/features/posts/data/models/post_model.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -26,6 +27,7 @@ class PostCard extends StatelessWidget {
   Widget build(BuildContext context) {
     timeago.setLocaleMessages('custom', CustomShortMessagesForTimeAgo());
     final timeAgo = timeago.format(post.timestamp, locale: 'custom');
+    final HomeCubit homeCubit = HomeCubit.getInstance();
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 20, left: 5, right: 5),
@@ -42,7 +44,33 @@ class PostCard extends StatelessWidget {
               filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
               child: Column(
                 children: [
-                  _PostHeader(post: post, timeAgo: timeAgo),
+                  _PostHeader(
+                    post: post,
+                    timeAgo: timeAgo,
+                    onDelete: (String postId) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('Delete Post'),
+                          content: const Text(
+                              'Are you sure you want to delete this post?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                homeCubit.deletePost(postId);
+                                Navigator.pop(context);
+                              },
+                              child: const Text('Delete'),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                   _PostImage(imageUrl: post.imageUrl),
                   const Gap(10),
                   _PostDescription(
@@ -85,10 +113,11 @@ BoxDecoration _postCardGradient() {
 class _PostHeader extends StatelessWidget {
   final PostModel post;
   final String timeAgo;
-
+  final Function(String postId) onDelete;
   const _PostHeader({
     required this.post,
     required this.timeAgo,
+    required this.onDelete,
   });
 
   @override
@@ -101,7 +130,20 @@ class _PostHeader extends StatelessWidget {
           CircleProfileImageWidget(userProfileImage: post.userProfileImage),
       title: Text(post.username, style: CustomTextStyle.pacifico13),
       subtitle: Text(timeAgo),
-      trailing: const Icon(Icons.more_horiz),
+      trailing: PopupMenuButton(
+        onSelected: (value) {
+          if (value == 'delete') {
+            onDelete(post.id.toString());
+          }
+        },
+        itemBuilder: (context) => [
+          const PopupMenuItem(
+            value: 'delete',
+            child: Text('Delete Post'),
+          )
+        ],
+        icon: const Icon(Icons.more_horiz),
+      ),
     );
   }
 }

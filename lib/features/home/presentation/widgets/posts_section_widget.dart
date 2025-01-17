@@ -24,7 +24,7 @@ class _PostsSectionWidgetState extends State<PostsSectionWidget> {
             return const PostsLoadingShimmerWidget();
           } else if (state is HomePostsFailure) {
             return const Center(child: Text('Failed to load posts'));
-          } else if (state is HomePostsSuccess) {
+          } else if (state is HomePostsSuccess ) {
             return PostsListWidget(posts: state.posts ?? []);
           }
           return const SizedBox.shrink();
