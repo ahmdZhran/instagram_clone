@@ -17,3 +17,14 @@ final class HomePostsFailure extends HomeState {
 
   HomePostsFailure({required this.errMessage});
 }
+
+final class DeleteUserPostLoading extends HomeState {}
+
+final class DeleteUserPostSuccess extends HomeState {}
+
+final class DeleteUserPostFailure extends HomeState {
+  final String errMessage;
+
+  DeleteUserPostFailure({required this.errMessage});
+
+}

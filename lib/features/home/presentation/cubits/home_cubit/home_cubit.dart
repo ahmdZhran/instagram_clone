@@ -26,6 +26,16 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
+  Future<void> deletePost(String postId) async {
+    emit(DeleteUserPostLoading());
+    try {
+      await _homeRepository.deletePost(postId);
+      emit(DeleteUserPostSuccess());
+    } catch (error) {
+      emit(DeleteUserPostFailure(errMessage: error.toString()));
+    }
+  }
+
   Future<void> toggleLikedPost(String postId, String userId) async {
     final currentState = state as HomePostsSuccess;
     List<PostModel> updatedPosts =
