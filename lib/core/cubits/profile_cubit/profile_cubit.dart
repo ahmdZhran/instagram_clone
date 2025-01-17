@@ -108,8 +108,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     final isRegistered =
         profileDI.isRegistered<ProfileCubit>(instanceName: _tag);
     if (isRegistered) {
-      final cubit = profileDI<ProfileCubit>(instanceName: _tag);
-      await cubit.close();
+      profileDI<ProfileCubit>(instanceName: _tag);
       profileDI.unregister<ProfileCubit>(instanceName: _tag);
     }
   }

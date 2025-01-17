@@ -11,6 +11,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   final HomeRepository _homeRepository;
   StreamSubscription? _streamSubscription;
+  List<PostModel>? posts;
 
   Future<void> fetchPosts() async {
     emit(HomePostsLoading());
@@ -23,6 +24,17 @@ class HomeCubit extends Cubit<HomeState> {
       });
     } catch (error) {
       emit(HomePostsFailure(errMessage: error.toString()));
+    }
+  }
+
+  Future<void> deletePost(String postId) async {
+    emit(DeleteUserPostLoading());
+    try {
+      await _homeRepository.deletePost(postId);
+      emit(DeleteUserPostSuccess());
+      fetchPosts();
+    } catch (error) {
+      emit(DeleteUserPostFailure(errMessage: error.toString()));
     }
   }
 
@@ -69,8 +81,7 @@ class HomeCubit extends Cubit<HomeState> {
   static Future<void> deleteInstance() async {
     final isRegister = homeDI.isRegistered<HomeCubit>(instanceName: _tag);
     if (isRegister) {
-      final cubit = homeDI<HomeCubit>(instanceName: _tag);
-      await cubit.close();
+      homeDI<HomeCubit>(instanceName: _tag);
       homeDI.unregister<HomeCubit>(instanceName: _tag);
     }
   }

@@ -40,7 +40,7 @@ class _AddDescriptionAndUploadPostScreenState
   final ValueNotifier<Uint8List?> _imageBytesNotifier = ValueNotifier(null);
   final ValueNotifier<String?> _descriptionNotifier = ValueNotifier(null);
 
-  UserProfileDataModel? _userProfileEntity;
+  UserProfileDataModel? _userProfileData;
   String? _deviceToken;
 
   @override
@@ -68,7 +68,7 @@ class _AddDescriptionAndUploadPostScreenState
   Future<void> _fetchUserData() async {
     final userId = FirebaseAuth.instance.currentUser!.uid;
     await _profileCubit.getUserData(userId: userId);
-    _userProfileEntity = _profileCubit.getUserProfileData;
+    _userProfileData = _profileCubit.getUserProfileData;
   }
 
   Future<void> _loadSelectedMedia() async {
@@ -126,13 +126,13 @@ class _AddDescriptionAndUploadPostScreenState
                                   .millisecondsSinceEpoch
                                   .toString(),
                               userId: FirebaseAuth.instance.currentUser!.uid,
-                              username: _userProfileEntity!.username,
+                              username: _userProfileData!.username,
                               imageUrl: imageBytes.toString(),
                               timestamp: DateTime.now(),
                               description: _descriptionNotifier.value ?? "",
                               likes: [],
                               userProfileImage:
-                                  _userProfileEntity!.profileImageUrl,
+                                  _userProfileData!.profileImageUrl,
                             );
                             await _postsCubit.createPost(
                               image: imageBytes,
