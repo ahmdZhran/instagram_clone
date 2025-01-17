@@ -1,4 +1,4 @@
-class CommentEntity {
+class CommentModel {
   final String commentId;
   final String profilePic;
   final String username;
@@ -6,7 +6,7 @@ class CommentEntity {
   final DateTime dateOfComment;
   final String uid;
 
-  CommentEntity({
+  CommentModel({
     required this.commentId,
     required this.profilePic,
     required this.username,
@@ -26,8 +26,8 @@ class CommentEntity {
     };
   }
 
-  factory CommentEntity.fromJson(Map<String, dynamic> map) {
-    return CommentEntity(
+  factory CommentModel.fromJson(Map<String, dynamic> map) {
+    return CommentModel(
       commentId: map['commentId'],
       profilePic: map['profilePic'],
       username: map['username'],
@@ -37,7 +37,7 @@ class CommentEntity {
     );
   }
 
-  CommentEntity copyWith({
+  CommentModel copyWith({
     String? commentId,
     String? profilePic,
     String? username,
@@ -45,7 +45,7 @@ class CommentEntity {
     DateTime? dateOfComment,
     String? uid,
   }) {
-    return CommentEntity(
+    return CommentModel(
       commentId: commentId ?? this.commentId,
       profilePic: profilePic ?? this.profilePic,
       username: username ?? this.username,

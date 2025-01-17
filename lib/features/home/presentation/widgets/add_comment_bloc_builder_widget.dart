@@ -8,7 +8,7 @@ import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../core/services/fcm_notification_services/notification_helper.dart';
-import '../../domain/entities/comment_entity/comment_entity.dart';
+import '../../data/models/comment_model.dart';
 import '../cubits/comment_cubit/comment_cubit.dart';
 import 'comments_bottom_sheet_widget.dart';
 
@@ -105,7 +105,7 @@ class _AddCommentBlocBuilderWidgetState
                             DateTime.now().millisecondsSinceEpoch.toString();
                         widget._commentCubit.addComment(
                           widget.widget.postId,
-                          CommentEntity(
+                          CommentModel(
                             commentId: commentId,
                             profilePic: widget._userProfile!.profileImageUrl,
                             username: widget._userProfile!.username,

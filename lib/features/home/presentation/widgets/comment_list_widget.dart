@@ -4,16 +4,16 @@ import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 
 import '../../../../core/utils/app_colors.dart';
-import '../../domain/entities/comment_entity/comment_entity.dart';
+import '../../data/models/comment_model.dart';
 import '../cubits/comment_cubit/comment_cubit.dart';
 import 'comment_item_widget.dart';
 
 class CommentsListWidget extends StatelessWidget {
   final ScrollController scrollController;
   final CommentCubit commentCubit;
-  final List<CommentEntity> comments;
+  final List<CommentModel> comments;
   final List<bool> isPressed;
-  final Function(BuildContext, CommentEntity) onLongPress;
+  final Function(BuildContext, CommentModel) onLongPress;
 
   const CommentsListWidget({
     super.key,

@@ -7,7 +7,7 @@ final class CommentInitial extends CommentState {}
 final class AddCommentLoading extends CommentState {}
 
 final class AddCommentSuccess extends CommentState {
-  final CommentEntity comment;
+  final CommentModel comment;
 
   AddCommentSuccess({required this.comment});
 }
@@ -21,7 +21,7 @@ final class AddCommentFailure extends CommentState {
 final class FetchCommentLoading extends CommentState {}
 
 final class FetchCommentSuccess extends CommentState {
-  final List<CommentEntity> comments;
+  final List<CommentModel> comments;
 
   FetchCommentSuccess({required this.comments});
 }
