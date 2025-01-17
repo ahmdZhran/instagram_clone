@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/features/home/domain/repositories/home_Repository.dart';
 
-import '../../../domain/entities/comment_entity/comment_entity.dart';
+import '../../../data/models/comment_model.dart';
 import '../../../home_di.dart';
 part 'comment_state.dart';
 
@@ -13,7 +13,7 @@ class CommentCubit extends Cubit<CommentState> {
   final HomeRepository _homeRepository;
   StreamSubscription? _commentsSubscription;
 
-  Future<void> addComment(String postId, CommentEntity comment) async {
+  Future<void> addComment(String postId, CommentModel comment) async {
     emit(AddCommentLoading());
     try {
       await _homeRepository.addComment(postId, comment);

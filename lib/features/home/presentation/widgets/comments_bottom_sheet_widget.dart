@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/features/profile/data/models/user_model.dart';
-import '../../domain/entities/comment_entity/comment_entity.dart';
+import '../../data/models/comment_model.dart';
 import '../cubits/comment_cubit/comment_cubit.dart';
 import '../../../../core/models/user_profile_manager.dart';
 import '../../../../core/utils/app_colors.dart';
@@ -37,7 +37,7 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
   UserProfileDataModel? _userProfile;
   final TextEditingController commentController = TextEditingController();
   final CommentCubit _commentCubit = CommentCubit.getInstance();
-  final List<CommentEntity> _comments = [];
+  final List<CommentModel> _comments = [];
   final List<bool> _isPressed = [];
 
   @override
@@ -93,7 +93,7 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
     super.dispose();
   }
 
-  void _showCommentActions(BuildContext context, CommentEntity comment) {
+  void _showCommentActions(BuildContext context, CommentModel comment) {
     widget.uid == comment.uid
         ? showModalBottomSheet(
             context: context,

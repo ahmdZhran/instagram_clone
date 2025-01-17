@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
+import 'package:instagram_clone/features/home/data/models/comment_model.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/custom_text_style.dart';
-import '../../domain/entities/comment_entity/comment_entity.dart';
 
 class CommentActionsBottomSheetWidget extends StatelessWidget {
-  final CommentEntity comment;
+  final CommentModel comment;
   final VoidCallback onDelete;
   final Function(String) onEdit;
   const CommentActionsBottomSheetWidget({

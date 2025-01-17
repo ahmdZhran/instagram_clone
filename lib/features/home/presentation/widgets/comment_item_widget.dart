@@ -2,17 +2,17 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
+import 'package:instagram_clone/features/home/data/models/comment_model.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:readmore/readmore.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
-import '../../domain/entities/comment_entity/comment_entity.dart';
 
 class CommentItem extends StatelessWidget {
-  final CommentEntity comment;
+  final CommentModel comment;
   final bool isPressed;
-  final Function(BuildContext, CommentEntity) onLongPress;
+  final Function(BuildContext, CommentModel) onLongPress;
 
   const CommentItem({
     super.key,

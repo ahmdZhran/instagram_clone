@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:instagram_clone/features/home/data/models/comment_model.dart';
 import '../../../posts/data/models/post_model.dart';
 import '../../domain/repositories/home_Repository.dart';
-import '../../domain/entities/comment_entity/comment_entity.dart';
 
 class HomeRepositoryImpl implements HomeRepository {
   final CollectionReference postCollection =
@@ -52,7 +52,7 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<void> addComment(String postId, CommentEntity commentEntity) async {
+  Future<void> addComment(String postId, CommentModel commentEntity) async {
     try {
       await postCollection
           .doc(postId)
@@ -65,7 +65,7 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<Stream<List<CommentEntity>>> fetchComments(String postId) async {
+  Future<Stream<List<CommentModel>>> fetchComments(String postId) async {
     try {
       return FirebaseFirestore.instance
           .collection("posts")
@@ -75,7 +75,7 @@ class HomeRepositoryImpl implements HomeRepository {
           .snapshots()
           .map((snapshot) {
         return snapshot.docs.map((doc) {
-          return CommentEntity.fromJson(doc.data());
+          return CommentModel.fromJson(doc.data());
         }).toList();
       });
     } catch (error) {
