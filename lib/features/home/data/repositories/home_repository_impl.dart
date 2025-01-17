@@ -18,8 +18,8 @@ class HomeRepositoryImpl implements HomeRepository {
           .snapshots()
           .map((snapshot) {
         return snapshot.docs
-            .map((doc) =>
-                PostModel.fromJson(doc.data() as Map<String, dynamic>))
+            .map(
+                (doc) => PostModel.fromJson(doc.data() as Map<String, dynamic>))
             .toList();
       });
     } catch (error) {
@@ -32,8 +32,7 @@ class HomeRepositoryImpl implements HomeRepository {
     try {
       final postDoc = await postCollection.doc(postID).get();
       if (postDoc.exists) {
-        final post =
-            PostModel.fromJson(postDoc.data() as Map<String, dynamic>);
+        final post = PostModel.fromJson(postDoc.data() as Map<String, dynamic>);
         final hasLiked = post.likes.contains(userID);
         if (hasLiked) {
           post.likes.remove(userID);
@@ -111,6 +110,20 @@ class HomeRepositoryImpl implements HomeRepository {
       });
     } catch (error) {
       throw Exception("Error editing comment: $error");
+    }
+  }
+
+  @override
+  Future<void> deletePost(String postId) async {
+    try {
+      await postCollection.doc(postId).delete();
+      final commentsSnapshot =
+          await postCollection.doc(postId).collection("comments").get();
+      for (var doc in commentsSnapshot.docs) {
+        await doc.reference.delete();
+      }
+    } catch (error) {
+      throw Exception("Error deleting post: $error");
     }
   }
 }
