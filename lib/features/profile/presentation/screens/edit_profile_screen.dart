@@ -16,8 +16,10 @@ import '../../../../core/utils/custom_text_style.dart';
 import '../../../../core/widgets/custom_out_line_text_form_field.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key, required UserModel userProfileData}) : _userModelData = userProfileData;
-  final UserModel _userModelData;
+  const EditProfileScreen(
+      {super.key, required UserProfileDataModel userProfileData})
+      : _userModelData = userProfileData;
+  final UserProfileDataModel _userModelData;
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -33,8 +35,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
-    profileCubit =
-        ProfileCubit.getInstance();
+    profileCubit = ProfileCubit.getInstance();
   }
 
   @override
@@ -49,7 +50,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               Icons.check,
               color: isNotEmpty
                   ? AppColors.primaryColor
-                  : AppColors.primaryColor.withValues(alpha:  0.4),
+                  : AppColors.primaryColor.withValues(alpha: 0.4),
             ),
           ),
         ],
@@ -97,8 +98,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ),
                               )
                             : CachedNetworkImage(
-                                imageUrl:
-                                    widget._userModelData.profileImageUrl,
+                                imageUrl: widget._userModelData.profileImageUrl,
                                 placeholder: (context, url) =>
                                     const CircularProgressIndicator(),
                                 errorWidget: (context, url, error) =>
@@ -182,7 +182,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             await FirebaseStorageService.uploadImagesToFireStorage(
                 profileImage!, widget._userModelData.uid, "profileImages");
       }
-      final updatedProfile = UserModel(
+      final updatedProfile = UserProfileDataModel(
         name: name ?? widget._userModelData.name,
         username: username ?? widget._userModelData.username,
         bio: bio ?? widget._userModelData.bio,

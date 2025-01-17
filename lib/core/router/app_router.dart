@@ -45,7 +45,7 @@ class AppRouter {
           builder: (_) => const ForgotPasswordScreen(),
         );
       case Routes.editProfileScreen:
-        final userProfileData = settings.arguments as UserModel;
+        final userProfileData = settings.arguments as UserProfileDataModel;
         return MaterialPageRoute(
           builder: (_) => EditProfileScreen(
             userProfileData: userProfileData,

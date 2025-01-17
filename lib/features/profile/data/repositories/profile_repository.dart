@@ -15,22 +15,22 @@ class ProfileRepository {
     required this.localDataSource,
   });
 
-  Future<UserModel> getProfileData(String userId) async {
+  Future<UserProfileDataModel> getProfileData(String userId) async {
     try {
-      final UserModel remoteData = await remoteDataSource.getUserProfile(userId);
+      final UserProfileDataModel remoteData =
+          await remoteDataSource.getUserProfile(userId);
       localDataSource.cacheUserProfile(remoteData);
       return remoteData;
     } catch (error) {
-      debugPrint(
-          "Error fetching profile data from repository: $error");
+      debugPrint("Error fetching profile data from repository: $error");
       rethrow;
     }
   }
 
-  Future<UserModel> updateProfileData(
-      UserModel profileEntity) async {
+  Future<UserProfileDataModel> updateProfileData(
+      UserProfileDataModel profileEntity) async {
     try {
-      final userModel = UserModel(
+      final userModel = UserProfileDataModel(
         name: profileEntity.name,
         username: profileEntity.username,
         bio: profileEntity.bio,
@@ -45,8 +45,7 @@ class ProfileRepository {
       );
       return updatedUser;
     } catch (error) {
-      debugPrint(
-          "Error updating profile data in repository: $error");
+      debugPrint("Error updating profile data in repository: $error");
       rethrow;
     }
   }
@@ -55,8 +54,7 @@ class ProfileRepository {
     try {
       return await remoteDataSource.getUserPosts(userId);
     } catch (error) {
-      debugPrint(
-          "Error fetching user posts in repository: $error");
+      debugPrint("Error fetching user posts in repository: $error");
       rethrow;
     }
   }
@@ -65,8 +63,7 @@ class ProfileRepository {
     try {
       await remoteDataSource.followUser(currentUserId, targetUserId);
     } catch (error) {
-      debugPrint(
-          "Error following user in repository: $error");
+      debugPrint("Error following user in repository: $error");
       rethrow;
     }
   }
@@ -75,8 +72,7 @@ class ProfileRepository {
     try {
       await remoteDataSource.unFollowUser(currentUserId, targetUserId);
     } catch (error) {
-      debugPrint(
-          "Error unfollowing user in repository: $error");
+      debugPrint("Error unfollowing user in repository: $error");
       rethrow;
     }
   }

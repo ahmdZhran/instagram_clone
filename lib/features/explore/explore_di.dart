@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:instagram_clone/features/explore/data/explore_repository.dart';
+import 'package:instagram_clone/features/explore/data/repositories/explore_repository.dart';
 
 final exploreDI = GetIt.instance;
 

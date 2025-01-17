@@ -34,7 +34,7 @@ class CommentsBottomSheetWidget extends StatefulWidget {
 }
 
 class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
-  UserModel? _userProfile;
+  UserProfileDataModel? _userProfile;
   final TextEditingController commentController = TextEditingController();
   final CommentCubit _commentCubit = CommentCubit.getInstance();
   final List<CommentEntity> _comments = [];

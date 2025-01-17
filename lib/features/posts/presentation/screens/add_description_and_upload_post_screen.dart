@@ -40,7 +40,7 @@ class _AddDescriptionAndUploadPostScreenState
   final ValueNotifier<Uint8List?> _imageBytesNotifier = ValueNotifier(null);
   final ValueNotifier<String?> _descriptionNotifier = ValueNotifier(null);
 
-  UserModel? _userProfileEntity;
+  UserProfileDataModel? _userProfileEntity;
   String? _deviceToken;
 
   @override
@@ -48,8 +48,7 @@ class _AddDescriptionAndUploadPostScreenState
     super.initState();
     _postsCubit = PostsCubit.getInstance();
     _audioPlayer = AudioPlayer();
-    _profileCubit =
-        ProfileCubit.getInstance();
+    _profileCubit = ProfileCubit.getInstance();
 
     _fetchInitialData();
   }

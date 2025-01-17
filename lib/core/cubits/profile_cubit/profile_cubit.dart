@@ -17,10 +17,10 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   final ProfileRepository _profileRepository;
   ImagePickerService? _pickerImageService;
-  UserModel? userProfileData;
+  UserProfileDataModel? userProfileData;
   Uint8List? profileImage;
 
-  UserModel get getUserProfileData => userProfileData!;
+  UserProfileDataModel get getUserProfileData => userProfileData!;
   Uint8List get getProfileImage => profileImage!;
 
   Future<void> getUserData({required String userId}) async {
@@ -29,14 +29,15 @@ class ProfileCubit extends Cubit<ProfileState> {
       final userData = await _profileRepository.getProfileData(userId);
       userProfileData = userData;
 
-      UserProfileManager().updateUserProfile(userData);
+      UserProfileManager().updateUserProfileIfCurrentUser(userData, userId);
+
       emit(ProfileSuccess());
     } catch (error) {
       emit(ProfileFailure(errMessage: error.toString()));
     }
   }
 
-  Future<void> updatedUserData(UserModel profileEntity) async {
+  Future<void> updatedUserData(UserProfileDataModel profileEntity) async {
     try {
       emit(ProfileUpdateLoading());
       final updatedProfile =
