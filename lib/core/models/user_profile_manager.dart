@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-
 import '../../features/profile/data/models/user_model.dart';
 
 class UserProfileManager {
@@ -15,12 +14,16 @@ class UserProfileManager {
 
   void updateUserProfileIfCurrentUser(
       UserProfileDataModel profile, String userId) {
-    if (FirebaseAuth.instance.currentUser!.uid == userId) {
+    if (FirebaseAuth.instance.currentUser?.uid == userId) {
       userProfile = profile;
     }
   }
 
   void clearProfile() {
     userProfile = null;
+  }
+
+  UserProfileDataModel? getUserProfile() {
+    return userProfile;
   }
 }

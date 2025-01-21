@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/core/cubits/profile_cubit/profile_cubit.dart';
 import '../cubits/home_cubit/home_cubit.dart';
 import '../widgets/custom_sliver_app_bar_widget.dart';
 import '../widgets/posts_section_widget.dart';
@@ -13,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final HomeCubit _homeCubit = HomeCubit.getInstance();
-
+  
   @override
   void initState() {
     _homeCubit.fetchPosts();

@@ -1,8 +1,9 @@
+import 'dart:developer';
 import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../core/cubits/profile_cubit/profile_cubit.dart';
+import 'package:instagram_clone/core/cubits/profile_cubit/profile_cubit.dart';
 import '../../core/helper/extensions.dart';
 import '../notifications/notifications_screen.dart';
 import '../../core/utils/app_assets.dart';
@@ -25,13 +26,6 @@ class MainWidget extends StatefulWidget {
 class _MainWidgetState extends State<MainWidget> {
   int index = 0;
   final String? uid = FirebaseAuth.instance.currentUser!.uid;
-  final ProfileCubit _profileCubit = ProfileCubit.getInstance();
-
-  @override
-  void initState() {
-    _profileCubit.getUserData(userId: uid!);
-    super.initState();
-  }
 
   Widget _getSelectedScreen() {
     switch (index) {
@@ -59,6 +53,18 @@ class _MainWidgetState extends State<MainWidget> {
       context.showExitConfirmationDialog();
     }
   }
+
+@override
+void initState() {
+  super.initState();
+  final userId = FirebaseAuth.instance.currentUser?.uid;
+  if (userId != null) {
+    ProfileCubit.getInstance().getUserData(userId: userId);
+    log("this is our profile cubit is created after you login");
+  } else {
+    log("User ID is null");
+  }
+}
 
   @override
   Widget build(BuildContext context) {
