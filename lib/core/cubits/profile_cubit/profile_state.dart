@@ -6,7 +6,11 @@ final class ProfileInitial extends ProfileState {}
 
 final class ProfileLoading extends ProfileState {}
 
-final class ProfileSuccess extends ProfileState {}
+final class ProfileSuccess extends ProfileState {
+  final UserProfileDataModel? userProfileData;
+
+  ProfileSuccess([this.userProfileData]);
+}
 
 final class ProfileFailure extends ProfileState {
   final String errMessage;

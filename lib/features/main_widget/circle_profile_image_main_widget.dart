@@ -1,15 +1,16 @@
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
-import 'package:instagram_clone/core/models/user_profile_manager.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import '../../core/cubits/profile_cubit/profile_cubit.dart';
+import '../../core/models/user_profile_manager.dart';
+import '../profile/data/models/user_model.dart';
 
 class CircleProfileImageMainWidget extends StatefulWidget {
-  const CircleProfileImageMainWidget({
-    super.key,
-    required this.index,
-  });
+  const CircleProfileImageMainWidget({super.key, required this.index});
 
   final int index;
 
@@ -20,7 +21,19 @@ class CircleProfileImageMainWidget extends StatefulWidget {
 
 class _CircleProfileImageMainWidgetState
     extends State<CircleProfileImageMainWidget> {
-  final UserProfileManager _userProfileManager = UserProfileManager();
+  final userProfile = UserProfileManager().getUserProfile();
+  final ProfileCubit _profileCubit = ProfileCubit.getInstance();
+  UserProfileDataModel? _userProfileData;
+  @override
+  void initState() {
+    super.initState();
+  _fetchUserData();
+  }
+ Future<void> _fetchUserData() async {
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+    await _profileCubit.getUserData(userId: userId);
+    _userProfileData = _profileCubit.getUserProfileData;
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,7 +50,7 @@ class _CircleProfileImageMainWidgetState
         backgroundColor: AppColors.darkGrey,
         child: ClipOval(
           child: CachedNetworkImage(
-            imageUrl: _userProfileManager.userProfile!.profileImageUrl,
+            imageUrl: _userProfileData!.profileImageUrl,
             placeholder: (context, url) => LoadingAnimationWidget.beat(
               color: AppColors.primaryColor,
               size: 40,
