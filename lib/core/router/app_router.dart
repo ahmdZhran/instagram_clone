@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram_clone/core/cubits/profile_cubit/profile_cubit.dart';
 import '../../features/profile/data/models/user_model.dart';
 import '../../features/posts/data/models/media_model.dart';
 import '../../features/posts/presentation/screens/add_description_and_upload_post_screen.dart';
