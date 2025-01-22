@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
+import 'package:instagram_clone/core/models/user_profile_manager.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -16,7 +17,7 @@ class CircleProfileImageMainWidget extends StatefulWidget {
 
 class _CircleProfileImageMainWidgetState
     extends State<CircleProfileImageMainWidget> {
-
+  final UserProfileManager _profileManager = UserProfileManager();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,7 +34,7 @@ class _CircleProfileImageMainWidgetState
         backgroundColor: AppColors.darkGrey,
         child: ClipOval(
           child: CachedNetworkImage(
-            imageUrl: 'imageUrl',
+            imageUrl: _profileManager.userProfile!.profileImageUrl,
             placeholder: (context, url) => LoadingAnimationWidget.beat(
               color: AppColors.primaryColor,
               size: 40,

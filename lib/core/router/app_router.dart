@@ -21,6 +21,7 @@ class AppRouter {
         );
       case Routes.mainWidget:
         return MaterialPageRoute(
+          
           builder: (_) => const MainWidget(),
         );
       case Routes.logIn:

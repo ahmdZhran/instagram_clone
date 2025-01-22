@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../features/profile/data/models/user_model.dart';
 
@@ -16,6 +18,7 @@ class UserProfileManager {
       UserProfileDataModel profile, String userId) {
     if (FirebaseAuth.instance.currentUser?.uid == userId) {
       userProfile = profile;
+      log(userProfile!.name);
     }
   }
 
