@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -130,20 +131,22 @@ class _PostHeader extends StatelessWidget {
           CircleProfileImageWidget(userProfileImage: post.userProfileImage),
       title: Text(post.username, style: CustomTextStyle.pacifico13),
       subtitle: Text(timeAgo),
-      trailing: PopupMenuButton(
-        onSelected: (value) {
-          if (value == 'delete') {
-            onDelete(post.id.toString());
-          }
-        },
-        itemBuilder: (context) => [
-          const PopupMenuItem(
-            value: 'delete',
-            child: Text('Delete Post'),
-          )
-        ],
-        icon: const Icon(Icons.more_horiz),
-      ),
+      trailing: FirebaseAuth.instance.currentUser!.uid == post.userId
+          ? PopupMenuButton(
+              onSelected: (value) {
+                if (value == 'delete') {
+                  onDelete(post.id.toString());
+                }
+              },
+              itemBuilder: (context) => [
+                const PopupMenuItem(
+                  value: 'delete',
+                  child: Text('Delete Post'),
+                )
+              ],
+              icon: const Icon(Icons.more_horiz),
+            )
+          : null,
     );
   }
 }
