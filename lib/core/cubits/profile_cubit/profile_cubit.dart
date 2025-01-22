@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:typed_data';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -28,7 +29,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(ProfileLoading());
       final userData = await _profileRepository.getProfileData(userId);
       userProfileData = userData;
-
+      log('Fetched user data: $userData');
       UserProfileManager().updateUserProfileIfCurrentUser(userData, userId);
 
       emit(ProfileSuccess());
