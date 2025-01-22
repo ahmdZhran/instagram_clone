@@ -28,7 +28,10 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> deletePost(String postId) async {
-    emit(DeleteUserPostLoading());
+    final currentState = state as HomePostsSuccess;
+    final updatedPosts =
+        currentState.posts!.where((post) => post.id != postId).toList();
+    emit(HomePostsSuccess(updatedPosts));
     try {
       await _homeRepository.deletePost(postId);
       emit(DeleteUserPostSuccess());
