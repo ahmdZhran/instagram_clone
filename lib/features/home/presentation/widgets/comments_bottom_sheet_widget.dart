@@ -106,25 +106,17 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
                 top: Radius.circular(20),
               ),
             ),
-            builder: (context) => DraggableScrollableSheet(
-              initialChildSize: 0.9,
-              minChildSize: 0.5,
-              maxChildSize: 0.95,
-              snap: true,
-              builder: (context, scrollController) {
-                return CommentActionsBottomSheetWidget(
-                  comment: comment,
-                  onDelete: () => _commentCubit.deleteComment(
-                    widget.postId,
-                    comment.commentId,
-                  ),
-                  onEdit: (updatedComment) => _commentCubit.editComment(
-                    widget.postId,
-                    comment.commentId,
-                    updatedComment,
-                  ),
-                );
-              },
+            builder: (context) => CommentActionsBottomSheetWidget(
+              comment: comment,
+              onDelete: () => _commentCubit.deleteComment(
+                widget.postId,
+                comment.commentId,
+              ),
+              onEdit: (updatedComment) => _commentCubit.editComment(
+                widget.postId,
+                comment.commentId,
+                updatedComment,
+              ),
             ),
           )
         : const SizedBox.shrink();
