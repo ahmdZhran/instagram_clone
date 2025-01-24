@@ -37,16 +37,19 @@ class _AddCommentBlocBuilderWidgetState
     extends State<AddCommentBlocBuilderWidget> {
   bool isTextNotEmpty = false;
   // String? _deviceToken;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   widget.commentController.addListener(_updateButtonState);
-  //   _deviceToken = widget.deviceToken;
-  // }
+  final FocusNode _focusNode = FocusNode();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      FocusScope.of(context).requestFocus(_focusNode);
+    });
+    widget.commentController.addListener(_updateButtonState);
+  }
 
   @override
   void dispose() {
+    _focusNode.dispose();
     widget.commentController.removeListener(_updateButtonState);
     super.dispose();
   }

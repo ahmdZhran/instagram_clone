@@ -94,12 +94,14 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
   void _showCommentActions(BuildContext context, CommentModel comment) {
     widget.uid == comment.uid
         ? showModalBottomSheet(
+            showDragHandle: true,
             context: context,
+            isScrollControlled: true,
+            enableDrag: true,
+            useSafeArea: true,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
-                top: Radius.circular(
-                  20,
-                ),
+                top: Radius.circular(20),
               ),
             ),
             builder: (context) => CommentActionsBottomSheetWidget(

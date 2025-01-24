@@ -15,6 +15,7 @@ class CustomTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.controller,
     this.fillColor,
+    this.focusNode,
   });
   final String hintText;
   final TextEditingController? controller;
@@ -25,7 +26,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final void Function(String)? onChanged;
   final bool obscureText;
-
+  final FocusNode? focusNode;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -38,6 +39,7 @@ class CustomTextFormField extends StatelessWidget {
           obscureText: obscureText,
           keyboardType: keyboardType,
           onChanged: onChanged,
+          focusNode: focusNode,
           cursorHeight: 25,
           controller: controller,
           cursorColor: AppColors.primaryColor,
