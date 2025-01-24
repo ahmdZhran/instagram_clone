@@ -87,13 +87,24 @@ class _ReactIconsWidgetState extends State<ReactIconsWidget> {
       backgroundColor: Colors.transparent,
       isDismissible: true,
       isScrollControlled: true,
+      enableDrag: true,
+      transitionAnimationController: AnimationController(
+        vsync: Scaffold.of(context),
+        duration: const Duration(milliseconds: 300),
+      ),
       context: context,
       builder: (context) {
-        return Padding(
+        return AnimatedPadding(
+          duration: const Duration(milliseconds: 300),
           padding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
           child: DraggableScrollableSheet(
+            initialChildSize: 0.9,
+            minChildSize: 0.5,
+            maxChildSize: 0.95,
+            snap: true,
+            snapSizes: const [0.7, 0.9],
             builder: (context, scrollController) {
               return CommentsBottomSheetWidget(
                 description: widget.description,
