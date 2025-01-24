@@ -65,7 +65,6 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
               username: widget.username,
               profileImage: widget.profileImage,
               description: widget.description),
-
           const Divider(color: AppColors.greyColor),
           Flexible(
             child: CommentsListWidget(
@@ -76,13 +75,6 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
               onLongPress: _showCommentActions,
             ),
           ),
-          // CommentsListWidget(
-          //   scrollController: widget.scrollController,
-          //   commentCubit: _commentCubit,
-          //   comments: _comments,
-          //   isPressed: _isPressed,
-          //   onLongPress: _showCommentActions,
-          // ),
           AddCommentBlocBuilderWidget(
             userProfile: _userProfile,
             commentController: commentController,
@@ -115,37 +107,25 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
               ),
             ),
             builder: (context) => DraggableScrollableSheet(
-                initialChildSize: 0.9,
-                minChildSize: 0.5,
-                maxChildSize: 0.95,
-                snap: true,
-                builder: (context, scrollController) {
-                  return CommentActionsBottomSheetWidget(
-                    comment: comment,
-                    onDelete: () => _commentCubit.deleteComment(
-                      widget.postId,
-                      comment.commentId,
-                    ),
-                    onEdit: (updatedComment) => _commentCubit.editComment(
-                      widget.postId,
-                      comment.commentId,
-                      updatedComment,
-                    ),
-                  );
-                }
-                // child: CommentActionsBottomSheetWidget(
-                //   comment: comment,
-                //   onDelete: () => _commentCubit.deleteComment(
-                //     widget.postId,
-                //     comment.commentId,
-                //   ),
-                //   onEdit: (updatedComment) => _commentCubit.editComment(
-                //     widget.postId,
-                //     comment.commentId,
-                //     updatedComment,
-                //   ),
-                // ),
-                ),
+              initialChildSize: 0.9,
+              minChildSize: 0.5,
+              maxChildSize: 0.95,
+              snap: true,
+              builder: (context, scrollController) {
+                return CommentActionsBottomSheetWidget(
+                  comment: comment,
+                  onDelete: () => _commentCubit.deleteComment(
+                    widget.postId,
+                    comment.commentId,
+                  ),
+                  onEdit: (updatedComment) => _commentCubit.editComment(
+                    widget.postId,
+                    comment.commentId,
+                    updatedComment,
+                  ),
+                );
+              },
+            ),
           )
         : const SizedBox.shrink();
   }
