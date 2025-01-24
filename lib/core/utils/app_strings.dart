@@ -27,7 +27,9 @@ abstract class AppStrings {
 
   // Home Strings
   static const String addYourComment = "add_your_comment";
-
+  static const String deletePost = "delete_post";
+  static const String areYouSureYouWantToDeleteThisPost =
+      "are_you_sure_you_want_to_delete_this_post";
   // Reset Password View
   static const String resetPassword = 'Reset Password';
   static const String pleaseEnterYourEmail =
@@ -76,5 +78,6 @@ abstract class AppStrings {
   static const String editComment = "edit_comment";
   static const String enterYourUpdatedComment = "enter_your_updated_comment";
   static const String save = "save";
-  static const String beTheFirstToComment = "be_the_first_to_comment_on_this_post";
+  static const String beTheFirstToComment =
+      "be_the_first_to_comment_on_this_post";
 }

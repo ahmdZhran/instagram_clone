@@ -39,6 +39,8 @@
     "edit_comment":"تعديل التعليق",
     "enter_your_updated_comment":"أدخل تعليقك المحدث",
     "save":"حفظ",
-    "be_the_first_to_comment_on_this_post.":"كن أول من يعلق على هذا المنشور."
+    "be_the_first_to_comment_on_this_post.":"كن أول من يعلق على هذا المنشور.",
+    "delete_post":"حذف المنشور",
+    "are_you_sure_you_want_to_delete_this_post":"هل أنت متأكد أنك تريد حذف هذا المنشور؟"
     
 }

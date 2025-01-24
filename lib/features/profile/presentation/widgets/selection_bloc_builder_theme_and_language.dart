@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/core/helper/extensions.dart';
 
 import '../../../../core/theme/app_them.dart';
 import '../../../../core/utils/app_assets.dart';
@@ -72,8 +73,8 @@ class _SelectionBlocBuilderThemeAndLanguageState
                               return DropdownMenuItem<String>(
                                 value: value,
                                 child: Text(value == AppStrings.englishCode
-                                    ? AppStrings.english
-                                    : AppStrings.arabic),
+                                    ? context.translate(AppStrings.english)
+                                    : context.translate(AppStrings.arabic)),
                               );
                             }).toList(),
                             onChanged: (String? newValue) {

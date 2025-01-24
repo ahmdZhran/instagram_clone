@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:insta_image_viewer/insta_image_viewer.dart';
+import 'package:instagram_clone/core/helper/extensions.dart';
+import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:instagram_clone/features/home/presentation/cubits/home_cubit/home_cubit.dart';
 import 'package:instagram_clone/features/posts/data/models/post_model.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -52,20 +54,21 @@ class PostCard extends StatelessWidget {
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
-                          title: const Text('Delete Post'),
-                          content: const Text(
-                              'Are you sure you want to delete this post?'),
+                          title: Text(context.translate(AppStrings.deletePost)),
+                          content: Text(context.translate(
+                              AppStrings.areYouSureYouWantToDeleteThisPost)),
                           actions: [
                             TextButton(
                               onPressed: () => Navigator.pop(context),
-                              child: const Text('Cancel'),
+                              child: Text(context.translate(AppStrings.cancel)),
                             ),
                             TextButton(
                               onPressed: () {
                                 homeCubit.deletePost(postId);
                                 Navigator.pop(context);
                               },
-                              child: const Text('Delete'),
+                              child: Text(
+                                  context.translate(AppStrings.deletePost)),
                             ),
                           ],
                         ),
@@ -139,9 +142,9 @@ class _PostHeader extends StatelessWidget {
                 }
               },
               itemBuilder: (context) => [
-                const PopupMenuItem(
+                PopupMenuItem(
                   value: 'delete',
-                  child: Text('Delete Post'),
+                  child: Text(context.translate(AppStrings.deletePost)),
                 )
               ],
               icon: const Icon(Icons.more_horiz),
