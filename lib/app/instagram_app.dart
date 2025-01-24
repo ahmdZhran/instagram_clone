@@ -26,7 +26,7 @@ class _InstagramAppState extends State<InstagramApp> {
 
   //TODO put this in a suitble place
   final ProfileCubit profileCubit = ProfileCubit.getInstance()
-    ..getUserData(userId: FirebaseAuth.instance.currentUser?.uid ?? '');
+    ..getUserData(userId: FirebaseAuth.instance.currentUser!.uid);
 
   @override
   Widget build(BuildContext context) {

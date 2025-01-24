@@ -48,9 +48,7 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
   }
 
   void _fetchUserProfile() {
-    setState(() {
-      _userProfile = UserProfileManager().userProfile;
-    });
+    _userProfile = UserProfileManager().userProfile;
   }
 
   @override
