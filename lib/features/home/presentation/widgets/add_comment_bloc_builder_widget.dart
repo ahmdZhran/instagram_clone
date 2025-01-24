@@ -36,8 +36,8 @@ class AddCommentBlocBuilderWidget extends StatefulWidget {
 class _AddCommentBlocBuilderWidgetState
     extends State<AddCommentBlocBuilderWidget> {
   bool isTextNotEmpty = false;
-  // String? _deviceToken;
   final FocusNode _focusNode = FocusNode();
+
   @override
   void initState() {
     super.initState();
@@ -55,9 +55,7 @@ class _AddCommentBlocBuilderWidgetState
   }
 
   void _updateButtonState() {
-    setState(() {
-      isTextNotEmpty = widget.commentController.text.trim().isNotEmpty;
-    });
+    isTextNotEmpty = widget.commentController.text.trim().isNotEmpty;
   }
 
   @override
@@ -80,6 +78,7 @@ class _AddCommentBlocBuilderWidgetState
             child: CustomTextFormField(
               controller: widget.commentController,
               hintText: context.translate(AppStrings.addYourComment),
+              focusNode: _focusNode,
             ),
           ),
           BlocBuilder<CommentCubit, CommentState>(
@@ -117,11 +116,6 @@ class _AddCommentBlocBuilderWidgetState
                           ),
                         );
                         widget.commentController.clear();
-                        // await NotificationService.sendNotification(
-                        //   _deviceToken ?? "",
-                        //   "Post Comments",
-                        //   "Click to know who commented on your post",
-                        // );
                       }
                     : null,
               );

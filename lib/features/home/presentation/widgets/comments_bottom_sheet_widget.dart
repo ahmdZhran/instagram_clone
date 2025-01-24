@@ -39,10 +39,10 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
   final CommentCubit _commentCubit = CommentCubit.getInstance();
   final List<CommentModel> _comments = [];
   final List<bool> _isPressed = [];
-
   @override
   void initState() {
     super.initState();
+  
     _fetchUserProfile();
     _commentCubit.fetchComments(widget.postId);
   }
