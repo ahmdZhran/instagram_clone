@@ -20,7 +20,6 @@ class CircleProfileImageMainWidget extends StatefulWidget {
 class _CircleProfileImageMainWidgetState
     extends State<CircleProfileImageMainWidget> {
   late final ProfileCubit _profileCubit = ProfileCubit.getInstance();
-
   @override
   void initState() {
     if (_profileCubit.userProfileData == null) {

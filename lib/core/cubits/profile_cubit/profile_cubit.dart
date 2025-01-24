@@ -24,6 +24,9 @@ class ProfileCubit extends Cubit<ProfileState> {
   Uint8List get getProfileImage => profileImage!;
 
   Future<void> getUserData({required String userId}) async {
+    if (state is ProfileSuccess) {
+      return;
+    }
     try {
       emit(ProfileLoading());
       final userData = await _profileRepository.getProfileData(userId);
