@@ -22,8 +22,6 @@ class AuthCubit extends Cubit<AuthState> {
   final AuthRepository _authRepository;
   bool obscuredPasswordText = true;
 
-
-
   Future<void> createUserWithEmailAndPassword() async {
     emit(CreateUserLoading());
 
@@ -113,8 +111,7 @@ class AuthCubit extends Cubit<AuthState> {
   static Future<void> deleteInstance() async {
     final isRegister = authDI.isRegistered<AuthCubit>(instanceName: _tag);
     if (isRegister) {
-      final cubit = authDI<AuthCubit>(instanceName: _tag);
-      await cubit.close();
+      authDI<AuthCubit>(instanceName: _tag);
       authDI.unregister<AuthCubit>(instanceName: _tag);
     }
   }

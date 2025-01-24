@@ -1,8 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:instagram_clone/core/cubits/profile_cubit/profile_cubit.dart';
 import '../core/router/app_router.dart';
 import '../core/theme/app_them.dart';
 import '../core/utils/app_strings.dart';
@@ -23,10 +21,6 @@ class _InstagramAppState extends State<InstagramApp> {
   final settingsCubit = SettingsCubit.getInstance()
     ..loadTheme()
     ..loadLanguage();
-
-  //TODO put this in a suitble place
-  final ProfileCubit profileCubit = ProfileCubit.getInstance()
-    ..getUserData(userId: FirebaseAuth.instance.currentUser!.uid);
 
   @override
   Widget build(BuildContext context) {

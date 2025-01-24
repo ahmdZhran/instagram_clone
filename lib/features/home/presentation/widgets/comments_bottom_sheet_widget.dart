@@ -109,10 +109,6 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
             isScrollControlled: true,
             enableDrag: true,
             useSafeArea: true,
-            transitionAnimationController: AnimationController(
-              vsync: Scaffold.of(context),
-              duration: const Duration(milliseconds: 300),
-            ),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
                 top: Radius.circular(20),

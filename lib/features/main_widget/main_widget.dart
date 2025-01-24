@@ -115,7 +115,7 @@ class _MainWidgetState extends State<MainWidget> {
                                 duration: const Duration(milliseconds: 200),
                                 scale: index == 4 ? 1.2 : 1,
                                 child:
-                                    CircleProfileImageMainWidget(index: index),
+                                    CircleProfileImageMainWidget(index: index, userId: uid!),
                               ),
                             ),
                           ],

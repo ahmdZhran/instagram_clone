@@ -19,11 +19,13 @@ class AuthDI {
     authDI
         .registerLazySingleton<ImagePickerService>(() => ImagePickerService());
 
-    authDI.registerLazySingleton<AuthRepository>(() => AuthRepository(
-          auth: authDI<FirebaseAuth>(),
-          firestore: authDI<FirebaseFirestore>(),
-          firebaseStorage: authDI<FirebaseStorage>(),
-          firebaseStorageService: authDI<FirebaseStorageService>(),
-        ));
+    authDI.registerLazySingleton<AuthRepository>(
+      () => AuthRepository(
+        auth: authDI<FirebaseAuth>(),
+        firestore: authDI<FirebaseFirestore>(),
+        firebaseStorage: authDI<FirebaseStorage>(),
+        firebaseStorageService: authDI<FirebaseStorageService>(),
+      ),
+    );
   }
 }
