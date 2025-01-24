@@ -115,11 +115,11 @@ class _AddCommentBlocBuilderWidgetState
                           ),
                         );
                         widget.commentController.clear();
-                        await NotificationService.sendNotification(
-                          _deviceToken ?? "",
-                          "Post Comments",
-                          "Click to know who commented on your post",
-                        );
+                        // await NotificationService.sendNotification(
+                        //   _deviceToken ?? "",
+                        //   "Post Comments",
+                        //   "Click to know who commented on your post",
+                        // );
                       }
                     : null,
               );
