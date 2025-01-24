@@ -39,18 +39,16 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
   final CommentCubit _commentCubit = CommentCubit.getInstance();
   final List<CommentModel> _comments = [];
   final List<bool> _isPressed = [];
-
   @override
   void initState() {
     super.initState();
+
     _fetchUserProfile();
     _commentCubit.fetchComments(widget.postId);
   }
 
   void _fetchUserProfile() {
-    setState(() {
-      _userProfile = UserProfileManager().userProfile;
-    });
+    _userProfile = UserProfileManager().userProfile;
   }
 
   @override
@@ -96,12 +94,14 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
   void _showCommentActions(BuildContext context, CommentModel comment) {
     widget.uid == comment.uid
         ? showModalBottomSheet(
+            showDragHandle: true,
             context: context,
+            isScrollControlled: true,
+            enableDrag: true,
+            useSafeArea: true,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
-                top: Radius.circular(
-                  20,
-                ),
+                top: Radius.circular(20),
               ),
             ),
             builder: (context) => CommentActionsBottomSheetWidget(

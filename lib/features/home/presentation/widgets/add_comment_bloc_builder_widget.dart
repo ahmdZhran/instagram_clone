@@ -7,7 +7,6 @@ import 'package:instagram_clone/features/profile/data/models/user_model.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
-import '../../../../core/services/fcm_notification_services/notification_helper.dart';
 import '../../data/models/comment_model.dart';
 import '../cubits/comment_cubit/comment_cubit.dart';
 import 'comments_bottom_sheet_widget.dart';
@@ -37,17 +36,20 @@ class AddCommentBlocBuilderWidget extends StatefulWidget {
 class _AddCommentBlocBuilderWidgetState
     extends State<AddCommentBlocBuilderWidget> {
   bool isTextNotEmpty = false;
-  String? _deviceToken;
+  final FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    widget.commentController.addListener(_updateButtonState);
-    _deviceToken = widget.deviceToken;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      FocusScope.of(context).requestFocus(_focusNode);
+    });
+      widget.commentController.addListener(_updateButtonState);
   }
 
   @override
   void dispose() {
+    _focusNode.dispose();
     widget.commentController.removeListener(_updateButtonState);
     super.dispose();
   }
@@ -78,6 +80,7 @@ class _AddCommentBlocBuilderWidgetState
             child: CustomTextFormField(
               controller: widget.commentController,
               hintText: context.translate(AppStrings.addYourComment),
+              focusNode: _focusNode,
             ),
           ),
           BlocBuilder<CommentCubit, CommentState>(
@@ -115,11 +118,6 @@ class _AddCommentBlocBuilderWidgetState
                           ),
                         );
                         widget.commentController.clear();
-                        await NotificationService.sendNotification(
-                          _deviceToken ?? "",
-                          "Post Comments",
-                          "Click to know who commented on your post",
-                        );
                       }
                     : null,
               );

@@ -23,6 +23,8 @@ class _InstagramAppState extends State<InstagramApp> {
   final settingsCubit = SettingsCubit.getInstance()
     ..loadTheme()
     ..loadLanguage();
+
+  //TODO put this in a suitble place
   final ProfileCubit profileCubit = ProfileCubit.getInstance()
     ..getUserData(userId: FirebaseAuth.instance.currentUser!.uid);
 
