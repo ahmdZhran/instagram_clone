@@ -44,7 +44,7 @@ class _AddCommentBlocBuilderWidgetState
     WidgetsBinding.instance.addPostFrameCallback((_) {
       FocusScope.of(context).requestFocus(_focusNode);
     });
-    widget.commentController.addListener(_updateButtonState);
+      widget.commentController.addListener(_updateButtonState);
   }
 
   @override
@@ -55,7 +55,9 @@ class _AddCommentBlocBuilderWidgetState
   }
 
   void _updateButtonState() {
-    isTextNotEmpty = widget.commentController.text.trim().isNotEmpty;
+    setState(() {
+      isTextNotEmpty = widget.commentController.text.trim().isNotEmpty;
+    });
   }
 
   @override

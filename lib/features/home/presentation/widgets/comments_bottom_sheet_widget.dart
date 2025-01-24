@@ -42,7 +42,7 @@ class _CommentsBottomSheetWidgetState extends State<CommentsBottomSheetWidget> {
   @override
   void initState() {
     super.initState();
-  
+
     _fetchUserProfile();
     _commentCubit.fetchComments(widget.postId);
   }
