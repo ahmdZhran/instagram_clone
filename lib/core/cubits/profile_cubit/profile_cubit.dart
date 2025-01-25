@@ -24,7 +24,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   Uint8List get getProfileImage => profileImage!;
 
   Future<void> getUserData({required String userId}) async {
-    if (state is ProfileSuccess) {
+    if (state is ProfileSuccess && userProfileData?.uid == userId) {
       return;
     }
     try {
