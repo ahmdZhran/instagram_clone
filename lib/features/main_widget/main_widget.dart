@@ -114,8 +114,9 @@ class _MainWidgetState extends State<MainWidget> {
                               child: AnimatedScale(
                                 duration: const Duration(milliseconds: 200),
                                 scale: index == 4 ? 1.2 : 1,
-                                child:
-                                    CircleProfileImageMainWidget(index: index, userId: uid!),
+                                child: CircleProfileImageMainWidget(
+                                  index: index,
+                                ),
                               ),
                             ),
                           ],
