@@ -22,17 +22,13 @@ class CircleProfileImageMainWidget extends StatefulWidget {
 class _CircleProfileImageMainWidgetState
     extends State<CircleProfileImageMainWidget> {
   late final ProfileCubit _profileCubit = ProfileCubit.getInstance();
+
   UserProfileDataModel? currentUserData;
 
   @override
   void initState() {
     super.initState();
-    if (_profileCubit.getCurrentUserProfileData == null) {
-      _profileCubit.getUserData(
-        userId: FirebaseAuth.instance.currentUser!.uid,
-        isCurrentUser: true,
-      );
-    }
+    _fetchUserDataIfNeeded();
   }
 
   @override
@@ -104,5 +100,14 @@ class _CircleProfileImageMainWidgetState
         return const SizedBox.shrink();
       },
     );
+  }
+
+  void _fetchUserDataIfNeeded() {
+    if (_profileCubit.getCurrentUserProfileData == null) {
+      _profileCubit.getUserData(
+        userId: FirebaseAuth.instance.currentUser!.uid,
+        isCurrentUser: true,
+      );
+    }
   }
 }
