@@ -6,6 +6,7 @@ import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/custom_text_style.dart';
 
 import '../../../../core/helper/image_service.dart';
+import '../../../../core/utils/app_strings.dart';
 
 class StorySectionWidget extends StatelessWidget {
   const StorySectionWidget({super.key});
@@ -39,13 +40,16 @@ class StorySectionWidget extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                'Add Story',
+                                context.translate(AppStrings.addStory),
                                 style: CustomTextStyle.pacifico14,
                               ),
                               const Gap(10),
                               ListTile(
                                   leading: const Icon(Icons.camera_alt),
-                                  title: const Text("Take Photo/Video"),
+                                  title: Text(
+                                    context
+                                        .translate(AppStrings.takePhotoOrVideo),
+                                  ),
                                   onTap: () async {
                                     context.pop();
                                     ImagePickerService()
@@ -53,7 +57,8 @@ class StorySectionWidget extends StatelessWidget {
                                   }),
                               ListTile(
                                 leading: const Icon(Icons.photo),
-                                title: const Text("Choose from Gallery"),
+                                title: Text(context
+                                    .translate(AppStrings.chooseFromGallery)),
                                 onTap: () async {
                                   context.pop();
                                   ImagePickerService()
