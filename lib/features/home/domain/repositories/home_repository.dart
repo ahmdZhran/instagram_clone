@@ -1,5 +1,4 @@
 import 'package:instagram_clone/features/home/data/models/comment_model.dart';
-import 'package:instagram_clone/features/home/data/models/story_model.dart';
 import 'package:instagram_clone/features/posts/data/models/post_model.dart';
 
 abstract class HomeRepository {
@@ -8,9 +7,7 @@ abstract class HomeRepository {
   Future<void> addComment(String postId, CommentModel commentEntity);
   Future<Stream<List<CommentModel>>> fetchComments(String postId);
   Future<void> deleteComment(String postId, String commentId);
-  Future<void> editComment(String postId, String commentId, String updatedComment);
+  Future<void> editComment(
+      String postId, String commentId, String updatedComment);
   Future<void> deletePost(String postId);
-  Future<void> uploadStory(StoryModel storyModel);
-  Future<List<StoryModel>> fetchUserStories(String userId);
-  Future<List<StoryModel>> fetchFollowingStories();
 }

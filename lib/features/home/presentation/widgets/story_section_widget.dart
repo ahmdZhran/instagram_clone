@@ -1,36 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class StorySectionWidget extends StatelessWidget {
+import '../../data/models/story_model.dart';
+import '../screens/add_story_screen.dart';
+
+class StorySectionWidget extends StatefulWidget {
   const StorySectionWidget({super.key});
+
+  @override
+  State<StorySectionWidget> createState() => _StorySectionWidgetState();
+}
+
+class _StorySectionWidgetState extends State<StorySectionWidget> {
+  final List<StoryModel>? stories = [];
 
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: SizedBox(
-        height: 70.h,
+        height: 100,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          physics: const BouncingScrollPhysics(),
-          itemCount: 20,
+          itemCount: stories?.length ?? 0,
           itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Container(
-                width: 70.w,
-                height: 70.h,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/profile_image/post2.jpg'),
-                    fit: BoxFit.contain,
-                  ),
+            if (index == 0) {
+              // Add Story button
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const AddStoryScreen()),
+                  );
+                },
+                child: const CircleAvatar(
+                  child: Icon(Icons.add),
                 ),
-              ),
-            );
+              );
+            }
+            // Existing story items
+            return const StoryItem();
           },
         ),
       ),
     );
+  }
+}
+
+class StoryItem extends StatelessWidget {
+  const StoryItem({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
