@@ -1,55 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../data/models/story_model.dart';
-import '../screens/add_story_screen.dart';
-
-class StorySectionWidget extends StatefulWidget {
+class StorySectionWidget extends StatelessWidget {
   const StorySectionWidget({super.key});
-
-  @override
-  State<StorySectionWidget> createState() => _StorySectionWidgetState();
-}
-
-class _StorySectionWidgetState extends State<StorySectionWidget> {
-  final List<StoryModel>? stories = [];
 
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: SizedBox(
-        height: 100,
+        height: 70.h,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: stories?.length ?? 0,
+          physics: const BouncingScrollPhysics(),
+          itemCount: 20,
           itemBuilder: (context, index) {
-            if (index == 0) {
-              // Add Story button
-              return GestureDetector(
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => const AddStoryScreen()),
-                  );
+                  if (index == 0) {}
                 },
-                child: const CircleAvatar(
-                  child: Icon(Icons.add),
+                child: Stack(
+                  children: [
+                    Container(
+                      width: 70.w,
+                      height: 70.h,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: AssetImage(
+                              'assets/images/profile_image/post2.jpg'),
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
+                    if (index == 0) 
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: Container(
+                          width: 20.w,
+                          height: 20.h,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 2.w,
+                            ),
+                          ),
+                          child: const Center(
+                            child: Icon(
+                              Icons.add,
+                              size: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
-              );
-            }
-            // Existing story items
-            return const StoryItem();
+              ),
+            );
           },
         ),
       ),
     );
-  }
-}
-
-class StoryItem extends StatelessWidget {
-  const StoryItem({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }
