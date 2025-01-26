@@ -23,7 +23,7 @@ class StorySectionWidget extends StatelessWidget {
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: GestureDetector(
+              child: InkWell(
                 onTap: () {
                   if (index == 0) {
                     showModalBottomSheet(
