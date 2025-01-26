@@ -41,6 +41,8 @@
     "save":"حفظ",
     "be_the_first_to_comment_on_this_post.":"كن أول من يعلق على هذا المنشور.",
     "delete_post":"حذف المنشور",
-    "are_you_sure_you_want_to_delete_this_post":"هل أنت متأكد أنك تريد حذف هذا المنشور؟"
-    
+    "are_you_sure_you_want_to_delete_this_post":"هل أنت متأكد أنك تريد حذف هذا المنشور؟",
+    "add_story":"اضافة قصة",    
+    "take_photo_or_video":"إضافة صورة / فيديو",
+    "choose_from_gallery":"اختر من المعرض"
 }

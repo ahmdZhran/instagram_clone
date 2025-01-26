@@ -7,6 +7,7 @@ abstract class HomeRepository {
   Future<void> addComment(String postId, CommentModel commentEntity);
   Future<Stream<List<CommentModel>>> fetchComments(String postId);
   Future<void> deleteComment(String postId, String commentId);
-  Future<void> editComment(String postId, String commentId, String updatedComment);
+  Future<void> editComment(
+      String postId, String commentId, String updatedComment);
   Future<void> deletePost(String postId);
 }

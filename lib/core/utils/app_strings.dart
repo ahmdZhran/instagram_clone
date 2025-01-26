@@ -30,6 +30,10 @@ abstract class AppStrings {
   static const String deletePost = "delete_post";
   static const String areYouSureYouWantToDeleteThisPost =
       "are_you_sure_you_want_to_delete_this_post";
+  static const String addStory = "add_story";
+  static const String takePhotoOrVideo = "take_photo_or_video";
+  static const String chooseFromGallery = "choose_from_gallery";
+
   // Reset Password View
   static const String resetPassword = 'Reset Password';
   static const String pleaseEnterYourEmail =
