@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -7,9 +9,41 @@ import 'package:instagram_clone/core/utils/custom_text_style.dart';
 
 import '../../../../core/helper/image_service.dart';
 import '../../../../core/utils/app_strings.dart';
+import '../screens/story_screen_privew.dart';
 
-class StorySectionWidget extends StatelessWidget {
+class StorySectionWidget extends StatefulWidget {
   const StorySectionWidget({super.key});
+
+  @override
+  State<StorySectionWidget> createState() => _StorySectionWidgetState();
+}
+
+class _StorySectionWidgetState extends State<StorySectionWidget> {
+  Future<void> _pickAndNavigate(ImageSource source) async {
+    context.pop();
+
+    try {
+      final pickedImage = await ImagePickerService().pickImage(source);
+
+      if (pickedImage == null) {
+        log("No image selected");
+        return;
+      }
+
+      log("Image selected successfully");
+
+      if (!mounted) return;
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => StoryPreviewScreen(selectedImage: pickedImage),
+        ),
+      );
+    } catch (e) {
+      log("Error picking image: $e");
+    
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,25 +79,19 @@ class StorySectionWidget extends StatelessWidget {
                               ),
                               const Gap(10),
                               ListTile(
-                                  leading: const Icon(Icons.camera_alt),
-                                  title: Text(
-                                    context
-                                        .translate(AppStrings.takePhotoOrVideo),
-                                  ),
-                                  onTap: () async {
-                                    context.pop();
-                                    ImagePickerService()
-                                        .pickImage(ImageSource.camera);
-                                  }),
+                                leading: const Icon(Icons.camera_alt),
+                                title: Text(
+                                  context
+                                      .translate(AppStrings.takePhotoOrVideo),
+                                ),
+                                onTap: () => _pickAndNavigate(ImageSource.camera),
+                              ),
                               ListTile(
                                 leading: const Icon(Icons.photo),
-                                title: Text(context
-                                    .translate(AppStrings.chooseFromGallery)),
-                                onTap: () async {
-                                  context.pop();
-                                  ImagePickerService()
-                                      .pickImage(ImageSource.gallery);
-                                },
+                                title: Text(
+                                  context.translate(AppStrings.chooseFromGallery),
+                                ),
+                                onTap: () => _pickAndNavigate(ImageSource.gallery),
                               ),
                             ],
                           ),
@@ -95,7 +123,8 @@ class StorySectionWidget extends StatelessWidget {
                         shape: BoxShape.circle,
                         image: DecorationImage(
                           image: AssetImage(
-                              'assets/images/profile_image/post2.jpg'),
+                            'assets/images/profile_image/post2.jpg',
+                          ),
                           fit: BoxFit.contain,
                         ),
                       ),
