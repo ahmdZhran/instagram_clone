@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class StoryPreviewScreen extends StatefulWidget {
-  final Uint8List selectedImage;
+  final Uint8List? selectedImage;
 
   const StoryPreviewScreen({super.key, required this.selectedImage});
 
@@ -15,15 +17,15 @@ class _StoryPreviewScreenState extends State<StoryPreviewScreen> {
   final List<StoryElement> _storyElements = [];
 
   void _addText() {
-    // Show text input dialog
     showDialog(
       context: context,
       builder: (context) => TextInputDialog(
         onTextAdded: (text) {
           setState(() {
-            _storyElements
-                .add(StoryElement(type: StoryElementType.text, content: text));
-          },);
+            _storyElements.add(
+              StoryElement(type: StoryElementType.text, content: text),
+            );
+          });
         },
       ),
     );
@@ -37,7 +39,8 @@ class _StoryPreviewScreenState extends State<StoryPreviewScreen> {
         onStickerSelected: (sticker) {
           setState(() {
             _storyElements.add(
-                StoryElement(type: StoryElementType.sticker, content: sticker));
+              StoryElement(type: StoryElementType.sticker, content: sticker),
+            );
           });
         },
       ),
@@ -51,6 +54,8 @@ class _StoryPreviewScreenState extends State<StoryPreviewScreen> {
 
   @override
   Widget build(BuildContext context) {
+    log("Selected Image: ${widget.selectedImage}"); // Debugging
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Story Preview'),
@@ -64,12 +69,19 @@ class _StoryPreviewScreenState extends State<StoryPreviewScreen> {
       body: Stack(
         children: [
           // Background image
-          Image.memory(
-            widget.selectedImage,
-            width: double.infinity,
-            height: double.infinity,
-            fit: BoxFit.cover,
-          ),
+          widget.selectedImage != null
+              ? Image.memory(
+                  widget.selectedImage!,
+                  width: double.infinity,
+                  height: double.infinity,
+                  fit: BoxFit.cover,
+                )
+              : Image.asset(
+                  'assets/images/default_story_placeholder.png', // Fallback image
+                  width: double.infinity,
+                  height: double.infinity,
+                  fit: BoxFit.cover,
+                ),
 
           ..._storyElements
               .map((element) => Positioned(child: _buildStoryElement(element))),
