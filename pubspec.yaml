@@ -71,6 +71,7 @@ dependencies:
   shimmer: ^3.0.0
   skeletonizer: ^1.4.2
   sliver_tools: ^0.2.12
+  story_view: ^0.16.5
   timeago: ^3.7.0
   transparent_image: ^2.0.1
 dev_dependencies:

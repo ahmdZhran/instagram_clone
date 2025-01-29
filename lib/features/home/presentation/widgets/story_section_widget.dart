@@ -7,6 +7,7 @@ import 'package:instagram_clone/core/utils/custom_text_style.dart';
 
 import '../../../../core/helper/image_service.dart';
 import '../../../../core/utils/app_strings.dart';
+import '../screens/story_screen_privew.dart';
 
 class StorySectionWidget extends StatelessWidget {
   const StorySectionWidget({super.key});
@@ -52,8 +53,18 @@ class StorySectionWidget extends StatelessWidget {
                                   ),
                                   onTap: () async {
                                     context.pop();
-                                    ImagePickerService()
-                                        .pickImage(ImageSource.camera);
+                                    final pickedImage =
+                                        await ImagePickerService()
+                                            .pickImage(ImageSource.camera);
+                                    if (pickedImage != null) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  StoryPreviewScreen(
+                                                      selectedImage:
+                                                          pickedImage)));
+                                    }
                                   }),
                               ListTile(
                                 leading: const Icon(Icons.photo),
@@ -61,8 +72,19 @@ class StorySectionWidget extends StatelessWidget {
                                     .translate(AppStrings.chooseFromGallery)),
                                 onTap: () async {
                                   context.pop();
-                                  ImagePickerService()
+                                  final pickedImage = await ImagePickerService()
                                       .pickImage(ImageSource.gallery);
+
+                                  if (pickedImage != null) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            StoryPreviewScreen(
+                                                selectedImage: pickedImage),
+                                      ),
+                                    );
+                                  }
                                 },
                               ),
                             ],
@@ -95,7 +117,8 @@ class StorySectionWidget extends StatelessWidget {
                         shape: BoxShape.circle,
                         image: DecorationImage(
                           image: AssetImage(
-                              'assets/images/profile_image/post2.jpg'),
+                            'assets/images/profile_image/post2.jpg',
+                          ),
                           fit: BoxFit.contain,
                         ),
                       ),
