@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 class StoryPreviewScreen extends StatefulWidget {
   final Uint8List? selectedImage;
@@ -10,10 +11,10 @@ class StoryPreviewScreen extends StatefulWidget {
   const StoryPreviewScreen({super.key, required this.selectedImage});
 
   @override
-  _StoryPreviewScreenState createState() => _StoryPreviewScreenState();
+  StoryPreviewScreenState createState() => StoryPreviewScreenState();
 }
 
-class _StoryPreviewScreenState extends State<StoryPreviewScreen> {
+class StoryPreviewScreenState extends State<StoryPreviewScreen> {
   final List<StoryElement> _storyElements = [];
 
   void _addText() {
@@ -32,7 +33,6 @@ class _StoryPreviewScreenState extends State<StoryPreviewScreen> {
   }
 
   void _addSticker() {
-    // Show sticker selection bottom sheet
     showModalBottomSheet(
       context: context,
       builder: (context) => StickerSelectionSheet(
@@ -68,21 +68,12 @@ class _StoryPreviewScreenState extends State<StoryPreviewScreen> {
       ),
       body: Stack(
         children: [
-          // Background image
-          widget.selectedImage != null
-              ? Image.memory(
+              Image.memory(
                   widget.selectedImage!,
                   width: double.infinity,
                   height: double.infinity,
                   fit: BoxFit.cover,
-                )
-              : Image.asset(
-                  'assets/images/default_story_placeholder.png', // Fallback image
-                  width: double.infinity,
-                  height: double.infinity,
-                  fit: BoxFit.cover,
                 ),
-
           ..._storyElements
               .map((element) => Positioned(child: _buildStoryElement(element))),
         ],
@@ -163,9 +154,9 @@ class StickerSelectionSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final stickerPaths = [
-      'assets/stickers/happy.png',
-      'assets/stickers/sad.png',
-      'assets/stickers/love.png',
+      'assets/svg/just_follow.svg',
+      'assets/svg/just_follow.svg',
+      'assets/svg/just_follow.svg',
     ];
 
     return SizedBox(
@@ -181,7 +172,7 @@ class StickerSelectionSheet extends StatelessWidget {
               onStickerSelected(stickerPaths[index]);
               Navigator.of(context).pop();
             },
-            child: Image.asset(stickerPaths[index]),
+            child: SvgPicture.asset(stickerPaths[index]),
           );
         },
       ),
