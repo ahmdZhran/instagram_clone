@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 
 abstract class AppColors {
   static const blackColor = Color(0xff000000);
-  static const blueColor = Color.fromARGB(255, 22, 95, 164);
+  static const primaryColor = Color.fromARGB(255, 22, 95, 164);
+  static const moreDarkBlueColor = Color.fromARGB(255, 13, 52, 88);
+  static const darkBlueColor = Color.fromARGB(255, 10, 59, 105);
   static const greyColor = Color(0xff999999);
   static const Color deepGrey = Color.fromARGB(255, 44, 44, 46);
-  static const Color whiteColor = Color(0xffF9F9F9);
+  static const Color lightGrey = Color(0xffB2B2B2);
+  static const Color moreLightGrey = Color(0xffeaeaeb);
+  static const Color darkGrey = Color(0x0ffafafa);
+  // static const Color whiteColor = Color(0xffF9F9F9);
   static const Color redColor = Color.fromARGB(255, 229, 35, 21);
-  static const Color lightModeColor = Color(0xffF5F5F5);
+  static const Color lightThemeColor = Color(0xffF5F5F5);
   static const Color darkThemColor = Color(0xff121212);
 }

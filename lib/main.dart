@@ -1,30 +1,26 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'core/router/app_router.dart';
+import 'my_bloc_observer.dart';
 import 'app/instagram_app.dart';
+import 'core/helper/shared_pref_helper.dart';
+import 'core/utils/injection_container.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  final sharedPrefHelper = SharedPrefHelper();
+  await sharedPrefHelper.init();
+
+  Bloc.observer = MyBlocObserver();
+  await Future.wait([
+    InjectionContainer().init(),
+    Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform),
+  ]);
   runApp(
-    EasyLocalization(
-      supportedLocales: const [
-        Locale('en', 'US'),
-        Locale('ar', 'SA'),
-      ],
-      path: 'assets/translations',
-      startLocale: const Locale('en', 'US'),
-      child: const InstagramApp(),
+    InstagramApp(
+      appRouter: AppRouter(),
     ),
   );
-}
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
-  }
 }
