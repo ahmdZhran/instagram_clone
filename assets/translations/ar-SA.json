@@ -1,4 +1,12 @@
 {
-    "name":"الاسم",
-    "login": "تسجيل الدخول"
+    "posts":"منشور",
+    "followers": "متابعين",
+    "following":"متابع",
+    "edit_profile":"تعديل الملف الشخصي",
+    "share_profile":"مشاركة الملف الشخصي",
+    "arabic":"عربي",
+    "english":"انجليزي",
+    "logout":"تسجيل الخروج",
+    "dark_mode":"الوضع الليلي",
+    "light_mode":"الوضع المضئ"
 }
