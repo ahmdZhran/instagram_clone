@@ -18,6 +18,15 @@
   <a href="https://github.com/ahmdZhran/instagram_clone/stargazers">
     <img src="https://img.shields.io/github/stars/ahmdZhran/instagram_clone" alt="stars" />
   </a>
+   
+## 🚧 Development Branch
+
+[![Development Branch](https://img.shields.io/badge/Branch-Development-blue)](https://github.com/ahmdZhran/instagram_clone/tree/development)
+
+This project is currently under active development.  
+All new features, updates, and experimental work are being merged into the [`development` branch](https://github.com/ahmdZhran/instagram_clone/tree/development).
+
+Feel free to check it out and follow the latest progress!
 
 </p>
 
