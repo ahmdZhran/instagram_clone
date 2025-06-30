@@ -8,7 +8,7 @@ abstract class AppStrings {
   static const String headInstagramTitle = 'Instagram';
   static const String createYourEmail = 'Create your email';
   static const String welcomeBack = 'Welcome Back!';
-  static const String username = "user_name";
+  static const String username = "username";
   static const String name = "name";
   static const String bio = 'bio';
   static const String emailAddress = "Email Address";
@@ -24,12 +24,11 @@ abstract class AppStrings {
   static const String weSentVerifyEmail = "We've sent a verification email.";
   static const String cancel = "cancel";
   static const String back = "Back";
-
   // Home Strings
   static const String addYourComment = "add_your_comment";
   static const String deletePost = "delete_post";
   static const String areYouSureYouWantToDeleteThisPost =
-      "are_you_sure_you_want_to_delete_this_post";
+        "are_you_sure_you_want_to_delete_this_post";
   static const String addStory = "add_story";
   static const String takePhotoOrVideo = "take_photo_or_video";
   static const String chooseFromGallery = "choose_from_gallery";
