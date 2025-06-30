@@ -49,6 +49,14 @@ class _PickImagePostWidgetState extends State<PickImagePostWidget> {
   }
 
   void _loadAlbums() async {
+    // If albums are already loaded, don't reload
+    if (_albums.isNotEmpty && _currentAlbum != null) {
+      setState(() {
+        _isLoadingAlbums = false;
+      });
+      return;
+    }
+
     setState(() {
       _isLoadingAlbums = true;
     });
