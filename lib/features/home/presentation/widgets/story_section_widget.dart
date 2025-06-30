@@ -41,7 +41,6 @@ class _StorySectionWidgetState extends State<StorySectionWidget> {
       );
     } catch (e) {
       log("Error picking image: $e");
-    
     }
   }
 
@@ -84,14 +83,17 @@ class _StorySectionWidgetState extends State<StorySectionWidget> {
                                   context
                                       .translate(AppStrings.takePhotoOrVideo),
                                 ),
-                                onTap: () => _pickAndNavigate(ImageSource.camera),
+                                onTap: () =>
+                                    _pickAndNavigate(ImageSource.camera),
                               ),
                               ListTile(
                                 leading: const Icon(Icons.photo),
                                 title: Text(
-                                  context.translate(AppStrings.chooseFromGallery),
+                                  context
+                                      .translate(AppStrings.chooseFromGallery),
                                 ),
-                                onTap: () => _pickAndNavigate(ImageSource.gallery),
+                                onTap: () =>
+                                    _pickAndNavigate(ImageSource.gallery),
                               ),
                             ],
                           ),

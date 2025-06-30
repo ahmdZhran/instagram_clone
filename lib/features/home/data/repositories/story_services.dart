@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/features/home/data/models/story_model.dart';
 
 class StoryService {
@@ -30,9 +29,12 @@ class StoryService {
   }
 
   Future<List<StoryModel>> fetchStories() async {
-    QuerySnapshot snapshot = await _firestore.collection('stories')
+    QuerySnapshot snapshot = await _firestore
+        .collection('stories')
         .orderBy('timestamp', descending: true)
         .get();
-    return snapshot.docs.map((doc) => StoryModel.fromMap(doc.data() as Map<String, dynamic>)).toList();
+    return snapshot.docs
+        .map((doc) => StoryModel.fromMap(doc.data() as Map<String, dynamic>))
+        .toList();
   }
 }

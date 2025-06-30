@@ -1,9 +1,11 @@
 import 'dart:developer';
+import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class StoryPreviewScreen extends StatefulWidget {
   final Uint8List? selectedImage;
@@ -16,6 +18,14 @@ class StoryPreviewScreen extends StatefulWidget {
 
 class StoryPreviewScreenState extends State<StoryPreviewScreen> {
   final List<StoryElement> _storyElements = [];
+  final TextEditingController _captionController = TextEditingController();
+  // final StoryCubit _storyCubit = StoryCubit.getInstance();
+
+  @override
+  void dispose() {
+    _captionController.dispose();
+    super.dispose();
+  }
 
   void _addText() {
     showDialog(
@@ -47,17 +57,59 @@ class StoryPreviewScreenState extends State<StoryPreviewScreen> {
     );
   }
 
-  void _shareStory() {
-    // Implement story sharing logic
-    Navigator.of(context).pop(_storyElements);
+  void _showCaptionDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Add Caption'),
+        content: TextField(
+          controller: _captionController,
+          decoration: const InputDecoration(
+            hintText: 'Write a caption...',
+            border: OutlineInputBorder(),
+          ),
+          maxLines: 3,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text('Done'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _shareStory() async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please login to share stories')),
+      );
+      return;
+    }
+
+    if (widget.selectedImage == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('No image selected')),
+      );
+      return;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    log("Selected Image: ${widget.selectedImage}"); // Debugging
-
+    log("Selected Image: ${widget.selectedImage}");
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
         title: const Text('Story Preview'),
         actions: [
           TextButton(
@@ -68,27 +120,51 @@ class StoryPreviewScreenState extends State<StoryPreviewScreen> {
       ),
       body: Stack(
         children: [
-              Image.memory(
-                  widget.selectedImage!,
-                  width: double.infinity,
-                  height: double.infinity,
-                  fit: BoxFit.cover,
-                ),
+          if (widget.selectedImage != null)
+            Image.memory(
+              widget.selectedImage!,
+              width: double.infinity,
+              height: double.infinity,
+              fit: BoxFit.cover,
+            ),
           ..._storyElements
               .map((element) => Positioned(child: _buildStoryElement(element))),
+          if (_captionController.text.isNotEmpty)
+            Positioned(
+              bottom: 100,
+              left: 20,
+              right: 20,
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.7),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  _captionController.text,
+                  style: const TextStyle(color: Colors.white),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
+        color: Colors.black,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              icon: const Icon(Icons.text_fields),
+              icon: const Icon(Icons.text_fields, color: Colors.white),
               onPressed: _addText,
             ),
             IconButton(
-              icon: const Icon(Icons.emoji_emotions),
+              icon: const Icon(Icons.emoji_emotions, color: Colors.white),
               onPressed: _addSticker,
+            ),
+            IconButton(
+              icon: const Icon(Icons.edit, color: Colors.white),
+              onPressed: _showCaptionDialog,
             ),
           ],
         ),
@@ -99,22 +175,34 @@ class StoryPreviewScreenState extends State<StoryPreviewScreen> {
   Widget _buildStoryElement(StoryElement element) {
     switch (element.type) {
       case StoryElementType.text:
-        return Text(
-          element.content,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24.sp,
-            shadows: const [
-              Shadow(
-                blurRadius: 10.0,
-                color: Colors.black,
-                offset: Offset(2.0, 2.0),
-              ),
-            ],
+        return Positioned(
+          top: 100,
+          left: 20,
+          child: Text(
+            element.content,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24.sp,
+              shadows: const [
+                Shadow(
+                  blurRadius: 10.0,
+                  color: Colors.black,
+                  offset: Offset(2.0, 2.0),
+                ),
+              ],
+            ),
           ),
         );
       case StoryElementType.sticker:
-        return Image.asset(element.content, width: 100.w, height: 100.h);
+        return Positioned(
+          top: 200,
+          left: 20,
+          child: SvgPicture.asset(
+            element.content,
+            width: 100.w,
+            height: 100.h,
+          ),
+        );
     }
   }
 }

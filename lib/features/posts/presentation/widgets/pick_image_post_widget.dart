@@ -86,6 +86,7 @@ class _PickImagePostWidgetState extends State<PickImagePostWidget> {
         _selectedMedias.removeWhere(
             (element) => element.assetEntity.id == media.assetEntity.id);
       } else {
+        _selectedMedias.clear();
         _selectedMedias.add(media);
       }
       widget.onSelectionChanged(List<MediaModel>.from(_selectedMedias));

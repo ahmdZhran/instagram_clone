@@ -16,8 +16,8 @@ class AddPostScreen extends StatefulWidget {
 }
 
 class _AddPostScreenState extends State<AddPostScreen> {
-  List<MediaModel> selectedMedias = [];
-  bool hasImages = false;
+  MediaModel? selectedMedia;
+  bool hasImage = false;
   @override
   void initState() {
     PostsCubit.getInstance();
@@ -30,7 +30,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
       appBar: AppBar(
         title: Text(context.translate(AppStrings.addPost)),
         actions: [
-          hasImages
+          hasImage
               ? IconButton(
                   icon: Icon(
                     context.isEnglish
@@ -39,10 +39,12 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     color: AppColors.primaryColor,
                   ),
                   onPressed: () {
-                    context.pushNamed(
-                      Routes.addDescriptionToPost,
-                      arguments: selectedMedias,
-                    );
+                    if (selectedMedia != null) {
+                      context.pushNamed(
+                        Routes.addDescriptionToPost,
+                        arguments: [selectedMedia!],
+                      );
+                    }
                   },
                 )
               : Padding(
@@ -57,11 +59,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
         ],
       ),
       body: PickImagePostWidget(
-        selectedMedias: selectedMedias,
+        selectedMedias: selectedMedia != null ? [selectedMedia!] : [],
         onSelectionChanged: (selected) {
           setState(() {
-            selectedMedias = selected;
-            hasImages = selectedMedias.isNotEmpty;
+            selectedMedia = selected.isNotEmpty ? selected.first : null;
+            hasImage = selectedMedia != null;
           });
         },
       ),
