@@ -69,7 +69,7 @@ class _PickerImageInteractionWidgetState
       return SizedBox(
         height: 350.h,
         child: Center(
-          child: Text(context.translate(AppStrings.sleetedYourPost)),
+          child: Text(context.translate(AppStrings.selectYourPost)),
         ),
       );
     }

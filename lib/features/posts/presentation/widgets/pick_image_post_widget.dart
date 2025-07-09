@@ -49,7 +49,6 @@ class _PickImagePostWidgetState extends State<PickImagePostWidget> {
   }
 
   void _loadAlbums() async {
-    // If albums are already loaded, don't reload
     if (_albums.isNotEmpty && _currentAlbum != null) {
       setState(() {
         _isLoadingAlbums = false;
@@ -61,7 +60,6 @@ class _PickImagePostWidgetState extends State<PickImagePostWidget> {
       _isLoadingAlbums = true;
     });
 
-    // Use compute to move heavy operation off main thread
     try {
       List<AssetPathEntity> albums =
           await Future.microtask(() => fetchAlbums());
@@ -71,7 +69,6 @@ class _PickImagePostWidgetState extends State<PickImagePostWidget> {
           _albums = albums;
           _isLoadingAlbums = false;
         });
-        // Load medias after a short delay to prevent blocking UI
         Future.delayed(const Duration(milliseconds: 100), () {
           if (mounted) {
             _loadMedias();
@@ -101,7 +98,6 @@ class _PickImagePostWidgetState extends State<PickImagePostWidget> {
         isLoadingMedias = true;
       });
 
-      // Use microtask to prevent blocking main thread
       List<MediaModel> medias = await Future.microtask(
           () => fetchMedias(album: _currentAlbum!, page: _currentPage));
 
@@ -183,7 +179,7 @@ class _PickImagePostWidgetState extends State<PickImagePostWidget> {
               : SizedBox(
                   height: 350.h,
                   child: Center(
-                    child: Text(context.translate(AppStrings.sleetedYourPost)),
+                    child: Text(context.translate(AppStrings.selectYourPost)),
                   ),
                 ),
           SizedBox(

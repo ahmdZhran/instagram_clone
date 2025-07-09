@@ -62,7 +62,7 @@ abstract class AppStrings {
   static const String newPost = "new_post";
   static const String post = "post";
   static const String reset = "reset";
-  static const String sleetedYourPost = "select_your_post_below";
+  static const String selectYourPost = "select_your_post_below";
   static const String addDescription = "add_description";
   static const String yourPostUploaded = "your_post_uploaded_successfully";
   static const String somethingWentWrong = "something_went_wrong";
@@ -83,4 +83,10 @@ abstract class AppStrings {
   static const String save = "save";
   static const String beTheFirstToComment =
       "be_the_first_to_comment_on_this_post";
+
+  // reel strings
+  static const String reel = "reel";
+  static const String addReel = "add_reel";
+  static const String addDescriptionToReel = "add_description_to_reel";
+  static const String selectYourReel = "select_your_reel";
 }

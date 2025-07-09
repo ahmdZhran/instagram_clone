@@ -44,5 +44,9 @@
     "are_you_sure_you_want_to_delete_this_post":"هل أنت متأكد أنك تريد حذف هذا المنشور؟",
     "add_story":"اضافة قصة",    
     "take_photo_or_video":"إضافة صورة / فيديو",
-    "choose_from_gallery":"اختر من المعرض"
+    "choose_from_gallery":"اختر من المعرض",
+    "add_reel":"إضافة فيديو فصير",
+    "add_description_to_reel":"أضف وصفًا للفيديو القصير",
+    "reel":"فيديو قصير",
+    "select_your_reel":"اختر الفيديو القصير الخاص بك"
 }
