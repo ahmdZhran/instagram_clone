@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/router/routes.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
+import 'package:instagram_clone/core/widgets/custom_text_widget.dart';
 import 'package:instagram_clone/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:instagram_clone/features/posts/presentation/screens/pick_video_reel_widget.dart';
 import '../../../../core/utils/app_colors.dart';
@@ -81,8 +82,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     duration: const Duration(milliseconds: 300),
                     curve: Curves.easeInOut,
                   ),
-                  child: Text(
-                    context.translate(AppStrings.post),
+                  child: CustomTextWidget(
+                    text: AppStrings.post,
                     style: TextStyle(
                       color: _currentPage == 0
                           ? AppColors.primaryColor
@@ -99,8 +100,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     duration: const Duration(milliseconds: 300),
                     curve: Curves.easeInOut,
                   ),
-                  child: Text(
-                    context.translate(AppStrings.reel),
+                  child: CustomTextWidget(
+                    text: AppStrings.reel,
                     style: TextStyle(
                       color: _currentPage == 1
                           ? AppColors.primaryColor
@@ -152,4 +153,3 @@ class _AddPostScreenState extends State<AddPostScreen> {
     super.dispose();
   }
 }
-
