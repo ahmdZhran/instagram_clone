@@ -137,7 +137,7 @@ class StoryPreviewScreenState extends State<StoryPreviewScreen> {
               child: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.7),
+                  color: Colors.black.withAlpha((0.7 * 255).toInt()),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(

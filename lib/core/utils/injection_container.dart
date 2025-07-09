@@ -3,17 +3,19 @@ import 'package:instagram_clone/features/explore/explore_di.dart';
 import 'package:instagram_clone/features/home/home_di.dart';
 import 'package:instagram_clone/features/posts/post_di.dart';
 import '../../features/profile/profile_di.dart';
-
 import '../../features/auth/auth_di.dart';
 
 final sl = GetIt.instance;
 
 class InjectionContainer {
   Future<void> init() async {
-    AuthDI().init();
-    ProfileDI().init();
-    AddPostDI().init();
-    ExploreDI().init();
-    HomeDI().init();
+    // Initialize DI containers in parallel to reduce blocking
+    await Future.wait([
+      AuthDI().init(),
+      ProfileDI().init(),
+      AddPostDI().init(),
+      ExploreDI().init(),
+      HomeDI().init(),
+    ]);
   }
 }

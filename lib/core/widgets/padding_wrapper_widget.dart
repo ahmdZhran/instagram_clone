@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 
-//TODO remove this and just use appPaddingAndMargne spacer 
 
 class PaddingWrapperWidgetTop extends StatelessWidget {
   final Widget child;

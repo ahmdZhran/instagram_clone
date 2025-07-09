@@ -31,17 +31,14 @@ class _SearchForUserWidgetState extends State<SearchForUserWidget> {
   }
 
   void _onSearchChanged(String value) {
-    // Cancel previous timer
     _debounceTimer?.cancel();
 
     username = value.trim();
 
-    // If search is empty, clear results
     if (username == null || username!.isEmpty) {
       return;
     }
 
-    // Set new timer for debouncing (500ms delay)
     _debounceTimer = Timer(const Duration(milliseconds: 500), () {
       if (username != null && username!.isNotEmpty) {
         _exploreCubit.searchUsers(username!);
@@ -74,9 +71,7 @@ class _SearchForUserWidgetState extends State<SearchForUserWidget> {
                   ),
                 )
               else if (state is SearchUserSuccess)
-                if (username == null || username!.isEmpty)
-                  const SizedBox.shrink()
-                else if (state.users.isEmpty)
+                if (state.users.isEmpty)
                   Center(
                     child: Text(
                       context.translate(AppStrings.noUsersFound),

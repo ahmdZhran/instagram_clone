@@ -13,7 +13,7 @@ class ImagePickerService {
       final Uint8List bytes = await file.readAsBytes();
       return bytes;
     } catch (e) {
-      print('Error picking image: $e');
+      ('Error picking image: $e');
       return null;
     }
   }

@@ -23,7 +23,7 @@ class StoryService {
 
       return downloadUrl;
     } catch (e) {
-      print('Error uploading story: $e');
+      ('Error uploading story: $e');
       return null;
     }
   }

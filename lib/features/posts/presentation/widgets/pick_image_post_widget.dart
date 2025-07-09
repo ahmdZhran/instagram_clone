@@ -61,33 +61,62 @@ class _PickImagePostWidgetState extends State<PickImagePostWidget> {
       _isLoadingAlbums = true;
     });
 
-    List<AssetPathEntity> albums = await fetchAlbums();
-    if (albums.isNotEmpty) {
-      setState(() {
-        _currentAlbum = albums.first;
-        _albums = albums;
-        _isLoadingAlbums = false;
-      });
-      _loadMedias();
-    } else {
-      setState(() {
-        _isLoadingAlbums = false;
-      });
+    // Use compute to move heavy operation off main thread
+    try {
+      List<AssetPathEntity> albums =
+          await Future.microtask(() => fetchAlbums());
+      if (albums.isNotEmpty && mounted) {
+        setState(() {
+          _currentAlbum = albums.first;
+          _albums = albums;
+          _isLoadingAlbums = false;
+        });
+        // Load medias after a short delay to prevent blocking UI
+        Future.delayed(const Duration(milliseconds: 100), () {
+          if (mounted) {
+            _loadMedias();
+          }
+        });
+      } else if (mounted) {
+        setState(() {
+          _isLoadingAlbums = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isLoadingAlbums = false;
+        });
+      }
     }
   }
 
   void _loadMedias() async {
+    if (_currentAlbum == null) return;
+
     _lastPage = _currentPage;
-    if (_currentAlbum != null) {
+
+    try {
       setState(() {
         isLoadingMedias = true;
       });
-      List<MediaModel> medias =
-          await fetchMedias(album: _currentAlbum!, page: _currentPage);
-      setState(() {
-        _medias.addAll(medias);
-        isLoadingMedias = false;
-      });
+
+      // Use microtask to prevent blocking main thread
+      List<MediaModel> medias = await Future.microtask(
+          () => fetchMedias(album: _currentAlbum!, page: _currentPage));
+
+      if (mounted) {
+        setState(() {
+          _medias.addAll(medias);
+          isLoadingMedias = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          isLoadingMedias = false;
+        });
+      }
     }
   }
 
