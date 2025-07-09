@@ -61,10 +61,40 @@ class _CustomFormSignUpState extends State<CustomFormSignUp> {
                     child: Column(
                       children: [
                         signUpCubit.profileImage != null
-                            ? CircleAvatar(
-                                radius: 50,
-                                backgroundImage:
-                                    MemoryImage(signUpCubit.profileImage!),
+                            ? Container(
+                                padding: const EdgeInsets.all(
+                                    4), // Space for the gradient border
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Colors.purple,
+                                      Colors.pink,
+                                      Colors.orange
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                ),
+                                child: Container(
+                                  padding: const EdgeInsets.all(
+                                      2), // Inner white border
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white,
+                                  ),
+                                  child: ClipOval(
+                                    child: SizedBox(
+                                      width: 96, // 48 radius * 2
+                                      height: 96,
+                                      child: Image.memory(
+                                        signUpCubit.profileImage!,
+                                        fit: BoxFit
+                                            .cover, // Ensures the image covers the entire circle
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               )
                             : CircleAvatar(
                                 radius: 50,

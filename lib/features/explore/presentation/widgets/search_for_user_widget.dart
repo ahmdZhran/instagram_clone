@@ -10,6 +10,7 @@ import '../../../../core/helper/extensions.dart';
 import '../cubit/explore_cubit.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
+import 'dart:async';
 
 class SearchForUserWidget extends StatefulWidget {
   const SearchForUserWidget({super.key});
@@ -21,6 +22,29 @@ class SearchForUserWidget extends StatefulWidget {
 class _SearchForUserWidgetState extends State<SearchForUserWidget> {
   final ExploreCubit _exploreCubit = ExploreCubit.getInstance();
   String? username;
+  Timer? _debounceTimer;
+
+  @override
+  void dispose() {
+    _debounceTimer?.cancel();
+    super.dispose();
+  }
+
+  void _onSearchChanged(String value) {
+    _debounceTimer?.cancel();
+
+    username = value.trim();
+
+    if (username == null || username!.isEmpty) {
+      return;
+    }
+
+    _debounceTimer = Timer(const Duration(milliseconds: 500), () {
+      if (username != null && username!.isNotEmpty) {
+        _exploreCubit.searchUsers(username!);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +56,7 @@ class _SearchForUserWidgetState extends State<SearchForUserWidget> {
             children: [
               CustomTextFormField(
                 fillColor: context.isDart ? null : AppColors.moreLightGrey,
-                onChanged: (value) {
-                  username = value.trim();
-                  if (username != null && username!.isNotEmpty) {
-                    _exploreCubit.searchUsers(username!);
-                  }
-                },
+                onChanged: _onSearchChanged,
                 hintText: context.translate(AppStrings.searchForUser),
                 prefixIcon: const Icon(
                   Iconsax.search_normal,
@@ -52,9 +71,7 @@ class _SearchForUserWidgetState extends State<SearchForUserWidget> {
                   ),
                 )
               else if (state is SearchUserSuccess)
-                if (username == null || username!.isEmpty)
-                  const SizedBox.shrink()
-                else if (state.users.isEmpty)
+                if (state.users.isEmpty)
                   Center(
                     child: Text(
                       context.translate(AppStrings.noUsersFound),

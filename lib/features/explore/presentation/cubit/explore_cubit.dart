@@ -11,7 +11,6 @@ class ExploreCubit extends Cubit<ExploreState> {
   final ExploreRepository _exploreRepository;
 
   Future<void> searchUsers(String username) async {
-  
     emit(SearchUserLoading());
     try {
       final users = await _exploreRepository.searchUsers(username);
@@ -21,8 +20,7 @@ class ExploreCubit extends Cubit<ExploreState> {
     }
   }
 
-
-static const String _tag = "explore_instance";
+  static const String _tag = "explore_instance";
 
   static ExploreCubit getInstance() {
     final isRegistered =
@@ -45,5 +43,4 @@ static const String _tag = "explore_instance";
       exploreDI.unregister<ExploreCubit>(instanceName: _tag);
     }
   }
-
 }

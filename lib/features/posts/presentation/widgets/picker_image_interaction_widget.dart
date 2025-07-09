@@ -64,77 +64,81 @@ class _PickerImageInteractionWidgetState
 
   @override
   Widget build(BuildContext context) {
+    // Only show the first selected image since we only allow one selection
+    if (widget._selectedMedias.isEmpty) {
+      return SizedBox(
+        height: 350.h,
+        child: Center(
+          child: Text(context.translate(AppStrings.sleetedYourPost)),
+        ),
+      );
+    }
+
     return SizedBox(
       height: 350.h,
-      child: PageView.builder(
-        itemCount: widget._selectedMedias.length,
-        itemBuilder: (context, index) {
-          return Center(
-            child: Stack(
-              children: [
-                GestureDetector(
-                  onScaleStart: (details) {
-                    _previousScale = _scale;
-                    _startOffset = details.focalPoint - _offset;
-                    setState(() => _showGrid = true);
-                  },
-                  onScaleUpdate: (details) {
-                    setState(() {
-                      _scale = _previousScale * details.scale;
-                      _offset = details.focalPoint - _startOffset;
-                    });
-                  },
-                  onScaleEnd: (_) {
-                    setState(() => _showGrid = false);
+      child: Center(
+        child: Stack(
+          children: [
+            GestureDetector(
+              onScaleStart: (details) {
+                _previousScale = _scale;
+                _startOffset = details.focalPoint - _offset;
+                setState(() => _showGrid = true);
+              },
+              onScaleUpdate: (details) {
+                setState(() {
+                  _scale = _previousScale * details.scale;
+                  _offset = details.focalPoint - _startOffset;
+                });
+              },
+              onScaleEnd: (_) {
+                setState(() => _showGrid = false);
 
-                    if (_scale == 1.0) {
-                      _controller.reset();
-                      _animation =
-                          Tween<Offset>(begin: _offset, end: Offset.zero)
-                              .animate(_controller);
-                      _controller.forward();
-                    }
-                  },
-                  child: Stack(
+                if (_scale == 1.0) {
+                  _controller.reset();
+                  _animation = Tween<Offset>(begin: _offset, end: Offset.zero)
+                      .animate(_controller);
+                  _controller.forward();
+                }
+              },
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Transform(
                     alignment: Alignment.center,
-                    children: [
-                      Transform(
-                        alignment: Alignment.center,
-                        transform: Matrix4.identity()
-                          ..translate(_offset.dx, _offset.dy)
-                          ..scale(_scale),
-                        child: Image(
-                          image: AssetEntityImageProvider(
-                            widget._selectedMedias[index].assetEntity,
-                          ),
-                        ),
+                    transform: Matrix4.identity()
+                      ..translate(_offset.dx, _offset.dy)
+                      ..scale(_scale),
+                    child: Image(
+                      image: AssetEntityImageProvider(
+                        widget._selectedMedias.first.assetEntity,
                       ),
-                      if (_showGrid)
-                        Positioned.fill(
-                          child: CustomPaint(
-                            painter: GridPainter(),
-                          ),
-                        ),
-                      Positioned(
-                        bottom: 0,
-                        left: 10,
-                        child: ElevatedButton(
-                          onPressed: _resetImage,
-                          style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.all(1),
-                          ),
-                          child: Text(
-                            context.translate(AppStrings.reset),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ],
+                  if (_showGrid)
+                    Positioned.fill(
+                      child: CustomPaint(
+                        painter: GridPainter(),
+                      ),
+                    ),
+                  Positioned(
+                    bottom: 0,
+                    left: 10,
+                    child: ElevatedButton(
+                      onPressed: _resetImage,
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(1),
+                      ),
+                      child: Text(
+                        context.translate(AppStrings.reset),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }

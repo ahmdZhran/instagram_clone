@@ -12,11 +12,26 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen>
+    with TickerProviderStateMixin {
+  late AnimationController _animationController;
+
   @override
   void initState() {
-    delayedNavigation();
     super.initState();
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 1500),
+      vsync: this,
+    );
+
+    // Use microtask to prevent blocking main thread
+    Future.microtask(() => delayedNavigation());
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -26,26 +41,39 @@ class _SplashScreenState extends State<SplashScreen> {
         child: LottieBuilder.asset(
           AppAssets.instagramAnimationLogo,
           height: MediaQuery.of(context).size.height / 7,
+          // Add frame rate optimization
+          frameRate: const FrameRate(30),
+          controller: _animationController,
+          onLoaded: (composition) {
+            _animationController.duration = composition.duration;
+            _animationController.forward();
+          },
         ),
       ),
     );
   }
 
-  void delayedNavigation() {
-    Future.delayed(
-      const Duration(seconds: 2),
-      () {
-        if (!mounted) return;
-        final user = FirebaseAuth.instance.currentUser;
+  void delayedNavigation() async {
+    // Reduce delay and add error handling
+    await Future.delayed(const Duration(milliseconds: 1200));
 
-        if (user == null) {
-          context.pushReplacementNamed(Routes.logIn);
-        } else if (user.emailVerified) {
-          context.pushReplacementNamed(Routes.mainWidget);
-        } else {
-          context.pushReplacementNamed(Routes.logIn);
-        }
-      },
-    );
+    if (!mounted) return;
+
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+
+      if (user == null) {
+        context.pushReplacementNamed(Routes.logIn);
+      } else if (user.emailVerified) {
+        context.pushReplacementNamed(Routes.mainWidget);
+      } else {
+        context.pushReplacementNamed(Routes.logIn);
+      }
+    } catch (e) {
+      // Fallback to login screen if there's an error
+      if (mounted) {
+        context.pushReplacementNamed(Routes.logIn);
+      }
+    }
   }
 }

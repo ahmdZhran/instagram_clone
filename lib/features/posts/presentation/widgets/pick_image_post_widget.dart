@@ -30,6 +30,8 @@ class _PickImagePostWidgetState extends State<PickImagePostWidget> {
   int _lastPage = 0;
   int _currentPage = 0;
   final List<MediaModel> _selectedMedias = [];
+  bool _isLoadingAlbums = true;
+  bool isLoadingMedias = false;
 
   @override
   void initState() {
@@ -47,24 +49,74 @@ class _PickImagePostWidgetState extends State<PickImagePostWidget> {
   }
 
   void _loadAlbums() async {
-    List<AssetPathEntity> albums = await fetchAlbums();
-    if (albums.isNotEmpty) {
+    // If albums are already loaded, don't reload
+    if (_albums.isNotEmpty && _currentAlbum != null) {
       setState(() {
-        _currentAlbum = albums.first;
-        _albums = albums;
+        _isLoadingAlbums = false;
       });
-      _loadMedias();
+      return;
+    }
+
+    setState(() {
+      _isLoadingAlbums = true;
+    });
+
+    // Use compute to move heavy operation off main thread
+    try {
+      List<AssetPathEntity> albums =
+          await Future.microtask(() => fetchAlbums());
+      if (albums.isNotEmpty && mounted) {
+        setState(() {
+          _currentAlbum = albums.first;
+          _albums = albums;
+          _isLoadingAlbums = false;
+        });
+        // Load medias after a short delay to prevent blocking UI
+        Future.delayed(const Duration(milliseconds: 100), () {
+          if (mounted) {
+            _loadMedias();
+          }
+        });
+      } else if (mounted) {
+        setState(() {
+          _isLoadingAlbums = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isLoadingAlbums = false;
+        });
+      }
     }
   }
 
   void _loadMedias() async {
+    if (_currentAlbum == null) return;
+
     _lastPage = _currentPage;
-    if (_currentAlbum != null) {
-      List<MediaModel> medias =
-          await fetchMedias(album: _currentAlbum!, page: _currentPage);
+
+    try {
       setState(() {
-        _medias.addAll(medias);
+        isLoadingMedias = true;
       });
+
+      // Use microtask to prevent blocking main thread
+      List<MediaModel> medias = await Future.microtask(
+          () => fetchMedias(album: _currentAlbum!, page: _currentPage));
+
+      if (mounted) {
+        setState(() {
+          _medias.addAll(medias);
+          isLoadingMedias = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          isLoadingMedias = false;
+        });
+      }
     }
   }
 
@@ -86,6 +138,7 @@ class _PickImagePostWidgetState extends State<PickImagePostWidget> {
         _selectedMedias.removeWhere(
             (element) => element.assetEntity.id == media.assetEntity.id);
       } else {
+        _selectedMedias.clear();
         _selectedMedias.add(media);
       }
       widget.onSelectionChanged(List<MediaModel>.from(_selectedMedias));
@@ -141,17 +194,25 @@ class _PickImagePostWidgetState extends State<PickImagePostWidget> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    _currentAlbum?.name.isEmpty ?? true
-                        ? "Unnamed Album"
-                        : _currentAlbum!.name,
-                    style: const TextStyle(fontSize: 16.0),
-                  ),
+                  _isLoadingAlbums
+                      ? const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : Text(
+                          _currentAlbum?.name.isNotEmpty == true
+                              ? _currentAlbum!.name
+                              : "Unnamed Album",
+                          style: const TextStyle(fontSize: 16.0),
+                        ),
                   IconButton(
                     icon: const Icon(Iconsax.arrow_down_1),
-                    onPressed: () {
-                      _showAlbumPicker();
-                    },
+                    onPressed: _isLoadingAlbums
+                        ? null
+                        : () {
+                            _showAlbumPicker();
+                          },
                   ),
                 ],
               ),
@@ -159,12 +220,16 @@ class _PickImagePostWidgetState extends State<PickImagePostWidget> {
           ),
           Expanded(
             flex: 4,
-            child: MediasGridView(
-              medias: _medias,
-              selectedMedias: _selectedMedias,
-              selectMedia: _selectMedia,
-              scrollController: _scrollController,
-            ),
+            child: _isLoadingAlbums
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : MediasGridView(
+                    medias: _medias,
+                    selectedMedias: _selectedMedias,
+                    selectMedia: _selectMedia,
+                    scrollController: _scrollController,
+                  ),
           ),
         ],
       ),

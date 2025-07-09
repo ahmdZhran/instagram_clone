@@ -18,9 +18,24 @@ class InstagramApp extends StatefulWidget {
 }
 
 class _InstagramAppState extends State<InstagramApp> {
-  final settingsCubit = SettingsCubit.getInstance()
-    ..loadTheme()
-    ..loadLanguage();
+  final settingsCubit = SettingsCubit.getInstance();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSettingsInBackground();
+  }
+
+  void _loadSettingsInBackground() {
+    Future.microtask(() async {
+      try {
+        settingsCubit.loadTheme();
+        settingsCubit.loadLanguage();
+      } catch (e) {
+        debugPrint('Error loading settings: $e');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

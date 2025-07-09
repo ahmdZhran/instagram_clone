@@ -13,11 +13,17 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final HomeCubit _homeCubit = HomeCubit.getInstance();
+  bool isInitialized = false;
 
   @override
   void initState() {
-    _homeCubit.fetchPosts();
     super.initState();
+    Future.microtask(() {
+      if (mounted) {
+        _homeCubit.fetchPosts();
+        isInitialized = true;
+      }
+    });
   }
 
   @override

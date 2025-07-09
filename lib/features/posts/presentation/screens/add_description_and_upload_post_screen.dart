@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/features/profile/data/models/user_model.dart';
 import '../../../../core/router/routes.dart';
-import '../../../../core/services/token_device_manager.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/utils_messages.dart';
 import '../../data/models/post_model.dart';
@@ -56,13 +55,8 @@ class _AddDescriptionAndUploadPostScreenState
   Future<void> _fetchInitialData() async {
     await Future.wait([
       _fetchUserData(),
-      _fetchDeviceToken(),
       _loadSelectedMedia(),
     ]);
-  }
-
-  Future<void> _fetchDeviceToken() async {
-    _deviceToken = await TokenDeviceManager().getToken();
   }
 
   Future<void> _fetchUserData() async {
@@ -95,6 +89,7 @@ class _AddDescriptionAndUploadPostScreenState
         if (state is PostsSuccess) {
           _audioPlayer.play(AssetSource('post_uploaded.mp3'));
           Future.delayed(const Duration(seconds: 1), () {
+            if (mounted) return;
             context.pushReplacementNamed(Routes.mainWidget);
           });
         } else if (state is PostsFailure) {
