@@ -25,7 +25,7 @@ A full-featured Instagram Clone built with Flutter, mimicking the core functiona
 | 🎬 Reels   | **In Progress**     | Instagram Reels. Watch, scroll, and interact  |
 | 📸 Stories        | Planned         | 24-hour ephemeral posts with viewers list  |
 | 💬 Chat System    | Planned     | Real-time messaging between users    |
-| 🔔 Notifications  | Planned     | Push notifications & in-app alerts system |
+| 🔔 Notifications  | Planned     | Push notifications|
 | 📊 Analytics      | Planned     | User engagement statistics                |
 | 🌐 Web Version    | planned | Responsive web interface                  |
 
