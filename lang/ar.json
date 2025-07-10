@@ -46,8 +46,9 @@
     "take_photo_or_video":"إضافة صورة / فيديو",
     "choose_from_gallery":"اختر من المعرض",
     "add_reel":"إضافة فيديو فصير",
-    "add_description_to_reel":"أضف وصفًا للفيديو القصير",
+    "write_a_caption":"أضف وصفًا للفيديو القصير",
     "reel":"فيديو قصير",
     "select_your_reel":"اختر الفيديو القصير الخاص بك",
-    "new_reel":"فيديو قصير جديد"
+    "new_reel":"فيديو قصير جديد",
+    "share":"نشر"
 }

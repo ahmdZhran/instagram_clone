@@ -46,9 +46,10 @@
     "take_photo_or_video":"Take Photo/Video",
     "choose_from_gallery":"Choose from Gallery",
     "add_reel":"Add Reel",
-    "add_description_to_reel":"Add Description to Reel",
+    "write_a_caption":"Write a caption",
     "reel":"Reel",
     "select_your_reel":"Select Your Reel",
-    "new_reel":"New Reel"
+    "new_reel":"New Reel",
+    "share":"Share"
 
 }

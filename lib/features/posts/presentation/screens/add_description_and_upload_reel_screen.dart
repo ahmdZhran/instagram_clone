@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:instagram_clone/core/helper/extensions.dart';
+import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
+import 'package:instagram_clone/core/widgets/custom_button_widget.dart';
+import 'package:instagram_clone/core/widgets/custom_text_form_field.dart';
 import 'package:instagram_clone/core/widgets/custom_text_widget.dart';
 import 'package:instagram_clone/features/posts/data/models/media_model.dart';
 import 'package:video_player/video_player.dart';
@@ -66,16 +70,46 @@ class _AddDescriptionAndUploadReelScreenState
         title: const CustomTextWidget(text: AppStrings.newReel),
         centerTitle: true,
       ),
-      body: SizedBox(
-        height: 428.h,
-        width: 270.w,
-        child: !_isInitializing && _videoController.value.isInitialized
-            ? AspectRatio(
-                aspectRatio: _videoController.value.aspectRatio,
-                child: VideoPlayer(_videoController))
-            : const Center(
-                child: CircularProgressIndicator(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50),
+          child: Column(
+            spacing: 10.h,
+            children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: SizedBox(
+                  height: 428.h,
+                  width: 270.w,
+                  child:
+                      !_isInitializing && _videoController.value.isInitialized
+                          ? AspectRatio(
+                              aspectRatio: _videoController.value.aspectRatio,
+                              child: VideoPlayer(_videoController))
+                          : const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                ),
               ),
+              TextField(
+                decoration: InputDecoration(
+                  hintText: context.translate(AppStrings.writeACaption),
+                  hintStyle: TextStyle(
+                    fontSize: 12.sp,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+              CustomButton(
+                // width: 40.w,
+                height: 30.h,
+                onPressed: () {},
+                childOfCustomButton: CustomTextWidget(text: AppStrings.share),
+                color: AppColors.primaryColor,
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
