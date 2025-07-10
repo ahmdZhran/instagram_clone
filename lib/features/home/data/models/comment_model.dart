@@ -1,0 +1,57 @@
+class CommentModel {
+  final String commentId;
+  final String profilePic;
+  final String username;
+  final String commentText;
+  final DateTime dateOfComment;
+  final String uid;
+
+  CommentModel({
+    required this.commentId,
+    required this.profilePic,
+    required this.username,
+    required this.commentText,
+    required this.dateOfComment,
+    required this.uid,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'commentId': commentId,
+      'profilePic': profilePic,
+      'username': username,
+      'commentText': commentText,
+      'dateOfComment': dateOfComment.toIso8601String(),
+      'uid': uid,
+    };
+  }
+
+  factory CommentModel.fromJson(Map<String, dynamic> map) {
+    return CommentModel(
+      commentId: map['commentId'],
+      profilePic: map['profilePic'],
+      username: map['username'],
+      commentText: map['commentText'],
+      dateOfComment: DateTime.parse(map['dateOfComment']),
+      uid: map['uid'],
+    );
+  }
+
+  CommentModel copyWith({
+    String? commentId,
+    String? profilePic,
+    String? username,
+    String? commentText,
+    DateTime? dateOfComment,
+    String? uid,
+  }) {
+    return CommentModel(
+      commentId: commentId ?? this.commentId,
+      profilePic: profilePic ?? this.profilePic,
+      username: username ?? this.username,
+      commentText: commentText ?? this.commentText,
+      dateOfComment: dateOfComment ?? this.dateOfComment,
+      uid: uid ?? this.uid,
+    );
+  }
+}
