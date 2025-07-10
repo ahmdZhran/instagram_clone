@@ -4,7 +4,6 @@ import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:instagram_clone/core/widgets/custom_button_widget.dart';
-import 'package:instagram_clone/core/widgets/custom_text_form_field.dart';
 import 'package:instagram_clone/core/widgets/custom_text_widget.dart';
 import 'package:instagram_clone/features/posts/data/models/media_model.dart';
 import 'package:video_player/video_player.dart';
@@ -101,10 +100,10 @@ class _AddDescriptionAndUploadReelScreenState
                 ),
               ),
               CustomButton(
-                // width: 40.w,
                 height: 30.h,
                 onPressed: () {},
-                childOfCustomButton: CustomTextWidget(text: AppStrings.share),
+                childOfCustomButton:
+                    const CustomTextWidget(text: AppStrings.share),
                 color: AppColors.primaryColor,
               )
             ],
