@@ -17,4 +17,7 @@ class AppAssets {
   static const String settingsIcon = "assets/svg/settings.svg";
   static const String instagramAnimationLogo =
       'assets/lottie/intagram_logo_animation.json';
+
+  static const String activeReelIcon = "assets/images/active_reel_icon.png";
+  static const String inactiveReelIcon = "assets/images/inactive_reel_icon.png";
 }

@@ -85,29 +85,34 @@ class _MainWidgetState extends State<MainWidget> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            // SVG icons (default behavior)
                             BottomNavBarItemWidget(
                               onTap: () => setState(() => index = 0),
                               isActive: index == 0,
                               activeIcon: AppAssets.activeHomeIcon,
                               inactiveIcon: AppAssets.homeIcon,
+                              iconType: IconType.svg, // Explicitly set to SVG
                             ),
                             BottomNavBarItemWidget(
                               onTap: () => setState(() => index = 1),
                               isActive: index == 1,
                               activeIcon: AppAssets.activeSearch,
                               inactiveIcon: AppAssets.searchIcon,
+                              iconType: IconType.svg,
                             ),
                             BottomNavBarItemWidget(
                               onTap: () => setState(() => index = 2),
                               isActive: index == 2,
                               activeIcon: AppAssets.activeAddPost,
                               inactiveIcon: AppAssets.addPost,
+                              iconType: IconType.svg,
                             ),
                             BottomNavBarItemWidget(
                               onTap: () => setState(() => index = 3),
                               isActive: index == 3,
-                              activeIcon: AppAssets.heartActiveIcon,
-                              inactiveIcon: AppAssets.heartIcon,
+                              activeIcon: AppAssets.activeReelIcon,
+                              inactiveIcon: AppAssets.inactiveReelIcon,
+                              iconType: IconType.png,
                             ),
                             InkWell(
                               onTap: () => setState(() => index = 4),

@@ -7,14 +7,15 @@ import 'package:transparent_image/transparent_image.dart';
 Future<List<MediaModel>> fetchMedias({
   required AssetPathEntity album,
   required int page,
+  AssetType type = AssetType.image,
 }) async {
   List<MediaModel> medias = [];
 
   try {
     final List<AssetEntity> entities =
         await album.getAssetListPaged(page: page, size: 30);
-
-    for (AssetEntity entity in entities) {
+    final filteredEntities = entities.where((e) => e.type == type).toList();
+    for (AssetEntity entity in filteredEntities) {
       MediaModel media = MediaModel(
         assetEntity: entity,
         widget: FadeInImage(
