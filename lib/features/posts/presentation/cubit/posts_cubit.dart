@@ -1,16 +1,15 @@
 import 'dart:typed_data';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/features/posts/data/models/post_model.dart';
+import 'package:instagram_clone/features/posts/data/models/reel_model.dart';
 import '../../../../core/services/firebase_storage_service.dart';
 import '../../data/repositories/post_repository_impl.dart';
 import '../../post_di.dart';
-
 
 part 'posts_state.dart';
 
 class PostsCubit extends Cubit<PostsState> {
   PostsCubit(this._postRepository) : super(PostsInitial());
-
 
   final PostRepositoryImpl _postRepository;
 
@@ -37,7 +36,25 @@ class PostsCubit extends Cubit<PostsState> {
     }
   }
 
-  
+  Future<void> createReel({
+    required Uint8List videoUrl,
+    required ReelModel reel,
+    required String folderName,
+  }) async {
+    emit(AddReelLoading());
+    try {
+      final imageUrl = await FirebaseStorageService.uploadImagesToFireStorage(
+        videoUrl,
+        reel.id,
+        folderName,
+      );
+      final reelWithImage = reel.copyWith(videoUrl: imageUrl);
+      await _postRepository.createReel(reelWithImage);
+      emit(AddReelSuccess());
+    } catch (error) {
+      emit(AddReelFailure(errorMessage: error.toString()));
+    }
+  }
 
   Future<void> deletePost(String postId) async {
     try {

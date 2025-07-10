@@ -23,7 +23,7 @@ class ReelModel {
     required this.userProfileImage,
   });
 
-  ReelModel copyWith({String? imageUrl, List<String>? likes}) {
+  ReelModel copyWith({String? videoUrl, List<String>? likes}) {
     return ReelModel(
       id: id,
       likes: likes ?? this.likes,
@@ -31,7 +31,7 @@ class ReelModel {
       deviceToken: deviceToken,
       username: username,
       description: description,
-      videoUrl: videoUrl,
+      videoUrl: videoUrl ?? this.videoUrl,
       timestamp: timestamp,
       userProfileImage: userProfileImage,
     );

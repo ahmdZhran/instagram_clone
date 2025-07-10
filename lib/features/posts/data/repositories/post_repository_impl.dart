@@ -6,6 +6,8 @@ class PostRepositoryImpl {
   final CollectionReference postCollection =
       FirebaseFirestore.instance.collection("posts");
 
+  final CollectionReference reelsCollection =
+      FirebaseFirestore.instance.collection("Reels");
   Future<void> createPost(PostModel post) async {
     try {
       await postCollection.doc(post.id).set(post.toJson());
@@ -20,7 +22,7 @@ class PostRepositoryImpl {
 
   Future<void> createReel(ReelModel reel) async {
     try {
-      await postCollection.doc(reel.id).set(reel.toJson());
+      await reelsCollection.doc(reel.id).set(reel.toJson());
     } catch (error) {
       throw Exception("Error creating reel $error");
     }
