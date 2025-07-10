@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:instagram_clone/core/cubits/profile_cubit/profile_cubit.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
+import 'package:instagram_clone/core/router/routes.dart';
 import 'package:instagram_clone/core/utils/app_colors.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
 import 'package:instagram_clone/core/utils/utils_messages.dart';
@@ -89,7 +90,7 @@ class _AddDescriptionAndUploadReelScreenState
   void dispose() {
     _captionController.dispose();
     _videoController.dispose();
-    // PostsCubit.deleteInstance();
+    PostsCubit.deleteInstance();
     super.dispose();
   }
 
@@ -104,7 +105,8 @@ class _AddDescriptionAndUploadReelScreenState
         bloc: _postsCubit,
         listener: (context, state) {
           if (state is AddReelSuccess) {
-            context.pop();
+            //TODO make it navigate to Reel screen 
+            context.pushReplacementNamed(Routes.mainWidget);
           } else if (state is AddReelFailure) {
             UtilsMessages.showToastErrorBottom(context,
                 message: state.errorMessage);
@@ -144,7 +146,7 @@ class _AddDescriptionAndUploadReelScreenState
                   ),
                   CustomButton(
                     height: 30.h,
-                    isLoading: state is AddReelLoading, 
+                    isLoading: state is AddReelLoading,
                     onPressed: () {
                       _postsCubit.createReel(
                         videoUrl: _videoBytes!,
