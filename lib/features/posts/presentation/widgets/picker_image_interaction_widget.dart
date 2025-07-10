@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:instagram_clone/core/helper/extensions.dart';
 import 'package:instagram_clone/core/utils/app_strings.dart';
+import 'package:instagram_clone/core/widgets/custom_text_widget.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 import 'gride_painter_widget.dart';
 import '../../data/models/media_model.dart';
@@ -64,16 +65,14 @@ class _PickerImageInteractionWidgetState
 
   @override
   Widget build(BuildContext context) {
-    // Only show the first selected image since we only allow one selection
     if (widget._selectedMedias.isEmpty) {
       return SizedBox(
         height: 350.h,
-        child: Center(
-          child: Text(context.translate(AppStrings.selectYourPost)),
+        child: const Center(
+          child: CustomTextWidget(text: AppStrings.selectYourPost),
         ),
       );
     }
-
     return SizedBox(
       height: 350.h,
       child: Center(

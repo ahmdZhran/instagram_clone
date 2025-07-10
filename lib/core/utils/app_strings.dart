@@ -89,4 +89,5 @@ abstract class AppStrings {
   static const String addReel = "add_reel";
   static const String addDescriptionToReel = "add_description_to_reel";
   static const String selectYourReel = "select_your_reel";
+  static const String newReel = "new_reel";
 }

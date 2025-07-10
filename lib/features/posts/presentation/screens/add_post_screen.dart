@@ -52,11 +52,10 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     arguments: [selectedPostMedia!],
                   );
                 } else if (_currentPage == 1 && selectedReelMedia != null) {
-                  // Handle reel upload navigation
-                  // context.pushNamed(
-                  //   Routes.addDescriptionToReel,
-                  //   arguments: [selectedReelMedia!],
-                  // );
+                  context.pushNamed(
+                    Routes.addDescriptionToReel,
+                    arguments: [selectedReelMedia!],
+                  );
                 }
               },
             )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/features/posts/presentation/screens/add_description_and_upload_reel_screen.dart';
 import '../../features/profile/data/models/user_model.dart';
 import '../../features/posts/data/models/media_model.dart';
 import '../../features/posts/presentation/screens/add_description_and_upload_post_screen.dart';
@@ -21,7 +22,6 @@ class AppRouter {
         );
       case Routes.mainWidget:
         return MaterialPageRoute(
-          
           builder: (_) => const MainWidget(),
         );
       case Routes.logIn:
@@ -56,6 +56,13 @@ class AppRouter {
         final selectedMedias = settings.arguments as List<MediaModel>?;
         return MaterialPageRoute(
           builder: (_) => AddDescriptionAndUploadPostScreen(
+            selectedMedias: selectedMedias,
+          ),
+        );
+      case Routes.addDescriptionToReel:
+        final selectedMedias = settings.arguments as List<MediaModel>?;
+        return MaterialPageRoute(
+          builder: (_) => AddDescriptionAndUploadReelScreen(
             selectedMedias: selectedMedias,
           ),
         );
