@@ -41,10 +41,5 @@ A full-featured Instagram Clone built with Flutter, mimicking the core functiona
 
 
 
-
-## Getting Started
-
-
-
 </p>
 
