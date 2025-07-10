@@ -5,7 +5,7 @@ class ReelModel {
   final String userId;
   final String? description;
   final String username;
-  final String videoUrl;
+  final String? videoUrl;
   final String? deviceToken;
   final String userProfileImage;
   final List<String> likes;
@@ -16,7 +16,7 @@ class ReelModel {
     required this.userId,
     required this.description,
     required this.username,
-    required this.videoUrl,
+    this.videoUrl,
     this.deviceToken,
     required this.timestamp,
     required this.likes,

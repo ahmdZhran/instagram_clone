@@ -144,6 +144,7 @@ class _AddDescriptionAndUploadReelScreenState
                   ),
                   CustomButton(
                     height: 30.h,
+                    isLoading: state is AddReelLoading, 
                     onPressed: () {
                       _postsCubit.createReel(
                         videoUrl: _videoBytes!,
@@ -152,19 +153,19 @@ class _AddDescriptionAndUploadReelScreenState
                           userId: FirebaseAuth.instance.currentUser!.uid,
                           username: _userProfileData!.username,
                           userProfileImage: _userProfileData!.profileImageUrl,
-                          videoUrl: _videoBytes.toString(),
                           timestamp: DateTime.now(),
                           likes: [],
-                          id: FirebaseAuth.instance.currentUser!.uid,
+                          id: DateTime.now().millisecondsSinceEpoch.toString(),
                         ),
                         folderName:
                             'Reels/${FirebaseAuth.instance.currentUser!.uid}',
                       );
                     },
                     childOfCustomButton: state is AddReelLoading
-                        ? const CircularProgressIndicator(
-                            color: AppColors.primaryColor,
-                          )
+                        ? const SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator())
                         : const CustomTextWidget(text: AppStrings.share),
                     color: AppColors.primaryColor,
                   )
