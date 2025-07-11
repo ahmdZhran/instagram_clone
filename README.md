@@ -3,7 +3,7 @@
    <img src="https://github.com/user-attachments/assets/2de80d7c-a58b-4ec9-ba2d-d58fbb8585eb" alt="Instagram Logo" width="300" height="300" />
    
 <h1>Instagram Clone</h1>
-# Instagram Clone
+
 
 A full-featured Instagram Clone built with Flutter, mimicking the core functionalities and design of the popular social media platform. This project demonstrates modern Flutter development practices, Firebase integration, and scalable architecture.
 
