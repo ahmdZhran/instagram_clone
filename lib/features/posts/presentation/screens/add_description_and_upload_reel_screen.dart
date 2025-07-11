@@ -13,7 +13,7 @@ import 'package:instagram_clone/core/utils/utils_messages.dart';
 import 'package:instagram_clone/core/widgets/custom_button_widget.dart';
 import 'package:instagram_clone/core/widgets/custom_text_widget.dart';
 import 'package:instagram_clone/features/posts/data/models/media_model.dart';
-import 'package:instagram_clone/features/posts/data/models/reel_model.dart';
+import 'package:instagram_clone/features/reels/data/models/reel_model.dart';
 import 'package:instagram_clone/features/posts/presentation/cubit/posts_cubit.dart';
 import 'package:instagram_clone/features/profile/data/models/user_model.dart';
 import 'package:video_player/video_player.dart';

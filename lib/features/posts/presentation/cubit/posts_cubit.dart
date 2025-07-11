@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/features/posts/data/models/post_model.dart';
-import 'package:instagram_clone/features/posts/data/models/reel_model.dart';
+import 'package:instagram_clone/features/reels/data/models/reel_model.dart';
 import '../../../../core/services/firebase_storage_service.dart';
 import '../../data/repositories/post_repository_impl.dart';
 import '../../post_di.dart';

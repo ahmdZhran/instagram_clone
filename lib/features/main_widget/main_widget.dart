@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:instagram_clone/features/reels/screens/reels_screen.dart';
+import 'package:instagram_clone/features/reels/presentation/screens/reels_screen.dart';
 import '../../core/helper/extensions.dart';
 import '../../core/utils/app_assets.dart';
 import '../../core/utils/app_colors.dart';
