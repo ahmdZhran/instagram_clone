@@ -2,8 +2,8 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:instagram_clone/features/reels/reels_screen.dart';
 import '../../core/helper/extensions.dart';
-import '../notifications/notifications_screen.dart';
 import '../../core/utils/app_assets.dart';
 import '../../core/utils/app_colors.dart';
 import '../../core/utils/app_responsive_spacer_helper.dart';
@@ -34,7 +34,7 @@ class _MainWidgetState extends State<MainWidget> {
       case 2:
         return const AddPostScreen();
       case 3:
-        return const NotificationsScreen();
+        return const ReelsScreen();
       case 4:
         return ProfileScreen(uid: uid!);
       default:
