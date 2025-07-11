@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/features/reels/data/models/reel_model.dart';
 import 'package:video_player/video_player.dart';
 
 class ReelItemWidget extends StatefulWidget {
-  const ReelItemWidget({super.key, required this.snapshot});
-  final Map<String, dynamic> snapshot;
+  const ReelItemWidget({super.key, required this.reel});
+
+  final ReelModel reel;
 
   @override
   State<ReelItemWidget> createState() => _ReelItemWidgetState();
@@ -17,8 +19,7 @@ class _ReelItemWidgetState extends State<ReelItemWidget> {
   void initState() {
     super.initState();
     _controller = VideoPlayerController.networkUrl(
-        Uri.parse(widget.snapshot['videoUrl']));
-
+        Uri.parse(widget.reel.videoUrl.toString()));
     _initializeVideo();
   }
 

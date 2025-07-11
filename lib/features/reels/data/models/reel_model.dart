@@ -59,7 +59,7 @@ class ReelModel {
       userId: json['userId'],
       username: json['user_name'],
       deviceToken: json['device_token'],
-      videoUrl: json['imageUrl'],
+      videoUrl: json['videoUrl'],
       timestamp: json['timestamp'].toDate(),
       userProfileImage: json['user_profile_image'],
     );

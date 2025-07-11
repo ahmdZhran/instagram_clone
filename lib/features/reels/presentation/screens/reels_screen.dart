@@ -1,5 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/features/reels/presentation/cubits/cubit/reel_cubit.dart';
 import 'package:instagram_clone/features/reels/presentation/widgets/reel_item_widget.dart';
 
 class ReelsScreen extends StatefulWidget {
@@ -10,11 +11,12 @@ class ReelsScreen extends StatefulWidget {
 }
 
 class _ReelsScreenState extends State<ReelsScreen> {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   late PageController _pageController;
+  final ReelCubit _reelCubit = ReelCubit.getInstance();
   @override
   void initState() {
     super.initState();
+    _reelCubit.fetchReels();
     _pageController = PageController(initialPage: 0);
   }
 
@@ -27,30 +29,30 @@ class _ReelsScreenState extends State<ReelsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder(
-        stream: _firestore.collection("Reels").snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+      body: BlocBuilder<ReelCubit, ReelState>(
+        bloc: _reelCubit,
+        builder: (context, state) {
+          if (state is ReelLoading) {
             return const Center(child: CircularProgressIndicator());
-          }
-          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Center(child: Text("No reels available"));
-          }
-          final reels = snapshot.data!.docs;
-          return PageView.builder(
-            scrollDirection: Axis.vertical,
-            controller: _pageController,
-            itemCount: reels.length,
-            itemBuilder: (context, index) {
-              if (!snapshot.hasData) {
-                return const CircularProgressIndicator();
-              } else {
+          } else if (state is ReelFailure) {
+            return Center(child: Text("Error: ${state.errorMessage}"));
+          } else if (state is ReelSuccess) {
+            if (state.reels.isEmpty) {
+              return const Center(child: Text("No reels available"));
+            }
+
+            return PageView.builder(
+              scrollDirection: Axis.vertical,
+              controller: _pageController,
+              itemCount: state.reels.length,
+              itemBuilder: (context, index) {
                 return ReelItemWidget(
-                  snapshot: snapshot.data!.docs[index].data(),
+                  reel: state.reels[index],
                 );
-              }
-            },
-          );
+              },
+            );
+          }
+          return const SizedBox();
         },
       ),
     );
